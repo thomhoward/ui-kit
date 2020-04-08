@@ -3,6 +3,7 @@
     "./node_modules/gts"
   ],
   "ignorePatterns": [
-    "node_modules"
+    "node_modules",
+    "packages/poc-*"
   ]
 }
