@@ -1,19 +1,9 @@
-import { h, render } from "preact";
-import Header from "./header";
+import Searchbox from './searchbox';
+import Results from './results';
+import { CoveoHeadlessEngine } from 'coveo-headless-engine';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-if ((module as any).hot) {
-    // tslint:disable-next-line:no-var-requires
-    require("preact/debug");
-}
+export const coveoHeadlessEngine = new CoveoHeadlessEngine();
+coveoHeadlessEngine.performSearch();
 
-class HeaderElement extends HTMLElement {
-    private root!: ShadowRoot;
-
-    connectedCallback() {
-        this.root = this.attachShadow({ mode: "open" });
-        render(<Header />, this.root);
-    }
-}
-
-customElements.define("coveo-header", HeaderElement);
+customElements.define('coveo-searchbox', Searchbox);
+customElements.define('coveo-results', Results);
