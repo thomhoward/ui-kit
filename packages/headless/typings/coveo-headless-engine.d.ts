@@ -24,13 +24,13 @@ export enum SearchStatus {
   FAIL = 'FAIL',
 }
 
-interface ResultsState {
+export interface ResultsState {
   list: SearchResult[];
   firstResult: number;
   numberOfResults: number;
 }
 
-interface SearchResult {
+export interface SearchResult {
   title: string;
   uri: string;
   printableUri: string;
