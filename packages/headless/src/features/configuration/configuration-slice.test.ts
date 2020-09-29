@@ -139,8 +139,6 @@ describe('configuration slice', () => {
           undefined,
           updateSearchConfiguration({
             apiBaseUrl: 'http://test.com/search',
-            pipeline: '',
-            searchHub: '',
           })
         )
       ).toEqual(expectedState);
@@ -158,8 +156,6 @@ describe('configuration slice', () => {
           existingState,
           updateSearchConfiguration({
             apiBaseUrl: 'http://test.com/search',
-            pipeline: '',
-            searchHub: '',
           })
         )
       ).toEqual(expectedState);
