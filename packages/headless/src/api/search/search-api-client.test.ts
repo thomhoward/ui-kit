@@ -181,7 +181,7 @@ describe('search api client', () => {
           query: categoryFacetSearch.options.query,
           field: categoryFacet.field,
           delimitingCharacter: categoryFacet.delimitingCharacter,
-          ignorePaths: [],
+          ignorePaths: [[]],
           searchContext: searchRequest(state),
         },
       });

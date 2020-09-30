@@ -4,6 +4,7 @@ import {SearchPageState} from '../../../../state';
 import {buildMockSearchRequest} from '../../../../test/mock-search-request';
 import {buildMockCategoryFacetRequest} from '../../../../test/mock-category-facet-request';
 import {buildMockCategoryFacetSearch} from '../../../../test/mock-category-facet-search';
+import {buildMockCategoryFacetValueRequest} from '../../../../test/mock-category-facet-value-request';
 
 describe('#buildCategoryFacetSearchRequest', () => {
   const id = '1';
@@ -63,15 +64,24 @@ describe('#buildCategoryFacetSearchRequest', () => {
     expect(buildParms().delimitingCharacter).toBe(char);
   });
 
-  it('builds the #ignorePaths from the category facet', () => {
-    state.categoryFacetSet[id].currentValues = [];
-    expect(buildParms().ignorePaths).toEqual([]);
-  });
-
   it('sets the #searchContext to the search request params', () => {
     const facet = state.categoryFacetSet[id];
     const request = buildMockSearchRequest({facets: [facet]});
 
     expect(buildParms().searchContext).toEqual(request);
+  });
+
+  describe('#ignorePaths', () => {
+    it('#ignorePaths is empty when currentValues is empty', () => {
+      state.categoryFacetSet[id].currentValues = [];
+      expect(buildParms().ignorePaths).toEqual([[]]);
+    });
+
+    it('#ignorePaths returns the last element ', () => {
+      state.categoryFacetSet[id].currentValues = [
+        buildMockCategoryFacetValueRequest({value: 'test', state: 'selected'}),
+      ];
+      expect(buildParms().ignorePaths).toEqual([['test']]);
+    });
   });
 });
