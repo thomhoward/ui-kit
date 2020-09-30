@@ -77,11 +77,29 @@ describe('#buildCategoryFacetSearchRequest', () => {
       expect(buildParms().ignorePaths).toEqual([[]]);
     });
 
-    it('#ignorePaths returns the last element ', () => {
+    it('#ignorePaths returns the correct path when currentValues has one level', () => {
       state.categoryFacetSet[id].currentValues = [
-        buildMockCategoryFacetValueRequest({value: 'test', state: 'selected'}),
+        buildMockCategoryFacetValueRequest({
+          value: 'level1',
+          state: 'selected',
+        }),
       ];
-      expect(buildParms().ignorePaths).toEqual([['test']]);
+      expect(buildParms().ignorePaths).toEqual([['level1']]);
+    });
+
+    it('#ignorePaths returns the correct path when currentValues has more than one level', () => {
+      state.categoryFacetSet[id].currentValues = [
+        buildMockCategoryFacetValueRequest({
+          value: 'level1',
+          children: [
+            buildMockCategoryFacetValueRequest({
+              value: 'level2',
+              state: 'selected',
+            }),
+          ],
+        }),
+      ];
+      expect(buildParms().ignorePaths).toEqual([['level1', 'level2']]);
     });
   });
 });
