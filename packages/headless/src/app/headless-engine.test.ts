@@ -64,6 +64,47 @@ describe('headless engine', () => {
     );
   });
 
+  it(`when there is only searchHub as search param 
+    should initialize pipeline to 'default'`, () => {
+    options = {
+      configuration: {
+        accessToken: 'mytoken',
+        organizationId: 'someorg',
+        search: {
+          searchHub: 'mockSearchHub',
+        },
+      },
+      reducers: searchPageReducers,
+    };
+    new HeadlessEngine(options);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      updateSearchConfiguration({
+        pipeline: 'default',
+        searchHub: 'mockSearchHub',
+      })
+    );
+  });
+  it(`when there is only pipeline as search param 
+    should initialize searchHub to 'default'`, () => {
+    options = {
+      configuration: {
+        accessToken: 'mytoken',
+        organizationId: 'someorg',
+        search: {
+          pipeline: 'mockPipeline',
+        },
+      },
+      reducers: searchPageReducers,
+    };
+    new HeadlessEngine(options);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      updateSearchConfiguration({
+        searchHub: 'default',
+        pipeline: 'mockPipeline',
+      })
+    );
+  });
+
   it(`when renewAccessToken is not defined in the config
   renewAccessToken should return an empty string`, async (done) => {
     expect(await engine.renewAccessToken()).toBe('');
