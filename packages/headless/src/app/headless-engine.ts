@@ -180,11 +180,7 @@ export class HeadlessEngine<Reducers extends ReducersMapObject>
     );
     if (options.configuration.search) {
       this.reduxStore.dispatch(
-        updateSearchConfiguration({
-          pipeline: 'default',
-          searchHub: 'default',
-          ...options.configuration.search,
-        })
+        updateSearchConfiguration(options.configuration.search)
       );
     }
     if (options.configuration.analytics) {
