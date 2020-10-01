@@ -64,26 +64,43 @@ export namespace Components {
     }
     interface AtomicSearchInterface {
         "initialize": (options: Pick<HeadlessConfigurationOptions, 'accessToken' | 'organizationId' | 'renewAccessToken' | 'platformUrl'>) => Promise<void>;
-        "pipeline": string;
-        "sample": boolean;
-        "searchHub": string;
+      'pipeline': string;
+      'sample': boolean;
+      'searchHub': string;
     }
-    interface AtomicSortDropdown {
-    }
-    interface AtomicTab {
-        "expression": string;
-        "isActive": boolean;
-    }
+
+  interface AtomicSortDropdown {
+  }
+
+  interface AtomicTab {
+    'expression': string;
+    'isActive': boolean;
+  }
+
+  interface ChildComponent {
+    'error'?: Error;
+  }
+
+  interface ChildComponent1 {
+    'engine': Engine;
+  }
+
+  interface ChildComponentErrored {
+    'engine': Engine;
+    'error'?: Error;
+  }
 }
 declare global {
-    interface HTMLAtomicCategoryFacetElement extends Components.AtomicCategoryFacet, HTMLStencilElement {
-    }
-    var HTMLAtomicCategoryFacetElement: {
-        prototype: HTMLAtomicCategoryFacetElement;
-        new (): HTMLAtomicCategoryFacetElement;
-    };
-    interface HTMLAtomicComponentErrorElement extends Components.AtomicComponentError, HTMLStencilElement {
-    }
+  interface HTMLAtomicCategoryFacetElement extends Components.AtomicCategoryFacet, HTMLStencilElement {
+  }
+
+  var HTMLAtomicCategoryFacetElement: {
+    prototype: HTMLAtomicCategoryFacetElement;
+    new(): HTMLAtomicCategoryFacetElement;
+  };
+
+  interface HTMLAtomicComponentErrorElement extends Components.AtomicComponentError, HTMLStencilElement {
+  }
     var HTMLAtomicComponentErrorElement: {
         prototype: HTMLAtomicComponentErrorElement;
         new (): HTMLAtomicComponentErrorElement;
@@ -186,38 +203,69 @@ declare global {
     };
     interface HTMLAtomicSortDropdownElement extends Components.AtomicSortDropdown, HTMLStencilElement {
     }
-    var HTMLAtomicSortDropdownElement: {
-        prototype: HTMLAtomicSortDropdownElement;
-        new (): HTMLAtomicSortDropdownElement;
-    };
-    interface HTMLAtomicTabElement extends Components.AtomicTab, HTMLStencilElement {
-    }
-    var HTMLAtomicTabElement: {
-        prototype: HTMLAtomicTabElement;
-        new (): HTMLAtomicTabElement;
-    };
-    interface HTMLElementTagNameMap {
-        "atomic-category-facet": HTMLAtomicCategoryFacetElement;
-        "atomic-component-error": HTMLAtomicComponentErrorElement;
-        "atomic-date-facet": HTMLAtomicDateFacetElement;
-        "atomic-did-you-mean": HTMLAtomicDidYouMeanElement;
-        "atomic-facet": HTMLAtomicFacetElement;
-        "atomic-field-condition": HTMLAtomicFieldConditionElement;
-        "atomic-history": HTMLAtomicHistoryElement;
-        "atomic-numeric-facet": HTMLAtomicNumericFacetElement;
-        "atomic-pager": HTMLAtomicPagerElement;
+
+  var HTMLAtomicSortDropdownElement: {
+    prototype: HTMLAtomicSortDropdownElement;
+    new(): HTMLAtomicSortDropdownElement;
+  };
+
+  interface HTMLAtomicTabElement extends Components.AtomicTab, HTMLStencilElement {
+  }
+
+  var HTMLAtomicTabElement: {
+    prototype: HTMLAtomicTabElement;
+    new(): HTMLAtomicTabElement;
+  };
+
+  interface HTMLChildComponentElement extends Components.ChildComponent, HTMLStencilElement {
+  }
+
+  var HTMLChildComponentElement: {
+    prototype: HTMLChildComponentElement;
+    new(): HTMLChildComponentElement;
+  };
+
+  interface HTMLChildComponent1Element extends Components.ChildComponent1, HTMLStencilElement {
+  }
+
+  var HTMLChildComponent1Element: {
+    prototype: HTMLChildComponent1Element;
+    new(): HTMLChildComponent1Element;
+  };
+
+  interface HTMLChildComponentErroredElement extends Components.ChildComponentErrored, HTMLStencilElement {
+  }
+
+  var HTMLChildComponentErroredElement: {
+    prototype: HTMLChildComponentErroredElement;
+    new(): HTMLChildComponentErroredElement;
+  };
+
+  interface HTMLElementTagNameMap {
+    'atomic-category-facet': HTMLAtomicCategoryFacetElement;
+    'atomic-component-error': HTMLAtomicComponentErrorElement;
+    'atomic-date-facet': HTMLAtomicDateFacetElement;
+    'atomic-did-you-mean': HTMLAtomicDidYouMeanElement;
+    'atomic-facet': HTMLAtomicFacetElement;
+    'atomic-field-condition': HTMLAtomicFieldConditionElement;
+    'atomic-history': HTMLAtomicHistoryElement;
+    'atomic-numeric-facet': HTMLAtomicNumericFacetElement;
+    'atomic-pager': HTMLAtomicPagerElement;
         "atomic-query-error": HTMLAtomicQueryErrorElement;
-        "atomic-query-summary": HTMLAtomicQuerySummaryElement;
-        "atomic-result": HTMLAtomicResultElement;
-        "atomic-result-list": HTMLAtomicResultListElement;
-        "atomic-result-template": HTMLAtomicResultTemplateElement;
-        "atomic-result-value": HTMLAtomicResultValueElement;
-        "atomic-results-per-page": HTMLAtomicResultsPerPageElement;
-        "atomic-search-box": HTMLAtomicSearchBoxElement;
-        "atomic-search-interface": HTMLAtomicSearchInterfaceElement;
-        "atomic-sort-dropdown": HTMLAtomicSortDropdownElement;
-        "atomic-tab": HTMLAtomicTabElement;
-    }
+    'atomic-query-summary': HTMLAtomicQuerySummaryElement;
+    'atomic-result': HTMLAtomicResultElement;
+    'atomic-result-list': HTMLAtomicResultListElement;
+    'atomic-result-template': HTMLAtomicResultTemplateElement;
+    'atomic-result-value': HTMLAtomicResultValueElement;
+    'atomic-results-per-page': HTMLAtomicResultsPerPageElement;
+    'atomic-search-box': HTMLAtomicSearchBoxElement;
+    'atomic-search-interface': HTMLAtomicSearchInterfaceElement;
+    'atomic-sort-dropdown': HTMLAtomicSortDropdownElement;
+    'atomic-tab': HTMLAtomicTabElement;
+    'child-component': HTMLChildComponentElement;
+    'child-component-1': HTMLChildComponent1Element;
+    'child-component-errored': HTMLChildComponentErroredElement;
+  }
 }
 declare namespace LocalJSX {
     interface AtomicCategoryFacet {
@@ -273,38 +321,57 @@ declare namespace LocalJSX {
         "numberOfSuggestions"?: number;
     }
     interface AtomicSearchInterface {
-        "pipeline"?: string;
-        "sample"?: boolean;
-        "searchHub"?: string;
+      'pipeline'?: string;
+      'sample'?: boolean;
+      'searchHub'?: string;
     }
-    interface AtomicSortDropdown {
-    }
-    interface AtomicTab {
-        "expression"?: string;
-        "isActive"?: boolean;
-    }
-    interface IntrinsicElements {
-        "atomic-category-facet": AtomicCategoryFacet;
-        "atomic-component-error": AtomicComponentError;
-        "atomic-date-facet": AtomicDateFacet;
-        "atomic-did-you-mean": AtomicDidYouMean;
-        "atomic-facet": AtomicFacet;
-        "atomic-field-condition": AtomicFieldCondition;
-        "atomic-history": AtomicHistory;
-        "atomic-numeric-facet": AtomicNumericFacet;
-        "atomic-pager": AtomicPager;
+
+  interface AtomicSortDropdown {
+  }
+
+  interface AtomicTab {
+    'expression'?: string;
+    'isActive'?: boolean;
+  }
+
+  interface ChildComponent {
+    'error'?: Error;
+  }
+
+  interface ChildComponent1 {
+    'engine': Engine;
+  }
+
+  interface ChildComponentErrored {
+    'engine': Engine;
+    'error'?: Error;
+  }
+
+  interface IntrinsicElements {
+    'atomic-category-facet': AtomicCategoryFacet;
+    'atomic-component-error': AtomicComponentError;
+    'atomic-date-facet': AtomicDateFacet;
+    'atomic-did-you-mean': AtomicDidYouMean;
+    'atomic-facet': AtomicFacet;
+    'atomic-field-condition': AtomicFieldCondition;
+    'atomic-history': AtomicHistory;
+    'atomic-numeric-facet': AtomicNumericFacet;
+    'atomic-pager': AtomicPager;
         "atomic-query-error": AtomicQueryError;
-        "atomic-query-summary": AtomicQuerySummary;
-        "atomic-result": AtomicResult;
-        "atomic-result-list": AtomicResultList;
-        "atomic-result-template": AtomicResultTemplate;
-        "atomic-result-value": AtomicResultValue;
-        "atomic-results-per-page": AtomicResultsPerPage;
-        "atomic-search-box": AtomicSearchBox;
-        "atomic-search-interface": AtomicSearchInterface;
-        "atomic-sort-dropdown": AtomicSortDropdown;
-        "atomic-tab": AtomicTab;
-    }
+    'atomic-query-summary': AtomicQuerySummary;
+    'atomic-result': AtomicResult;
+    'atomic-result-list': AtomicResultList;
+    'atomic-result-template': AtomicResultTemplate;
+    'atomic-result-value': AtomicResultValue;
+    'atomic-results-per-page': AtomicResultsPerPage;
+    'atomic-search-box': AtomicSearchBox;
+    'atomic-search-interface': AtomicSearchInterface;
+    'atomic-sort-dropdown': AtomicSortDropdown;
+    'atomic-tab': AtomicTab;
+    'child-component': ChildComponent;
+    'child-component-1': ChildComponent1;
+    'child-component-errored': ChildComponentErrored;
+  }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
@@ -320,16 +387,19 @@ declare module "@stencil/core" {
             "atomic-numeric-facet": LocalJSX.AtomicNumericFacet & JSXBase.HTMLAttributes<HTMLAtomicNumericFacetElement>;
             "atomic-pager": LocalJSX.AtomicPager & JSXBase.HTMLAttributes<HTMLAtomicPagerElement>;
             "atomic-query-error": LocalJSX.AtomicQueryError & JSXBase.HTMLAttributes<HTMLAtomicQueryErrorElement>;
-            "atomic-query-summary": LocalJSX.AtomicQuerySummary & JSXBase.HTMLAttributes<HTMLAtomicQuerySummaryElement>;
-            "atomic-result": LocalJSX.AtomicResult & JSXBase.HTMLAttributes<HTMLAtomicResultElement>;
-            "atomic-result-list": LocalJSX.AtomicResultList & JSXBase.HTMLAttributes<HTMLAtomicResultListElement>;
-            "atomic-result-template": LocalJSX.AtomicResultTemplate & JSXBase.HTMLAttributes<HTMLAtomicResultTemplateElement>;
-            "atomic-result-value": LocalJSX.AtomicResultValue & JSXBase.HTMLAttributes<HTMLAtomicResultValueElement>;
-            "atomic-results-per-page": LocalJSX.AtomicResultsPerPage & JSXBase.HTMLAttributes<HTMLAtomicResultsPerPageElement>;
-            "atomic-search-box": LocalJSX.AtomicSearchBox & JSXBase.HTMLAttributes<HTMLAtomicSearchBoxElement>;
-            "atomic-search-interface": LocalJSX.AtomicSearchInterface & JSXBase.HTMLAttributes<HTMLAtomicSearchInterfaceElement>;
-            "atomic-sort-dropdown": LocalJSX.AtomicSortDropdown & JSXBase.HTMLAttributes<HTMLAtomicSortDropdownElement>;
-            "atomic-tab": LocalJSX.AtomicTab & JSXBase.HTMLAttributes<HTMLAtomicTabElement>;
+          'atomic-query-summary': LocalJSX.AtomicQuerySummary & JSXBase.HTMLAttributes<HTMLAtomicQuerySummaryElement>;
+          'atomic-result': LocalJSX.AtomicResult & JSXBase.HTMLAttributes<HTMLAtomicResultElement>;
+          'atomic-result-list': LocalJSX.AtomicResultList & JSXBase.HTMLAttributes<HTMLAtomicResultListElement>;
+          'atomic-result-template': LocalJSX.AtomicResultTemplate & JSXBase.HTMLAttributes<HTMLAtomicResultTemplateElement>;
+          'atomic-result-value': LocalJSX.AtomicResultValue & JSXBase.HTMLAttributes<HTMLAtomicResultValueElement>;
+          'atomic-results-per-page': LocalJSX.AtomicResultsPerPage & JSXBase.HTMLAttributes<HTMLAtomicResultsPerPageElement>;
+          'atomic-search-box': LocalJSX.AtomicSearchBox & JSXBase.HTMLAttributes<HTMLAtomicSearchBoxElement>;
+          'atomic-search-interface': LocalJSX.AtomicSearchInterface & JSXBase.HTMLAttributes<HTMLAtomicSearchInterfaceElement>;
+          'atomic-sort-dropdown': LocalJSX.AtomicSortDropdown & JSXBase.HTMLAttributes<HTMLAtomicSortDropdownElement>;
+          'atomic-tab': LocalJSX.AtomicTab & JSXBase.HTMLAttributes<HTMLAtomicTabElement>;
+          'child-component': LocalJSX.ChildComponent & JSXBase.HTMLAttributes<HTMLChildComponentElement>;
+          'child-component-1': LocalJSX.ChildComponent1 & JSXBase.HTMLAttributes<HTMLChildComponent1Element>;
+          'child-component-errored': LocalJSX.ChildComponentErrored & JSXBase.HTMLAttributes<HTMLChildComponentErroredElement>;
         }
     }
 }

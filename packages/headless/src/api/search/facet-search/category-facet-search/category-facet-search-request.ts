@@ -23,7 +23,8 @@ export const buildCategoryFacetSearchRequest = (
   const {captions, query, numberOfValues} = options;
   const {field, delimitingCharacter, basePath} = categoryFacet;
   const searchContext = searchRequest(state);
-  const ignorePaths = [getPathToSelectedCategoryFacetItem(categoryFacet)];
+  const path = getPathToSelectedCategoryFacetItem(categoryFacet);
+  const ignorePaths = path.length ? [path] : [];
 
   return {
     basePath,
@@ -42,7 +43,7 @@ const getPathToSelectedCategoryFacetItem = (
   categoryFacet: CategoryFacetRequest
 ): string[] => {
   const path = [];
-  let selectedValue = categoryFacet?.currentValues[0];
+  let selectedValue = categoryFacet.currentValues[0];
   while (selectedValue) {
     path.push(selectedValue.value);
     selectedValue = selectedValue.children[0];

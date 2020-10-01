@@ -74,7 +74,7 @@ describe('#buildCategoryFacetSearchRequest', () => {
   describe('#ignorePaths', () => {
     it('#ignorePaths is empty when currentValues is empty', () => {
       state.categoryFacetSet[id].currentValues = [];
-      expect(buildParms().ignorePaths).toEqual([[]]);
+      expect(buildParms().ignorePaths).toEqual([]);
     });
 
     it('#ignorePaths returns the correct path when currentValues has one level', () => {
