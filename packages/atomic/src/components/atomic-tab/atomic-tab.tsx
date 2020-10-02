@@ -26,7 +26,9 @@ export class AtomicTab {
   @Initialization()
   public initialize() {
     const options: TabProps = {
-      expression: this.expression,
+      options: {
+        expression: this.expression,
+      },
       initialState: {
         isActive: this.isActive,
       },
