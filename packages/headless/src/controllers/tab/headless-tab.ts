@@ -43,8 +43,7 @@ export function buildTab(engine: Engine, props: TabProps) {
 
     get state() {
       const isActive =
-        engine.state.constantQuery.cq === props.options.expression &&
-        engine.state.constantQuery.isInitialized;
+        engine.state.constantQuery.cq === props.options.expression;
       return {isActive};
     },
   };

@@ -5,7 +5,7 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Engine, HeadlessConfigurationOptions, Result, ResultTemplateCondition, } from "@coveo/headless";
+import { Engine, HeadlessConfigurationOptions, Result, ResultTemplateCondition } from "@coveo/headless";
 export namespace Components {
     interface AtomicCategoryFacet {
         "field": string;
@@ -62,7 +62,7 @@ export namespace Components {
         "numberOfSuggestions": number;
     }
     interface AtomicSearchInterface {
-        "initialize": (options: Pick<HeadlessConfigurationOptions, "accessToken" | "organizationId" | "renewAccessToken" | "platformUrl">) => Promise<void>;
+        "initialize": (options: Pick<HeadlessConfigurationOptions, 'accessToken' | 'organizationId' | 'renewAccessToken' | 'platformUrl'>) => Promise<void>;
         "pipeline": string;
         "sample": boolean;
         "searchHub": string;
@@ -72,16 +72,6 @@ export namespace Components {
     interface AtomicTab {
         "expression": string;
         "isActive": boolean;
-    }
-    interface ChildComponent {
-        "error"?: Error;
-    }
-    interface ChildComponent1 {
-        "engine": Engine;
-    }
-    interface ChildComponentErrored {
-        "engine": Engine;
-        "error"?: Error;
     }
 }
 declare global {
@@ -205,24 +195,6 @@ declare global {
         prototype: HTMLAtomicTabElement;
         new (): HTMLAtomicTabElement;
     };
-    interface HTMLChildComponentElement extends Components.ChildComponent, HTMLStencilElement {
-    }
-    var HTMLChildComponentElement: {
-        prototype: HTMLChildComponentElement;
-        new (): HTMLChildComponentElement;
-    };
-    interface HTMLChildComponent1Element extends Components.ChildComponent1, HTMLStencilElement {
-    }
-    var HTMLChildComponent1Element: {
-        prototype: HTMLChildComponent1Element;
-        new (): HTMLChildComponent1Element;
-    };
-    interface HTMLChildComponentErroredElement extends Components.ChildComponentErrored, HTMLStencilElement {
-    }
-    var HTMLChildComponentErroredElement: {
-        prototype: HTMLChildComponentErroredElement;
-        new (): HTMLChildComponentErroredElement;
-    };
     interface HTMLElementTagNameMap {
         "atomic-category-facet": HTMLAtomicCategoryFacetElement;
         "atomic-component-error": HTMLAtomicComponentErrorElement;
@@ -244,9 +216,6 @@ declare global {
         "atomic-search-interface": HTMLAtomicSearchInterfaceElement;
         "atomic-sort-dropdown": HTMLAtomicSortDropdownElement;
         "atomic-tab": HTMLAtomicTabElement;
-        "child-component": HTMLChildComponentElement;
-        "child-component-1": HTMLChildComponent1Element;
-        "child-component-errored": HTMLChildComponentErroredElement;
     }
 }
 declare namespace LocalJSX {
@@ -312,16 +281,6 @@ declare namespace LocalJSX {
         "expression"?: string;
         "isActive"?: boolean;
     }
-    interface ChildComponent {
-        "error"?: Error;
-    }
-    interface ChildComponent1 {
-        "engine": Engine;
-    }
-    interface ChildComponentErrored {
-        "engine": Engine;
-        "error"?: Error;
-    }
     interface IntrinsicElements {
         "atomic-category-facet": AtomicCategoryFacet;
         "atomic-component-error": AtomicComponentError;
@@ -343,9 +302,6 @@ declare namespace LocalJSX {
         "atomic-search-interface": AtomicSearchInterface;
         "atomic-sort-dropdown": AtomicSortDropdown;
         "atomic-tab": AtomicTab;
-        "child-component": ChildComponent;
-        "child-component-1": ChildComponent1;
-        "child-component-errored": ChildComponentErrored;
     }
 }
 export { LocalJSX as JSX };
@@ -372,9 +328,6 @@ declare module "@stencil/core" {
             "atomic-search-interface": LocalJSX.AtomicSearchInterface & JSXBase.HTMLAttributes<HTMLAtomicSearchInterfaceElement>;
             "atomic-sort-dropdown": LocalJSX.AtomicSortDropdown & JSXBase.HTMLAttributes<HTMLAtomicSortDropdownElement>;
             "atomic-tab": LocalJSX.AtomicTab & JSXBase.HTMLAttributes<HTMLAtomicTabElement>;
-            "child-component": LocalJSX.ChildComponent & JSXBase.HTMLAttributes<HTMLChildComponentElement>;
-            "child-component-1": LocalJSX.ChildComponent1 & JSXBase.HTMLAttributes<HTMLChildComponent1Element>;
-            "child-component-errored": LocalJSX.ChildComponentErrored & JSXBase.HTMLAttributes<HTMLChildComponentErroredElement>;
         }
     }
 }
