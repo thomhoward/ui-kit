@@ -71,35 +71,33 @@ describe('#buildCategoryFacetSearchRequest', () => {
     expect(buildParms().searchContext).toEqual(request);
   });
 
-  describe('#ignorePaths', () => {
-    it('#ignorePaths is empty when currentValues is empty', () => {
-      state.categoryFacetSet[id].currentValues = [];
-      expect(buildParms().ignorePaths).toEqual([]);
-    });
+  it('#ignorePaths is empty when currentValues is empty', () => {
+    state.categoryFacetSet[id].currentValues = [];
+    expect(buildParms().ignorePaths).toEqual([]);
+  });
 
-    it('#ignorePaths returns the correct path when currentValues has one level', () => {
-      state.categoryFacetSet[id].currentValues = [
-        buildMockCategoryFacetValueRequest({
-          value: 'level1',
-          state: 'selected',
-        }),
-      ];
-      expect(buildParms().ignorePaths).toEqual([['level1']]);
-    });
+  it('#ignorePaths returns the correct path when currentValues has one level', () => {
+    state.categoryFacetSet[id].currentValues = [
+      buildMockCategoryFacetValueRequest({
+        value: 'level1',
+        state: 'selected',
+      }),
+    ];
+    expect(buildParms().ignorePaths).toEqual([['level1']]);
+  });
 
-    it('#ignorePaths returns the correct path when currentValues has more than one level', () => {
-      state.categoryFacetSet[id].currentValues = [
-        buildMockCategoryFacetValueRequest({
-          value: 'level1',
-          children: [
-            buildMockCategoryFacetValueRequest({
-              value: 'level2',
-              state: 'selected',
-            }),
-          ],
-        }),
-      ];
-      expect(buildParms().ignorePaths).toEqual([['level1', 'level2']]);
-    });
+  it('#ignorePaths returns the correct path when currentValues has more than one level', () => {
+    state.categoryFacetSet[id].currentValues = [
+      buildMockCategoryFacetValueRequest({
+        value: 'level1',
+        children: [
+          buildMockCategoryFacetValueRequest({
+            value: 'level2',
+            state: 'selected',
+          }),
+        ],
+      }),
+    ];
+    expect(buildParms().ignorePaths).toEqual([['level1', 'level2']]);
   });
 });
