@@ -30,6 +30,7 @@ import {
   CategoryFacetSetState,
 } from '../facets/category-facet-set/category-facet-set-slice';
 import {getInitialConstantQueryState} from '../constant-query/constant-query-slice';
+import {getInitialAdvancedQueryState} from '../advanced-query/advanced-query-slice';
 
 export const getHistoryEmptyState = (): SearchParametersState => ({
   context: getContextInitialState(),
@@ -40,6 +41,7 @@ export const getHistoryEmptyState = (): SearchParametersState => ({
   pagination: getPaginationInitialState(),
   query: getQueryInitialState(),
   constantQuery: getInitialConstantQueryState(),
+  advancedQuery: getInitialAdvancedQueryState(),
   sortCriteria: getSortCriteriaInitialState(),
   querySet: getQuerySetInitialState(),
   pipeline: getPipelineInitialState(),
