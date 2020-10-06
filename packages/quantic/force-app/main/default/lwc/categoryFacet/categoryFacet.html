@@ -1,9 +1,11 @@
 <template>
-    <template if:true={hasValues}>
+    <template if:true={hasParentsOrValues}>
         <lightning-card title={label}>
             <ul class="slds-has-dividers_around-space slds-m-vertical_medium">
                 <template for:each={parents} for:item="v">
-                    <li key={v.value}>{v.value}</li>
+                    <li class="slds-m-horizontal--medium slds-m-vertical--x-small slds-grid" key={v.value}>
+                        <span class="nowrap slds-text-title_bold">{v.value}</span>
+                    </li>
                 </template>
             </ul>
             <ul class="slds-has-dividers_around-space slds-m-vertical_medium">
@@ -20,6 +22,10 @@
                 <template if:true={canShowLess}>
                     <lightning-button variant="base" label="Less" title="Show less" icon-name="utility:arrowup"
                                       class="slds-m-left_x-small" onclick={showLess}></lightning-button>
+                </template>
+                <template if:true={hasParents}>
+                    <lightning-button variant="base" label="All" title="Show All" icon-name="utility:all"
+                                      class="slds-m-left_x-small" onclick={reset}></lightning-button>
                 </template>
             </lightning-button-group>
         </lightning-card>

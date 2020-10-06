@@ -29,13 +29,22 @@ export default class CategoryFacet extends LightningElement {
     this.facet = CoveoHeadless.buildCategoryFacet(engine, {
       options: {
         field: this.field,
+        delimitingCharacter: ';'
       },
     });
     this.unsubscribe = this.facet.subscribe(() => this.updateState());
   }
 
+  updateState() {
+    this.state = this.facet.state;
+  }
+
   get values() {
     return this.state.values || [];
+  }
+
+  get parents() {
+    return this.state.parents || [];
   }
 
   get canShowMore() {
@@ -52,6 +61,18 @@ export default class CategoryFacet extends LightningElement {
     return this.state.canShowLessValues;
   }
 
+  get hasParents() {
+    return this.state.parents.length !== 0;
+  }
+
+  get hasValues() {
+    return this.state.values.length !== 0
+  }
+
+  get hasParentsOrValues() {
+    return this.hasParents || this.hasValues;
+  }
+
   /**
    * @param {CustomEvent<import("coveo").CategoryFacetValue>} evt
    */
@@ -65,5 +86,9 @@ export default class CategoryFacet extends LightningElement {
 
   showLess() {
     this.facet.showLessValues();
+  }
+
+  reset() {
+    this.facet.deselectAll();
   }
 }
