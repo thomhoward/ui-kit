@@ -12,7 +12,7 @@ import {
   PaginationState,
   getPaginationInitialState,
 } from '../pagination/pagination-slice';
-import {ConstantQueryState, QueryState} from '../../state';
+import {ConstantQueryState, QueryState, AdvancedQueryState} from '../../state';
 import {SortState} from '../../controllers/sort/headless-sort';
 import {snapshot} from './history-actions';
 import {getPipelineInitialState} from '../pipeline/pipeline-slice';
@@ -64,6 +64,7 @@ const isEqual = (
   return (
     isContextEqual(current.context, next.context) &&
     isConstantQueryEqual(current.constantQuery, next.constantQuery) &&
+    isAdvancedQueryEqual(current.advancedQuery, next.advancedQuery) &&
     isFacetsEqual(current.facetSet, next.facetSet) &&
     isDateFacetsEqual(current.dateFacetSet, next.dateFacetSet) &&
     isNumericFacetsEqual(current.numericFacetSet, next.numericFacetSet) &&
@@ -107,6 +108,11 @@ const isQueryEqual = (current: QueryState, next: QueryState) =>
 const isConstantQueryEqual = (
   current: ConstantQueryState,
   next: ConstantQueryState
+) => JSON.stringify(current) === JSON.stringify(next);
+
+const isAdvancedQueryEqual = (
+  current: AdvancedQueryState,
+  next: AdvancedQueryState
 ) => JSON.stringify(current) === JSON.stringify(next);
 
 const isSortEqual = (current: SortState, next: SortState) =>
