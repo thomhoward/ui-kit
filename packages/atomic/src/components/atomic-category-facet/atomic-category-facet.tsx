@@ -27,7 +27,10 @@ export class AtomicCategoryFacet {
 
   @Initialization()
   public initialize() {
-    const options: CategoryFacetOptions = {field: this.field};
+    const options: CategoryFacetOptions = {
+      field: this.field,
+      delimitingCharacter: ';',
+    };
     this.categoryFacet = buildCategoryFacet(this.engine, {options});
     this.unsubscribe = this.categoryFacet.subscribe(() => this.updateState());
   }
@@ -86,7 +89,7 @@ export class AtomicCategoryFacet {
   private get facetSearchResults() {
     const facetSearch = this.categoryFacet.facetSearch;
     return facetSearch.state.values.map((searchResult) => (
-      <div>
+      <div onClick={() => this.categoryFacet.facetSearch.select(searchResult)}>
         {searchResult.displayValue} {searchResult.count}
       </div>
     ));

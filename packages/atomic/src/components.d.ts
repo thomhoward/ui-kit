@@ -59,7 +59,6 @@ export namespace Components {
     interface AtomicResultsPerPage {
     }
     interface AtomicSearchBox {
-        "isStandalone": boolean;
         "numberOfSuggestions": number;
     }
     interface AtomicSearchInterface {
@@ -269,7 +268,6 @@ declare namespace LocalJSX {
     interface AtomicResultsPerPage {
     }
     interface AtomicSearchBox {
-        "isStandalone"?: boolean;
         "numberOfSuggestions"?: number;
     }
     interface AtomicSearchInterface {

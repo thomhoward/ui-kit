@@ -15,7 +15,6 @@ import {Initialization} from '../../utils/initialization-utils';
 })
 export class AtomicSearchBox implements ComponentInterface {
   @State() searchBoxState!: SearchBoxState;
-  @Prop() isStandalone = false;
   @Prop() numberOfSuggestions = 5;
 
   private engine!: Engine;
@@ -26,17 +25,10 @@ export class AtomicSearchBox implements ComponentInterface {
   public initialize() {
     this.searchBox = buildSearchBox(this.engine, {
       options: {
-        isStandalone: this.isStandalone,
         numberOfSuggestions: this.numberOfSuggestions,
       },
     });
     this.unsubscribe = this.searchBox.subscribe(() => this.updateState());
-  }
-
-  public componentDidUpdate() {
-    if (this.searchBoxState.redirectTo) {
-      window.location.assign(this.searchBoxState.redirectTo);
-    }
   }
 
   public disconnectedCallback() {
