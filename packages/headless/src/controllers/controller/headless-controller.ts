@@ -9,10 +9,16 @@ export function buildController(engine: Engine) {
    * Determines whether or not the state has changed between two subscribe calls
    * @returns A boolean representing whether the state has changed
    */
-  const hasStateChanged = (currentState: string): boolean => {
-    const hasChanged = prevState !== currentState;
-    prevState = currentState;
-    return hasChanged;
+  const hasStateChanged = (currentState: Record<string, any>): boolean => {
+    try {
+      const stringifiedState = JSON.stringify(currentState);
+      const hasChanged = prevState !== stringifiedState;
+      prevState = stringifiedState;
+      return hasChanged;
+    } catch (e) {
+      console.log(e);
+      return true;
+    }
   };
 
   return {
@@ -25,8 +31,7 @@ export function buildController(engine: Engine) {
     subscribe(listener: () => void) {
       listener();
       return engine.subscribe(() => {
-        console.log(this.state);
-        if (hasStateChanged(JSON.stringify(this.state))) {
+        if (hasStateChanged(this.state)) {
           listener();
         }
       });
