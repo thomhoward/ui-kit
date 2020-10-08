@@ -3,20 +3,19 @@ import {Engine} from '../../app/headless-engine';
 export type Controller = ReturnType<typeof buildController>;
 
 export function buildController(engine: Engine) {
+  let prevState = '{}';
+
+  /**
+   * Determines whether or not the state has changed between two subscribe calls
+   * @returns A boolean representing whether the state has changed
+   */
+  const hasStateChanged = (currentState: string): boolean => {
+    const hasChanged = prevState !== currentState;
+    prevState = currentState;
+    return hasChanged;
+  };
+
   return {
-    prevState: '',
-
-    /**
-     * Determines whether or not the state has changed between two subscribe calls
-     * @returns A boolean representing whether the state has changed
-     */
-    hasStateChanged(): boolean {
-      const currentState = JSON.stringify(this.state);
-      const prevState = this.prevState;
-      this.prevState = currentState;
-      return prevState !== currentState;
-    },
-
     /**
      * Adds a callback that will be called on state change.
      *
@@ -26,7 +25,8 @@ export function buildController(engine: Engine) {
     subscribe(listener: () => void) {
       listener();
       return engine.subscribe(() => {
-        if (this.hasStateChanged()) {
+        console.log(this.state);
+        if (hasStateChanged(JSON.stringify(this.state))) {
           listener();
         }
       });
