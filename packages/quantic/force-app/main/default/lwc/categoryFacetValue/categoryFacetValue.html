@@ -1,8 +1,12 @@
 <template>
-    <li class="slds-m-around_small slds-grid">
+    <li class="slds-m-horizontal--small slds-grid">
         <div class="slds-col_bump-right" onclick={onSelect}>
-            <span class="slds-m-horizontal_medium nowrap">{item.value}</span>
+            <button class="slds-m-horizontal_medium nowrap slds-button slds-text-color_default">
+                {item.value}
+                <span class="slds-m-horizontal_small">
+                    ({item.numberOfResults})
+                </span>
+            </button>
         </div>
-        <div class="slds-m-horizontal_small">({item.numberOfResults})</div>
     </li>
 </template>

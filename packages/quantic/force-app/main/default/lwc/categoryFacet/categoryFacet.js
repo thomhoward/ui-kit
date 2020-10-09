@@ -40,11 +40,11 @@ export default class CategoryFacet extends LightningElement {
   }
 
   get values() {
-    return this.state.values || [];
+    return this.state.values;
   }
 
   get parents() {
-    return this.state.parents || [];
+    return this.state.parents;
   }
 
   get canShowMore() {
