@@ -5,10 +5,6 @@ export type Controller = ReturnType<typeof buildController>;
 export function buildController(engine: Engine) {
   let prevState = '{}';
 
-  /**
-   * Determines whether or not the state has changed between two subscribe calls
-   * @returns A boolean representing whether the state has changed
-   */
   const hasStateChanged = (currentState: Record<string, any>): boolean => {
     try {
       const stringifiedState = JSON.stringify(currentState);
