@@ -2,6 +2,7 @@ import {SearchPageState} from '../../../state';
 import {getQParam} from '../search-api-params';
 import {Context} from '../../../features/context/context-slice';
 import {AnyFacetRequest} from '../../../features/facets/generic/interfaces/generic-facet-request';
+import {configureAnalytics} from '../../analytics/analytics';
 
 export interface SearchRequest {
   q: string;
@@ -32,7 +33,10 @@ export const searchRequest = (state: SearchPageState): SearchRequest => {
     fieldsToInclude: state.fields.fieldsToInclude,
     pipeline: state.pipeline,
     searchHub: state.searchHub,
-    visitorId: state.visitorId,
+    ...(state.configuration.analytics.enabled && {
+      visitorId: configureAnalytics(state).coveoAnalyticsClient
+        .currentVisitorId,
+    }),
   };
 };
 

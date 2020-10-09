@@ -51,6 +51,7 @@ describe('search api client', () => {
         fieldsToInclude: state.fields.fieldsToInclude,
         pipeline: state.pipeline,
         searchHub: state.searchHub,
+        visitorId: expect.any(String),
       },
     };
 
@@ -154,7 +155,10 @@ describe('search api client', () => {
           field: facetState.field,
           delimitingCharacter: facetState.delimitingCharacter,
           ignoreValues: [],
-          searchContext: searchRequest(state),
+          searchContext: {
+            ...searchRequest(state),
+            visitorId: expect.any(String),
+          },
         },
       });
     });
@@ -182,7 +186,10 @@ describe('search api client', () => {
           field: categoryFacet.field,
           delimitingCharacter: categoryFacet.delimitingCharacter,
           ignorePaths: [],
-          searchContext: searchRequest(state),
+          searchContext: {
+            ...searchRequest(state),
+            visitorId: expect.any(String),
+          },
         },
       });
     });
