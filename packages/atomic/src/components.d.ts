@@ -8,6 +8,7 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Engine, HeadlessConfigurationOptions, Result, ResultTemplateCondition } from "@coveo/headless";
 export namespace Components {
     interface AtomicCategoryFacet {
+        "facetId": string;
         "field": string;
         "label": string;
     }
@@ -15,14 +16,18 @@ export namespace Components {
         "error": Error;
     }
     interface AtomicDateFacet {
+        "facetId": string;
         "field": string;
         "label": string;
     }
     interface AtomicDidYouMean {
     }
     interface AtomicFacet {
+        "facetId": string;
         "field": string;
         "label": string;
+    }
+    interface AtomicFacetManager {
     }
     interface AtomicFieldCondition {
         "conditions": ResultTemplateCondition[];
@@ -32,6 +37,7 @@ export namespace Components {
     interface AtomicHistory {
     }
     interface AtomicNumericFacet {
+        "facetId": string;
         "field": string;
         "label": string;
     }
@@ -73,6 +79,16 @@ export namespace Components {
         "expression": string;
         "isActive": boolean;
     }
+    interface ChildComponent {
+        "error"?: Error;
+    }
+    interface ChildComponent1 {
+        "engine": Engine;
+    }
+    interface ChildComponentErrored {
+        "engine": Engine;
+        "error"?: Error;
+    }
 }
 declare global {
     interface HTMLAtomicCategoryFacetElement extends Components.AtomicCategoryFacet, HTMLStencilElement {
@@ -104,6 +120,12 @@ declare global {
     var HTMLAtomicFacetElement: {
         prototype: HTMLAtomicFacetElement;
         new (): HTMLAtomicFacetElement;
+    };
+    interface HTMLAtomicFacetManagerElement extends Components.AtomicFacetManager, HTMLStencilElement {
+    }
+    var HTMLAtomicFacetManagerElement: {
+        prototype: HTMLAtomicFacetManagerElement;
+        new (): HTMLAtomicFacetManagerElement;
     };
     interface HTMLAtomicFieldConditionElement extends Components.AtomicFieldCondition, HTMLStencilElement {
     }
@@ -195,12 +217,31 @@ declare global {
         prototype: HTMLAtomicTabElement;
         new (): HTMLAtomicTabElement;
     };
+    interface HTMLChildComponentElement extends Components.ChildComponent, HTMLStencilElement {
+    }
+    var HTMLChildComponentElement: {
+        prototype: HTMLChildComponentElement;
+        new (): HTMLChildComponentElement;
+    };
+    interface HTMLChildComponent1Element extends Components.ChildComponent1, HTMLStencilElement {
+    }
+    var HTMLChildComponent1Element: {
+        prototype: HTMLChildComponent1Element;
+        new (): HTMLChildComponent1Element;
+    };
+    interface HTMLChildComponentErroredElement extends Components.ChildComponentErrored, HTMLStencilElement {
+    }
+    var HTMLChildComponentErroredElement: {
+        prototype: HTMLChildComponentErroredElement;
+        new (): HTMLChildComponentErroredElement;
+    };
     interface HTMLElementTagNameMap {
         "atomic-category-facet": HTMLAtomicCategoryFacetElement;
         "atomic-component-error": HTMLAtomicComponentErrorElement;
         "atomic-date-facet": HTMLAtomicDateFacetElement;
         "atomic-did-you-mean": HTMLAtomicDidYouMeanElement;
         "atomic-facet": HTMLAtomicFacetElement;
+        "atomic-facet-manager": HTMLAtomicFacetManagerElement;
         "atomic-field-condition": HTMLAtomicFieldConditionElement;
         "atomic-history": HTMLAtomicHistoryElement;
         "atomic-numeric-facet": HTMLAtomicNumericFacetElement;
@@ -216,10 +257,14 @@ declare global {
         "atomic-search-interface": HTMLAtomicSearchInterfaceElement;
         "atomic-sort-dropdown": HTMLAtomicSortDropdownElement;
         "atomic-tab": HTMLAtomicTabElement;
+        "child-component": HTMLChildComponentElement;
+        "child-component-1": HTMLChildComponent1Element;
+        "child-component-errored": HTMLChildComponentErroredElement;
     }
 }
 declare namespace LocalJSX {
     interface AtomicCategoryFacet {
+        "facetId"?: string;
         "field"?: string;
         "label"?: string;
     }
@@ -227,14 +272,18 @@ declare namespace LocalJSX {
         "error": Error;
     }
     interface AtomicDateFacet {
+        "facetId"?: string;
         "field"?: string;
         "label"?: string;
     }
     interface AtomicDidYouMean {
     }
     interface AtomicFacet {
+        "facetId"?: string;
         "field"?: string;
         "label"?: string;
+    }
+    interface AtomicFacetManager {
     }
     interface AtomicFieldCondition {
         "conditions"?: ResultTemplateCondition[];
@@ -243,6 +292,7 @@ declare namespace LocalJSX {
     interface AtomicHistory {
     }
     interface AtomicNumericFacet {
+        "facetId"?: string;
         "field"?: string;
         "label"?: string;
     }
@@ -281,12 +331,23 @@ declare namespace LocalJSX {
         "expression"?: string;
         "isActive"?: boolean;
     }
+    interface ChildComponent {
+        "error"?: Error;
+    }
+    interface ChildComponent1 {
+        "engine": Engine;
+    }
+    interface ChildComponentErrored {
+        "engine": Engine;
+        "error"?: Error;
+    }
     interface IntrinsicElements {
         "atomic-category-facet": AtomicCategoryFacet;
         "atomic-component-error": AtomicComponentError;
         "atomic-date-facet": AtomicDateFacet;
         "atomic-did-you-mean": AtomicDidYouMean;
         "atomic-facet": AtomicFacet;
+        "atomic-facet-manager": AtomicFacetManager;
         "atomic-field-condition": AtomicFieldCondition;
         "atomic-history": AtomicHistory;
         "atomic-numeric-facet": AtomicNumericFacet;
@@ -302,6 +363,9 @@ declare namespace LocalJSX {
         "atomic-search-interface": AtomicSearchInterface;
         "atomic-sort-dropdown": AtomicSortDropdown;
         "atomic-tab": AtomicTab;
+        "child-component": ChildComponent;
+        "child-component-1": ChildComponent1;
+        "child-component-errored": ChildComponentErrored;
     }
 }
 export { LocalJSX as JSX };
@@ -313,6 +377,7 @@ declare module "@stencil/core" {
             "atomic-date-facet": LocalJSX.AtomicDateFacet & JSXBase.HTMLAttributes<HTMLAtomicDateFacetElement>;
             "atomic-did-you-mean": LocalJSX.AtomicDidYouMean & JSXBase.HTMLAttributes<HTMLAtomicDidYouMeanElement>;
             "atomic-facet": LocalJSX.AtomicFacet & JSXBase.HTMLAttributes<HTMLAtomicFacetElement>;
+            "atomic-facet-manager": LocalJSX.AtomicFacetManager & JSXBase.HTMLAttributes<HTMLAtomicFacetManagerElement>;
             "atomic-field-condition": LocalJSX.AtomicFieldCondition & JSXBase.HTMLAttributes<HTMLAtomicFieldConditionElement>;
             "atomic-history": LocalJSX.AtomicHistory & JSXBase.HTMLAttributes<HTMLAtomicHistoryElement>;
             "atomic-numeric-facet": LocalJSX.AtomicNumericFacet & JSXBase.HTMLAttributes<HTMLAtomicNumericFacetElement>;
@@ -328,6 +393,9 @@ declare module "@stencil/core" {
             "atomic-search-interface": LocalJSX.AtomicSearchInterface & JSXBase.HTMLAttributes<HTMLAtomicSearchInterfaceElement>;
             "atomic-sort-dropdown": LocalJSX.AtomicSortDropdown & JSXBase.HTMLAttributes<HTMLAtomicSortDropdownElement>;
             "atomic-tab": LocalJSX.AtomicTab & JSXBase.HTMLAttributes<HTMLAtomicTabElement>;
+            "child-component": LocalJSX.ChildComponent & JSXBase.HTMLAttributes<HTMLChildComponentElement>;
+            "child-component-1": LocalJSX.ChildComponent1 & JSXBase.HTMLAttributes<HTMLChildComponent1Element>;
+            "child-component-errored": LocalJSX.ChildComponentErrored & JSXBase.HTMLAttributes<HTMLChildComponentErroredElement>;
         }
     }
 }
