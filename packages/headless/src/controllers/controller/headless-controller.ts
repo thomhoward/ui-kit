@@ -16,7 +16,10 @@ export function buildController(engine: Engine) {
       prevState = stringifiedState;
       return hasChanged;
     } catch (e) {
-      console.log(e);
+      console.warn(
+        'Could not detect if state has changed, check the controller "get state method"',
+        e
+      );
       return true;
     }
   };
