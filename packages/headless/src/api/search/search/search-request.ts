@@ -1,4 +1,4 @@
-import {SearchPageState} from '../../../state';
+import {SearchPageState, AdvancedSearchParametersState} from '../../../state';
 import {getQParam} from '../search-api-params';
 import {Context} from '../../../features/context/context-slice';
 import {AnyFacetRequest} from '../../../features/facets/generic/interfaces/generic-facet-request';
@@ -6,8 +6,7 @@ import {configureAnalytics} from '../../analytics/analytics';
 
 export interface SearchRequest {
   q: string;
-  cq: string;
-  aq: string;
+  advancedSearchParameters: AdvancedSearchParametersState;
   numberOfResults: number;
   sortCriteria: string;
   firstResult: number;
@@ -24,8 +23,7 @@ export interface SearchRequest {
 export const searchRequest = (state: SearchPageState): SearchRequest => {
   return {
     ...getQParam(state),
-    cq: state.constantQuery.cq,
-    aq: state.advancedQuery.aq,
+    advancedSearchParameters: state.advancedSearchParameters,
     numberOfResults: state.pagination.numberOfResults,
     sortCriteria: state.sortCriteria,
     firstResult: state.pagination.firstResult,
