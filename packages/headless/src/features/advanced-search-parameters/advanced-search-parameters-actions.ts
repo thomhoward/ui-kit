@@ -5,7 +5,7 @@ import {createAction} from '@reduxjs/toolkit';
  * @param aq (string) The new advanced query value (e.g., `@year==2017`).
  */
 export const updateAdvancedQuery = createAction<string>(
-  'advancedSearchParameters/updatAadvancedQuery'
+  'advancedSearchParameters/updateAadvancedQuery'
 );
 
 /**
