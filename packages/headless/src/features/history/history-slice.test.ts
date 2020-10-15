@@ -75,6 +75,7 @@ describe('history slice', () => {
       sortCriteria: 'date descending',
       pipeline: 'my-pipeline',
       searchHub: 'my-search-hub',
+      recommendation: 'foo',
     };
 
     expect(addSnapshot(expectedSnapshot).present).toEqual(expectedSnapshot);

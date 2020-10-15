@@ -17,6 +17,7 @@ export function buildMockSearchRequest(
     fieldsToInclude: getFieldsInitialState().fieldsToInclude,
     pipeline: 'default',
     searchHub: 'default',
+    actionsHistory: [],
     ...config,
   };
 }
