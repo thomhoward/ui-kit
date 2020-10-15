@@ -31,6 +31,7 @@ import {
 } from '../facets/category-facet-set/category-facet-set-slice';
 import {getInitialConstantQueryState} from '../constant-query/constant-query-slice';
 import {getInitialAdvancedQueryState} from '../advanced-query/advanced-query-slice';
+import {getRecommendationInitialState} from '../recommendation/recommendation-slice';
 
 export const getHistoryEmptyState = (): SearchParametersState => ({
   context: getContextInitialState(),
@@ -46,6 +47,7 @@ export const getHistoryEmptyState = (): SearchParametersState => ({
   querySet: getQuerySetInitialState(),
   pipeline: getPipelineInitialState(),
   searchHub: getSearchHubInitialState(),
+  recommendation: getRecommendationInitialState(),
 });
 
 export const historyReducer = createReducer(
@@ -73,7 +75,8 @@ const isEqual = (
     isQueryEqual(current.query, next.query) &&
     isSortEqual(current, next) &&
     isPipelineEqual(current.pipeline, next.pipeline) &&
-    isSearchHubEqual(current.searchHub, next.searchHub)
+    isSearchHubEqual(current.searchHub, next.searchHub) &&
+    isRecommendationEqual(current.recommendation, next.recommendation)
   );
 };
 
@@ -121,3 +124,6 @@ const isSortEqual = (current: SortState, next: SortState) =>
 const isPipelineEqual = (current: string, next: string) => current === next;
 
 const isSearchHubEqual = (current: string, next: string) => current === next;
+
+const isRecommendationEqual = (current: string, next: string) =>
+  current === next;

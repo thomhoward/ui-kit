@@ -11,6 +11,7 @@ import {snapshot} from '../history/history-actions';
 import {logDidYouMeanAutomatic} from '../did-you-mean/did-you-mean-analytics-actions';
 import {applyDidYouMeanCorrection} from '../did-you-mean/did-you-mean-actions';
 import {updateQuery} from '../query/query-actions';
+import {historyStore} from '../../api/analytics/analytics';
 
 export interface ExecuteSearchThunkReturn {
   /** The successful search response. */
@@ -51,6 +52,7 @@ export const executeSearch = createAsyncThunk<
     {getState, dispatch, rejectWithValue, extra: {searchAPIClient}}
   ) => {
     const state = getState();
+    addEntryInActionsHistory(state);
     const fetched = await fetchFromAPI(searchAPIClient, state);
 
     if (isErrorResponse(fetched.response)) {
@@ -132,4 +134,15 @@ const extractHistory = (state: SearchPageState) => ({
   sortCriteria: state.sortCriteria,
   pipeline: state.pipeline,
   searchHub: state.searchHub,
+  recommendation: state.recommendation,
 });
+
+const addEntryInActionsHistory = (state: SearchPageState) => {
+  if (state.configuration.analytics.enabled) {
+    historyStore.addElement({
+      name: 'Query',
+      value: state.query.q,
+      time: JSON.stringify(new Date()),
+    });
+  }
+};

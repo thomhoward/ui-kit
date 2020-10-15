@@ -21,6 +21,7 @@ import {getInitialConstantQueryState} from '../features/constant-query/constant-
 import {getFacetSearchSetInitialState} from '../features/facets/facet-search-set/specific/specific-facet-search-set-slice';
 import {getCategoryFacetSearchSetInitialState} from '../features/facets/facet-search-set/category/category-facet-search-set-slice';
 import {getInitialAdvancedQueryState} from '../features/advanced-query/advanced-query-slice';
+import {getRecommendationInitialState} from '../features/recommendation/recommendation-slice';
 
 export function createMockState(
   config: Partial<SearchPageState> = {}
@@ -48,6 +49,7 @@ export function createMockState(
     history: makeHistory(getHistoryEmptyState()),
     pipeline: getPipelineInitialState(),
     searchHub: getSearchHubInitialState(),
+    recommendation: getRecommendationInitialState(),
     ...config,
   };
 }

@@ -2,7 +2,8 @@ import {SearchPageState} from '../../../state';
 import {getQParam} from '../search-api-params';
 import {Context} from '../../../features/context/context-slice';
 import {AnyFacetRequest} from '../../../features/facets/generic/interfaces/generic-facet-request';
-import {configureAnalytics} from '../../analytics/analytics';
+import {configureAnalytics, historyStore} from '../../analytics/analytics';
+import {history} from 'coveo.analytics';
 
 export interface SearchRequest {
   q: string;
@@ -18,6 +19,8 @@ export interface SearchRequest {
   pipeline: string;
   searchHub: string;
   visitorId?: string;
+  recommendation?: string;
+  actionsHistory: history.HistoryElement[];
 }
 
 /** The search request parameters. For a full description, refer to {@link https://docs.coveo.com/en/13/cloud-v2-api-reference/search-api#operation/searchUsingPost}*/
@@ -35,6 +38,11 @@ export const searchRequest = (state: SearchPageState): SearchRequest => {
     fieldsToInclude: state.fields.fieldsToInclude,
     pipeline: state.pipeline,
     searchHub: state.searchHub,
+    actionsHistory: historyStore.getHistory(),
+
+    ...(state.recommendation !== '' && {
+      recommendation: state.recommendation,
+    }),
     ...(state.configuration.analytics.enabled && {
       visitorId: configureAnalytics(state).coveoAnalyticsClient
         .currentVisitorId,

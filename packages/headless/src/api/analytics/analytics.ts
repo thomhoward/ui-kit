@@ -1,4 +1,8 @@
-import {CoveoSearchPageClient, SearchPageClientProvider} from 'coveo.analytics';
+import {
+  CoveoSearchPageClient,
+  SearchPageClientProvider,
+  history,
+} from 'coveo.analytics';
 import {SearchPageState} from '../../state';
 
 export class AnalyticsProvider implements SearchPageClientProvider {
@@ -81,3 +85,5 @@ export const configureAnalytics = (state: SearchPageState) => {
   }
   return client;
 };
+
+export const historyStore = new history.HistoryStore();
