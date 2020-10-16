@@ -4,7 +4,6 @@ import {
   SearchBoxState,
   Unsubscribe,
   buildSearchBox,
-  buildContext,
   Engine,
 } from '@coveo/headless';
 import {Initialization} from '../../utils/initialization-utils';
