@@ -13,7 +13,6 @@ import {
   NumericFacetSection,
   PaginationSection,
   PipelineSection,
-  BasicSearchParameterSection,
   QuerySetSection,
   QuerySuggestionSection,
   RedirectionSection,
@@ -27,7 +26,7 @@ export type SearchParametersState = FacetSection &
   DateFacetSection &
   NumericFacetSection &
   CategoryFacetSection &
-  BasicSearchParameterSection &
+  QuerySection &
   AdvancedSearchParameterSection &
   QuerySection &
   PaginationSection &

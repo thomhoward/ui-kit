@@ -1,3 +1,4 @@
+import {AdvancedSearchParametersState} from '../features/advanced-search-parameters/advanced-search-parameters-slice';
 import {ConfigurationState} from '../features/configuration/configuration-slice';
 import {ContextState} from '../features/context/context-slice';
 import {DidYouMeanState} from '../features/did-you-mean/did-you-mean-slice';
@@ -16,33 +17,18 @@ import {RedirectionState} from '../features/redirection/redirection-slice';
 import {SearchState} from '../features/search/search-slice';
 import {SortCriteriaState} from '../features/sort-criteria/sort-criteria-slice';
 
-export interface BasicSearchParameterSection {
-  /**
-   * The basic query expression (e.g., `acme tornado seeds`).
-   */
-  q: string;
-}
-
-export interface AdvancedSearchParameterSection {
-  /**
-   * The cq filter (e.g., `((q AND aq) OR dq) AND cq).
-   */
-  cq: string;
-  /**
-   * Represents whether the query has been updated once yet.
-   */
-  isInitialized: boolean;
-  /**
-   * The aq filter (e.g., `((q AND aq) OR dq) AND cq).
-   */
-  aq: string;
-}
-
 export interface QuerySection {
   /**
    * The expressions that constitute the current query.
    */
   query: QueryState;
+}
+
+export interface AdvancedSearchParameterSection {
+  /**
+   * The current advanced search parameters (e.g: aq and cq)
+   */
+  advancedSearchParameters: AdvancedSearchParametersState;
 }
 
 export interface FacetSection {

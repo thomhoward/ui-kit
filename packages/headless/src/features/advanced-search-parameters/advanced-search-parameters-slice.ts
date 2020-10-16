@@ -4,7 +4,18 @@ import {
   updateAdvancedQuery,
   updateConstantQuery,
 } from './advanced-search-parameters-actions';
-import {AdvancedSearchParametersState} from '../../state';
+
+export interface AdvancedSearchParametersState {
+  /**
+   * The cq filter (e.g., `((q AND aq) OR dq) AND cq).
+   */
+  cq: string;
+
+  /**
+   * The aq filter (e.g., `((q AND aq) OR dq) AND cq).
+   */
+  aq: string;
+}
 
 export const getAdvancedSearchParametersInitialState: () => AdvancedSearchParametersState = () => ({
   cq: '',

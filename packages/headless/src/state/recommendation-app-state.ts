@@ -4,13 +4,11 @@ import {
   ContextSection,
   FieldsSection,
   PipelineSection,
-  BasicSearchParameterSection,
   SearchHubSection,
   SearchSection,
 } from './state-sections';
 
-export type RecommendationAppState = BasicSearchParameterSection &
-  AdvancedSearchParameterSection &
+export type RecommendationAppState = AdvancedSearchParameterSection &
   ContextSection &
   PipelineSection &
   SearchHubSection &
