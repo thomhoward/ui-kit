@@ -6,8 +6,7 @@ import {FieldsState} from './features/fields/fields-slice';
 import {ConfigurationState} from './features/configuration/configuration-slice';
 import {SpecificFacetSearchSetState} from './features/facets/facet-search-set/specific/specific-facet-search-set-slice';
 import {CategoryFacetSearchSetState} from './features/facets/facet-search-set/category/category-facet-search-set-slice';
-import {RedirectionState} from './features/redirection/redirection-slice';
-import {QuerySuggestSet} from './features/query-suggest/query-suggest-slice';
+import {SearchAPIErrorWithStatusCode} from './api/search/search-api-error-response';
 
 export interface SearchPageState extends SearchParametersState {
   /**
@@ -46,4 +45,56 @@ export interface SearchPageState extends SearchParametersState {
    * The information related to fields used in the engine.
    */
   fields: FieldsState;
+}
+
+export interface QueryState {
+  /**
+   * The basic query expression (e.g., `acme tornado seeds`).
+   */
+  q: string;
+}
+
+export interface AdvancedSearchParametersState {
+  /**
+   * The cq filter (e.g., `((q AND aq) OR dq) AND cq).
+   */
+  cq: string;
+
+  /**
+   * The aq filter (e.g., `((q AND aq) OR dq) AND cq).
+   */
+  aq: string;
+}
+
+export interface RedirectionState {
+  /**
+   * The URL to redirect the user to.
+   */
+  redirectTo: string | null;
+}
+
+export type QuerySuggestSet = Record<string, QuerySuggestState | undefined>;
+
+export interface QuerySuggestState {
+  /**
+   * The unique identifier of the query suggest entity (e.g., `b953ab2e-022b-4de4-903f-68b2c0682942`).
+   */
+  id: string;
+  /**
+   * The current list of query suggestions.
+   */
+  completions: QuerySuggestCompletion[];
+  /**
+   * The partial basic query expression for which query suggestions were requested (e.g., `cov`).
+   */
+  q: string;
+  /**
+   * The number of query suggestions requested from Coveo ML (e.g., `3`).
+   */
+  count: number;
+  /**
+   * The unique identifier of the current query suggestion request.
+   */
+  currentRequestId: string;
+  error: SearchAPIErrorWithStatusCode | null;
 }

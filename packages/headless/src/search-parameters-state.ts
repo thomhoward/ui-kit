@@ -1,4 +1,5 @@
 import {FacetSetState} from './features/facets/facet-set/facet-set-slice';
+import {QueryState, AdvancedSearchParametersState} from './state';
 import {PaginationState} from './features/pagination/pagination-slice';
 import {SortCriteriaState} from './features/sort-criteria/sort-criteria-slice';
 import {ContextState} from './features/context/context-slice';
@@ -6,9 +7,6 @@ import {QuerySetState} from './features/query-set/query-set-slice';
 import {DateFacetSetState} from './features/facets/range-facets/date-facet-set/date-facet-set-slice';
 import {NumericFacetSetState} from './features/facets/range-facets/numeric-facet-set/numeric-facet-set-slice';
 import {CategoryFacetSetState} from './features/facets/category-facet-set/category-facet-set-slice';
-import {QueryState} from './features/query/query-slice';
-import {ConstantQueryState} from './features/constant-query/constant-query-slice';
-import {AdvancedQueryState} from './features/advanced-query/advanced-query-slice';
 
 export interface SearchParametersState {
   /**
@@ -33,14 +31,10 @@ export interface SearchParametersState {
   query: QueryState;
 
   /**
-   * The current cq
+   * The current advanced search parameters (e.g: aq and cq)
    */
-  constantQuery: ConstantQueryState;
 
-  /**
-   * The current aq
-   */
-  advancedQuery: AdvancedQueryState;
+  advancedSearchParameters: AdvancedSearchParametersState;
 
   /**
    * The properties related to pagination.
