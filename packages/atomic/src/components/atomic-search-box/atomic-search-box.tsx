@@ -4,6 +4,7 @@ import {
   SearchBoxState,
   Unsubscribe,
   buildSearchBox,
+  buildContext,
   Engine,
 } from '@coveo/headless';
 import {Initialization} from '../../utils/initialization-utils';
@@ -34,6 +35,7 @@ export class AtomicSearchBox implements AtomicSearchBoxOptions {
         numberOfSuggestions: this.numberOfSuggestions,
       },
     });
+    buildContext(this.engine);
     this.unsubscribe = this.searchBox.subscribe(() => this.updateState());
   }
 

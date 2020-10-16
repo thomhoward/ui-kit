@@ -1,10 +1,20 @@
-import {ConstantQueryState} from '../../state';
 import {createReducer} from '@reduxjs/toolkit';
 import {
   registerConstantQuery,
   updateConstantQuery,
 } from './constant-query-actions';
 import {change} from '../history/history-actions';
+
+export interface ConstantQueryState {
+  /**
+   * The cq filter (e.g., `((q AND aq) OR dq) AND cq).
+   */
+  cq: string;
+  /**
+   * Represents whether the query has been updated once yet.
+   */
+  isInitialized: boolean;
+}
 
 export const getInitialConstantQueryState: () => ConstantQueryState = () => ({
   cq: '',

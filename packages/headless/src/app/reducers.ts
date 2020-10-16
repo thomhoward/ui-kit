@@ -1,5 +1,5 @@
 import {ReducersMapObject} from '@reduxjs/toolkit';
-import {SearchPageState} from '../state';
+import {SearchAppState} from '../state/search-app-state';
 import {queryReducer} from '../features/query/query-slice';
 import {configurationReducer} from '../features/configuration/configuration-slice';
 import {redirectionReducer} from '../features/redirection/redirection-slice';
@@ -30,7 +30,7 @@ import {advancedQueryReducer} from '../features/advanced-query/advanced-query-sl
 /**
  * Map of reducers that make up the SearchPageState.
  */
-export const searchPageReducers: ReducersMapObject<SearchPageState> = {
+export const searchPageReducers: ReducersMapObject<SearchAppState> = {
   configuration: configurationReducer,
   facetSet: facetSetReducer,
   dateFacetSet: dateFacetSetReducer,
