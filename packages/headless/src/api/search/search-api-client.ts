@@ -1,6 +1,5 @@
 import {PlatformClient, PlatformResponse} from '../platform-client';
 import {PlanResponseSuccess, Plan} from './plan/plan-response';
-import {SearchPageState} from '../../state';
 import {
   QuerySuggestSuccessResponse,
   QuerySuggest,
@@ -21,6 +20,7 @@ import {
 import {FacetSearchRequest} from './facet-search/facet-search-request';
 import {FacetSearchResponse} from './facet-search/facet-search-response';
 import {buildCategoryFacetSearchRequest} from './facet-search/category-facet-search/category-facet-search-request';
+import {SearchPageState} from '../../state/search-app-state';
 
 export type AllSearchAPIResponse = Plan | Search | QuerySuggest;
 

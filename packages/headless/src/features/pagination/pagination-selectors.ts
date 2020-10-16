@@ -1,5 +1,5 @@
-import {SearchPageState} from '../../state';
 import {createSelector} from '@reduxjs/toolkit';
+import {SearchPageState} from '../../state/search-app-state';
 import {calculatePage, calculateMaxPage, minimumPage} from './pagination-slice';
 
 interface Range {

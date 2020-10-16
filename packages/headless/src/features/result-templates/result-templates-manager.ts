@@ -1,9 +1,9 @@
 import {ResultTemplate} from './result-templates';
 import {Result} from '../../api/search/search/result';
 import {NumberValue, Schema} from '@coveo/bueno';
-import {SearchPageState} from '../../state';
 import {Engine} from '../../app/headless-engine';
 import {registerFieldsToInclude} from '../fields/fields-actions';
+import {SearchPageState} from '../../state/search-app-state';
 
 const prioritySchema = new Schema({
   priority: new NumberValue({required: false, default: 0, min: 0}),

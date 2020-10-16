@@ -4,7 +4,7 @@ import {
   updateSearchConfiguration,
 } from '../features/configuration/configuration-actions';
 import * as storeConfig from './store';
-import {searchPageReducers} from './reducers';
+import {searchPageReducers} from './search-page-reducers';
 
 describe('headless engine', () => {
   let options: HeadlessOptions<typeof searchPageReducers>;

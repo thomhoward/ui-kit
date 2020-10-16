@@ -2,10 +2,10 @@ import {Engine} from '../app/headless-engine';
 import {createMockState} from './mock-state';
 import configureStore, {MockStoreEnhanced} from 'redux-mock-store';
 import {AnyAction, ThunkDispatch, getDefaultMiddleware} from '@reduxjs/toolkit';
-import {SearchPageState} from '../state';
 import thunk from 'redux-thunk';
 import {analyticsMiddleware} from '../app/analytics-middleware';
 import {SearchAPIClient} from '../api/search/search-api-client';
+import {SearchPageState} from '../state/search-app-state';
 
 export interface MockEngine extends Engine {
   store: MockStore;

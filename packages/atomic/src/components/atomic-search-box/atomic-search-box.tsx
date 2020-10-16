@@ -35,7 +35,6 @@ export class AtomicSearchBox implements AtomicSearchBoxOptions {
         numberOfSuggestions: this.numberOfSuggestions,
       },
     });
-    buildContext(this.engine);
     this.unsubscribe = this.searchBox.subscribe(() => this.updateState());
   }
 

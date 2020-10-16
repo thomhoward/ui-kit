@@ -15,9 +15,9 @@ import {
   updateAnalyticsConfiguration,
 } from '../features/configuration/configuration-actions';
 import {configureStore, Store} from './store';
-import {SearchPageState} from '../state';
 import {SearchAPIClient} from '../api/search/search-api-client';
 import {debounce} from 'ts-debounce';
+import {SearchPageState} from '../state/search-app-state';
 
 /**
  * The global headless engine options.

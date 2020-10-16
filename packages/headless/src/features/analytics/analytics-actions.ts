@@ -1,7 +1,7 @@
 import {createAsyncThunk, AsyncThunkAction} from '@reduxjs/toolkit';
 import {configureAnalytics} from '../../api/analytics/analytics';
 import {SearchPageEvents} from 'coveo.analytics/dist/definitions/searchPage/searchPageEvents';
-import {SearchPageState} from '../../state';
+import {SearchPageState} from '../../state/search-app-state';
 
 export const searchPageState = (getState: () => unknown) =>
   getState() as SearchPageState;

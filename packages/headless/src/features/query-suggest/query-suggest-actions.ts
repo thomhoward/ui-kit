@@ -1,5 +1,4 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
-import {SearchPageState} from '../../state';
 import {validatePayloadSchema} from '../../utils/validate-payload';
 import {NumberValue, StringValue} from '@coveo/bueno';
 import {QuerySuggestSuccessResponse} from '../../api/search/query-suggest/query-suggest-response';
@@ -8,6 +7,7 @@ import {
   isErrorResponse,
   AsyncThunkSearchOptions,
 } from '../../api/search/search-api-client';
+import {SearchPageState} from '../../state/search-app-state';
 
 const idDefinition = {
   id: new StringValue({required: true, emptyAllowed: false}),

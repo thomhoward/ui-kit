@@ -1,6 +1,17 @@
-import {SearchPageState} from '../../../state';
+import {
+  ContextSection,
+  PipelineSection,
+  QuerySuggestionSection,
+  SearchHubSection,
+} from '../../../state/state-sections';
 
-export const querySuggestRequest = (id: string, state: SearchPageState) => ({
+export const querySuggestRequest = (
+  id: string,
+  state: QuerySuggestionSection &
+    ContextSection &
+    PipelineSection &
+    SearchHubSection
+) => ({
   /**
    * Specifies the number of suggestions that the Coveo Machine Learning service should return.
    */
