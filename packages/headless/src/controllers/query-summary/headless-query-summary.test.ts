@@ -1,10 +1,10 @@
 import {createMockState} from '../../test/mock-state';
 import {buildMockEngine} from '../../test/mock-engine';
 import {QuerySummary, buildQuerySummary} from './headless-query-summary';
-import {SearchPageState} from '../../state';
 import {buildMockResult} from '../../test/mock-result';
 import {buildMockSearchResponse} from '../../test/mock-search-response';
 import {Result} from '../../api/search/search/result';
+import {SearchPageState} from '../../state/search-app-state';
 
 describe('headless query summary', () => {
   let state: SearchPageState;

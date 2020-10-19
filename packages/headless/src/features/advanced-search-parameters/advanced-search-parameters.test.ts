@@ -1,8 +1,8 @@
 import {
   getAdvancedSearchParametersInitialState,
   advancedSearchParametersReducer,
+  AdvancedSearchParametersState,
 } from './advanced-search-parameters-slice';
-import {AdvancedSearchParametersState} from '../../state';
 import {
   updateConstantQuery,
   updateAdvancedQuery,

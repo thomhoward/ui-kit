@@ -3,7 +3,7 @@ import {
   PartialDocumentInformation,
   DocumentIdentifier,
 } from 'coveo.analytics/dist/definitions/searchPage/searchPageEvents';
-import {SearchPageState} from '../../state';
+import {SearchPageState} from '../../state/search-app-state';
 
 export const partialDocumentInformation = (
   result: Result,

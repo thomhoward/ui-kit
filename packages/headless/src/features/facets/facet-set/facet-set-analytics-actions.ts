@@ -5,8 +5,8 @@ import {
   makeSearchActionType,
 } from '../../analytics/analytics-actions';
 import {configureAnalytics} from '../../../api/analytics/analytics';
-import {SearchPageState} from '../../../state';
 import {RangeFacetSortCriterion} from '../range-facets/generic/interfaces/request';
+import {SearchPageState} from '../../../state/search-app-state';
 
 export type FacetUpdateSortMetadata = {
   facetId: string;

@@ -1,5 +1,5 @@
 import {CoveoSearchPageClient, SearchPageClientProvider} from 'coveo.analytics';
-import {SearchPageState} from '../../state';
+import {SearchPageState} from '../../state/search-app-state';
 
 export class AnalyticsProvider implements SearchPageClientProvider {
   constructor(private state: SearchPageState) {}

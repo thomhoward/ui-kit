@@ -1,10 +1,10 @@
 import {searchRequest} from './search-request';
 import {createMockState} from '../../../test/mock-state';
-import {SearchPageState} from '../../../state';
 import {buildMockFacetRequest} from '../../../test/mock-facet-request';
 import {buildMockNumericFacetRequest} from '../../../test/mock-numeric-facet-request';
 import {buildMockDateFacetRequest} from '../../../test/mock-date-facet-request';
 import {buildMockCategoryFacetRequest} from '../../../test/mock-category-facet-request';
+import {SearchPageState} from '../../../state/search-app-state';
 
 describe('search request', () => {
   let state: SearchPageState;

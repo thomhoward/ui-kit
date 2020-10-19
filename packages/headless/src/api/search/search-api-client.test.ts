@@ -8,9 +8,9 @@ import {buildMockQuerySuggest} from '../../test/mock-query-suggest';
 import {getOrganizationIdQueryParam} from './search-api-params';
 import {buildMockFacetSearch} from '../../test/mock-facet-search';
 import {buildMockFacetRequest} from '../../test/mock-facet-request';
-import {SearchPageState} from '../../state';
 import {buildMockCategoryFacetSearch} from '../../test/mock-category-facet-search';
 import {buildMockCategoryFacetRequest} from '../../test/mock-category-facet-request';
+import {SearchPageState} from '../../state/search-app-state';
 
 jest.mock('../platform-client');
 describe('search api client', () => {

@@ -1,4 +1,4 @@
-import {SearchPageState} from '../../../state';
+import {SearchPageState} from '../../../state/search-app-state';
 import {getQParam} from '../search-api-params';
 
 export const planRequest = (state: SearchPageState) => ({

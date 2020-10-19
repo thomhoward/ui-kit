@@ -1,10 +1,10 @@
 import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {FacetSearchResponse} from '../../../../api/search/facet-search/facet-search-response';
 import {SearchAPIClient} from '../../../../api/search/search-api-client';
-import {SearchPageState} from '../../../../state';
 import {logFacetSearch} from '../../facet-set/facet-set-analytics-actions';
 import {SpecificFacetSearchResult} from '../../../../api/search/facet-search/specific-facet-search/specific-facet-search-response';
 import {FacetSearchOptions} from '../facet-search-request-options';
+import {SearchPageState} from '../../../../state/search-app-state';
 
 type selectFacetSearchResultPayload = {
   facetId: string;

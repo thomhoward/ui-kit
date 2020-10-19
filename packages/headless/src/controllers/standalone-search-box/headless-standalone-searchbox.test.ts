@@ -9,7 +9,7 @@ import {createMockState} from '../../test/mock-state';
 import {updateQuery} from '../../features/query/query-actions';
 import {buildMockQuerySuggest} from '../../test/mock-query-suggest';
 import {buildMockEngine, MockEngine} from '../../test/mock-engine';
-import {SearchPageState} from '../../state';
+import {SearchPageState} from '../../state/search-app-state';
 
 describe('headless standalone searchBox', () => {
   const id = 'search-box-123';

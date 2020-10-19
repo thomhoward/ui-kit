@@ -2,9 +2,9 @@ import {
   BaseFacetSearchRequest,
   FacetSearchType,
 } from '../base/base-facet-search-request';
-import {SearchPageState} from '../../../../state';
 import {searchRequest} from '../../search/search-request';
 import {CategoryFacetRequest} from '../../../../features/facets/category-facet-set/interfaces/request';
+import {SearchPageState} from '../../../../state/search-app-state';
 
 export interface CategoryFacetSearchRequest
   extends BaseFacetSearchRequest,

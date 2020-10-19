@@ -1,8 +1,9 @@
-import {SearchPageState, AdvancedSearchParametersState} from '../../../state';
 import {getQParam} from '../search-api-params';
 import {Context} from '../../../features/context/context-slice';
 import {AnyFacetRequest} from '../../../features/facets/generic/interfaces/generic-facet-request';
 import {configureAnalytics} from '../../analytics/analytics';
+import {SearchPageState} from '../../../state/search-app-state';
+import {AdvancedSearchParametersState} from '../../../features/advanced-search-parameters/advanced-search-parameters-slice';
 
 export interface SearchRequest {
   q: string;
