@@ -3,7 +3,7 @@ import {
   CategoryFacetSearchSection,
   CategoryFacetSection,
   ConfigurationSection,
-  AdvancedSearchParameterSection,
+  AdvancedSearchQueriesSection,
   ContextSection,
   DateFacetSection,
   DidYouMeanSection,
@@ -27,7 +27,7 @@ export type SearchParametersState = FacetSection &
   NumericFacetSection &
   CategoryFacetSection &
   QuerySection &
-  AdvancedSearchParameterSection &
+  AdvancedSearchQueriesSection &
   PaginationSection &
   SortSection &
   ContextSection &

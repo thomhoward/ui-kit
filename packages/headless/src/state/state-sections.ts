@@ -1,4 +1,4 @@
-import {AdvancedSearchParametersState} from '../features/advanced-search-parameters/advanced-search-parameters-slice';
+import {AdvancedSearchQueriesState} from '../features/advanced-search-queries/advanced-search-queries-slice';
 import {ConfigurationState} from '../features/configuration/configuration-slice';
 import {ContextState} from '../features/context/context-slice';
 import {DidYouMeanState} from '../features/did-you-mean/did-you-mean-slice';
@@ -24,11 +24,11 @@ export interface QuerySection {
   query: QueryState;
 }
 
-export interface AdvancedSearchParameterSection {
+export interface AdvancedSearchQueriesSection {
   /**
    * The current advanced search parameters (e.g: aq and cq)
    */
-  advancedSearchParameters: AdvancedSearchParametersState;
+  advancedSearchQueries: AdvancedSearchQueriesState;
 }
 
 export interface FacetSection {
