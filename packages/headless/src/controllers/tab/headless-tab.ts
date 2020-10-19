@@ -2,7 +2,7 @@ import {Engine} from '../../app/headless-engine';
 import {buildController} from '../controller/headless-controller';
 import {executeSearch} from '../../features/search/search-actions';
 import {logInterfaceChange} from '../../features/analytics/analytics-actions';
-import {updateConstantQuery} from '../../features/advanced-search-parameters/advanced-search-parameters-actions';
+import {updateAdvancedSearchQueries} from '../../features/advanced-search-queries/advanced-search-queries-actions';
 
 type TabOptions = {
   expression: string;
@@ -24,19 +24,33 @@ export function buildTab(engine: Engine, props: TabProps) {
   const controller = buildController(engine);
   const {dispatch} = engine;
 
+  if (props.initialState?.isActive) {
+    dispatch(
+      updateAdvancedSearchQueries({
+        ...engine.state.advancedSearchQueries,
+        cq: props.options.expression,
+      })
+    );
+  }
+
   return {
     ...controller,
     /**
      * Makes this tab the active one
      */
     select() {
-      dispatch(updateConstantQuery(props.options.expression));
+      dispatch(
+        updateAdvancedSearchQueries({
+          ...engine.state.advancedSearchQueries,
+          cq: props.options.expression,
+        })
+      );
       dispatch(executeSearch(logInterfaceChange()));
     },
 
     get state() {
       const isActive =
-        engine.state.advancedSearchParameters.cq === props.options.expression;
+        engine.state.advancedSearchQueries.cq === props.options.expression;
       return {isActive};
     },
   };

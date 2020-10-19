@@ -1,8 +1,8 @@
-import {AdvancedSearchParametersState} from '../state';
+import {AdvancedSearchQueriesState} from '../state';
 
-export function buildMockAdvancedSearchParametersState(
-  config: Partial<AdvancedSearchParametersState> = {}
-): AdvancedSearchParametersState {
+export function buildMockAdvancedSearchQueriesState(
+  config: Partial<AdvancedSearchQueriesState> = {}
+): AdvancedSearchQueriesState {
   return {
     aq: '',
     cq: '',

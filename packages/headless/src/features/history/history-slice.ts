@@ -12,7 +12,7 @@ import {
   PaginationState,
   getPaginationInitialState,
 } from '../pagination/pagination-slice';
-import {QueryState, AdvancedSearchParametersState} from '../../state';
+import {QueryState, AdvancedSearchQueriesState} from '../../state';
 import {SortState} from '../../controllers/sort/headless-sort';
 import {snapshot} from './history-actions';
 import {getPipelineInitialState} from '../pipeline/pipeline-slice';
@@ -29,7 +29,7 @@ import {
   getCategoryFacetSetInitialState,
   CategoryFacetSetState,
 } from '../facets/category-facet-set/category-facet-set-slice';
-import {getAdvancedSearchParametersInitialState} from '../advanced-search-parameters/advanced-search-parameters-slice';
+import {getAdvancedSearchQueriesInitialState} from '../advanced-search-queries/advanced-search-queries-slice';
 
 export const getHistoryEmptyState = (): SearchParametersState => ({
   context: getContextInitialState(),
@@ -39,7 +39,7 @@ export const getHistoryEmptyState = (): SearchParametersState => ({
   categoryFacetSet: getCategoryFacetSetInitialState(),
   pagination: getPaginationInitialState(),
   query: getQueryInitialState(),
-  advancedSearchParameters: getAdvancedSearchParametersInitialState(),
+  advancedSearchQueries: getAdvancedSearchQueriesInitialState(),
   sortCriteria: getSortCriteriaInitialState(),
   querySet: getQuerySetInitialState(),
   pipeline: getPipelineInitialState(),
@@ -61,9 +61,9 @@ const isEqual = (
 ) => {
   return (
     isContextEqual(current.context, next.context) &&
-    isAdvancedSerachParametersEqual(
-      current.advancedSearchParameters,
-      next.advancedSearchParameters
+    isAdvancedSearchQueriesEqual(
+      current.advancedSearchQueries,
+      next.advancedSearchQueries
     ) &&
     isFacetsEqual(current.facetSet, next.facetSet) &&
     isDateFacetsEqual(current.dateFacetSet, next.dateFacetSet) &&
@@ -105,9 +105,9 @@ const isPaginationEqual = (current: PaginationState, next: PaginationState) =>
 const isQueryEqual = (current: QueryState, next: QueryState) =>
   current.q === next.q;
 
-const isAdvancedSerachParametersEqual = (
-  current: AdvancedSearchParametersState,
-  next: AdvancedSearchParametersState
+const isAdvancedSearchQueriesEqual = (
+  current: AdvancedSearchQueriesState,
+  next: AdvancedSearchQueriesState
 ) => JSON.stringify(current) === JSON.stringify(next);
 const isSortEqual = (current: SortState, next: SortState) =>
   current.sortCriteria === next.sortCriteria;

@@ -55,7 +55,7 @@ export interface QueryState {
   q: string;
 }
 
-export interface AdvancedSearchParametersState {
+export interface AdvancedSearchQueriesState {
   /**
    * The cq filter (e.g., `((q AND aq) OR dq) AND cq).
    */

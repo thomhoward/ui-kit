@@ -19,14 +19,14 @@ import {getSearchHubInitialState} from '../features/search-hub/search-hub-slice'
 import {getCategoryFacetSetInitialState} from '../features/facets/category-facet-set/category-facet-set-slice';
 import {getFacetSearchSetInitialState} from '../features/facets/facet-search-set/specific/specific-facet-search-set-slice';
 import {getCategoryFacetSearchSetInitialState} from '../features/facets/facet-search-set/category/category-facet-search-set-slice';
-import {getAdvancedSearchParametersInitialState} from '../features/advanced-search-parameters/advanced-search-parameters-slice';
+import {getAdvancedSearchQueriesInitialState} from '../features/advanced-search-queries/advanced-search-queries-slice';
 
 export function createMockState(
   config: Partial<SearchPageState> = {}
 ): SearchPageState {
   return {
     configuration: getConfigurationInitialState(),
-    advancedSearchParameters: getAdvancedSearchParametersInitialState(),
+    advancedSearchQueries: getAdvancedSearchQueriesInitialState(),
     facetSet: getFacetSetInitialState(),
     dateFacetSet: getDateFacetSetInitialState(),
     numericFacetSet: getNumericFacetSetInitialState(),

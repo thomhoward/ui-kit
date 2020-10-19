@@ -41,7 +41,8 @@ describe('search api client', () => {
       renewAccessToken,
       requestParams: {
         q: state.query.q,
-        advancedSearchParameters: {aq: '', cq: ''},
+        cq: '',
+        aq: '',
         numberOfResults: state.pagination.numberOfResults,
         sortCriteria: state.sortCriteria,
         firstResult: state.pagination.firstResult,

@@ -24,7 +24,7 @@ import {numericFacetSetReducer} from '../features/facets/range-facets/numeric-fa
 import {searchHubReducer} from '../features/search-hub/search-hub-slice';
 import {categoryFacetSetReducer} from '../features/facets/category-facet-set/category-facet-set-slice';
 import {categoryFacetSearchSetReducer} from '../features/facets/facet-search-set/category/category-facet-search-set-slice';
-import {advancedSearchParametersReducer} from '../features/advanced-search-parameters/advanced-search-parameters-slice';
+import {advancedSearchQueriesReducer} from '../features/advanced-search-queries/advanced-search-queries-slice';
 
 /**
  * Map of reducers that make up the SearchPageState.
@@ -38,7 +38,7 @@ export const searchPageReducers: ReducersMapObject<SearchPageState> = {
   facetSearchSet: specificFacetSearchSetReducer,
   categoryFacetSearchSet: categoryFacetSearchSetReducer,
   query: queryReducer,
-  advancedSearchParameters: advancedSearchParametersReducer,
+  advancedSearchQueries: advancedSearchQueriesReducer,
   querySet: querySetReducer,
   pagination: paginationReducer,
   redirection: redirectionReducer,

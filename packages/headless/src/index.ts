@@ -36,7 +36,7 @@ export * from './features/facets/facet-set/facet-set-selectors';
 export * from './features/pagination/pagination-selectors';
 
 // Grouped Actions
-export * as AdvancedSearchParametersActions from './features/advanced-search-parameters/advanced-search-parameters-actions';
+export * as AdvancedSearchQueriesActions from './features/advanced-search-queries/advanced-search-queries-actions';
 export * as AnalyticsActions from './features/analytics/analytics-actions';
 export * as CategoryFacetActions from './features/facets/category-facet-set/category-facet-set-actions';
 export * as ConfigurationActions from './features/configuration/configuration-actions';

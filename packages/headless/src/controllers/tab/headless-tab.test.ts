@@ -1,6 +1,6 @@
 import {MockEngine, buildMockEngine} from '../../test/mock-engine';
 import {TabProps, buildTab, Tab} from './headless-tab';
-import {updateConstantQuery} from '../../features/advanced-search-parameters/advanced-search-parameters-actions';
+import {updateAdvancedSearchQueries} from '../../features/advanced-search-queries/advanced-search-queries-actions';
 
 describe('Tab', () => {
   const expression = 'abc123';
@@ -14,7 +14,7 @@ describe('Tab', () => {
 
   beforeEach(() => {
     engine = buildMockEngine();
-    engine.state.advancedSearchParameters = {aq: '', cq: ''};
+    engine.state.advancedSearchQueries = {aq: '', cq: ''};
     props = {
       options: {
         expression,
@@ -26,6 +26,24 @@ describe('Tab', () => {
   });
 
   describe('initalization', () => {
+    it('calls #registerConstantQuery if isActive is true', () => {
+      props = {
+        options: {
+          expression,
+        },
+        initialState: {
+          isActive: true,
+        },
+      };
+      initTab();
+
+      const action = updateAdvancedSearchQueries({
+        ...engine.state.advancedSearchQueries,
+        cq: expression,
+      });
+      expect(engine.actions).toContainEqual(action);
+    });
+
     it('does not throw if initialState is undefined', () => {
       props = {
         options: {
@@ -40,7 +58,10 @@ describe('Tab', () => {
   it('#select calls #updateConstantQuery', () => {
     initTab();
     tab.select();
-    const action = updateConstantQuery(expression);
+    const action = updateAdvancedSearchQueries({
+      ...engine.state.advancedSearchQueries,
+      cq: expression,
+    });
     expect(engine.actions).toContainEqual(action);
   });
 
@@ -52,7 +73,7 @@ describe('Tab', () => {
   it('#state.isActive is true if the tabs cq matches the active cq', () => {
     props.options.expression = 'abc123';
     initTab();
-    engine.state.advancedSearchParameters.cq = props.options.expression;
+    engine.state.advancedSearchQueries.cq = props.options.expression;
     expect(tab.state.isActive).toBe(true);
   });
 });
