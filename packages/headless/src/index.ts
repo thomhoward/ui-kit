@@ -9,7 +9,7 @@ export {
 
 // Main App
 export * from './app/headless-engine';
-export * from './app/search-page-reducers';
+export * from './app/search-app-reducers';
 
 // State
 export {SearchAppState, SearchParametersState} from './state/search-app-state';
