@@ -35,7 +35,7 @@ export type SearchParametersState = FacetSection &
   PipelineSection &
   SearchHubSection;
 
-export type SearchPageState = SearchParametersState &
+export type SearchAppState = SearchParametersState &
   ConfigurationSection &
   FacetSearchSection &
   CategoryFacetSearchSection &

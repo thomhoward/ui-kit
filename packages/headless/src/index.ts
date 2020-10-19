@@ -11,6 +11,9 @@ export {
 export * from './app/headless-engine';
 export * from './app/search-page-reducers';
 
+// State
+export {SearchAppState, SearchParametersState} from './state/search-app-state';
+
 // Controllers
 export * from './controllers/controller/headless-controller';
 export * from './controllers/context/headless-context';

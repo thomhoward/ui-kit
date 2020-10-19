@@ -3,7 +3,7 @@ import {Result} from '../../api/search/search/result';
 import {NumberValue, Schema} from '@coveo/bueno';
 import {Engine} from '../../app/headless-engine';
 import {registerFieldsToInclude} from '../fields/fields-actions';
-import {SearchPageState} from '../../state/search-app-state';
+import {SearchAppState} from '../../state/search-app-state';
 
 const prioritySchema = new Schema({
   priority: new NumberValue({required: false, default: 0, min: 0}),
@@ -12,10 +12,7 @@ const prioritySchema = new Schema({
 /**
  * A manager in which result templates can be registered and selected based on a list of conditions and priority.
  */
-export class ResultTemplatesManager<
-  Content = unknown,
-  State = SearchPageState
-> {
+export class ResultTemplatesManager<Content = unknown, State = SearchAppState> {
   private templates: Required<ResultTemplate<Content>>[] = [];
   /**
    * Creates a new `ResultTemplatesManager` instance.
