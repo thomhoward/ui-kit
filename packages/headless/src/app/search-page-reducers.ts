@@ -1,5 +1,5 @@
 import {ReducersMapObject} from '@reduxjs/toolkit';
-import {SearchPageState} from '../state';
+import {SearchAppState} from '../state/search-app-state';
 import {queryReducer} from '../features/query/query-slice';
 import {configurationReducer} from '../features/configuration/configuration-slice';
 import {redirectionReducer} from '../features/redirection/redirection-slice';
@@ -23,14 +23,13 @@ import {dateFacetSetReducer} from '../features/facets/range-facets/date-facet-se
 import {numericFacetSetReducer} from '../features/facets/range-facets/numeric-facet-set/numeric-facet-set-slice';
 import {searchHubReducer} from '../features/search-hub/search-hub-slice';
 import {categoryFacetSetReducer} from '../features/facets/category-facet-set/category-facet-set-slice';
-import {constantQueryReducer} from '../features/constant-query/constant-query-slice';
 import {categoryFacetSearchSetReducer} from '../features/facets/facet-search-set/category/category-facet-search-set-slice';
-import {advancedQueryReducer} from '../features/advanced-query/advanced-query-slice';
+import {advancedSearchParametersReducer} from '../features/advanced-search-parameters/advanced-search-parameters-slice';
 
 /**
  * Map of reducers that make up the SearchPageState.
  */
-export const searchPageReducers: ReducersMapObject<SearchPageState> = {
+export const searchPageReducers: ReducersMapObject<SearchAppState> = {
   configuration: configurationReducer,
   facetSet: facetSetReducer,
   dateFacetSet: dateFacetSetReducer,
@@ -39,8 +38,7 @@ export const searchPageReducers: ReducersMapObject<SearchPageState> = {
   facetSearchSet: specificFacetSearchSetReducer,
   categoryFacetSearchSet: categoryFacetSearchSetReducer,
   query: queryReducer,
-  constantQuery: constantQueryReducer,
-  advancedQuery: advancedQueryReducer,
+  advancedSearchParameters: advancedSearchParametersReducer,
   querySet: querySetReducer,
   pagination: paginationReducer,
   redirection: redirectionReducer,

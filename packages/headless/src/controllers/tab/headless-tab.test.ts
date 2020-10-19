@@ -1,9 +1,6 @@
 import {MockEngine, buildMockEngine} from '../../test/mock-engine';
 import {TabProps, buildTab, Tab} from './headless-tab';
-import {
-  registerConstantQuery,
-  updateConstantQuery,
-} from '../../features/constant-query/constant-query-actions';
+import {updateConstantQuery} from '../../features/advanced-search-parameters/advanced-search-parameters-actions';
 
 describe('Tab', () => {
   const expression = 'abc123';
@@ -17,7 +14,7 @@ describe('Tab', () => {
 
   beforeEach(() => {
     engine = buildMockEngine();
-    engine.state.constantQuery = {cq: '', isInitialized: false};
+    engine.state.advancedSearchParameters = {aq: '', cq: ''};
     props = {
       options: {
         expression,
@@ -29,21 +26,6 @@ describe('Tab', () => {
   });
 
   describe('initalization', () => {
-    it('calls #registerConstantQuery if isActive is true', () => {
-      props = {
-        options: {
-          expression,
-        },
-        initialState: {
-          isActive: true,
-        },
-      };
-      initTab();
-
-      const action = registerConstantQuery(expression);
-      expect(engine.actions).toContainEqual(action);
-    });
-
     it('does not throw if initialState is undefined', () => {
       props = {
         options: {
@@ -70,10 +52,7 @@ describe('Tab', () => {
   it('#state.isActive is true if the tabs cq matches the active cq', () => {
     props.options.expression = 'abc123';
     initTab();
-    engine.state.constantQuery = {
-      isInitialized: true,
-      cq: props.options.expression,
-    };
+    engine.state.advancedSearchParameters.cq = props.options.expression;
     expect(tab.state.isActive).toBe(true);
   });
 });

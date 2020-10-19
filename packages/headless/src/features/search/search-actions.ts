@@ -4,13 +4,13 @@ import {
   isErrorResponse,
   AsyncThunkSearchOptions,
 } from '../../api/search/search-api-client';
-import {SearchPageState} from '../../state';
 import {SearchAction} from '../analytics/analytics-actions';
 import {SearchResponseSuccess} from '../../api/search/search/search-response';
 import {snapshot} from '../history/history-actions';
 import {logDidYouMeanAutomatic} from '../did-you-mean/did-you-mean-analytics-actions';
 import {applyDidYouMeanCorrection} from '../did-you-mean/did-you-mean-actions';
 import {updateQuery} from '../query/query-actions';
+import {SearchPageState} from '../../state/search-app-state';
 
 export interface ExecuteSearchThunkReturn {
   /** The successful search response. */
@@ -126,8 +126,7 @@ const extractHistory = (state: SearchPageState) => ({
   categoryFacetSet: state.categoryFacetSet,
   pagination: state.pagination,
   query: state.query,
-  constantQuery: state.constantQuery,
-  advancedQuery: state.advancedQuery,
+  advancedSearchParameters: state.advancedSearchParameters,
   querySet: state.querySet,
   sortCriteria: state.sortCriteria,
   pipeline: state.pipeline,

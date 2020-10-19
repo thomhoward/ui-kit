@@ -1,5 +1,4 @@
-import {querySuggestReducer} from './query-suggest-slice';
-import {QuerySuggestState, QuerySuggestSet} from '../../state';
+import {querySuggestReducer, QuerySuggestSet} from './query-suggest-slice';
 import {QuerySuggestCompletion} from '../../api/search/query-suggest/query-suggest-response';
 import {
   clearQuerySuggest,

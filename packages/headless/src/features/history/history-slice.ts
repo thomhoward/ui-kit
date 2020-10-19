@@ -1,18 +1,16 @@
-import {SearchParametersState} from '../../search-parameters-state';
 import {createReducer} from '@reduxjs/toolkit';
 import {getContextInitialState, ContextState} from '../context/context-slice';
 import {
   getFacetSetInitialState,
   FacetSetState,
 } from '../facets/facet-set/facet-set-slice';
-import {getQueryInitialState} from '../query/query-slice';
+import {getQueryInitialState, QueryState} from '../query/query-slice';
 import {getSortCriteriaInitialState} from '../sort-criteria/sort-criteria-slice';
 import {getQuerySetInitialState} from '../query-set/query-set-slice';
 import {
   PaginationState,
   getPaginationInitialState,
 } from '../pagination/pagination-slice';
-import {ConstantQueryState, QueryState, AdvancedQueryState} from '../../state';
 import {SortState} from '../../controllers/sort/headless-sort';
 import {snapshot} from './history-actions';
 import {getPipelineInitialState} from '../pipeline/pipeline-slice';
@@ -29,8 +27,11 @@ import {
   getCategoryFacetSetInitialState,
   CategoryFacetSetState,
 } from '../facets/category-facet-set/category-facet-set-slice';
-import {getInitialConstantQueryState} from '../constant-query/constant-query-slice';
-import {getInitialAdvancedQueryState} from '../advanced-query/advanced-query-slice';
+import {
+  AdvancedSearchParametersState,
+  getAdvancedSearchParametersInitialState,
+} from '../advanced-search-parameters/advanced-search-parameters-slice';
+import {SearchParametersState} from '../../state/search-app-state';
 
 export const getHistoryEmptyState = (): SearchParametersState => ({
   context: getContextInitialState(),
@@ -40,8 +41,7 @@ export const getHistoryEmptyState = (): SearchParametersState => ({
   categoryFacetSet: getCategoryFacetSetInitialState(),
   pagination: getPaginationInitialState(),
   query: getQueryInitialState(),
-  constantQuery: getInitialConstantQueryState(),
-  advancedQuery: getInitialAdvancedQueryState(),
+  advancedSearchParameters: getAdvancedSearchParametersInitialState(),
   sortCriteria: getSortCriteriaInitialState(),
   querySet: getQuerySetInitialState(),
   pipeline: getPipelineInitialState(),
@@ -63,8 +63,10 @@ const isEqual = (
 ) => {
   return (
     isContextEqual(current.context, next.context) &&
-    isConstantQueryEqual(current.constantQuery, next.constantQuery) &&
-    isAdvancedQueryEqual(current.advancedQuery, next.advancedQuery) &&
+    isAdvancedSerachParametersEqual(
+      current.advancedSearchParameters,
+      next.advancedSearchParameters
+    ) &&
     isFacetsEqual(current.facetSet, next.facetSet) &&
     isDateFacetsEqual(current.dateFacetSet, next.dateFacetSet) &&
     isNumericFacetsEqual(current.numericFacetSet, next.numericFacetSet) &&
@@ -105,16 +107,10 @@ const isPaginationEqual = (current: PaginationState, next: PaginationState) =>
 const isQueryEqual = (current: QueryState, next: QueryState) =>
   current.q === next.q;
 
-const isConstantQueryEqual = (
-  current: ConstantQueryState,
-  next: ConstantQueryState
+const isAdvancedSerachParametersEqual = (
+  current: AdvancedSearchParametersState,
+  next: AdvancedSearchParametersState
 ) => JSON.stringify(current) === JSON.stringify(next);
-
-const isAdvancedQueryEqual = (
-  current: AdvancedQueryState,
-  next: AdvancedQueryState
-) => JSON.stringify(current) === JSON.stringify(next);
-
 const isSortEqual = (current: SortState, next: SortState) =>
   current.sortCriteria === next.sortCriteria;
 

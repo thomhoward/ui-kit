@@ -8,6 +8,7 @@ import {logFacetSelect} from '../../../features/facets/facet-set/facet-set-analy
 import {SpecificFacetSearchState} from '../../../features/facets/facet-search-set/specific/specific-facet-search-set-slice';
 import {CategoryFacetSearchState} from '../../../features/facets/facet-search-set/category/category-facet-search-set-slice';
 import {FacetSearchOptions} from '../../../features/facets/facet-search-set/facet-search-request-options';
+import {SearchAppState} from '../../../state/search-app-state';
 
 type FacetSearchState = SpecificFacetSearchState | CategoryFacetSearchState;
 
@@ -19,7 +20,7 @@ export interface GenericFacetSearchProps<T extends FacetSearchState> {
 export type GenericFacetSearch = ReturnType<typeof buildGenericFacetSearch>;
 
 export function buildGenericFacetSearch<T extends FacetSearchState>(
-  engine: Engine,
+  engine: Engine<SearchAppState>,
   props: GenericFacetSearchProps<T>
 ) {
   type GenericFacetSearchResult = T['response']['values'][0];

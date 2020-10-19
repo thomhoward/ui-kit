@@ -9,8 +9,7 @@ export {
 
 // Main App
 export * from './app/headless-engine';
-export * from './app/reducers';
-export {SearchPageState} from './state';
+export * from './app/search-page-reducers';
 
 // Controllers
 export * from './controllers/controller/headless-controller';
@@ -36,11 +35,10 @@ export * from './features/facets/facet-set/facet-set-selectors';
 export * from './features/pagination/pagination-selectors';
 
 // Grouped Actions
-export * as AdvancedQueryActions from './features/advanced-query/advanced-query-actions';
+export * as AdvancedSearchParametersActions from './features/advanced-search-parameters/advanced-search-parameters-actions';
 export * as AnalyticsActions from './features/analytics/analytics-actions';
 export * as CategoryFacetActions from './features/facets/category-facet-set/category-facet-set-actions';
 export * as ConfigurationActions from './features/configuration/configuration-actions';
-export * as ConstantQueryActions from './features/constant-query/constant-query-actions';
 export * as ContextActions from './features/context/context-actions';
 export * as DateFacetActions from './features/facets/range-facets/date-facet-set/date-facet-actions';
 export * as DidYouMeanActions from './features/did-you-mean/did-you-mean-actions';
