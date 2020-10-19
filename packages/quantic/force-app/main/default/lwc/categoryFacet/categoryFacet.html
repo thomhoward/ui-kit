@@ -1,6 +1,7 @@
 <template>
     <template if:true={hasParentsOrValues}>
         <lightning-card title={label}>
+            <c-category-facet-search facet={facet}></c-category-facet-search>
             <ul class="slds-has-dividers_around-space slds-m-bottom_medium">
                 <template if:true={hasParents}>
                     <lightning-button variant="base" label="All" title="Show All" icon-name="utility:all"
