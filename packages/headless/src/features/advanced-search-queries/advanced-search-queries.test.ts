@@ -26,15 +26,15 @@ describe('advanced search parameters', () => {
 
   it('#updateAdvancedSearchQueries sets only cq to the correct values', () => {
     const expected = {aq: '', cq: cq};
-    const action = updateAdvancedSearchQueries({...state, cq: cq});
+    const action = updateAdvancedSearchQueries({cq: cq});
     state = advancedSearchQueriesReducer(state, action);
 
     expect(state).toEqual(expected);
   });
 
-  it('#updateAdvancedSearchQueries sets only cq to the correct values', () => {
+  it('#updateAdvancedSearchQueries sets only aq to the correct values', () => {
     const expected = {aq: aq, cq: ''};
-    const action = updateAdvancedSearchQueries({...state, aq: aq});
+    const action = updateAdvancedSearchQueries({aq: aq});
     state = advancedSearchQueriesReducer(state, action);
 
     expect(state).toEqual(expected);

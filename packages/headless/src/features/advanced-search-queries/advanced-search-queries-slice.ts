@@ -13,8 +13,12 @@ export const advancedSearchQueriesReducer = createReducer(
   (builder) => {
     builder
       .addCase(updateAdvancedSearchQueries, (state, action) => {
-        state.cq = action.payload.cq;
-        state.aq = action.payload.aq;
+        if (action.payload.aq) {
+          state.aq = action.payload.aq;
+        }
+        if (action.payload.cq) {
+          state.cq = action.payload.cq;
+        }
       })
       .addCase(
         change.fulfilled,

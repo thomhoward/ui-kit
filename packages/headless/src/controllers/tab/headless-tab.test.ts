@@ -37,10 +37,7 @@ describe('Tab', () => {
       };
       initTab();
 
-      const action = updateAdvancedSearchQueries({
-        ...engine.state.advancedSearchQueries,
-        cq: expression,
-      });
+      const action = updateAdvancedSearchQueries({cq: expression});
       expect(engine.actions).toContainEqual(action);
     });
 
@@ -58,10 +55,7 @@ describe('Tab', () => {
   it('#select calls #updateConstantQuery', () => {
     initTab();
     tab.select();
-    const action = updateAdvancedSearchQueries({
-      ...engine.state.advancedSearchQueries,
-      cq: expression,
-    });
+    const action = updateAdvancedSearchQueries({cq: expression});
     expect(engine.actions).toContainEqual(action);
   });
 

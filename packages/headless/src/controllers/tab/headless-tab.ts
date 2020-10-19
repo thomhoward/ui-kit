@@ -25,12 +25,7 @@ export function buildTab(engine: Engine, props: TabProps) {
   const {dispatch} = engine;
 
   if (props.initialState?.isActive) {
-    dispatch(
-      updateAdvancedSearchQueries({
-        ...engine.state.advancedSearchQueries,
-        cq: props.options.expression,
-      })
-    );
+    dispatch(updateAdvancedSearchQueries({cq: props.options.expression}));
   }
 
   return {
@@ -39,12 +34,7 @@ export function buildTab(engine: Engine, props: TabProps) {
      * Makes this tab the active one
      */
     select() {
-      dispatch(
-        updateAdvancedSearchQueries({
-          ...engine.state.advancedSearchQueries,
-          cq: props.options.expression,
-        })
-      );
+      dispatch(updateAdvancedSearchQueries({cq: props.options.expression}));
       dispatch(executeSearch(logInterfaceChange()));
     },
 

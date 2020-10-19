@@ -6,5 +6,5 @@ import {AdvancedSearchQueriesState} from '../../state';
  * @param (advancedSearchQueries)  The current state of the advanced search queries.
  */
 export const updateAdvancedSearchQueries = createAction<
-  AdvancedSearchQueriesState
+  Partial<AdvancedSearchQueriesState>
 >('advancedSearchQueries/update');
