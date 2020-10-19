@@ -3,11 +3,11 @@ import {Context} from '../../../features/context/context-slice';
 import {AnyFacetRequest} from '../../../features/facets/generic/interfaces/generic-facet-request';
 import {configureAnalytics} from '../../analytics/analytics';
 import {SearchAppState} from '../../../state/search-app-state';
-import {AdvancedSearchParametersState} from '../../../features/advanced-search-parameters/advanced-search-parameters-slice';
 
 export interface SearchRequest {
   q: string;
-  advancedSearchParameters: AdvancedSearchParametersState;
+  aq: string;
+  cq: string;
   numberOfResults: number;
   sortCriteria: string;
   firstResult: number;
@@ -24,7 +24,8 @@ export interface SearchRequest {
 export const searchRequest = (state: SearchAppState): SearchRequest => {
   return {
     ...getQParam(state),
-    advancedSearchParameters: state.advancedSearchParameters,
+    aq: state.advancedSearchQueries.aq,
+    cq: state.advancedSearchQueries.cq,
     numberOfResults: state.pagination.numberOfResults,
     sortCriteria: state.sortCriteria,
     firstResult: state.pagination.firstResult,

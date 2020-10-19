@@ -1,8 +1,8 @@
-import {AdvancedSearchParametersState} from '../features/advanced-search-parameters/advanced-search-parameters-slice';
+import {AdvancedSearchQueriesState} from '../features/advanced-search-queries/advanced-search-queries-slice';
 
-export function buildMockAdvancedSearchParametersState(
-  config: Partial<AdvancedSearchParametersState> = {}
-): AdvancedSearchParametersState {
+export function buildMockAdvancedSearchQueriesState(
+  config: Partial<AdvancedSearchQueriesState> = {}
+): AdvancedSearchQueriesState {
   return {
     aq: '',
     cq: '',

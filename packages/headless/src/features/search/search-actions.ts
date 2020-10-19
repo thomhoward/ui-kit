@@ -123,7 +123,7 @@ const extractHistory = (state: SearchAppState) => ({
   categoryFacetSet: state.categoryFacetSet,
   pagination: state.pagination,
   query: state.query,
-  advancedSearchParameters: state.advancedSearchParameters,
+  advancedSearchQueries: state.advancedSearchQueries,
   querySet: state.querySet,
   sortCriteria: state.sortCriteria,
   pipeline: state.pipeline,
