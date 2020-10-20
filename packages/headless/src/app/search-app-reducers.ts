@@ -29,7 +29,7 @@ import {advancedSearchQueriesReducer} from '../features/advanced-search-queries/
 /**
  * Map of reducers that make up the SearchPageState.
  */
-export const searchPageReducers: ReducersMapObject<SearchAppState> = {
+export const searchAppReducers: ReducersMapObject<SearchAppState> = {
   configuration: configurationReducer,
   facetSet: facetSetReducer,
   dateFacetSet: dateFacetSetReducer,
