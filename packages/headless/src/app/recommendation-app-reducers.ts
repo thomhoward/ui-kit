@@ -9,7 +9,7 @@ import {searchReducer} from '../features/search/search-slice';
 import {RecommendationAppState} from '../state/recommendation-app-state';
 
 /**
- * Map of reducers that make up the SearchAppState.
+ * Map of reducers that make up the RecommendationAppState.
  */
 export const recommendationAppReducer: ReducersMapObject<RecommendationAppState> = {
   configuration: configurationReducer,
