@@ -1,10 +1,10 @@
 import {createAsyncThunk, AsyncThunkAction} from '@reduxjs/toolkit';
 import {configureAnalytics} from '../../api/analytics/analytics';
 import {SearchPageEvents} from 'coveo.analytics/dist/definitions/searchPage/searchPageEvents';
-import {SearchPageState} from '../../state';
+import {SearchAppState} from '../../state/search-app-state';
 
 export const searchPageState = (getState: () => unknown) =>
-  getState() as SearchPageState;
+  getState() as SearchAppState;
 
 export enum AnalyticsType {
   Search,
@@ -83,7 +83,7 @@ export const logInterfaceChange = createAsyncThunk(
   async (_, {getState}) => {
     const state = searchPageState(getState);
     await configureAnalytics(state).logInterfaceChange({
-      interfaceChangeTo: state.constantQuery.cq,
+      interfaceChangeTo: state.advancedSearchQueries.cq,
     });
     return makeSearchActionType();
   }

@@ -1,17 +1,17 @@
-import {SearchPageState} from '../../../state';
+import {SearchAppState} from '../../../state/search-app-state';
 import {facetSelector} from '../../..';
 import {partitionIntoParentsAndValues} from './category-facet-utilities';
 import {CategoryFacetResponse} from './interfaces/response';
 
 export const categoryFacetRequestSelector = (
-  state: SearchPageState,
+  state: SearchAppState,
   id: string
 ) => {
   return state.categoryFacetSet[id];
 };
 
 export const categoryFacetSelectedValuesSelector = (
-  state: SearchPageState,
+  state: SearchAppState,
   facetId: string
 ) => {
   const facetResponse = facetSelector(state, facetId) as CategoryFacetResponse;

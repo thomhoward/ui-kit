@@ -1,13 +1,13 @@
-import {SearchPageState} from '../../../state';
 import {getQParam} from '../search-api-params';
 import {Context} from '../../../features/context/context-slice';
 import {AnyFacetRequest} from '../../../features/facets/generic/interfaces/generic-facet-request';
 import {configureAnalytics} from '../../analytics/analytics';
+import {SearchAppState} from '../../../state/search-app-state';
 
 export interface SearchRequest {
   q: string;
-  cq: string;
   aq: string;
+  cq: string;
   numberOfResults: number;
   sortCriteria: string;
   firstResult: number;
@@ -21,11 +21,11 @@ export interface SearchRequest {
 }
 
 /** The search request parameters. For a full description, refer to {@link https://docs.coveo.com/en/13/cloud-v2-api-reference/search-api#operation/searchUsingPost}*/
-export const searchRequest = (state: SearchPageState): SearchRequest => {
+export const searchRequest = (state: SearchAppState): SearchRequest => {
   return {
     ...getQParam(state),
-    cq: state.constantQuery.cq,
-    aq: state.advancedQuery.aq,
+    aq: state.advancedSearchQueries.aq,
+    cq: state.advancedSearchQueries.cq,
     numberOfResults: state.pagination.numberOfResults,
     sortCriteria: state.sortCriteria,
     firstResult: state.pagination.firstResult,
@@ -42,7 +42,7 @@ export const searchRequest = (state: SearchPageState): SearchRequest => {
   };
 };
 
-function getFacets(state: SearchPageState) {
+function getFacets(state: SearchAppState) {
   return [
     ...getFacetRequests(state.facetSet),
     ...getFacetRequests(state.numericFacetSet),

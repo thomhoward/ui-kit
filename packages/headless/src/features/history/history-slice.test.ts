@@ -1,5 +1,4 @@
 import {historyReducer, getHistoryEmptyState} from './history-slice';
-import {SearchParametersState} from '../../search-parameters-state';
 import {snapshot} from './history-actions';
 import {Reducer} from 'redux';
 import {undoable, StateWithHistory, makeHistory} from '../../app/undoable';
@@ -7,7 +6,8 @@ import {buildMockFacetRequest} from '../../test/mock-facet-request';
 import {buildMockNumericFacetRequest} from '../../test/mock-numeric-facet-request';
 import {buildMockDateFacetRequest} from '../../test/mock-date-facet-request';
 import {buildMockCategoryFacetRequest} from '../../test/mock-category-facet-request';
-import {buildMockConstantQueryState} from '../../test/mock-constant-query-state';
+import {buildMockAdvancedSearchQueriesState} from '../../test/mock-advanced-search-parameters-state';
+import {SearchParametersState} from '../../state/search-app-state';
 
 describe('history slice', () => {
   let undoableReducer: Reducer<StateWithHistory<SearchParametersState>>;
@@ -69,8 +69,7 @@ describe('history slice', () => {
         totalCountFiltered: 789,
       },
       query: {q: 'foo'},
-      constantQuery: {cq: '', isInitialized: false},
-      advancedQuery: {aq: ''},
+      advancedSearchQueries: {aq: '', cq: ''},
       querySet: {foo: 'bar', hello: 'world'},
       sortCriteria: 'date descending',
       pipeline: 'my-pipeline',
@@ -184,14 +183,12 @@ describe('history slice', () => {
     it('should consider same snapshots for sane constant query values', () => {
       expectHistoryNotToHaveCreatedDifferentSnapshots(
         getSnapshot({
-          constantQuery: buildMockConstantQueryState({
-            isInitialized: true,
+          advancedSearchQueries: buildMockAdvancedSearchQueriesState({
             cq: 'hello',
           }),
         }),
         getSnapshot({
-          constantQuery: buildMockConstantQueryState({
-            isInitialized: true,
+          advancedSearchQueries: buildMockAdvancedSearchQueriesState({
             cq: 'hello',
           }),
         })
@@ -201,14 +198,12 @@ describe('history slice', () => {
     it('should consider different snapshot for different constant query values', () => {
       expectHistoryToHaveCreatedDifferentSnapshots(
         getSnapshot({
-          constantQuery: buildMockConstantQueryState({
-            isInitialized: true,
+          advancedSearchQueries: buildMockAdvancedSearchQueriesState({
             cq: 'hello',
           }),
         }),
         getSnapshot({
-          constantQuery: buildMockConstantQueryState({
-            isInitialized: true,
+          advancedSearchQueries: buildMockAdvancedSearchQueriesState({
             cq: 'world',
           }),
         })
