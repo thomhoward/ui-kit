@@ -5,27 +5,21 @@ import {
   QuerySuggest,
 } from './query-suggest/query-suggest-response';
 import {baseSearchParams} from './search-api-params';
-import {SearchRequest, searchRequest} from './search/search-request';
-import {buildSpecificFacetSearchRequest} from './facet-search/specific-facet-search/specific-facet-search-request';
+import {SearchRequest} from './search/search-request';
 import {Search, SearchResponseSuccess} from './search/search-response';
 import {
   SearchAPIErrorWithStatusCode,
   SearchAPIErrorWithExceptionInBody,
 } from './search-api-error-response';
-import {PlanRequest, planRequest} from './plan/plan-request';
-import {
-  QuerySuggestRequest,
-  querySuggestRequest,
-} from './query-suggest/query-suggest-request';
+import {PlanRequest} from './plan/plan-request';
+import {QuerySuggestRequest} from './query-suggest/query-suggest-request';
 import {FacetSearchRequest} from './facet-search/facet-search-request';
 import {FacetSearchResponse} from './facet-search/facet-search-response';
-import {buildCategoryFacetSearchRequest} from './facet-search/category-facet-search/category-facet-search-request';
-import {SearchAppState} from '../../state/search-app-state';
 
 export type AllSearchAPIResponse = Plan | Search | QuerySuggest;
 
-export interface AsyncThunkSearchOptions {
-  state: SearchAppState;
+export interface AsyncThunkSearchOptions<T> {
+  state: T;
   rejectValue: SearchAPIErrorWithStatusCode;
   extra: {
     searchAPIClient: SearchAPIClient;
@@ -44,15 +38,16 @@ export type SearchAPIClientResponse<T> =
 
 export class SearchAPIClient {
   constructor(private renewAccessToken: () => Promise<string>) {}
+
   async plan(
-    state: SearchAppState
+    req: PlanRequest
   ): Promise<SearchAPIClientResponse<PlanResponseSuccess>> {
     const platformResponse = await PlatformClient.call<
       PlanRequest,
       PlanResponseSuccess
     >({
-      ...baseSearchParams(state, 'POST', 'application/json', '/plan'),
-      requestParams: planRequest(state),
+      ...baseSearchParams(req, 'POST', 'application/json', '/plan'),
+      requestParams: req,
       renewAccessToken: this.renewAccessToken,
     });
 
@@ -65,15 +60,14 @@ export class SearchAPIClient {
   }
 
   async querySuggest(
-    id: string,
-    state: SearchAppState
+    req: QuerySuggestRequest
   ): Promise<SearchAPIClientResponse<QuerySuggestSuccessResponse>> {
     const platformResponse = await PlatformClient.call<
       QuerySuggestRequest,
       QuerySuggestSuccessResponse
     >({
-      ...baseSearchParams(state, 'POST', 'application/json', '/querySuggest'),
-      requestParams: querySuggestRequest(id, state),
+      ...baseSearchParams(req, 'POST', 'application/json', '/querySuggest'),
+      requestParams: req,
       renewAccessToken: this.renewAccessToken,
     });
     if (isSuccessQuerySuggestionsResponse(platformResponse)) {
@@ -87,11 +81,11 @@ export class SearchAPIClient {
   }
 
   async search(
-    state: SearchAppState
+    req: SearchRequest
   ): Promise<SearchAPIClientResponse<SearchResponseSuccess>> {
     const platformResponse = await PlatformClient.call<SearchRequest, Search>({
-      ...baseSearchParams(state, 'POST', 'application/json', ''),
-      requestParams: searchRequest(state),
+      ...baseSearchParams(req, 'POST', 'application/json', ''),
+      requestParams: req,
       renewAccessToken: this.renewAccessToken,
     });
 
@@ -106,19 +100,13 @@ export class SearchAPIClient {
     };
   }
 
-  async facetSearch(id: string, state: SearchAppState) {
-    const isFacetSearch = id in state.facetSearchSet;
-    const buildParams = isFacetSearch
-      ? buildSpecificFacetSearchRequest
-      : buildCategoryFacetSearchRequest;
-    const requestParams = buildParams(id, state);
-
+  async facetSearch(req: FacetSearchRequest) {
     const res = await PlatformClient.call<
       FacetSearchRequest,
       FacetSearchResponse
     >({
-      ...baseSearchParams(state, 'POST', 'application/json', '/facet'),
-      requestParams,
+      ...baseSearchParams(req, 'POST', 'application/json', '/facet'),
+      requestParams: req,
       renewAccessToken: this.renewAccessToken,
     });
 

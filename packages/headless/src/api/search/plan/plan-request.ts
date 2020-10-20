@@ -1,11 +1,13 @@
-import {SearchAppState} from '../../../state/search-app-state';
-import {getQParam} from '../search-api-params';
+import {
+  BaseRequest,
+  ContextRequest,
+  PipelineRequest,
+  QueryRequest,
+  SearchHubRequest,
+} from '../search-api-request';
 
-export const planRequest = (state: SearchAppState) => ({
-  ...getQParam(state),
-  context: state.context.contextValues,
-  pipeline: state.pipeline,
-  searchHub: state.searchHub,
-});
-
-export type PlanRequest = ReturnType<typeof planRequest>;
+export type PlanRequest = BaseRequest &
+  SearchHubRequest &
+  ContextRequest &
+  QueryRequest &
+  PipelineRequest;
