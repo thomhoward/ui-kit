@@ -30,6 +30,19 @@ import {
 } from '../../state/state-sections';
 import {configureAnalytics} from '../../api/analytics/analytics';
 import {AnyFacetRequest} from '../facets/generic/interfaces/generic-facet-request';
+import {SearchParametersState} from '../../state/search-app-state';
+import {getContextInitialState} from '../context/context-slice';
+import {getFacetSetInitialState} from '../facets/facet-set/facet-set-slice';
+import {getNumericFacetSetInitialState} from '../facets/range-facets/numeric-facet-set/numeric-facet-set-slice';
+import {getDateFacetSetInitialState} from '../facets/range-facets/date-facet-set/date-facet-set-slice';
+import {getCategoryFacetSetInitialState} from '../facets/category-facet-set/category-facet-set-slice';
+import {getPaginationInitialState} from '../pagination/pagination-slice';
+import {getQueryInitialState} from '../query/query-slice';
+import {getAdvancedSearchQueriesInitialState} from '../advanced-search-queries/advanced-search-queries-slice';
+import {getQuerySetInitialState} from '../query-set/query-set-slice';
+import {getSortCriteriaInitialState} from '../sort-criteria/sort-criteria-slice';
+import {getPipelineInitialState} from '../pipeline/pipeline-slice';
+import {getSearchHubInitialState} from '../search-hub/search-hub-slice';
 
 export type StateNeededByExecuteSearch = ConfigurationSection &
   Partial<
@@ -157,22 +170,27 @@ const shouldReExecuteTheQueryWithCorrections = (
   return false;
 };
 
-const extractHistory = (state: StateNeededByExecuteSearch) => ({
-  context: state.context,
-  facetSet: state.facetSet,
-  numericFacetSet: state.numericFacetSet,
-  dateFacetSet: state.dateFacetSet,
-  categoryFacetSet: state.categoryFacetSet,
-  pagination: state.pagination,
-  query: state.query,
-  advancedSearchQueries: state.advancedSearchQueries,
-  querySet: state.querySet,
-  sortCriteria: state.sortCriteria,
-  pipeline: state.pipeline,
-  searchHub: state.searchHub,
+const extractHistory = (
+  state: StateNeededByExecuteSearch
+): SearchParametersState => ({
+  context: state.context || getContextInitialState(),
+  facetSet: state.facetSet || getFacetSetInitialState(),
+  numericFacetSet: state.numericFacetSet || getNumericFacetSetInitialState(),
+  dateFacetSet: state.dateFacetSet || getDateFacetSetInitialState(),
+  categoryFacetSet: state.categoryFacetSet || getCategoryFacetSetInitialState(),
+  pagination: state.pagination || getPaginationInitialState(),
+  query: state.query || getQueryInitialState(),
+  advancedSearchQueries:
+    state.advancedSearchQueries || getAdvancedSearchQueriesInitialState(),
+  querySet: state.querySet || getQuerySetInitialState(),
+  sortCriteria: state.sortCriteria || getSortCriteriaInitialState(),
+  pipeline: state.pipeline || getPipelineInitialState(),
+  searchHub: state.searchHub || getSearchHubInitialState(),
 });
 
-const searchRequest = (state: StateNeededByExecuteSearch): SearchRequest => {
+export const searchRequest = (
+  state: StateNeededByExecuteSearch
+): SearchRequest => {
   return {
     accessToken: state.configuration.accessToken,
     organizationId: state.configuration.organizationId,

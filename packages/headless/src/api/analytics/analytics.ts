@@ -1,8 +1,17 @@
 import {CoveoSearchPageClient, SearchPageClientProvider} from 'coveo.analytics';
-import {SearchAppState} from '../../state/search-app-state';
+import {
+  ConfigurationSection,
+  PipelineSection,
+  QuerySection,
+  SearchHubSection,
+  SearchSection,
+} from '../../state/state-sections';
+
+export type StateNeededByAnalyticsProvider = ConfigurationSection &
+  Partial<SearchHubSection & SearchSection & PipelineSection & QuerySection>;
 
 export class AnalyticsProvider implements SearchPageClientProvider {
-  constructor(private state: SearchAppState) {}
+  constructor(private state: StateNeededByAnalyticsProvider) {}
 
   public getSearchEventRequestPayload() {
     return {
@@ -18,15 +27,15 @@ export class AnalyticsProvider implements SearchPageClientProvider {
   }
 
   public getSearchUID() {
-    return this.state.search.response.searchUid;
+    return this.state.search?.response.searchUid || '';
   }
 
   public getPipeline() {
-    return this.state.pipeline;
+    return this.state.pipeline || 'default';
   }
 
   public getOriginLevel1() {
-    return this.state.searchHub;
+    return this.state.searchHub || 'default';
   }
 
   public getOriginLevel2() {
@@ -47,26 +56,26 @@ export class AnalyticsProvider implements SearchPageClientProvider {
   }
 
   private mapResultsToAnalyticsDocument() {
-    return this.state.search.response.results.map((r) => ({
+    return this.state.search?.response.results.map((r) => ({
       documentUri: r.uri,
       documentUriHash: r.raw.urihash,
     }));
   }
 
   private get queryText() {
-    return this.state.query.q;
+    return this.state.query?.q || '';
   }
 
   private get responseTime() {
-    return this.state.search.duration;
+    return this.state.search?.duration || 0;
   }
 
   private get numberOfResults() {
-    return this.state.search.response.results.length;
+    return this.state.search?.response.results.length || 0;
   }
 }
 
-export const configureAnalytics = (state: SearchAppState) => {
+export const configureAnalytics = (state: StateNeededByAnalyticsProvider) => {
   const provider = new AnalyticsProvider(state);
   const client = new CoveoSearchPageClient(
     {

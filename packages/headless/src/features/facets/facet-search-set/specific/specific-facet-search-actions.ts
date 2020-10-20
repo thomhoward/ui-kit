@@ -5,6 +5,8 @@ import {logFacetSearch} from '../../facet-set/facet-set-analytics-actions';
 import {SpecificFacetSearchResult} from '../../../../api/search/facet-search/specific-facet-search/specific-facet-search-response';
 import {FacetSearchOptions} from '../facet-search-request-options';
 import {SearchAppState} from '../../../../state/search-app-state';
+import {SpecificFacetSearchRequest} from '../../../../api/search/facet-search/specific-facet-search/specific-facet-search-request';
+import {searchRequest} from '../../../search/search-actions';
 
 type selectFacetSearchResultPayload = {
   facetId: string;
