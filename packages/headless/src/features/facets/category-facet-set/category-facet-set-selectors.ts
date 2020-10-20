@@ -1,5 +1,5 @@
 import {SearchAppState} from '../../../state/search-app-state';
-import {facetSelector} from '../../..';
+import {facetSelector} from '../facet-set/facet-set-selectors';
 import {partitionIntoParentsAndValues} from './category-facet-utilities';
 import {CategoryFacetResponse} from './interfaces/response';
 

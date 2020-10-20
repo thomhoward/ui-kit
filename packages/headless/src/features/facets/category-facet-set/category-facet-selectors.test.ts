@@ -1,4 +1,4 @@
-import {SearchPageState} from '../../../state';
+import {SearchAppState} from '../../../state/search-app-state';
 import {createMockState} from '../../../test/mock-state';
 import {categoryFacetSelectedValuesSelector} from './category-facet-set-selectors';
 import {buildMockCategoryFacetResponse} from '../../../test/mock-category-facet-response';
@@ -6,7 +6,7 @@ import {buildMockCategoryFacetValue} from '../../../test/mock-category-facet-val
 
 describe('category facet selectors', () => {
   const facetId = 'abc123';
-  let state: SearchPageState;
+  let state: SearchAppState;
 
   beforeEach(() => {
     state = createMockState();

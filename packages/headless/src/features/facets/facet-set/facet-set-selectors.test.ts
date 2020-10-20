@@ -5,7 +5,7 @@ import {
   facetRequestSelector,
   facetSelectedValuesSelector,
 } from './facet-set-selectors';
-import {SearchPageState} from '../../../state';
+import {SearchAppState} from '../../../state/search-app-state';
 import {buildMockFacetRequest} from '../../../test/mock-facet-request';
 import {buildMockDateFacetValue} from '../../../test/mock-date-facet-value';
 import {buildMockDateFacetResponse} from '../../../test/mock-date-facet-response';
@@ -39,7 +39,7 @@ describe('facet-set selectors', () => {
 
   describe('#facetSelectedValuesSelector', () => {
     const facetId = 'abc123';
-    let state: SearchPageState;
+    let state: SearchAppState;
 
     beforeEach(() => {
       state = createMockState();
