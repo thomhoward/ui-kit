@@ -39,7 +39,7 @@ export const checkForRedirection = createAsyncThunk<
         url: true,
       }),
     });
-    const response = await searchAPIClient.plan(planRequest(getState()));
+    const response = await searchAPIClient.plan(buildPlanRequest(getState()));
     if (isErrorResponse(response)) {
       return rejectWithValue(response.error);
     }
@@ -53,14 +53,14 @@ export const checkForRedirection = createAsyncThunk<
   }
 );
 
-export const planRequest = (
+export const buildPlanRequest = (
   state: StateNeededForRedirectionCheck
 ): PlanRequest => {
   return {
     accessToken: state.configuration.accessToken,
     organizationId: state.configuration.organizationId,
-    url: state.configuration.platformUrl,
-    ...(state.query?.q && {q: state.query.q}),
+    url: state.configuration.search.apiBaseUrl,
+    q: state.query ? state.query.q : '',
     ...(state.context && {context: state.context.contextValues}),
     ...(state.pipeline && {pipeline: state.pipeline}),
     ...(state.searchHub && {searchHub: state.searchHub}),

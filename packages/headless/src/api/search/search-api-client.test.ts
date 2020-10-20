@@ -11,7 +11,7 @@ import {buildMockFacetRequest} from '../../test/mock-facet-request';
 import {buildMockCategoryFacetSearch} from '../../test/mock-category-facet-search';
 import {buildMockCategoryFacetRequest} from '../../test/mock-category-facet-request';
 import {SearchAppState} from '../../state/search-app-state';
-import {planRequest} from '../../features/redirection/redirection-actions';
+import {buildPlanRequest} from '../../features/redirection/redirection-actions';
 
 jest.mock('../platform-client');
 describe('search api client', () => {
@@ -62,7 +62,7 @@ describe('search api client', () => {
 
   it(`when calling SearchAPIClient.plan
   should call PlatformClient.call with the right options`, () => {
-    searchAPIClient.plan(planRequest(state));
+    searchAPIClient.plan(buildPlanRequest(state));
 
     const expectedRequest: PlatformClientCallOptions<Omit<
       PlanRequest,
