@@ -5,7 +5,7 @@ import {
   QuerySuggest,
 } from './query-suggest/query-suggest-response';
 import {baseSearchParams} from './search-api-params';
-import {SearchRequest, searchRequest} from './search/search-request';
+import {SearchRequest} from './search/search-request';
 import {buildSpecificFacetSearchRequest} from './facet-search/specific-facet-search/specific-facet-search-request';
 import {Search, SearchResponseSuccess} from './search/search-response';
 import {
@@ -84,11 +84,11 @@ export class SearchAPIClient {
   }
 
   async search(
-    state: SearchAppState
+    req: SearchRequest
   ): Promise<SearchAPIClientResponse<SearchResponseSuccess>> {
     const platformResponse = await PlatformClient.call<SearchRequest, Search>({
-      ...baseSearchParams(state, 'POST', 'application/json', ''),
-      requestParams: searchRequest(state),
+      ...baseSearchRequest(req, 'POST', 'application/json', ''),
+      requestParams: pickNonBaseParams(req) as SearchRequest, // TODO: This cast won't be needed once all methods have been reworked and we can change types in PlatformClient
       renewAccessToken: this.renewAccessToken,
     });
 

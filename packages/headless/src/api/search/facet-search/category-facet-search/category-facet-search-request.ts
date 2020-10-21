@@ -2,9 +2,9 @@ import {
   BaseFacetSearchRequest,
   FacetSearchType,
 } from '../base/base-facet-search-request';
-import {searchRequest} from '../../search/search-request';
 import {CategoryFacetRequest} from '../../../../features/facets/category-facet-set/interfaces/request';
 import {SearchAppState} from '../../../../state/search-app-state';
+import {buildSearchRequest} from '../../../../features/search/search-actions';
 
 export interface CategoryFacetSearchRequest
   extends BaseFacetSearchRequest,
@@ -22,7 +22,7 @@ export const buildCategoryFacetSearchRequest = (
 
   const {captions, query, numberOfValues} = options;
   const {field, delimitingCharacter, basePath} = categoryFacet;
-  const searchContext = searchRequest(state);
+  const searchContext = buildSearchRequest(state);
   const path = getPathToSelectedCategoryFacetItem(categoryFacet);
   const ignorePaths = path.length ? [path] : [];
 

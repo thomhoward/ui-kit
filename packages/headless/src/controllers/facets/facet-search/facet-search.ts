@@ -5,8 +5,8 @@ import {
 } from '../../../features/facets/facet-search-set/specific/specific-facet-search-actions';
 import {executeSearch} from '../../../features/search/search-actions';
 import {logFacetSelect} from '../../../features/facets/facet-set/facet-set-analytics-actions';
-import {SpecificFacetSearchState} from '../../../features/facets/facet-search-set/specific/specific-facet-search-set-slice';
-import {CategoryFacetSearchState} from '../../../features/facets/facet-search-set/category/category-facet-search-set-slice';
+import {SpecificFacetSearchState} from '../../../features/facets/facet-search-set/specific/specific-facet-search-set-state';
+import {CategoryFacetSearchState} from '../../../features/facets/facet-search-set/category/category-facet-search-set-state';
 import {FacetSearchOptions} from '../../../features/facets/facet-search-set/facet-search-request-options';
 
 type FacetSearchState = SpecificFacetSearchState | CategoryFacetSearchState;

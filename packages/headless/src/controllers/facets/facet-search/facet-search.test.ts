@@ -13,7 +13,7 @@ import {
   GenericFacetSearch,
   GenericFacetSearchProps,
 } from './facet-search';
-import {SpecificFacetSearchState} from '../../../features/facets/facet-search-set/specific/specific-facet-search-set-slice';
+import {SpecificFacetSearchState} from '../../../features/facets/facet-search-set/specific/specific-facet-search-set-state';
 
 describe('FacetSearch', () => {
   const facetId = '1';

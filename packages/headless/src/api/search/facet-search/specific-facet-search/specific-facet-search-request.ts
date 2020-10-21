@@ -2,8 +2,8 @@ import {
   BaseFacetSearchRequest,
   FacetSearchType,
 } from '../base/base-facet-search-request';
-import {searchRequest} from '../../search/search-request';
 import {SearchAppState} from '../../../../state/search-app-state';
+import {buildSearchRequest} from '../../../../features/search/search-actions';
 
 export interface SpecificFacetSearchRequest
   extends BaseFacetSearchRequest,
@@ -17,7 +17,7 @@ export const buildSpecificFacetSearchRequest = (
 ): SpecificFacetSearchRequest => {
   const {captions, query, numberOfValues} = state.facetSearchSet[id].options;
   const {field, delimitingCharacter, currentValues} = state.facetSet[id];
-  const searchContext = searchRequest(state);
+  const searchContext = buildSearchRequest(state);
   const ignoreValues = currentValues
     .filter((v) => v.state !== 'idle')
     .map((facetValue) => facetValue.value);

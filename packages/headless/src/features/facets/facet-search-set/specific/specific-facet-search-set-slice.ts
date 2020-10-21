@@ -1,6 +1,4 @@
 import {
-  FacetSearchSetState,
-  FacetSearchState,
   handleFacetSearchRegistration,
   handleFacetSearchUpdate,
   handleFacetSearchPending,
@@ -14,17 +12,7 @@ import {
   updateFacetSearch,
   executeFacetSearch,
 } from './specific-facet-search-actions';
-
-export type SpecificFacetSearchState = FacetSearchState<
-  SpecificFacetSearchResponse
->;
-export type SpecificFacetSearchSetState = FacetSearchSetState<
-  SpecificFacetSearchResponse
->;
-
-export function getFacetSearchSetInitialState(): SpecificFacetSearchSetState {
-  return {};
-}
+import {getFacetSearchSetInitialState} from './specific-facet-search-set-state';
 
 export const specificFacetSearchSetReducer = createReducer(
   getFacetSearchSetInitialState(),

@@ -3,13 +3,13 @@ import {
   updateFacetSearch,
   executeFacetSearch,
 } from './specific-facet-search-actions';
-import {
-  SpecificFacetSearchSetState,
-  specificFacetSearchSetReducer,
-  getFacetSearchSetInitialState,
-} from './specific-facet-search-set-slice';
+import {specificFacetSearchSetReducer} from './specific-facet-search-set-slice';
 import * as FacetSearchReducerHelpers from '../facet-search-reducer-helpers';
 import {buildMockFacetSearchResponse} from '../../../../test/mock-facet-search-response';
+import {
+  getFacetSearchSetInitialState,
+  SpecificFacetSearchSetState,
+} from './specific-facet-search-set-state';
 
 describe('FacetSearch slice', () => {
   const facetId = '1';

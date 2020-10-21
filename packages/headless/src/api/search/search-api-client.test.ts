@@ -2,7 +2,7 @@ import {SearchAPIClient} from './search-api-client';
 import {PlatformClient, PlatformClientCallOptions} from '../platform-client';
 import {PlanRequest} from './plan/plan-request';
 import {QuerySuggestRequest} from './query-suggest/query-suggest-request';
-import {SearchRequest, searchRequest} from './search/search-request';
+import {SearchRequest} from './search/search-request';
 import {createMockState} from '../../test/mock-state';
 import {buildMockQuerySuggest} from '../../test/mock-query-suggest';
 import {getOrganizationIdQueryParam} from './search-api-params';
@@ -13,6 +13,7 @@ import {buildMockCategoryFacetRequest} from '../../test/mock-category-facet-requ
 import {SearchAppState} from '../../state/search-app-state';
 import {buildPlanRequest} from '../../features/redirection/redirection-actions';
 import {buildQuerySuggestRequest} from '../../features/query-suggest/query-suggest-actions';
+import {buildSearchRequest} from '../../features/search/search-actions';
 
 jest.mock('../platform-client');
 describe('search api client', () => {
@@ -31,9 +32,12 @@ describe('search api client', () => {
 
   it(`when calling SearchAPIClient.search
   should call PlatformClient.call with the right options`, () => {
-    searchAPIClient.search(state);
+    searchAPIClient.search(buildSearchRequest(state));
 
-    const expectedRequest: PlatformClientCallOptions<SearchRequest> = {
+    const expectedRequest: PlatformClientCallOptions<Omit<
+      SearchRequest,
+      'url' | 'accessToken' | 'organizationId'
+    >> = {
       accessToken: state.configuration.accessToken,
       method: 'POST',
       contentType: 'application/json',
@@ -165,7 +169,7 @@ describe('search api client', () => {
           delimitingCharacter: facetState.delimitingCharacter,
           ignoreValues: [],
           searchContext: {
-            ...searchRequest(state),
+            ...buildSearchRequest(state),
             visitorId: expect.any(String),
           },
         },
@@ -196,7 +200,7 @@ describe('search api client', () => {
           delimitingCharacter: categoryFacet.delimitingCharacter,
           ignorePaths: [],
           searchContext: {
-            ...searchRequest(state),
+            ...buildSearchRequest(state),
             visitorId: expect.any(String),
           },
         },
