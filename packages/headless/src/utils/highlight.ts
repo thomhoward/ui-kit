@@ -1,4 +1,3 @@
-import * as _ from 'underscore';
 import {isNullOrUndefined} from '@coveo/bueno';
 
 export interface HighlightKeyword {
@@ -14,6 +13,16 @@ export interface HighlightKeyword {
 
 function isEmptyString(str: string) {
   return str === '';
+}
+
+function escapeString(str: string): string {
+  return str
+    .replace('&', '&amp;')
+    .replace('<', '&lt;')
+    .replace('>', '&gt;')
+    .replace('"', '&quot;')
+    .replace("'", '&#x27;')
+    .replace('`', '&#96;');
 }
 
 /**
@@ -33,7 +42,7 @@ export function highlightString(
     throw Error('delimiters should be a non-empty string');
   }
 
-  if (isNullOrUndefined(content) || content === '') {
+  if (isNullOrUndefined(content) || isEmptyString(content)) {
     return content;
   }
   const maxIndex = content.length;
@@ -48,15 +57,15 @@ export function highlightString(
       break;
     }
 
-    highlighted += _.escape(content.slice(last, start));
+    highlighted += escapeString(content.slice(last, start));
     highlighted += openingDelimiter;
-    highlighted += _.escape(content.slice(start, end));
+    highlighted += escapeString(content.slice(start, end));
     highlighted += closingDelimiter;
 
     last = end;
   }
   if (last !== maxIndex) {
-    highlighted += _.escape(content.slice(last));
+    highlighted += escapeString(content.slice(last));
   }
   return highlighted;
 }
