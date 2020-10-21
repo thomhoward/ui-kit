@@ -20,7 +20,8 @@ function isEmptyString(str: string) {
  * Highlight the passed string using specified highlights.
  * @param content The string to highlight items in.
  * @param highlights The highlighted positions to highlight in the string.
- * @param tag The opening tag to use when starting to highlight (e.g. <span class="my-class">).
+ * @param openingDelimiter The opening delimiter used when starting to highlight.
+ * @param closingDelimiter The closing delimiter used to close highlighted section.
  */
 export function highlightString(
   content: string,
