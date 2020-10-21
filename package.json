@@ -19,7 +19,8 @@
     "version:pre": "lerna version --conventional-commits --conventional-prerelease",
     "version:graduate": "lerna version --conventional-commits --conventional-graduate",
     "npm:publish": "lerna run --no-bail npm:publish",
-    "doc": "cd packages/headless ; npm run doc"
+    "doc": "cd packages/headless ; npm run doc",
+    "swagger": "node ./scripts/swagger/generate.js"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^11.0.0",
@@ -41,7 +42,9 @@
     "lint-staged": "^10.0.8",
     "prettier": "^2.1.2",
     "rimraf": "^3.0.2",
-    "typescript": "^4.0.5"
+    "typescript": "^4.0.5",
+    "request": "^2.88.2",
+    "yamljs": "^0.3.0"
   },
   "husky": {
     "hooks": {

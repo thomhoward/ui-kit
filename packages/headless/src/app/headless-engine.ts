@@ -197,8 +197,8 @@ export class HeadlessEngine<Reducers extends ReducersMapObject>
    */
   static getSampleConfiguration(): HeadlessConfigurationOptions {
     return {
-      organizationId: 'searchuisamples',
-      accessToken: 'xx564559b1-0045-48e1-953c-3addd1ee4457',
+      organizationId: 'acotest4ih4eruy',
+      accessToken: '',
       search: {
         pipeline: 'default',
         searchHub: 'default',

@@ -19,6 +19,7 @@ import {BaseParam, baseSearchRequest} from './search-api-params';
 import {CategoryFacetSearchRequest} from './facet-search/category-facet-search/category-facet-search-request';
 import {RecommendationRequest} from './recommendation/recommendation-request';
 import {ProductRecommendationsRequest} from './product-recommendations/product-recommendations-request';
+import {SearchAPIClientV4} from "../search-v4/search-api-client";
 
 export type AllSearchAPIResponse = Plan | Search | QuerySuggest;
 
@@ -41,7 +42,10 @@ export type SearchAPIClientResponse<T> =
   | {error: SearchAPIErrorWithStatusCode};
 
 export class SearchAPIClient {
-  constructor(private renewAccessToken: () => Promise<string>) {}
+  clientV4: SearchAPIClientV4;
+  constructor(private renewAccessToken: () => Promise<string>) {
+    this.clientV4 = new SearchAPIClientV4(renewAccessToken);
+  }
   async plan(
     req: PlanRequest
   ): Promise<SearchAPIClientResponse<PlanResponseSuccess>> {
@@ -86,6 +90,8 @@ export class SearchAPIClient {
   async search(
     req: SearchRequest
   ): Promise<SearchAPIClientResponse<SearchResponseSuccess>> {
+    return this.clientV4.search(req);
+    /*
     const platformResponse = await PlatformClient.call<SearchRequest, Search>({
       ...baseSearchRequest(req, 'POST', 'application/json', ''),
       requestParams: pickNonBaseParams(req),
@@ -101,6 +107,7 @@ export class SearchAPIClient {
     return {
       error: unwrapError(platformResponse),
     };
+    */
   }
 
   async facetSearch(req: FacetSearchRequest | CategoryFacetSearchRequest) {
