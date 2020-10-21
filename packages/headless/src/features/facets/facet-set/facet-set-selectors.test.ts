@@ -1,7 +1,7 @@
 import {createMockState} from '../../../test/mock-state';
 import {buildMockFacetResponse} from '../../../test/mock-facet-response';
 import {
-  facetSelector,
+  genericFacetResponseSelector,
   facetRequestSelector,
   facetSelectedValuesSelector,
 } from './facet-set-selectors';
@@ -20,12 +20,12 @@ describe('facet-set selectors', () => {
     const facetResponse = buildMockFacetResponse({facetId});
     state.search.response.facets = [facetResponse];
 
-    expect(facetSelector(state, facetId)).toBe(facetResponse);
+    expect(genericFacetResponseSelector(state, facetId)).toBe(facetResponse);
   });
 
   it('when the id is not found, #facetSelector returns undefined', () => {
     const state = createMockState();
-    expect(facetSelector(state, '1')).toBe(undefined);
+    expect(genericFacetResponseSelector(state, '1')).toBe(undefined);
   });
 
   it('#facetRequestSelector gets the facet request by id', () => {

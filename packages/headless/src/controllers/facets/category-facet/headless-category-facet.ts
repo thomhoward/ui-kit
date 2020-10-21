@@ -9,11 +9,8 @@ import {
   updateCategoryFacetNumberOfValues,
   updateCategoryFacetSortCriterion,
 } from '../../../features/facets/category-facet-set/category-facet-set-actions';
-import {facetSelector} from '../../../features/facets/facet-set/facet-set-selectors';
-import {
-  CategoryFacetResponse,
-  CategoryFacetValue,
-} from '../../../features/facets/category-facet-set/interfaces/response';
+import {categoryFacetResponseSelector} from '../../../features/facets/category-facet-set/category-facet-set-selectors';
+import {CategoryFacetValue} from '../../../features/facets/category-facet-set/interfaces/response';
 import {executeSearch} from '../../../features/search/search-actions';
 import {
   FacetSelectionChangeMetadata,
@@ -85,9 +82,7 @@ export function buildCategoryFacet(engine: Engine, props: CategoryFacetProps) {
   };
 
   const getResponse = () => {
-    return facetSelector(engine.state, facetId) as
-      | CategoryFacetResponse
-      | undefined;
+    return categoryFacetResponseSelector(engine.state, facetId);
   };
 
   dispatch(registerCategoryFacet(options));
