@@ -10,16 +10,10 @@ export interface HighlightKeyword {
    * The length of the offset.
    */
   length: number;
-  /**
-   * The group number for the highlight. A single string can have the same term highlighted multiple times.
-   * This allows to regroup the different highlights.
-   */
-  dataHighlightGroup?: number;
-  /**
-   * The string that represent the highlight. A single string can have the same term highlighted multiple times.
-   * This allows to regroup the different highlights.
-   */
-  dataHighlightGroupTerm?: string;
+}
+
+function isEmptyString(str: string) {
+  return str === '';
 }
 
 export class HighlightUtils {
@@ -27,15 +21,16 @@ export class HighlightUtils {
    * Highlight the passed string using specified highlights.
    * @param content The string to highlight items in.
    * @param highlights The highlighted positions to highlight in the string.
-   * @param cssClass The css class to use on the highlighting `span`.
+   * @param tag The opening tag to use when starting to highlight (e.g. <span class="my-class">).
    */
   static highlightString(
     content: string,
     highlights: HighlightKeyword[],
-    cssClass: string
+    openingDelimiter: string,
+    closingDelimiter: string
   ): string {
-    if (_.isString(cssClass) && cssClass === '') {
-      throw Error('cssClass should be a non-empty string');
+    if (isEmptyString(openingDelimiter) || isEmptyString(closingDelimiter)) {
+      throw Error('delimiters should be a non-empty string');
     }
 
     if (isNullOrUndefined(content) || content === '') {
@@ -54,16 +49,9 @@ export class HighlightUtils {
       }
 
       highlighted += _.escape(content.slice(last, start));
-      highlighted += `<span class="${cssClass}"`;
-      if (highlight.dataHighlightGroup) {
-        highlighted += ` data-highlight-group="${highlight.dataHighlightGroup.toString()}"`;
-      }
-      if (highlight.dataHighlightGroupTerm) {
-        highlighted += ` data-highlight-group-term="${highlight.dataHighlightGroupTerm}"`;
-      }
-      highlighted += '>';
+      highlighted += openingDelimiter;
       highlighted += _.escape(content.slice(start, end));
-      highlighted += '</span>';
+      highlighted += closingDelimiter;
 
       last = end;
     }

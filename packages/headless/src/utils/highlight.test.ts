@@ -12,22 +12,22 @@ describe('highlight', () => {
 
   it('should wrap the passed highlights with tags using the specified class name', () => {
     const expectedHighlight =
-      'Lor<span class="coveo-highlight">em ip</span>su<span class="coveo-highlight">m do</span>lor <span class="coveo-highlight">sit amet, conse</span>ctetur adipi<span class="coveo-highlight">sicing eli</span>t, sed do eiusmod tempor incididunt ut';
+      'Lor<span>em ip</span>su<span>m do</span>lor <span>sit amet, conse</span>ctetur adipi<span>sicing eli</span>t, sed do eiusmod tempor incididunt ut';
     expect(
-      HighlightUtils.highlightString(lorem, highlights, 'coveo-highlight')
+      HighlightUtils.highlightString(lorem, highlights, '<span>', '</span>')
     ).toBe(expectedHighlight);
   });
 
   it('should return the string unchanged if "content" is an empty string', () => {
     const expectedString = '';
     expect(
-      HighlightUtils.highlightString('', highlights, 'coveo-highlight')
+      HighlightUtils.highlightString('', highlights, '<span>', '</span>')
     ).toBe(expectedString);
   });
 
-  it('should throw if "cssClass is empty"', () => {
-    expect(() => HighlightUtils.highlightString(lorem, highlights, '')).toThrow(
-      'cssClass should be a non-empty string'
-    );
+  it('should throw if "tag" is an empty string', () => {
+    expect(() =>
+      HighlightUtils.highlightString(lorem, highlights, '', '</span>')
+    ).toThrow('delimiters should be a non-empty string');
   });
 });
