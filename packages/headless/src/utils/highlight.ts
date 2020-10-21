@@ -15,6 +15,9 @@ function isEmptyString(str: string) {
   return str === '';
 }
 
+/**
+ * Function to escape a string. For more information, refer to {@link https://underscorejs.org/#escape}
+ */
 function escapeString(str: string): string {
   return str
     .replace('&', '&amp;')
