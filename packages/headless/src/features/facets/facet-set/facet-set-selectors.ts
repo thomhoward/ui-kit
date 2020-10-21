@@ -1,5 +1,6 @@
 import {SearchAppState} from '../../../state/search-app-state';
 import {FacetSection} from '../../../state/state-sections';
+import {BaseFacetValue} from '../facet-api/response';
 
 export const facetSelector = (state: SearchAppState, id: string) => {
   return state.search.response.facets.find(
@@ -19,7 +20,7 @@ export const facetSelectedValuesSelector = (
   if (!facetResponse) {
     return [];
   }
-  const filteredResponses = [];
+  const filteredResponses: BaseFacetValue[] = [];
 
   for (const value of facetResponse.values) {
     if (value.state === 'selected') {
