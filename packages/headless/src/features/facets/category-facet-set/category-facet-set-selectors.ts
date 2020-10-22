@@ -1,6 +1,6 @@
 import {SearchAppState} from '../../../state/search-app-state';
-import {genericFacetResponseSelector} from '../facet-set/facet-set-selectors';
-import {partitionIntoParentsAndValues} from './category-facet-utilities';
+import {baseFacetResponseSelector} from '../facet-set/facet-set-selectors';
+import {partitionIntoParentsAndValues} from './category-facet-utils';
 import {CategoryFacetResponse} from './interfaces/response';
 import {AnyFacetResponse} from '../generic/interfaces/generic-facet-response';
 
@@ -8,14 +8,14 @@ function isCategoryFacetResponse(
   state: SearchAppState,
   response: AnyFacetResponse | undefined
 ): response is CategoryFacetResponse {
-  return (response && response.facetId in state.categoryFacetSet) || false;
+  return !!response && response.facetId in state.categoryFacetSet;
 }
 
 export const categoryFacetResponseSelector = (
   state: SearchAppState,
   facetId: string
 ) => {
-  const response = genericFacetResponseSelector(state, facetId);
+  const response = baseFacetResponseSelector(state, facetId);
   if (isCategoryFacetResponse(state, response)) {
     return response;
   }

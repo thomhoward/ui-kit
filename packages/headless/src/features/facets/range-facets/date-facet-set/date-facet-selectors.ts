@@ -1,20 +1,20 @@
 import {SearchAppState} from '../../../../state/search-app-state';
 import {DateFacetResponse} from './interfaces/response';
-import {genericFacetResponseSelector} from '../../facet-set/facet-set-selectors';
+import {baseFacetResponseSelector} from '../../facet-set/facet-set-selectors';
 import {AnyFacetResponse} from '../../generic/interfaces/generic-facet-response';
 
 function isDateFacetResponse(
   state: SearchAppState,
   response: AnyFacetResponse | undefined
 ): response is DateFacetResponse {
-  return (response && response.facetId in state.dateFacetSet) || false;
+  return !!response && response.facetId in state.dateFacetSet;
 }
 
 export const dataFacetResponseSelector = (
   state: SearchAppState,
   facetId: string
 ) => {
-  const response = genericFacetResponseSelector(state, facetId);
+  const response = baseFacetResponseSelector(state, facetId);
   if (isDateFacetResponse(state, response)) {
     return response;
   }

@@ -8,7 +8,6 @@ import {buildMockCategoryFacetResponse} from '../../../test/mock-category-facet-
 import {buildMockCategoryFacetValue} from '../../../test/mock-category-facet-value';
 import {buildMockCategoryFacetRequest} from '../../../test/mock-category-facet-request';
 import {buildMockFacetRequest} from '../../../test/mock-facet-request';
-import {buildMockFacetValue} from '../../../test/mock-facet-value';
 import {buildMockFacetResponse} from '../../../test/mock-facet-response';
 
 describe('category facet selectors', () => {
@@ -24,15 +23,9 @@ describe('category facet selectors', () => {
     expect(response).toBeUndefined();
   });
 
-  it('#categoryFacetResponseSelector gets a valid date facet response', () => {
+  it('#categoryFacetResponseSelector gets a valid date category response', () => {
     state.categoryFacetSet[facetId] = buildMockCategoryFacetRequest({facetId});
-    const mockValue = buildMockCategoryFacetValue({
-      state: 'selected',
-    });
-    const mockResponse = buildMockCategoryFacetResponse({
-      facetId,
-      values: [mockValue],
-    });
+    const mockResponse = buildMockCategoryFacetResponse({facetId});
     state.search.response.facets = [mockResponse];
 
     const response = categoryFacetResponseSelector(state, facetId);
@@ -41,13 +34,7 @@ describe('category facet selectors', () => {
 
   it('#categoryFacetResponseSelector returns undefined if facet is of wrong type', () => {
     state.facetSet[facetId] = buildMockFacetRequest({facetId});
-    const mockValue = buildMockFacetValue({
-      state: 'selected',
-    });
-    const mockResponse = buildMockFacetResponse({
-      facetId,
-      values: [mockValue],
-    });
+    const mockResponse = buildMockFacetResponse({facetId});
     state.search.response.facets = [mockResponse];
 
     const response = categoryFacetResponseSelector(state, facetId);

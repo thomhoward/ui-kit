@@ -1,16 +1,12 @@
 import {createMockState} from '../../../test/mock-state';
 import {buildMockFacetResponse} from '../../../test/mock-facet-response';
 import {
-  genericFacetResponseSelector,
+  baseFacetResponseSelector,
   facetRequestSelector,
-  facetSelectedValuesSelector,
+  facetResponseValuesSelector,
 } from './facet-set-selectors';
 import {SearchAppState} from '../../../state/search-app-state';
 import {buildMockFacetRequest} from '../../../test/mock-facet-request';
-import {buildMockDateFacetValue} from '../../../test/mock-date-facet-value';
-import {buildMockDateFacetResponse} from '../../../test/mock-date-facet-response';
-import {buildMockNumericFacetValue} from '../../../test/mock-numeric-facet-value';
-import {buildMockNumericFacetResponse} from '../../../test/mock-numeric-facet-response';
 import {buildMockFacetValue} from '../../../test/mock-facet-value';
 
 describe('facet-set selectors', () => {
@@ -20,12 +16,12 @@ describe('facet-set selectors', () => {
     const facetResponse = buildMockFacetResponse({facetId});
     state.search.response.facets = [facetResponse];
 
-    expect(genericFacetResponseSelector(state, facetId)).toBe(facetResponse);
+    expect(baseFacetResponseSelector(state, facetId)).toBe(facetResponse);
   });
 
   it('when the id is not found, #facetSelector returns undefined', () => {
     const state = createMockState();
-    expect(genericFacetResponseSelector(state, '1')).toBe(undefined);
+    expect(baseFacetResponseSelector(state, '1')).toBe(undefined);
   });
 
   it('#facetRequestSelector gets the facet request by id', () => {
@@ -43,39 +39,12 @@ describe('facet-set selectors', () => {
 
     beforeEach(() => {
       state = createMockState();
+      state.facetSet[facetId] = buildMockFacetRequest({facetId});
     });
 
     it('#facetSelectedValuesSelector returns an empty array if the facet does not exist', () => {
-      const selectedValues = facetSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseValuesSelector(state, facetId);
       expect(selectedValues).toEqual([]);
-    });
-
-    it('#facetSelectedValuesSelector gets the selected selected value for a date facet', () => {
-      const mockValue = buildMockDateFacetValue({
-        state: 'selected',
-      });
-      state.search.response.facets = [
-        buildMockDateFacetResponse({
-          facetId,
-          values: [mockValue],
-        }),
-      ];
-      const selectedValues = facetSelectedValuesSelector(state, facetId);
-      expect(selectedValues).toEqual([mockValue]);
-    });
-
-    it('#facetSelectedValuesSelector gets the selected selected value for a numeric facet', () => {
-      const mockValue = buildMockNumericFacetValue({
-        state: 'selected',
-      });
-      state.search.response.facets = [
-        buildMockNumericFacetResponse({
-          facetId,
-          values: [mockValue],
-        }),
-      ];
-      const selectedValues = facetSelectedValuesSelector(state, facetId);
-      expect(selectedValues).toEqual([mockValue]);
     });
 
     it('#facetSelectedValuesSelector gets the selected selected value for a generic facet', () => {
@@ -88,7 +57,7 @@ describe('facet-set selectors', () => {
           values: [mockValue],
         }),
       ];
-      const selectedValues = facetSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseValuesSelector(state, facetId);
       expect(selectedValues).toEqual([mockValue]);
     });
 
@@ -107,7 +76,7 @@ describe('facet-set selectors', () => {
           values: [mockValue, mockValue2],
         }),
       ];
-      const selectedValues = facetSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseValuesSelector(state, facetId);
       expect(selectedValues).toContain(mockValue);
       expect(selectedValues).toContain(mockValue2);
     });
@@ -127,7 +96,7 @@ describe('facet-set selectors', () => {
           values: [mockValue, mockValue2],
         }),
       ];
-      const selectedValues = facetSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseValuesSelector(state, facetId);
       expect(selectedValues).toContain(mockValue);
       expect(selectedValues).not.toContain(mockValue2);
     });

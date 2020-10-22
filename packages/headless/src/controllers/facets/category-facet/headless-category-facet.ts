@@ -29,7 +29,7 @@ import {
   FacetSearchOptions,
 } from '../../../features/facets/facet-search-set/facet-search-request-options';
 import {buildCategoryFacetSearch} from '../facet-search/category/headless-category-facet-search';
-import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utilities';
+import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utils';
 
 export type CategoryFacetProps = {
   options: CategoryFacetOptions;

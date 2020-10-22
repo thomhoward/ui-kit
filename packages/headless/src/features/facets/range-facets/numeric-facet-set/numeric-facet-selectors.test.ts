@@ -4,7 +4,6 @@ import {
   numericFacetSelectedValuesSelector,
 } from './numeric-facet-selectors';
 import {buildMockFacetRequest} from '../../../../test/mock-facet-request';
-import {buildMockFacetValue} from '../../../../test/mock-facet-value';
 import {buildMockFacetResponse} from '../../../../test/mock-facet-response';
 import {createMockState} from '../../../../test';
 import {buildMockNumericFacetRequest} from '../../../../test/mock-numeric-facet-request';
@@ -23,15 +22,9 @@ describe('numeric facet selectors', () => {
     expect(response).toBeUndefined();
   });
 
-  it('#numericFacetResponseSelector gets a valid date facet response', () => {
+  it('#numericFacetResponseSelector gets a valid numeric facet response', () => {
     state.numericFacetSet[facetId] = buildMockNumericFacetRequest({facetId});
-    const mockValue = buildMockNumericFacetValue({
-      state: 'selected',
-    });
-    const mockResponse = buildMockNumericFacetResponse({
-      facetId,
-      values: [mockValue],
-    });
+    const mockResponse = buildMockNumericFacetResponse({facetId});
     state.search.response.facets = [mockResponse];
 
     const response = numericFacetResponseSelector(state, facetId);
@@ -40,13 +33,7 @@ describe('numeric facet selectors', () => {
 
   it('#numericFacetResponseSelector returns undefined if facet is of wrong type', () => {
     state.facetSet[facetId] = buildMockFacetRequest({facetId});
-    const mockValue = buildMockFacetValue({
-      state: 'selected',
-    });
-    const mockResponse = buildMockFacetResponse({
-      facetId,
-      values: [mockValue],
-    });
+    const mockResponse = buildMockFacetResponse({facetId});
     state.search.response.facets = [mockResponse];
 
     const response = numericFacetResponseSelector(state, facetId);
@@ -61,20 +48,6 @@ describe('numeric facet selectors', () => {
     it('#numericFacetSelectedValuesSelector returns an empty array if the facet does not exist', () => {
       const selectedValues = numericFacetSelectedValuesSelector(state, facetId);
       expect(selectedValues).toEqual([]);
-    });
-
-    it('#numericFacetSelectedValuesSelector returns the selected values for the provided facetId', () => {
-      const mockValue = buildMockNumericFacetValue({
-        state: 'selected',
-      });
-      state.search.response.facets = [
-        buildMockNumericFacetResponse({
-          facetId,
-          values: [mockValue],
-        }),
-      ];
-      const selectedValues = numericFacetSelectedValuesSelector(state, facetId);
-      expect(selectedValues).toEqual([mockValue]);
     });
 
     it('#numericFacetSelectedValuesSelector returns only the selected values for the provided facetId', () => {

@@ -8,7 +8,6 @@ import {buildMockDateFacetRequest} from '../../../../test/mock-date-facet-reques
 import {buildMockDateFacetResponse} from '../../../../test/mock-date-facet-response';
 import {buildMockDateFacetValue} from '../../../../test/mock-date-facet-value';
 import {buildMockFacetRequest} from '../../../../test/mock-facet-request';
-import {buildMockFacetValue} from '../../../../test/mock-facet-value';
 import {buildMockFacetResponse} from '../../../../test/mock-facet-response';
 
 describe('date facet selectors', () => {
@@ -26,13 +25,7 @@ describe('date facet selectors', () => {
 
   it('#dateFacetResponseSelector gets a valid date facet response', () => {
     state.dateFacetSet[facetId] = buildMockDateFacetRequest({facetId});
-    const mockValue = buildMockDateFacetValue({
-      state: 'selected',
-    });
-    const mockResponse = buildMockDateFacetResponse({
-      facetId,
-      values: [mockValue],
-    });
+    const mockResponse = buildMockDateFacetResponse({facetId});
     state.search.response.facets = [mockResponse];
 
     const response = dataFacetResponseSelector(state, facetId);
@@ -41,13 +34,7 @@ describe('date facet selectors', () => {
 
   it('#dateFacetResponseSelector returns undefined if facet is of wrong type', () => {
     state.facetSet[facetId] = buildMockFacetRequest({facetId});
-    const mockValue = buildMockFacetValue({
-      state: 'selected',
-    });
-    const mockResponse = buildMockFacetResponse({
-      facetId,
-      values: [mockValue],
-    });
+    const mockResponse = buildMockFacetResponse({facetId});
     state.search.response.facets = [mockResponse];
 
     const response = dataFacetResponseSelector(state, facetId);
@@ -62,20 +49,6 @@ describe('date facet selectors', () => {
     it('#dateFacetSelectedValuesSelector returns an empty array if the facet does not exist', () => {
       const selectedValues = dateFacetSelectedValuesSelector(state, facetId);
       expect(selectedValues).toEqual([]);
-    });
-
-    it('#dateFacetSelectedValuesSelector returns the selected values for the provided facetId', () => {
-      const mockValue = buildMockDateFacetValue({
-        state: 'selected',
-      });
-      state.search.response.facets = [
-        buildMockDateFacetResponse({
-          facetId,
-          values: [mockValue],
-        }),
-      ];
-      const selectedValues = dateFacetSelectedValuesSelector(state, facetId);
-      expect(selectedValues).toEqual([mockValue]);
     });
 
     it('#dateFacetSelectedValuesSelector returns only the selected values for the provided facetId', () => {
