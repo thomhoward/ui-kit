@@ -18,7 +18,7 @@ import {FacetSearchRequest} from './facet-search/facet-search-request';
 import {FacetSearchResponse} from './facet-search/facet-search-response';
 import {buildCategoryFacetSearchRequest} from './facet-search/category-facet-search/category-facet-search-request';
 import {SearchAppState} from '../../state/search-app-state';
-import {BaseRequest, baseSearchRequest} from './search-api-request';
+import {BaseParam, baseSearchRequest} from './search-api-request';
 
 export type AllSearchAPIResponse = Plan | Search | QuerySuggest;
 
@@ -206,7 +206,7 @@ function isException(
   );
 }
 
-function pickNonBaseParams<Params extends BaseRequest>(req: Params) {
+function pickNonBaseParams<Params extends BaseParam>(req: Params) {
   // cheap version of _.omit
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const {url, accessToken, organizationId, ...nonBase} = req;

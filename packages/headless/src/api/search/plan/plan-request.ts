@@ -1,13 +1,13 @@
 import {
-  BaseRequest,
-  ContextRequest,
-  PipelineRequest,
-  QueryRequest,
-  SearchHubRequest,
+  BaseParam,
+  ContextParam,
+  PipelineParam,
+  QueryParam,
+  SearchHubParam,
 } from '../search-api-request';
 
-export type PlanRequest = BaseRequest &
-  SearchHubRequest &
-  ContextRequest &
-  QueryRequest &
-  PipelineRequest;
+export type PlanRequest = BaseParam &
+  SearchHubParam &
+  ContextParam &
+  QueryParam &
+  PipelineParam;

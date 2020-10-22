@@ -1,31 +1,33 @@
 import {
-  AdvancedQueryRequest,
-  BaseRequest,
-  ConstantQueryRequest,
-  ContextRequest,
-  EnableDidYouMeanRequest,
-  FacetsRequest,
-  FieldsToIncludeRequest,
-  FirstResultRequest,
-  NumberOfResultsRequest,
-  PipelineRequest,
-  QueryRequest,
-  SearchHubRequest,
-  SortCriteriaRequest,
-  VisitorIDRequest,
+  AdvancedQueryParam,
+  BaseParam,
+  ConstantQueryParam,
+  ContextParam,
+  EnableDidYouMeanParam,
+  FacetOptionsParam,
+  FacetsParam,
+  FieldsToIncludeParam,
+  FirstResultParam,
+  NumberOfResultsParam,
+  PipelineParam,
+  QueryParam,
+  SearchHubParam,
+  SortCriteriaParam,
+  VisitorIDParam,
 } from '../search-api-request';
 
-export type SearchRequest = BaseRequest &
-  QueryRequest &
-  AdvancedQueryRequest &
-  ConstantQueryRequest &
-  NumberOfResultsRequest &
-  FirstResultRequest &
-  SortCriteriaRequest &
-  FacetsRequest &
-  ContextRequest &
-  EnableDidYouMeanRequest &
-  FieldsToIncludeRequest &
-  PipelineRequest &
-  SearchHubRequest &
-  VisitorIDRequest;
+export type SearchRequest = BaseParam &
+  QueryParam &
+  AdvancedQueryParam &
+  ConstantQueryParam &
+  NumberOfResultsParam &
+  FirstResultParam &
+  SortCriteriaParam &
+  FacetsParam &
+  ContextParam &
+  EnableDidYouMeanParam &
+  FieldsToIncludeParam &
+  PipelineParam &
+  SearchHubParam &
+  FacetOptionsParam &
+  VisitorIDParam;

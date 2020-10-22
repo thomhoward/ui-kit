@@ -1,15 +1,15 @@
 import {
-  BaseRequest,
-  ContextRequest,
-  PipelineRequest,
-  QueryRequest,
-  SearchHubRequest,
+  BaseParam,
+  ContextParam,
+  PipelineParam,
+  QueryParam,
+  SearchHubParam,
 } from '../search-api-request';
 
-export type QuerySuggestRequest = BaseRequest &
-  QueryRequest &
-  ContextRequest &
-  PipelineRequest &
-  SearchHubRequest & {
+export type QuerySuggestRequest = BaseParam &
+  QueryParam &
+  ContextParam &
+  PipelineParam &
+  SearchHubParam & {
     count: number;
   };

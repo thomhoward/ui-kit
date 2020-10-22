@@ -10,7 +10,6 @@ import {snapshot} from '../history/history-actions';
 import {logDidYouMeanAutomatic} from '../did-you-mean/did-you-mean-analytics-actions';
 import {applyDidYouMeanCorrection} from '../did-you-mean/did-you-mean-actions';
 import {updateQuery} from '../query/query-actions';
-
 import {
   AdvancedSearchQueriesSection,
   CategoryFacetSection,

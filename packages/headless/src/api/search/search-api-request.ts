@@ -1,66 +1,71 @@
+import {FacetOptions} from '../../features/facet-options/facet-options';
 import {AnyFacetRequest} from '../../features/facets/generic/interfaces/generic-facet-request';
 import {HTTPContentTypes, HttpMethods} from '../platform-client';
 
-export interface BaseRequest {
+export interface BaseParam {
   url: string;
   accessToken: string;
   organizationId: string;
 }
 
-export interface ContextRequest {
+export interface ContextParam {
   context?: Record<string, string | string[]>;
 }
 
-export interface QueryRequest {
+export interface QueryParam {
   q?: string;
 }
 
-export interface PipelineRequest {
+export interface PipelineParam {
   pipeline?: string;
 }
 
-export interface SearchHubRequest {
+export interface SearchHubParam {
   searchHub?: string;
 }
 
-export interface AdvancedQueryRequest {
+export interface AdvancedQueryParam {
   aq?: string;
 }
 
-export interface ConstantQueryRequest {
+export interface ConstantQueryParam {
   cq?: string;
 }
 
-export interface NumberOfResultsRequest {
+export interface NumberOfResultsParam {
   numberOfResults?: number;
 }
 
-export interface SortCriteriaRequest {
+export interface SortCriteriaParam {
   sortCriteria?: string;
 }
 
-export interface FirstResultRequest {
+export interface FirstResultParam {
   firstResult?: number;
 }
 
-export interface FacetsRequest {
+export interface FacetsParam {
   facets?: AnyFacetRequest[];
 }
 
-export interface EnableDidYouMeanRequest {
+export interface EnableDidYouMeanParam {
   enableDidYouMean?: boolean;
 }
 
-export interface FieldsToIncludeRequest {
+export interface FieldsToIncludeParam {
   fieldsToInclude?: string[];
 }
 
-export interface VisitorIDRequest {
+export interface VisitorIDParam {
   visitorId?: string;
 }
 
+export interface FacetOptionsParam {
+  facetOptions?: FacetOptions;
+}
+
 export const baseSearchRequest = (
-  req: BaseRequest,
+  req: BaseParam,
   method: HttpMethods,
   contentType: HTTPContentTypes,
   path: string
@@ -71,5 +76,5 @@ export const baseSearchRequest = (
   url: `${req.url}${path}?${getOrganizationIdQueryParam(req)}`,
 });
 
-export const getOrganizationIdQueryParam = (req: BaseRequest) =>
+export const getOrganizationIdQueryParam = (req: BaseParam) =>
   `organizationId=${req.organizationId}`;

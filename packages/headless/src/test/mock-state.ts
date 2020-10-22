@@ -20,6 +20,7 @@ import {getFacetSearchSetInitialState} from '../features/facets/facet-search-set
 import {getCategoryFacetSearchSetInitialState} from '../features/facets/facet-search-set/category/category-facet-search-set-state';
 import {getAdvancedSearchQueriesInitialState} from '../features/advanced-search-queries/advanced-search-queries-state';
 import {SearchAppState} from '../state/search-app-state';
+import {getFacetOptionsInitialState} from '../features/facet-options/facet-options-state';
 
 export function createMockState(
   config: Partial<SearchAppState> = {}
@@ -33,6 +34,7 @@ export function createMockState(
     categoryFacetSet: getCategoryFacetSetInitialState(),
     facetSearchSet: getFacetSearchSetInitialState(),
     categoryFacetSearchSet: getCategoryFacetSearchSetInitialState(),
+    facetOptions: getFacetOptionsInitialState(),
     pagination: getPaginationInitialState(),
     query: getQueryInitialState(),
     querySet: getQuerySetInitialState(),

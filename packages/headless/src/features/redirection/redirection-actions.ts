@@ -16,8 +16,9 @@ import {
 } from '../../state/state-sections';
 import {PlanRequest} from '../../api/search/plan/plan-request';
 
-export type StateNeededForRedirectionCheck = ConfigurationSection &
-  Partial<ContextSection & QuerySection & SearchHubSection & PipelineSection>;
+export type RedirectionState = ConfigurationSection &
+  QuerySection &
+  Partial<ContextSection & SearchHubSection & PipelineSection>;
 
 /**
  * Preprocesses the query for the current headless state, and updates the redirection URL if a redirect trigger was fired in the query pipeline.
@@ -26,7 +27,7 @@ export type StateNeededForRedirectionCheck = ConfigurationSection &
 export const checkForRedirection = createAsyncThunk<
   string,
   {defaultRedirectionUrl: string},
-  AsyncThunkSearchOptions<StateNeededForRedirectionCheck>
+  AsyncThunkSearchOptions<RedirectionState>
 >(
   'redirection/check',
   async (
@@ -53,14 +54,12 @@ export const checkForRedirection = createAsyncThunk<
   }
 );
 
-export const buildPlanRequest = (
-  state: StateNeededForRedirectionCheck
-): PlanRequest => {
+export const buildPlanRequest = (state: RedirectionState): PlanRequest => {
   return {
     accessToken: state.configuration.accessToken,
     organizationId: state.configuration.organizationId,
     url: state.configuration.search.apiBaseUrl,
-    q: state.query ? state.query.q : '',
+    q: state.query.q,
     ...(state.context && {context: state.context.contextValues}),
     ...(state.pipeline && {pipeline: state.pipeline}),
     ...(state.searchHub && {searchHub: state.searchHub}),

@@ -2,6 +2,7 @@ import {AdvancedSearchQueriesState} from '../features/advanced-search-queries/ad
 import {ConfigurationState} from '../features/configuration/configuration-state';
 import {ContextState} from '../features/context/context-state';
 import {DidYouMeanState} from '../features/did-you-mean/did-you-mean-state';
+import {FacetOptionsState} from '../features/facet-options/facet-options-state';
 import {CategoryFacetSetState} from '../features/facets/category-facet-set/category-facet-set-state';
 import {CategoryFacetSearchSetState} from '../features/facets/facet-search-set/category/category-facet-search-set-state';
 import {SpecificFacetSearchSetState} from '../features/facets/facet-search-set/specific/specific-facet-search-set-state';
@@ -57,6 +58,11 @@ export interface CategoryFacetSection {
    * The set of category facets.
    */
   categoryFacetSet: CategoryFacetSetState;
+}
+
+export interface FacetOptionsSection {
+  /** The properties related to reordering facets. */
+  facetOptions: FacetOptionsState;
 }
 
 export interface PaginationSection {
