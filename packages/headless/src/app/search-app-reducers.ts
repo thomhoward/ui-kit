@@ -24,10 +24,11 @@ import {numericFacetSetReducer} from '../features/facets/range-facets/numeric-fa
 import {searchHubReducer} from '../features/search-hub/search-hub-slice';
 import {categoryFacetSetReducer} from '../features/facets/category-facet-set/category-facet-set-slice';
 import {categoryFacetSearchSetReducer} from '../features/facets/facet-search-set/category/category-facet-search-set-slice';
+import {facetOptionsReducer} from '../features/facet-options/facet-options-slice';
 import {advancedSearchQueriesReducer} from '../features/advanced-search-queries/advanced-search-queries-slice';
 
 /**
- * Map of reducers that make up the SearchPageState.
+ * Map of reducers that make up the SearchAppState.
  */
 export const searchAppReducers: ReducersMapObject<SearchAppState> = {
   configuration: configurationReducer,
@@ -36,6 +37,7 @@ export const searchAppReducers: ReducersMapObject<SearchAppState> = {
   numericFacetSet: numericFacetSetReducer,
   categoryFacetSet: categoryFacetSetReducer,
   facetSearchSet: specificFacetSearchSetReducer,
+  facetOptions: facetOptionsReducer,
   categoryFacetSearchSet: categoryFacetSearchSetReducer,
   query: queryReducer,
   advancedSearchQueries: advancedSearchQueriesReducer,
