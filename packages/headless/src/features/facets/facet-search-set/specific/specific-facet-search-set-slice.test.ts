@@ -1,7 +1,6 @@
 import {
   registerFacetSearch,
   updateFacetSearch,
-  executeFacetSearch,
 } from './specific-facet-search-actions';
 import {specificFacetSearchSetReducer} from './specific-facet-search-set-slice';
 import * as FacetSearchReducerHelpers from '../facet-search-reducer-helpers';
@@ -10,6 +9,7 @@ import {
   getFacetSearchSetInitialState,
   SpecificFacetSearchSetState,
 } from './specific-facet-search-set-state';
+import {executeFacetSearch} from '../generic/generic-facet-search-actions';
 
 describe('FacetSearch slice', () => {
   const facetId = '1';

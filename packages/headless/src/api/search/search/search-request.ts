@@ -14,7 +14,7 @@ import {
   SearchHubParam,
   SortCriteriaParam,
   VisitorIDParam,
-} from '../search-api-request';
+} from '../search-api-params';
 
 export type SearchRequest = BaseParam &
   QueryParam &
