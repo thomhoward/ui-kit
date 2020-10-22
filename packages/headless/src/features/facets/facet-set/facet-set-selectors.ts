@@ -33,7 +33,7 @@ export const facetResponseSelector = (
   return undefined;
 };
 
-export const facetResponseValuesSelector = (
+export const facetResponseSelectedValuesSelector = (
   state: SearchAppState,
   facetId: string
 ) => {
