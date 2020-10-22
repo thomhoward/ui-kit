@@ -9,11 +9,8 @@ import {
   updateCategoryFacetNumberOfValues,
   updateCategoryFacetSortCriterion,
 } from '../../../features/facets/category-facet-set/category-facet-set-actions';
-import {facetSelector} from '../../../features/facets/facet-set/facet-set-selectors';
-import {
-  CategoryFacetResponse,
-  CategoryFacetValue,
-} from '../../../features/facets/category-facet-set/interfaces/response';
+import {categoryFacetResponseSelector} from '../../../features/facets/category-facet-set/category-facet-set-selectors';
+import {CategoryFacetValue} from '../../../features/facets/category-facet-set/interfaces/response';
 import {executeSearch} from '../../../features/search/search-actions';
 import {
   FacetSelectionChangeMetadata,
@@ -32,7 +29,8 @@ import {
   FacetSearchOptions,
 } from '../../../features/facets/facet-search-set/facet-search-request-options';
 import {buildCategoryFacetSearch} from '../facet-search/category/headless-category-facet-search';
-import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utilities';
+import {updateFacetOptions} from '../../../features/facet-options/facet-options-actions';
+import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utils';
 
 export type CategoryFacetProps = {
   options: CategoryFacetOptions;
@@ -85,9 +83,7 @@ export function buildCategoryFacet(engine: Engine, props: CategoryFacetProps) {
   };
 
   const getResponse = () => {
-    return facetSelector(engine.state, facetId) as
-      | CategoryFacetResponse
-      | undefined;
+    return categoryFacetResponseSelector(engine.state, facetId);
   };
 
   dispatch(registerCategoryFacet(options));
@@ -104,6 +100,7 @@ export function buildCategoryFacet(engine: Engine, props: CategoryFacetProps) {
       const analyticsAction = getAnalyticsActionForToggleSelect(selection);
 
       dispatch(toggleSelectCategoryFacetValue({facetId, selection}));
+      dispatch(updateFacetOptions({freezeFacetOrder: true}));
       dispatch(executeSearch(analyticsAction));
     },
 
@@ -113,6 +110,7 @@ export function buildCategoryFacet(engine: Engine, props: CategoryFacetProps) {
 
       dispatch(deselectAllCategoryFacetValues(facetId));
       dispatch(updateCategoryFacetNumberOfValues({facetId, numberOfValues}));
+      dispatch(updateFacetOptions({freezeFacetOrder: true}));
       dispatch(executeSearch(logFacetClearAll(facetId)));
     },
 
@@ -123,6 +121,7 @@ export function buildCategoryFacet(engine: Engine, props: CategoryFacetProps) {
       const facetId = options.facetId;
 
       dispatch(updateCategoryFacetSortCriterion({facetId, criterion}));
+      dispatch(updateFacetOptions({freezeFacetOrder: true}));
       dispatch(executeSearch(logFacetUpdateSort({facetId, criterion})));
     },
 
@@ -139,10 +138,11 @@ export function buildCategoryFacet(engine: Engine, props: CategoryFacetProps) {
      */
     showMoreValues() {
       const {facetId, numberOfValues: increment} = options;
-
       const {values} = this.state;
       const numberOfValues = values.length + increment;
+
       dispatch(updateCategoryFacetNumberOfValues({facetId, numberOfValues}));
+      dispatch(updateFacetOptions({freezeFacetOrder: true}));
       dispatch(executeSearch(logFacetShowMore(facetId)));
     },
     /**
@@ -152,6 +152,7 @@ export function buildCategoryFacet(engine: Engine, props: CategoryFacetProps) {
       const {facetId, numberOfValues} = options;
 
       dispatch(updateCategoryFacetNumberOfValues({facetId, numberOfValues}));
+      dispatch(updateFacetOptions({freezeFacetOrder: true}));
       dispatch(executeSearch(logFacetShowLess(facetId)));
     },
 

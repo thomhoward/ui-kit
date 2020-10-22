@@ -1,7 +1,27 @@
 import {SearchAppState} from '../../../state/search-app-state';
-import {facetSelector} from '../facet-set/facet-set-selectors';
-import {partitionIntoParentsAndValues} from './category-facet-utilities';
+import {baseFacetResponseSelector} from '../facet-set/facet-set-selectors';
+import {partitionIntoParentsAndValues} from './category-facet-utils';
 import {CategoryFacetResponse} from './interfaces/response';
+import {AnyFacetResponse} from '../generic/interfaces/generic-facet-response';
+
+function isCategoryFacetResponse(
+  state: SearchAppState,
+  response: AnyFacetResponse | undefined
+): response is CategoryFacetResponse {
+  return !!response && response.facetId in state.categoryFacetSet;
+}
+
+export const categoryFacetResponseSelector = (
+  state: SearchAppState,
+  facetId: string
+) => {
+  const response = baseFacetResponseSelector(state, facetId);
+  if (isCategoryFacetResponse(state, response)) {
+    return response;
+  }
+
+  return undefined;
+};
 
 export const categoryFacetRequestSelector = (
   state: SearchAppState,
@@ -14,7 +34,7 @@ export const categoryFacetSelectedValuesSelector = (
   state: SearchAppState,
   facetId: string
 ) => {
-  const facetResponse = facetSelector(state, facetId) as CategoryFacetResponse;
+  const facetResponse = categoryFacetResponseSelector(state, facetId);
   if (!facetResponse) {
     return [];
   }
