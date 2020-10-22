@@ -30,7 +30,7 @@ import {
 import {
   FacetOptionsState,
   getFacetOptionsInitialState,
-} from '../facet-options/facet-options-slice';
+} from '../facet-options/facet-options-state';
 import {
   AdvancedSearchQueriesState,
   getAdvancedSearchQueriesInitialState,

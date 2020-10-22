@@ -17,6 +17,7 @@ import {
   ContextSection,
   DateFacetSection,
   DidYouMeanSection,
+  FacetOptionsSection,
   FacetSection,
   FieldsSection,
   NumericFacetSection,
@@ -25,6 +26,7 @@ import {
   QuerySection,
   QuerySetSection,
   SearchHubSection,
+  SearchSection,
   SortSection,
 } from '../../state/state-sections';
 import {configureAnalytics} from '../../api/analytics/analytics';
@@ -43,6 +45,7 @@ import {getQuerySetInitialState} from '../query-set/query-set-state';
 import {getSortCriteriaInitialState} from '../sort-criteria/sort-criteria-state';
 import {getPipelineInitialState} from '../pipeline/pipeline-state';
 import {getSearchHubInitialState} from '../search-hub/search-hub-state';
+import {getFacetOptionsInitialState} from '../facet-options/facet-options-state';
 
 export type StateNeededByExecuteSearch = ConfigurationSection &
   Partial<
@@ -59,7 +62,9 @@ export type StateNeededByExecuteSearch = ConfigurationSection &
       FieldsSection &
       PipelineSection &
       SearchHubSection &
-      QuerySetSection
+      QuerySetSection &
+      FacetOptionsSection &
+      SearchSection
   >;
 
 export interface ExecuteSearchThunkReturn {
@@ -184,6 +189,7 @@ const extractHistory = (
   sortCriteria: state.sortCriteria || getSortCriteriaInitialState(),
   pipeline: state.pipeline || getPipelineInitialState(),
   searchHub: state.searchHub || getSearchHubInitialState(),
+  facetOptions: state.facetOptions || getFacetOptionsInitialState(),
 });
 
 export const buildSearchRequest = (
@@ -229,18 +235,63 @@ export const buildSearchRequest = (
     ...(state.sortCriteria && {
       sortCriteria: state.sortCriteria,
     }),
+    ...(state.facetOptions && {
+      facetOptions: state.facetOptions,
+    }),
   };
 };
 
-const getFacets = (state: StateNeededByExecuteSearch) => {
+function getFacets(state: StateNeededByExecuteSearch) {
   return [
-    ...getFacetRequests(state.facetSet!),
-    ...getFacetRequests(state.numericFacetSet!),
-    ...getFacetRequests(state.dateFacetSet!),
-    ...getFacetRequests(state.categoryFacetSet!),
+    ...getFacetsInSameOrderAsResponse(state),
+    ...getFacetsNotInResponse(state),
   ];
-};
+}
 
-const getFacetRequests = (requests: Record<string, AnyFacetRequest>) => {
+function getFacetsInSameOrderAsResponse(state: StateNeededByExecuteSearch) {
+  const requests: AnyFacetRequest[] = [];
+  if (!state.search) {
+    return requests;
+  }
+  const responseFacets = state.search.response.facets;
+
+  responseFacets.forEach((f) => {
+    const request = findFacetRequest(state, f.facetId);
+    request && requests.push(request);
+  });
+
+  return requests;
+}
+
+function findFacetRequest(state: StateNeededByExecuteSearch, facetId: string) {
+  const sets = [
+    state.facetSet,
+    state.numericFacetSet,
+    state.dateFacetSet,
+    state.categoryFacetSet,
+  ];
+
+  const targetSet = sets.find((set) => set && set[facetId]);
+  return targetSet ? targetSet[facetId] : undefined;
+}
+
+function getFacetsNotInResponse(state: StateNeededByExecuteSearch) {
+  const excludedFacetIds = new Set<string>();
+  const responseFacets = state.search?.response.facets;
+  responseFacets?.forEach((f) => excludedFacetIds.add(f.facetId));
+
+  return getAllFacets(state).filter((f) => !excludedFacetIds.has(f.facetId));
+}
+
+function getAllFacets(state: StateNeededByExecuteSearch) {
+  return [
+    ...getFacetRequests(state.facetSet),
+    ...getFacetRequests(state.numericFacetSet),
+    ...getFacetRequests(state.dateFacetSet),
+    ...getFacetRequests(state.categoryFacetSet),
+  ];
+}
+
+function getFacetRequests(requests: Record<string, AnyFacetRequest> = {}) {
   return Object.keys(requests).map((id) => requests[id]);
-};
+}
