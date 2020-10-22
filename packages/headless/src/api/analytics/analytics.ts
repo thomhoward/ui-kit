@@ -30,7 +30,10 @@ export class AnalyticsProvider implements SearchPageClientProvider {
   }
 
   public getSearchUID() {
-    return this.state.search?.response.searchUid || '';
+    return (
+      this.state.search?.response.searchUid ||
+      getSearchInitialState().response.searchUid
+    );
   }
 
   public getPipeline() {
