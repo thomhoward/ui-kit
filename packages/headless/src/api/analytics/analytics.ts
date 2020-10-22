@@ -1,5 +1,6 @@
 import {CoveoSearchPageClient, SearchPageClientProvider} from 'coveo.analytics';
 import {getPipelineInitialState} from '../../features/pipeline/pipeline-state';
+import {getQueryInitialState} from '../../features/query/query-state';
 import {getSearchHubInitialState} from '../../features/search-hub/search-hub-state';
 import {getSearchInitialState} from '../../features/search/search-state';
 import {
@@ -69,7 +70,7 @@ export class AnalyticsProvider implements SearchPageClientProvider {
   }
 
   private get queryText() {
-    return this.state.query?.q || '';
+    return this.state.query?.q || getQueryInitialState().q;
   }
 
   private get responseTime() {
