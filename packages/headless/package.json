@@ -16,8 +16,8 @@
   "scripts": {
     "start": "rollup -c -w",
     "build": "npm run clean && npm run build:prod",
-    "build:prod": "rollup -c --environment BUILD:production",
-    "clean": "rm -f -r dist/*",
+    "build:prod": "tsc && rollup -c --environment BUILD:production",
+    "clean": "rm -f -r dist/* temp/*",
     "test": "jest",
     "test:watch": "jest --watch --colors --no-cache",
     "test:unit": "jest --testPathIgnorePatterns=src/integration-tests",
@@ -47,7 +47,7 @@
     "rollup": "^2.18.2",
     "rollup-plugin-size-snapshot": "^0.11.0",
     "rollup-plugin-terser": "^5.3.0",
-    "rollup-plugin-typescript2": "^0.27.0",
-    "ts-jest": "^26.3.0"
+    "ts-jest": "^26.3.0",
+    "typescript": "^4.0.3"
   }
 }

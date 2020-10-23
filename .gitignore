@@ -4,5 +4,6 @@ npm-debug.log
 .vscode/
 .ds_store
 dist
+temp
 veracode
 .size-snapshot.json

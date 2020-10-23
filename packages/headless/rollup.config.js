@@ -1,6 +1,5 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import typescript from 'rollup-plugin-typescript2';
 import replacePlugin from '@rollup/plugin-replace';
 import {terser} from 'rollup-plugin-terser';
 import {sizeSnapshot} from 'rollup-plugin-size-snapshot';
@@ -26,7 +25,7 @@ function onWarn(warning, warn) {
 }
 
 const nodeConfig = {
-  input: 'src/index.ts',
+  input: 'temp/index.js',
   output: [
     {file: 'dist/headless.js', format: 'cjs'},
     {file: 'dist/headless.esm.js', format: 'es'},
@@ -36,7 +35,6 @@ const nodeConfig = {
   plugins: [
     resolve({preferBuiltins: true}),
     commonjs(),
-    typescript(),
     replace(),
   ],
   external: ['cross-fetch'],
@@ -44,7 +42,7 @@ const nodeConfig = {
 };
 
 const browserConfig = {
-  input: 'src/index.ts',
+  input: 'temp/index.js',
   output: [
     {
       file: 'dist/browser/headless.js',
@@ -79,7 +77,6 @@ const browserConfig = {
     }),
     resolve({browser: true}),
     commonjs(),
-    typescript(),
     replace(),
     sizeSnapshot(),
     terser(),
