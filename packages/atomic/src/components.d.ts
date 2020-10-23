@@ -48,6 +48,8 @@ export namespace Components {
     }
     interface AtomicQuerySummary {
     }
+    interface AtomicRecommendation {
+    }
     interface AtomicResult {
         "engine": Engine;
         "result": Result;
@@ -167,6 +169,12 @@ declare global {
         prototype: HTMLAtomicQuerySummaryElement;
         new (): HTMLAtomicQuerySummaryElement;
     };
+    interface HTMLAtomicRecommendationElement extends Components.AtomicRecommendation, HTMLStencilElement {
+    }
+    var HTMLAtomicRecommendationElement: {
+        prototype: HTMLAtomicRecommendationElement;
+        new (): HTMLAtomicRecommendationElement;
+    };
     interface HTMLAtomicResultElement extends Components.AtomicResult, HTMLStencilElement {
     }
     var HTMLAtomicResultElement: {
@@ -252,6 +260,7 @@ declare global {
         "atomic-pager": HTMLAtomicPagerElement;
         "atomic-query-error": HTMLAtomicQueryErrorElement;
         "atomic-query-summary": HTMLAtomicQuerySummaryElement;
+        "atomic-recommendation": HTMLAtomicRecommendationElement;
         "atomic-result": HTMLAtomicResultElement;
         "atomic-result-list": HTMLAtomicResultListElement;
         "atomic-result-template": HTMLAtomicResultTemplateElement;
@@ -305,6 +314,8 @@ declare namespace LocalJSX {
     interface AtomicQueryError {
     }
     interface AtomicQuerySummary {
+    }
+    interface AtomicRecommendation {
     }
     interface AtomicResult {
         "engine": Engine;
@@ -361,6 +372,7 @@ declare namespace LocalJSX {
         "atomic-pager": AtomicPager;
         "atomic-query-error": AtomicQueryError;
         "atomic-query-summary": AtomicQuerySummary;
+        "atomic-recommendation": AtomicRecommendation;
         "atomic-result": AtomicResult;
         "atomic-result-list": AtomicResultList;
         "atomic-result-template": AtomicResultTemplate;
@@ -391,6 +403,7 @@ declare module "@stencil/core" {
             "atomic-pager": LocalJSX.AtomicPager & JSXBase.HTMLAttributes<HTMLAtomicPagerElement>;
             "atomic-query-error": LocalJSX.AtomicQueryError & JSXBase.HTMLAttributes<HTMLAtomicQueryErrorElement>;
             "atomic-query-summary": LocalJSX.AtomicQuerySummary & JSXBase.HTMLAttributes<HTMLAtomicQuerySummaryElement>;
+            "atomic-recommendation": LocalJSX.AtomicRecommendation & JSXBase.HTMLAttributes<HTMLAtomicRecommendationElement>;
             "atomic-result": LocalJSX.AtomicResult & JSXBase.HTMLAttributes<HTMLAtomicResultElement>;
             "atomic-result-list": LocalJSX.AtomicResultList & JSXBase.HTMLAttributes<HTMLAtomicResultListElement>;
             "atomic-result-template": LocalJSX.AtomicResultTemplate & JSXBase.HTMLAttributes<HTMLAtomicResultTemplateElement>;

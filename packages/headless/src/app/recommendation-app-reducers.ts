@@ -4,6 +4,7 @@ import {configurationReducer} from '../features/configuration/configuration-slic
 import {contextReducer} from '../features/context/context-slice';
 import {fieldsReducer} from '../features/fields/fields-slice';
 import {pipelineReducer} from '../features/pipeline/pipeline-slice';
+import {recommendationReducer} from '../features/recommendation/recommendation-slice';
 import {searchHubReducer} from '../features/search-hub/search-hub-slice';
 import {searchReducer} from '../features/search/search-slice';
 import {RecommendationAppState} from '../state/recommendation-app-state';
@@ -19,4 +20,5 @@ export const recommendationAppReducer: ReducersMapObject<RecommendationAppState>
   context: contextReducer,
   pipeline: pipelineReducer,
   searchHub: searchHubReducer,
+  recommendation: recommendationReducer,
 };

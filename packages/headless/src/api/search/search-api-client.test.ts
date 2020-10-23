@@ -113,6 +113,7 @@ describe('search api client', () => {
         context: state.context.contextValues,
         pipeline: state.pipeline,
         searchHub: state.searchHub,
+        actionsHistory: expect.any(Array),
       },
     };
 
