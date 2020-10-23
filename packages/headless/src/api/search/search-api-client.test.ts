@@ -14,10 +14,8 @@ import {SearchAppState} from '../../state/search-app-state';
 import {buildPlanRequest} from '../../features/redirection/redirection-actions';
 import {buildQuerySuggestRequest} from '../../features/query-suggest/query-suggest-actions';
 import {buildSearchRequest} from '../../features/search/search-actions';
-import {
-  buildCategoryFacetSearchRequest,
-  buildSpecificFacetSearchRequest,
-} from '../../features/facets/facet-search-set/generic/generic-facet-search-actions';
+import {buildSpecificFacetSearchRequest} from '../../features/facets/facet-search-set/specific/specific-facet-search-request-builder';
+import {buildCategoryFacetSearchRequest} from '../../features/facets/facet-search-set/category/category-facet-search-request-builder';
 
 jest.mock('../platform-client');
 describe('search api client', () => {
