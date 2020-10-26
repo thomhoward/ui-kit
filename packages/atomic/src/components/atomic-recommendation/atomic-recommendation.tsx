@@ -29,7 +29,7 @@ export class AtomicRecommendation {
     });
     this.recommendation = buildRecommendation(this.engine);
     this.unsubscribe = this.recommendation.subscribe(() => this.updateState());
-    this.recommendation.fetchRecommendations();
+    this.recommendation.getRecommendations();
   }
 
   private updateState() {
