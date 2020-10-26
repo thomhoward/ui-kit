@@ -14,7 +14,7 @@
     "dist/"
   ],
   "scripts": {
-    "start": "npm run clean && tsc --incremental && concurrently \"tsc -w --incremental\" \"rollup -c -w\"",
+    "start": "concurrently \"tsc -w --incremental\" \"rollup -c -w\"",
     "build": "npm run clean && npm run build:prod",
     "build:prod": "tsc && rollup -c --environment BUILD:production",
     "clean": "rm -f -r dist/* temp/*",
