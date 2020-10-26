@@ -4,7 +4,6 @@ import {randomID} from '../../../utils/utils';
 import {CategoryFacetRegistrationOptions} from '../../../features/facets/category-facet-set/interfaces/options';
 import {
   registerCategoryFacet,
-  toggleSelectCategoryFacetValue,
   deselectAllCategoryFacetValues,
   updateCategoryFacetNumberOfValues,
   updateCategoryFacetSortCriterion,
@@ -13,9 +12,6 @@ import {categoryFacetResponseSelector} from '../../../features/facets/category-f
 import {CategoryFacetValue} from '../../../features/facets/category-facet-set/interfaces/response';
 import {executeSearch} from '../../../features/search/search-actions';
 import {
-  FacetSelectionChangeMetadata,
-  logFacetDeselect,
-  logFacetSelect,
   logFacetUpdateSort,
   logFacetClearAll,
   logFacetShowMore,
@@ -37,6 +33,7 @@ import {
   SearchSection,
 } from '../../../state/state-sections';
 import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utils';
+import {toggleCategoryFacetSelect} from './headless-category-facet-utils';
 
 export type CategoryFacetProps = {
   options: CategoryFacetOptions;
@@ -82,16 +79,6 @@ export function buildCategoryFacet(
     return buildCategoryFacetSearch(engine, {options: facetSearchOptions});
   };
 
-  const getAnalyticsActionForToggleSelect = (selection: CategoryFacetValue) => {
-    const payload: FacetSelectionChangeMetadata = {
-      facetId,
-      facetValue: selection.value,
-    };
-
-    const isSelected = selection.state === 'selected';
-    return isSelected ? logFacetDeselect(payload) : logFacetSelect(payload);
-  };
-
   const getRequest = () => {
     return categoryFacetRequestSelector(engine.state, facetId);
   };
@@ -110,13 +97,7 @@ export function buildCategoryFacet(
      * Selects (deselects) the passed value if unselected (selected).
      * @param selection The category facet value to select or deselect.
      */
-    toggleSelect(selection: CategoryFacetValue) {
-      const analyticsAction = getAnalyticsActionForToggleSelect(selection);
-
-      dispatch(toggleSelectCategoryFacetValue({facetId, selection}));
-      dispatch(updateFacetOptions({freezeFacetOrder: true}));
-      dispatch(executeSearch(analyticsAction));
-    },
+    toggleSelect: (selection: CategoryFacetValue) => toggleCategoryFacetSelect(engine, facetId, selection),
 
     /** Deselects all facet values.*/
     deselectAll() {

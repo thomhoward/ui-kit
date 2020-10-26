@@ -15,9 +15,9 @@ import {
 } from '../../../../features/facets/range-facets/numeric-facet-set/interfaces/response';
 import {
   registerNumericFacet,
-  toggleSelectNumericFacetValue,
 } from '../../../../features/facets/range-facets/numeric-facet-set/numeric-facet-actions';
 import {buildRangeFacet} from '../headless-range-facet';
+import {toggleNumericFacetSelect} from './headless-numeric-facet-utils';
 import {
   ConfigurationSection,
   NumericFacetSection,
@@ -75,10 +75,7 @@ export function buildNumericFacet(
      * Selects (deselects) the passed value if unselected (selected).
      * @param selection The facet value to select or deselect.
      */
-    toggleSelect(selection: NumericFacetValue) {
-      dispatch(toggleSelectNumericFacetValue({facetId, selection}));
-      rangeFacet.toggleSelect(selection);
-    },
+    toggleSelect: (selection: NumericFacetValue) => toggleNumericFacetSelect(engine, facetId, selection),
 
     /** @returns The state of the `NumericFacet` controller.*/
     get state() {

@@ -8,6 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { Engine, HeadlessConfigurationOptions, Result, ResultTemplateCondition, SearchBox, SearchBoxState } from "@coveo/headless";
 import { AtomicSearchBoxOptions } from "./components/atomic-search-box/atomic-search-box";
 export namespace Components {
+    interface AtomicBreadcrumbManager {
+    }
     interface AtomicCategoryFacet {
         "facetId": string;
         "field": string;
@@ -95,6 +97,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLAtomicBreadcrumbManagerElement extends Components.AtomicBreadcrumbManager, HTMLStencilElement {
+    }
+    var HTMLAtomicBreadcrumbManagerElement: {
+        prototype: HTMLAtomicBreadcrumbManagerElement;
+        new (): HTMLAtomicBreadcrumbManagerElement;
+    };
     interface HTMLAtomicCategoryFacetElement extends Components.AtomicCategoryFacet, HTMLStencilElement {
     }
     var HTMLAtomicCategoryFacetElement: {
@@ -240,6 +248,7 @@ declare global {
         new (): HTMLAtomicTabElement;
     };
     interface HTMLElementTagNameMap {
+        "atomic-breadcrumb-manager": HTMLAtomicBreadcrumbManagerElement;
         "atomic-category-facet": HTMLAtomicCategoryFacetElement;
         "atomic-component-error": HTMLAtomicComponentErrorElement;
         "atomic-date-facet": HTMLAtomicDateFacetElement;
@@ -267,6 +276,8 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface AtomicBreadcrumbManager {
+    }
     interface AtomicCategoryFacet {
         "facetId"?: string;
         "field"?: string;
@@ -349,6 +360,7 @@ declare namespace LocalJSX {
         "isActive"?: boolean;
     }
     interface IntrinsicElements {
+        "atomic-breadcrumb-manager": AtomicBreadcrumbManager;
         "atomic-category-facet": AtomicCategoryFacet;
         "atomic-component-error": AtomicComponentError;
         "atomic-date-facet": AtomicDateFacet;
@@ -379,6 +391,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "atomic-breadcrumb-manager": LocalJSX.AtomicBreadcrumbManager & JSXBase.HTMLAttributes<HTMLAtomicBreadcrumbManagerElement>;
             "atomic-category-facet": LocalJSX.AtomicCategoryFacet & JSXBase.HTMLAttributes<HTMLAtomicCategoryFacetElement>;
             "atomic-component-error": LocalJSX.AtomicComponentError & JSXBase.HTMLAttributes<HTMLAtomicComponentErrorElement>;
             "atomic-date-facet": LocalJSX.AtomicDateFacet & JSXBase.HTMLAttributes<HTMLAtomicDateFacetElement>;

@@ -14,10 +14,10 @@ import {
   DateFacetValue,
 } from '../../../../features/facets/range-facets/date-facet-set/interfaces/response';
 import {
-  registerDateFacet,
-  toggleSelectDateFacetValue,
+  registerDateFacet
 } from '../../../../features/facets/range-facets/date-facet-set/date-facet-actions';
 import {buildRangeFacet} from '../headless-range-facet';
+import {toggleDateFacetSelect} from './headless-date-facet-utils';
 import {
   ConfigurationSection,
   DateFacetSection,
@@ -73,10 +73,7 @@ export function buildDateFacet(
      * Selects (deselects) the passed value if unselected (selected).
      * @param selection The facet value to select or deselect.
      */
-    toggleSelect(selection: DateFacetValue) {
-      dispatch(toggleSelectDateFacetValue({facetId, selection}));
-      rangeFacet.toggleSelect(selection);
-    },
+    toggleSelect: (selection: DateFacetValue) => toggleDateFacetSelect(engine, facetId, selection),
 
     /** @returns The state of the `DateFacet` controller.*/
     get state() {
