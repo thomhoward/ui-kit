@@ -23,7 +23,7 @@ export const buildRecommendation = (
   return {
     ...controller,
 
-    fetchRecommendations() {
+    getRecommendations() {
       dispatch(getRecommendations());
     },
 

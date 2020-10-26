@@ -6,22 +6,44 @@ import thunk from 'redux-thunk';
 import {analyticsMiddleware} from '../app/analytics-middleware';
 import {SearchAPIClient} from '../api/search/search-api-client';
 import {SearchAppState} from '../state/search-app-state';
+import {RecommendationAppState} from '../state/recommendation-app-state';
+import {createMockRecommendationState} from './mock-recommendation-state';
 
-export interface MockEngine extends Engine {
+export type AllStateShape = SearchAppState | RecommendationAppState;
+
+export interface MockEngine<T extends AllStateShape> extends Engine<T> {
   store: MockStore;
   actions: AnyAction[];
 }
 
+type MockStore = MockStoreEnhanced<AllStateShape, DispatchExts>;
+type DispatchExts = ThunkDispatch<AllStateShape, void, AnyAction>;
+
 const mockRenewAccessToken = async () => '';
 
-export function buildMockEngine(config: Partial<Engine> = {}): MockEngine {
+export function buildMockSearchAppEngine(
+  config: Partial<Engine<SearchAppState>> = {}
+): MockEngine<SearchAppState> {
+  return buildMockEngine(config, createMockState);
+}
+
+export function buildMockRecommendationAppEngine(
+  config: Partial<Engine<RecommendationAppState>> = {}
+): MockEngine<RecommendationAppState> {
+  return buildMockEngine(config, createMockRecommendationState);
+}
+
+function buildMockEngine<T extends AllStateShape>(
+  config: Partial<Engine<T>> = {},
+  mockState: () => T
+): MockEngine<T> {
   const storeConfiguration = configureMockStore();
-  const store = storeConfiguration(config.state || createMockState());
+  const store = storeConfiguration(config.state || mockState());
   const unsubscribe = () => {};
 
   return {
     store: store,
-    state: createMockState(),
+    state: mockState(),
     subscribe: jest.fn(() => unsubscribe),
     get dispatch() {
       return store.dispatch;
@@ -34,9 +56,8 @@ export function buildMockEngine(config: Partial<Engine> = {}): MockEngine {
   };
 }
 
-type DispatchExts = ThunkDispatch<SearchAppState, void, AnyAction>;
 const configureMockStore = () => {
-  return configureStore<SearchAppState, DispatchExts>([
+  return configureStore<AllStateShape, DispatchExts>([
     analyticsMiddleware,
     thunk.withExtraArgument({
       searchAPIClient: new SearchAPIClient(mockRenewAccessToken),
@@ -44,4 +65,3 @@ const configureMockStore = () => {
     ...getDefaultMiddleware(),
   ]);
 };
-type MockStore = MockStoreEnhanced<SearchAppState, DispatchExts>;

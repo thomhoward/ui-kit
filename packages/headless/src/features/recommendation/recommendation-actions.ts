@@ -9,6 +9,8 @@ import {Result} from '../../api/search/search/result';
 import {
   AdvancedSearchQueriesSection,
   ConfigurationSection,
+  ContextSection,
+  FieldsSection,
   PipelineSection,
   RecommendationSection,
   SearchHubSection,
@@ -23,7 +25,13 @@ import {StringValue} from '@coveo/bueno';
 
 export type StateNeededByGetRecommendations = ConfigurationSection &
   RecommendationSection &
-  Partial<SearchHubSection & PipelineSection & AdvancedSearchQueriesSection>;
+  Partial<
+    SearchHubSection &
+      PipelineSection &
+      AdvancedSearchQueriesSection &
+      ContextSection &
+      FieldsSection
+  >;
 
 export interface GetRecommendationsThunkReturn {
   recommendations: Result[];
@@ -31,6 +39,9 @@ export interface GetRecommendationsThunkReturn {
   duration: number;
 }
 
+/**
+ * Set recommendation identifier.
+ */
 export const setRecommendation = createAction(
   'recommendation/set',
   (payload: {id: string}) =>
@@ -54,6 +65,9 @@ export const logRecommendation = createAsyncThunk(
   }
 );
 
+/**
+ * Get recommendations.
+ */
 export const getRecommendations = createAsyncThunk<
   GetRecommendationsThunkReturn,
   void,
@@ -62,21 +76,23 @@ export const getRecommendations = createAsyncThunk<
   'recommendation/get',
   async (_, {getState, rejectWithValue, extra: {searchAPIClient}}) => {
     const state = getState();
+    const startedAt = new Date().getTime();
     const fetched = await searchAPIClient.recommendations(
       buildRecommnendationRequest(state)
     );
+    const duration = new Date().getTime() - startedAt;
     if (isErrorResponse(fetched)) {
       return rejectWithValue(fetched.error);
     }
     return {
       recommendations: fetched.success.results,
       analyticsAction: logRecommendation(),
-      duration: 0,
+      duration,
     };
   }
 );
 
-const buildRecommnendationRequest = (
+export const buildRecommnendationRequest = (
   s: StateNeededByGetRecommendations
 ): RecommendationRequest => ({
   accessToken: s.configuration.accessToken,
@@ -95,5 +111,11 @@ const buildRecommnendationRequest = (
   }),
   ...(s.searchHub && {
     searchHub: s.searchHub,
+  }),
+  ...(s.context && {
+    context: s.context.contextValues,
+  }),
+  ...(s.fields && {
+    fieldsToInclude: s.fields.fieldsToInclude,
   }),
 });

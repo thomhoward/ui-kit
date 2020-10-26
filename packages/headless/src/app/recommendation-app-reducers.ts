@@ -6,7 +6,6 @@ import {fieldsReducer} from '../features/fields/fields-slice';
 import {pipelineReducer} from '../features/pipeline/pipeline-slice';
 import {recommendationReducer} from '../features/recommendation/recommendation-slice';
 import {searchHubReducer} from '../features/search-hub/search-hub-slice';
-import {searchReducer} from '../features/search/search-slice';
 import {RecommendationAppState} from '../state/recommendation-app-state';
 
 /**
@@ -15,7 +14,6 @@ import {RecommendationAppState} from '../state/recommendation-app-state';
 export const recommendationAppReducer: ReducersMapObject<RecommendationAppState> = {
   configuration: configurationReducer,
   advancedSearchQueries: advancedSearchQueriesReducer,
-  search: searchReducer,
   fields: fieldsReducer,
   context: contextReducer,
   pipeline: pipelineReducer,
