@@ -16,7 +16,7 @@ export const toggleDateFacetSelect = createAsyncThunk<
   void,
   ToggleDateFacetSelect,
   AsyncThunkSearchOptions<ConfigurationSection & DateFacetSection>
->('headless/dateFacet/toggleSelect', ({facetId, selection}, {dispatch}) => {
+>('dateFacetController/toggleSelect', ({facetId, selection}, {dispatch}) => {
   dispatch(toggleSelectDateFacetValue({facetId, selection}));
   dispatch(toggleRangeFacetSelect({facetId, selection}));
 });

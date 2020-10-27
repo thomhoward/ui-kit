@@ -40,7 +40,7 @@ export const toggleFacetSelect = createAsyncThunk<
   void,
   ToggleFacetSelectOptions,
   AsyncThunkSearchOptions<FacetSection & ConfigurationSection>
->('headless/facet/toggleSelect', ({facetId, selection}, {dispatch}) => {
+>('facetController/toggleSelect', ({facetId, selection}, {dispatch}) => {
   const analyticsAction = getAnalyticsActionForToggleFacetSelect(
     facetId,
     selection

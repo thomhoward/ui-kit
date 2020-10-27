@@ -36,7 +36,7 @@ export const toggleRangeFacetSelect = createAsyncThunk<
   void,
   ToggleRangeFacetSelectArguments,
   AsyncThunkSearchOptions<ConfigurationSection>
->('headless/rangeFacet/toggleSelect', ({facetId, selection}, {dispatch}) => {
+>('rangeFacetController/toggleSelect', ({facetId, selection}, {dispatch}) => {
   const analyticsAction = getAnalyticsActionForToggleRageFacetSelect(
     facetId,
     selection

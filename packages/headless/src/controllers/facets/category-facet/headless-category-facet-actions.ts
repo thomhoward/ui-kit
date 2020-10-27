@@ -36,13 +36,16 @@ export const toggleCategoryFacetSelect = createAsyncThunk<
   void,
   ToggleCategoryFacetSelectArguments,
   AsyncThunkSearchOptions<CategoryFacetSection & ConfigurationSection>
->('headless/categoryFacet/toggleSelect', ({facetId, selection}, {dispatch}) => {
-  const analyticsAction = getAnalyticsActionForCategoryFacetToggleSelect(
-    facetId,
-    selection
-  );
+>(
+  'categoryFacetController/toggleSelect',
+  ({facetId, selection}, {dispatch}) => {
+    const analyticsAction = getAnalyticsActionForCategoryFacetToggleSelect(
+      facetId,
+      selection
+    );
 
-  dispatch(toggleSelectCategoryFacetValue({facetId, selection}));
-  dispatch(updateFacetOptions({freezeFacetOrder: true}));
-  dispatch(executeSearch(analyticsAction));
-});
+    dispatch(toggleSelectCategoryFacetValue({facetId, selection}));
+    dispatch(updateFacetOptions({freezeFacetOrder: true}));
+    dispatch(executeSearch(analyticsAction));
+  }
+);

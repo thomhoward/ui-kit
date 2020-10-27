@@ -17,7 +17,7 @@ export const toggleNumericFacetSelect = createAsyncThunk<
   void,
   ToggleNumericFacetSelectArguments,
   AsyncThunkSearchOptions<ConfigurationSection & NumericFacetSection>
->('headless/numericFacet/toggleSelect', ({facetId, selection}, {dispatch}) => {
+>('numericFacetController/toggleSelect', ({facetId, selection}, {dispatch}) => {
   dispatch(toggleSelectNumericFacetValue({facetId, selection}));
   dispatch(toggleRangeFacetSelect({facetId, selection}));
 });
