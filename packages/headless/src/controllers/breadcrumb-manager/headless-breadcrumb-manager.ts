@@ -33,7 +33,7 @@ export const buildBreadcrumbManager = (
   const controller = buildController(engine);
   const {dispatch} = engine;
 
-  function getBreadcrumbs() {
+  function getFacetBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [];
 
     Object.keys(engine.state.facetSet).forEach((facetId) => {
@@ -41,7 +41,7 @@ export const buildBreadcrumbManager = (
         engine.state,
         facetId
       );
-      selectedValues.map((selection) => {
+      selectedValues.forEach((selection) => {
         breadcrumbs.push({
           value: selection.value,
           deselect: () => dispatch(toggleFacetSelect({facetId, selection})),
@@ -49,12 +49,18 @@ export const buildBreadcrumbManager = (
       });
     });
 
+    return breadcrumbs;
+  }
+
+  function getCategoryFacetBreadcrumbs() {
+    const breadcrumbs: Breadcrumb[] = [];
+
     Object.keys(engine.state.categoryFacetSet).forEach((facetId) => {
       const selectedValues = categoryFacetSelectedValuesSelector(
         engine.state,
         facetId
       );
-      selectedValues.map((selection) => {
+      selectedValues.forEach((selection) => {
         breadcrumbs.push({
           value: selection.value,
           deselect: () =>
@@ -62,13 +68,18 @@ export const buildBreadcrumbManager = (
         });
       });
     });
+    return breadcrumbs;
+  }
+
+  function getNumericFacetBreadcrumb() {
+    const breadcrumbs: Breadcrumb[] = [];
 
     Object.keys(engine.state.numericFacetSet).forEach((facetId) => {
       const selectedValues = numericFacetSelectedValuesSelector(
         engine.state,
         facetId
       );
-      selectedValues.map((selection) => {
+      selectedValues.forEach((selection) => {
         breadcrumbs.push({
           value: `${selection.start}-${selection.end}`,
           deselect: () =>
@@ -77,12 +88,18 @@ export const buildBreadcrumbManager = (
       });
     });
 
+    return breadcrumbs;
+  }
+
+  function getDateFacetBreadcrumbs() {
+    const breadcrumbs: Breadcrumb[] = [];
+
     Object.keys(engine.state.dateFacetSet).forEach((facetId) => {
       const selectedValues = dateFacetSelectedValuesSelector(
         engine.state,
         facetId
       );
-      selectedValues.map((selection) => {
+      selectedValues.forEach((selection) => {
         breadcrumbs.push({
           value: `${selection.start}-${selection.end}`,
           deselect: () => dispatch(toggleDateFacetSelect({facetId, selection})),
@@ -91,6 +108,14 @@ export const buildBreadcrumbManager = (
     });
 
     return breadcrumbs;
+  }
+
+  function getBreadcrumbs() {
+    return getFacetBreadcrumbs().concat(
+      getCategoryFacetBreadcrumbs(),
+      getNumericFacetBreadcrumb(),
+      getDateFacetBreadcrumbs()
+    );
   }
 
   return {
