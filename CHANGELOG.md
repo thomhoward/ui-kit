@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.23](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.22...v0.1.0-alpha.23) (2020-10-27)
+
+**Note:** Version bump only for package ui-kit
+
+
+
+
+
+# [0.1.0-alpha.22](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.21...v0.1.0-alpha.22) (2020-10-27)
+
+
+### Features
+
+* **atomic:** document slots & add examples ([b8627a5](https://bitbucket.org/coveord/ui-kit/commits/b8627a5ea8e7d508331969a2e41533b3fa7d07c8))
+
+
+
+
+
+# [0.1.0-alpha.21](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.20...v0.1.0-alpha.21) (2020-10-27)
+
+
+### Bug Fixes
+
+* **headless:** history undo/redo ([ed5a183](https://bitbucket.org/coveord/ui-kit/commits/ed5a18320d1d71ffd16e33ba1b2752832481da71))
+
+
+
+
+
+# [0.1.0-alpha.20](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.19...v0.1.0-alpha.20) (2020-10-26)
+
+**Note:** Version bump only for package ui-kit
+
+
+
+
+
+# [0.1.0-alpha.19](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.18...v0.1.0-alpha.19) (2020-10-26)
+
+**Note:** Version bump only for package ui-kit
+
+
+
+
+
+# [0.1.0-alpha.18](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.17...v0.1.0-alpha.18) (2020-10-23)
+
+**Note:** Version bump only for package ui-kit
+
+
+
+
+
 # [0.1.0-alpha.17](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.16...v0.1.0-alpha.17) (2020-10-23)
 
 **Note:** Version bump only for package ui-kit
