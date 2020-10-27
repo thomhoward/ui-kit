@@ -57,10 +57,7 @@ export const logRecommendation = createAsyncThunk(
   'analytics/recommnendation/load',
   async (_, {getState}) => {
     const state = getState() as StateNeededByAnalyticsProvider;
-
-    // TODO: Need to create recommendation analytics events in coveo.analytics
-    // For now, log generic interface load event
-    await configureAnalytics(state).logInterfaceLoad();
+    await configureAnalytics(state).logRecommendationInterfaceLoad();
     return makeSearchActionType();
   }
 );
