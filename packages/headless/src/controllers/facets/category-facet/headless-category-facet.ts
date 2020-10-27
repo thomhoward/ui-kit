@@ -33,7 +33,7 @@ import {
   SearchSection,
 } from '../../../state/state-sections';
 import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utils';
-import {toggleCategoryFacetSelect} from './headless-category-facet-utils';
+import {toggleCategoryFacetSelect} from './headless-category-facet-actions';
 
 export type CategoryFacetProps = {
   options: CategoryFacetOptions;
@@ -97,7 +97,8 @@ export function buildCategoryFacet(
      * Selects (deselects) the passed value if unselected (selected).
      * @param selection The category facet value to select or deselect.
      */
-    toggleSelect: (selection: CategoryFacetValue) => toggleCategoryFacetSelect(engine, facetId, selection),
+    toggleSelect: (selection: CategoryFacetValue) =>
+      dispatch(toggleCategoryFacetSelect({facetId, selection})),
 
     /** Deselects all facet values.*/
     deselectAll() {

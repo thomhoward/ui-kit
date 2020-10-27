@@ -29,7 +29,10 @@ import {
 import {FacetValue} from '../../../features/facets/facet-set/interfaces/response';
 import {FacetSortCriterion} from '../../../features/facets/facet-set/interfaces/request';
 import {updateFacetOptions} from '../../../features/facet-options/facet-options-actions';
-import {toggleFacetSelect, isFacetValueSelected} from './headless-facet-utils';
+import {
+  toggleFacetSelect,
+  isFacetValueSelected,
+} from './headless-facet-actions';
 import {
   ConfigurationSection,
   FacetSearchSection,
@@ -123,7 +126,8 @@ export function buildFacet(
      * Selects (deselects) the passed value if unselected (selected).
      * @param selection The facet value to select or deselect.
      */
-    toggleSelect: (selection: FacetValue) => toggleFacetSelect(engine, options.facetId, selection),
+    toggleSelect: (selection: FacetValue) =>
+      dispatch(toggleFacetSelect({facetId: options.facetId, selection})),
     /**
      * Returns `true` if the passed facet value is selected and `false` otherwise.
      * @param {FacetValue} The facet value to check.

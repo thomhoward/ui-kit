@@ -18,7 +18,10 @@ import {
   ConfigurationSection,
   SearchSection,
 } from '../../../state/state-sections';
-import {isRangeFacetValueSelected, toggleRangeFacetSelect} from './headless-range-facet-utils';
+import {
+  isRangeFacetValueSelected,
+  toggleRangeFacetSelect,
+} from './headless-range-facet-actions';
 
 export type RangeFacet = ReturnType<typeof buildRangeFacet>;
 
@@ -43,7 +46,8 @@ export function buildRangeFacet<
   return {
     ...controller,
     /** Logs a deselect (select) value event when the passed value is active (idle), and executes a search.*/
-    toggleSelect: (selection: RangeFacetValue) => toggleRangeFacetSelect(engine, facetId, selection) ,
+    toggleSelect: (selection: RangeFacetValue) =>
+      dispatch(toggleRangeFacetSelect({facetId, selection})),
 
     /** Returns `true` if the passed value is selected, and `false` otherwise.
      * @param facetValue The facet value to check.
