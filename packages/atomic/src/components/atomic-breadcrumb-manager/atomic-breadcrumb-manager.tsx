@@ -27,15 +27,13 @@ export class AtomicBreadcrumbManager {
   }
 
   private subscribe() {
-    this.unsubscribe = this.breadcrumbManager.subscribe(() => this.updateState());
+    this.unsubscribe = this.breadcrumbManager.subscribe(() =>
+      this.updateState()
+    );
   }
 
   private updateState() {
     this.state = this.breadcrumbManager.state;
-  }
-
-  public connectedCallback() {
-    this.breadcrumbManager && this.subscribe();
   }
 
   public disconnectedCallback() {
@@ -43,16 +41,12 @@ export class AtomicBreadcrumbManager {
   }
 
   private get breadcrumbs() {
-    return this.state.breadcrumbs.map(breadcrumb =>
+    return this.state.breadcrumbs.map((breadcrumb) => (
       <button onClick={breadcrumb.deselect}>{breadcrumb.value}</button>
-    )
+    ));
   }
 
   render() {
-    return(
-      <div class="breadcrumb-manager">
-        {this.breadcrumbs}
-      </div>
-    )
+    return <div class="breadcrumb-manager">{this.breadcrumbs}</div>;
   }
 }
