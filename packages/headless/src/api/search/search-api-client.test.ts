@@ -17,7 +17,7 @@ import {buildQuerySuggestRequest} from '../../features/query-suggest/query-sugge
 import {buildSearchRequest} from '../../features/search/search-actions';
 import {buildSpecificFacetSearchRequest} from '../../features/facets/facet-search-set/specific/specific-facet-search-request-builder';
 import {buildCategoryFacetSearchRequest} from '../../features/facets/facet-search-set/category/category-facet-search-request-builder';
-import {buildRecommnendationRequest} from '../../features/recommendation/recommendation-actions';
+import {buildRecommendationRequest} from '../../features/recommendation/recommendation-actions';
 import {RecommendationRequest} from './recommendation/recommendation-request';
 
 jest.mock('../platform-client');
@@ -215,7 +215,7 @@ describe('search api client', () => {
     it(`when calling SearchAPIClient.recommendations
   should call PlatformClient.call with the right options`, () => {
       const recommendationState = createMockRecommendationState();
-      const req = buildRecommnendationRequest(recommendationState);
+      const req = buildRecommendationRequest(recommendationState);
 
       searchAPIClient.recommendations(req);
 
