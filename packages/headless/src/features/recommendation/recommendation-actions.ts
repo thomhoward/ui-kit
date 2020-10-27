@@ -75,7 +75,7 @@ export const getRecommendations = createAsyncThunk<
     const state = getState();
     const startedAt = new Date().getTime();
     const fetched = await searchAPIClient.recommendations(
-      buildRecommnendationRequest(state)
+      buildRecommendationRequest(state)
     );
     const duration = new Date().getTime() - startedAt;
     if (isErrorResponse(fetched)) {
@@ -89,7 +89,7 @@ export const getRecommendations = createAsyncThunk<
   }
 );
 
-export const buildRecommnendationRequest = (
+export const buildRecommendationRequest = (
   s: StateNeededByGetRecommendations
 ): RecommendationRequest => ({
   accessToken: s.configuration.accessToken,
