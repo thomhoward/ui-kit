@@ -6,6 +6,11 @@ import {
   Engine,
   Unsubscribe,
   buildBreadcrumbManager,
+  GenericBreadcrumb,
+  CategoryFacetBreadcrumb,
+  FacetValue,
+  NumericFacetValue,
+  DateFacetValue,
 } from '@coveo/headless';
 
 @Component({
@@ -40,13 +45,55 @@ export class AtomicBreadcrumbManager {
     this.unsubscribe();
   }
 
-  private get breadcrumbs() {
-    return this.state.breadcrumbs.map((breadcrumb) => (
-      <button onClick={breadcrumb.deselect}>{breadcrumb.value}</button>
-    ));
+  private get facetBreadcrumbs() {
+    return this.state.facetBreadcrumbs.map(
+      (breadcrumb: GenericBreadcrumb<FacetValue>) => (
+        <button onClick={breadcrumb.deselect}>{breadcrumb.value.value}</button>
+      )
+    );
+  }
+
+  private get numericFacetBreadcrumbs() {
+    return this.state.numericFacetBreadcrumbs.map(
+      (breadcrumb: GenericBreadcrumb<NumericFacetValue>) => (
+        <button onClick={breadcrumb.deselect}>
+          {breadcrumb.value.start} - {breadcrumb.value.end}
+        </button>
+      )
+    );
+  }
+
+  private get dateFacetBreadcrumbs() {
+    return this.state.dateFacetBreadcrumbs.map(
+      (breadcrumb: GenericBreadcrumb<DateFacetValue>) => (
+        <button onClick={breadcrumb.deselect}>
+          {breadcrumb.value.start} - {breadcrumb.value.end}
+        </button>
+      )
+    );
+  }
+
+  private get categoryFacetBreadcrumbs() {
+    return this.state.categoryFacetBreadcrumbs.map(
+      (breadcrumb: CategoryFacetBreadcrumb) => {
+        if (breadcrumb.path.length === 0) return null;
+        let path = '';
+        for (const segment of breadcrumb.path) {
+          path = path.concat(`${segment.value}/`);
+        }
+        return <button onClick={breadcrumb.deselect}>{path}</button>;
+      }
+    );
   }
 
   render() {
-    return <div class="breadcrumb-manager">{this.breadcrumbs}</div>;
+    return (
+      <div class="breadcrumb-manager">
+        {this.facetBreadcrumbs}
+        {this.numericFacetBreadcrumbs}
+        {this.dateFacetBreadcrumbs}
+        {this.categoryFacetBreadcrumbs}
+      </div>
+    );
   }
 }
