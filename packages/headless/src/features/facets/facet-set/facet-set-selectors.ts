@@ -1,6 +1,6 @@
 import {SearchSection} from '../../../state/state-sections';
 import {FacetSection} from '../../../state/state-sections';
-import {FacetResponse} from './interfaces/response';
+import {FacetResponse, FacetValue} from './interfaces/response';
 import {AnyFacetResponse} from '../generic/interfaces/generic-facet-response';
 
 export const baseFacetResponseSelector = (state: SearchSection, id: string) => {
@@ -34,7 +34,7 @@ export const facetResponseSelector = (
 export const facetResponseSelectedValuesSelector = (
   state: SearchSection & FacetSection,
   facetId: string
-) => {
+): FacetValue[] => {
   const response = facetResponseSelector(state, facetId);
   if (!response) {
     return [];
