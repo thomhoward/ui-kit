@@ -1,34 +1,52 @@
 import {Engine} from '../../app/headless-engine';
 import {
   getRecommendations,
-  setRecommendation,
+  setRecommendationId,
 } from '../../features/recommendation/recommendation-actions';
 import {
   ConfigurationSection,
   RecommendationSection,
 } from '../../state/state-sections';
 import {buildController} from '../controller/headless-controller';
+import {Schema, SchemaValues, StringValue} from '@coveo/bueno';
+
+const optionsSchema = new Schema({
+  /**
+   * The Recommendation identifier used by the Coveo platform to retrieve recommended documents.
+   * If not provided, will use default value of `Recommendation`.
+   */
+  id: new StringValue({emptyAllowed: true, required: false, default: ''}),
+});
+
+export type RecommendationListOptions = SchemaValues<typeof optionsSchema>;
+
+export interface RecommendationListProps {
+  options?: RecommendationListOptions;
+}
 
 /**
  * `Recommendation` controller allows to retrieve information about the current recommendations by the search API, if any.
  */
-export type Recommendation = ReturnType<typeof buildRecommendation>;
-export type RecommendationState = Recommendation['state'];
+export type RecommendationList = ReturnType<typeof buildRecommendationList>;
+export type RecommendationListState = RecommendationList['state'];
 
-export const buildRecommendation = (
-  engine: Engine<RecommendationSection & ConfigurationSection>
+export const buildRecommendationList = (
+  engine: Engine<RecommendationSection & ConfigurationSection>,
+  props: RecommendationListProps = {}
 ) => {
   const controller = buildController(engine);
   const {dispatch} = engine;
+  const options = optionsSchema.validate(props.options) as Required<
+    RecommendationListOptions
+  >;
+  if (options.id !== '') {
+    dispatch(setRecommendationId({id: options.id}));
+  }
   return {
     ...controller,
 
-    getRecommendations() {
+    refresh() {
       dispatch(getRecommendations());
-    },
-
-    setRecommendationId(id: string) {
-      dispatch(setRecommendation({id}));
     },
 
     get state() {

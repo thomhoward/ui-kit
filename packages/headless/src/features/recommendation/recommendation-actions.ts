@@ -42,7 +42,7 @@ export interface GetRecommendationsThunkReturn {
 /**
  * Set recommendation identifier.
  */
-export const setRecommendation = createAction(
+export const setRecommendationId = createAction(
   'recommendation/set',
   (payload: {id: string}) =>
     validatePayloadSchema(payload, {
@@ -53,8 +53,8 @@ export const setRecommendation = createAction(
 /**
  * Logs a search event with an `actionCause` value of `recommendationInterfaceLoad`.
  */
-export const logRecommendation = createAsyncThunk(
-  'analytics/recommnendation/load',
+export const logRecommendationUpdate = createAsyncThunk(
+  'analytics/recommnendation/uppdate',
   async (_, {getState}) => {
     const state = getState() as StateNeededByAnalyticsProvider;
     await configureAnalytics(state).logRecommendationInterfaceLoad();
@@ -83,7 +83,7 @@ export const getRecommendations = createAsyncThunk<
     }
     return {
       recommendations: fetched.success.results,
-      analyticsAction: logRecommendation(),
+      analyticsAction: logRecommendationUpdate(),
       duration,
     };
   }

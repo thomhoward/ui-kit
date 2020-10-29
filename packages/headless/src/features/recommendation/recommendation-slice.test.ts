@@ -1,6 +1,6 @@
 import {buildMockResult} from '../../test';
 import {buildMockRecommendation} from '../../test/mock-recommendation';
-import {getRecommendations, setRecommendation} from './recommendation-actions';
+import {getRecommendations, setRecommendationId} from './recommendation-actions';
 import {recommendationReducer} from './recommendation-slice';
 import {
   getRecommendationInitialState,
@@ -26,7 +26,7 @@ describe('recommendation slice', () => {
 
   it('should allow to set the recommendation id', () => {
     expect(
-      recommendationReducer(state, setRecommendation({id: 'foo'})).id
+      recommendationReducer(state, setRecommendationId({id: 'foo'})).id
     ).toEqual('foo');
   });
 
@@ -69,7 +69,7 @@ describe('recommendation slice', () => {
     expect(finalState.error).toBeNull();
   });
 
-  it('set the isloading state to true during getRecommendations.pending', () => {
+  it('set the isLoading state to true during getRecommendations.pending', () => {
     const pendingAction = getRecommendations.pending('');
     const finalState = recommendationReducer(state, pendingAction);
     expect(finalState.isLoading).toBe(true);

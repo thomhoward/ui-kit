@@ -9,15 +9,15 @@ import {SearchAppState} from '../state/search-app-state';
 import {RecommendationAppState} from '../state/recommendation-app-state';
 import {createMockRecommendationState} from './mock-recommendation-state';
 
-export type AllStateShape = SearchAppState | RecommendationAppState;
+export type AppState = SearchAppState | RecommendationAppState;
 
-export interface MockEngine<T extends AllStateShape> extends Engine<T> {
+export interface MockEngine<T extends AppState> extends Engine<T> {
   store: MockStore;
   actions: AnyAction[];
 }
 
-type MockStore = MockStoreEnhanced<AllStateShape, DispatchExts>;
-type DispatchExts = ThunkDispatch<AllStateShape, void, AnyAction>;
+type MockStore = MockStoreEnhanced<AppState, DispatchExts>;
+type DispatchExts = ThunkDispatch<AppState, void, AnyAction>;
 
 const mockRenewAccessToken = async () => '';
 
@@ -33,7 +33,7 @@ export function buildMockRecommendationAppEngine(
   return buildMockEngine(config, createMockRecommendationState);
 }
 
-function buildMockEngine<T extends AllStateShape>(
+function buildMockEngine<T extends AppState>(
   config: Partial<Engine<T>> = {},
   mockState: () => T
 ): MockEngine<T> {
@@ -57,7 +57,7 @@ function buildMockEngine<T extends AllStateShape>(
 }
 
 const configureMockStore = () => {
-  return configureStore<AllStateShape, DispatchExts>([
+  return configureStore<AppState, DispatchExts>([
     analyticsMiddleware,
     thunk.withExtraArgument({
       searchAPIClient: new SearchAPIClient(mockRenewAccessToken),

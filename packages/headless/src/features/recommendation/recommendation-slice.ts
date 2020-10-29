@@ -1,5 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {getRecommendations, setRecommendation} from './recommendation-actions';
+import {
+  getRecommendations,
+  setRecommendationId,
+} from './recommendation-actions';
 import {getRecommendationInitialState} from './recommendation-state';
 
 export const recommendationReducer = createReducer(
@@ -7,7 +10,7 @@ export const recommendationReducer = createReducer(
 
   (builder) => {
     builder
-      .addCase(setRecommendation, (state, action) => {
+      .addCase(setRecommendationId, (state, action) => {
         state.id = action.payload.id;
       })
       .addCase(getRecommendations.rejected, (state, action) => {
@@ -17,7 +20,8 @@ export const recommendationReducer = createReducer(
       .addCase(getRecommendations.fulfilled, (state, action) => {
         state.error = null;
         state.recommendations = action.payload.recommendations;
-        (state.duration = action.payload.duration), (state.isLoading = false);
+        state.duration = action.payload.duration;
+        state.isLoading = false;
       })
       .addCase(getRecommendations.pending, (state) => {
         state.isLoading = true;
