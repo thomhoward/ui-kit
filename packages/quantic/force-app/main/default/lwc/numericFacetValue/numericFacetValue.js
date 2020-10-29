@@ -1,4 +1,4 @@
-// @ts-check
+
 import { LightningElement, api } from "lwc";
 
 export default class NumericFacetValue extends LightningElement {
@@ -10,6 +10,6 @@ export default class NumericFacetValue extends LightningElement {
    */
   onSelect(evt) {
     evt.preventDefault();
-    this.dispatchEvent(new CustomEvent("selectvalue", { detail: this.item }));
+    this.dispatchEvent(new CustomEvent('selectvalue', {detail: this.item}));
   }
 }

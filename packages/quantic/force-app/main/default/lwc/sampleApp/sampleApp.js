@@ -1,6 +1,7 @@
+// @ts-ignore
 import template1 from './resultTemplates/template1.html';
+// @ts-ignore
 import template2 from './resultTemplates/template2.html';
-// @ts-check
 import { LightningElement } from 'lwc';
 
 export default class SampleApp extends LightningElement {
@@ -19,11 +20,20 @@ export default class SampleApp extends LightningElement {
     /** @type {import("coveo").ResultTemplatesManager} */
     const resultTemplatesManager = event.detail;
 
-    const isMessage = CoveoHeadless.ResultTemplatesHelpers.fieldMustMatch('objecttype', ['Message']);
-    const fieldsMustBeDefined = CoveoHeadless.ResultTemplatesHelpers.fieldsMustBeDefined(['gdfiletitle']);
+    const isMessage = CoveoHeadless.ResultTemplatesHelpers.fieldMustMatch(
+      'objecttype',
+      ['Message']
+    );
+    const fieldsMustBeDefined = CoveoHeadless.ResultTemplatesHelpers.fieldsMustBeDefined(
+      ['gdfiletitle']
+    );
     resultTemplatesManager.registerTemplates(
-      { content: template1, conditions: [isMessage] },
-      { content: template2, conditions: [fieldsMustBeDefined], fields: ['gdfiletitle']
-    });
+      {content: template1, conditions: [isMessage]},
+      {
+        content: template2,
+        conditions: [fieldsMustBeDefined],
+        fields: ['gdfiletitle'],
+      }
+    );
   }
 }
