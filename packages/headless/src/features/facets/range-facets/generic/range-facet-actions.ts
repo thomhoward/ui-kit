@@ -5,7 +5,7 @@ import {AsyncThunkSearchOptions} from '../../../../api/search/search-api-client'
 import {ConfigurationSection} from '../../../../state/state-sections';
 import {updateFacetOptions} from '../../../facet-options/facet-options-actions';
 import {executeSearch} from '../../../search/search-actions';
-import {getAnalyticsActionForToggleRageFacetSelect} from './range-facet-utils';
+import {getAnalyticsActionForToggleRangeFacetSelect} from './range-facet-utils';
 
 /**
  * Updates the sort criterion of a range facet.
@@ -30,7 +30,7 @@ export const executeToggleRangeFacetSelect = createAsyncThunk<
   },
   AsyncThunkSearchOptions<ConfigurationSection>
   >('rangeFacet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
-  const analyticsAction = getAnalyticsActionForToggleRageFacetSelect(
+  const analyticsAction = getAnalyticsActionForToggleRangeFacetSelect(
     facetId,
     selection
   );

@@ -10,7 +10,7 @@ import {categoryFacetSelectedValuesSelector} from '../../features/facets/categor
 import {numericFacetSelectedValuesSelector} from '../../features/facets/range-facets/numeric-facet-set/numeric-facet-selectors';
 import {dateFacetSelectedValuesSelector} from '../../features/facets/range-facets/date-facet-set/date-facet-selectors';
 import {executeToggleNumericFacetSelect} from '../../features/facets/range-facets/numeric-facet-set/numeric-facet-actions';
-import {toggleDateFacetSelect} from '../../features/facets/range-facets/date-facet-set/date-facet-actions';
+import {executeToggleDateFacetSelect} from '../../features/facets/range-facets/date-facet-set/date-facet-actions';
 import {
   CategoryFacetSection,
   ConfigurationSection,
@@ -21,6 +21,7 @@ import {
 } from '../../state/state-sections';
 import {executeToggleFacetSelect} from '../../features/facets/facet-set/facet-set-actions';
 import {executeDeselectAllCategoryFacetValues} from '../../features/facets/category-facet-set/category-facet-set-actions';
+import {BaseFacetRequest} from '../../features/facets/facet-api/request';
 
 export type BreadcrumbManager = ReturnType<typeof buildBreadcrumbManager>;
 export type BreadcrumbManagerState = BreadcrumbManager['state'];
@@ -38,24 +39,65 @@ export const buildBreadcrumbManager = (
   const controller = buildController(engine);
   const {dispatch} = engine;
 
-  function getFacetBreadcrumbs() {
-    const breadcrumbs: GenericBreadcrumb<FacetValue>[] = [];
+  function getBreadcrumbsFor<T extends BaseFacetValue>(
+    facetSet: Record<string, BaseFacetRequest>,
+    deselect: (facetId: string, selection: T) => void,
+    selector: (facetId: string) => T[]
+  ) {
+    const breadcrumbs: GenericBreadcrumb<T>[] = [];
 
-    Object.keys(engine.state.facetSet).forEach((facetId) => {
-      const selectedValues = facetResponseSelectedValuesSelector(
-        engine.state,
-        facetId
-      );
+    Object.keys(facetSet).forEach((facetId) => {
+      const selectedValues = selector(facetId);
       selectedValues.forEach((selection) => {
         breadcrumbs.push({
           value: selection,
-          deselect: () =>
-            dispatch(executeToggleFacetSelect({facetId, selection})),
+          deselect: () => {
+            deselect(facetId, selection);
+          },
         });
       });
     });
 
     return breadcrumbs;
+  }
+
+  function getFacetBreadcrumbs() {
+    const deselect = (facetId: string, selection: FacetValue) => {
+      dispatch(executeToggleFacetSelect({facetId, selection}));
+    };
+    const selector = (facetId: string) =>
+      facetResponseSelectedValuesSelector(engine.state, facetId);
+    return getBreadcrumbsFor<FacetValue>(
+      engine.state.facetSet,
+      deselect,
+      selector
+    );
+  }
+
+  function getNumericFacetBreadcrumbs() {
+    const deselect = (facetId: string, selection: NumericFacetValue) => {
+      dispatch(executeToggleNumericFacetSelect({facetId, selection}));
+    };
+    const selector = (facetId: string) =>
+      numericFacetSelectedValuesSelector(engine.state, facetId);
+    return getBreadcrumbsFor<NumericFacetValue>(
+      engine.state.facetSet,
+      deselect,
+      selector
+    );
+  }
+
+  function getDateFacetBreadcrumbs() {
+    const deselect = (facetId: string, selection: DateFacetValue) => {
+      dispatch(executeToggleDateFacetSelect({facetId, selection}));
+    };
+    const selector = (facetId: string) =>
+      dateFacetSelectedValuesSelector(engine.state, facetId);
+    return getBreadcrumbsFor<DateFacetValue>(
+      engine.state.facetSet,
+      deselect,
+      selector
+    );
   }
 
   function getCategoryFacetBreadcrumbs() {
@@ -79,45 +121,6 @@ export const buildBreadcrumbManager = (
         },
       });
     });
-    return breadcrumbs;
-  }
-
-  function getNumericFacetBreadcrumbs() {
-    const breadcrumbs: GenericBreadcrumb<NumericFacetValue>[] = [];
-
-    Object.keys(engine.state.numericFacetSet).forEach((facetId) => {
-      const selectedValues = numericFacetSelectedValuesSelector(
-        engine.state,
-        facetId
-      );
-      selectedValues.forEach((selection) => {
-        breadcrumbs.push({
-          value: selection,
-          deselect: () =>
-            dispatch(executeToggleNumericFacetSelect({facetId, selection})),
-        });
-      });
-    });
-
-    return breadcrumbs;
-  }
-
-  function getDateFacetBreadcrumbs() {
-    const breadcrumbs: GenericBreadcrumb<DateFacetValue>[] = [];
-
-    Object.keys(engine.state.dateFacetSet).forEach((facetId) => {
-      const selectedValues = dateFacetSelectedValuesSelector(
-        engine.state,
-        facetId
-      );
-      selectedValues.forEach((selection) => {
-        breadcrumbs.push({
-          value: selection,
-          deselect: () => dispatch(toggleDateFacetSelect({facetId, selection})),
-        });
-      });
-    });
-
     return breadcrumbs;
   }
 

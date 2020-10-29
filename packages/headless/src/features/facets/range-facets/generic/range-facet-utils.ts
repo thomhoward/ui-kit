@@ -9,7 +9,7 @@ export const isRangeFacetValueSelected = (selection: RangeFacetValue) => {
   return selection.state === 'selected';
 };
 
-export const getAnalyticsActionForToggleRageFacetSelect = (
+export const getAnalyticsActionForToggleRangeFacetSelect = (
   facetId: string,
   selection: RangeFacetValue
 ) => {

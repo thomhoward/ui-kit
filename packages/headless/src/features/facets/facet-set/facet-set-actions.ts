@@ -65,22 +65,22 @@ export const updateFacetIsFieldExpanded = createAction<{
   isFieldExpanded: boolean;
 }>('facet/updateIsFieldExpanded');
 
-
 /**
  * Toggles the facet value and then executes a search with the appropriate analytics tag.
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  * @param selection (FacetValue) The target facet value.
  */
-export const executeToggleFacetSelect = createAsyncThunk<void,
+export const executeToggleFacetSelect = createAsyncThunk<
+  void,
   {
     facetId: string;
     selection: FacetValue;
   },
   AsyncThunkSearchOptions<FacetSection & ConfigurationSection>
-  >('facet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
+>('facet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
   const analyticsAction = getAnalyticsActionForToggleFacetSelect(
     facetId,
-    selection,
+    selection
   );
 
   dispatch(toggleSelectFacetValue({facetId, selection}));

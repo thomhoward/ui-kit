@@ -44,7 +44,7 @@ export const deselectAllDateFacetValues = deselectAllFacetValues;
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  * @param selection (DateFacetValue) The target date facet value.
  */
-export const toggleDateFacetSelect = createAsyncThunk<
+export const executeToggleDateFacetSelect = createAsyncThunk<
   void,
   {
     facetId: string;
