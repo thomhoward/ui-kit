@@ -1,4 +1,4 @@
-import {createAction} from '@reduxjs/toolkit';
+import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
 import {CategoryFacetRegistrationOptions} from './interfaces/options';
 import {CategoryFacetValue} from './interfaces/response';
 import {
@@ -6,6 +6,15 @@ import {
   updateFacetNumberOfValues,
 } from '../facet-set/facet-set-actions';
 import {CategoryFacetSortCriterion} from './interfaces/request';
+import {AsyncThunkSearchOptions} from '../../../api/search/search-api-client';
+import {
+  CategoryFacetSection,
+  ConfigurationSection,
+} from '../../../state/state-sections';
+import {updateFacetOptions} from '../../facet-options/facet-options-actions';
+import {executeSearch} from '../../search/search-actions';
+import {getAnalyticsActionForCategoryFacetToggleSelect} from './category-facet-utils';
+import {logFacetClearAll} from '../facet-set/facet-set-analytics-actions';
 
 /**
  * Registers a category facet in the category facet set.
@@ -45,3 +54,35 @@ export const updateCategoryFacetSortCriterion = createAction<{
   facetId: string;
   criterion: CategoryFacetSortCriterion;
 }>('categoryFacet/updateSortCriterion');
+
+export const executeToggleCategoryFacetSelect = createAsyncThunk<
+  void,
+  {
+    facetId: string;
+    selection: CategoryFacetValue;
+  },
+  AsyncThunkSearchOptions<CategoryFacetSection & ConfigurationSection>
+>('categoryFacet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
+  const analyticsAction = getAnalyticsActionForCategoryFacetToggleSelect(
+    facetId,
+    selection
+  );
+
+  dispatch(toggleSelectCategoryFacetValue({facetId, selection}));
+  dispatch(updateFacetOptions({freezeFacetOrder: true}));
+  dispatch(executeSearch(analyticsAction));
+});
+
+export const executeDeselectAllCategoryFacetValues = createAsyncThunk<
+  void,
+  {facetId: string; numberOfValues: number},
+  AsyncThunkSearchOptions<CategoryFacetSection & ConfigurationSection>
+>(
+  'categoryFacet/executeDeselectAll',
+  ({facetId, numberOfValues}, {dispatch}) => {
+    dispatch(deselectAllCategoryFacetValues(facetId));
+    dispatch(updateCategoryFacetNumberOfValues({facetId, numberOfValues}));
+    dispatch(updateFacetOptions({freezeFacetOrder: true}));
+    dispatch(executeSearch(logFacetClearAll(facetId)));
+  }
+);

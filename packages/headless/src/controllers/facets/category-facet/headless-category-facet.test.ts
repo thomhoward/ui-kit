@@ -219,6 +219,7 @@ describe('category facet', () => {
     });
 
     it('dispatches #updateFacetOptions with #freezeFacetOrder true', () => {
+      console.log(engine.actions);
       expect(engine.actions).toContainEqual(
         updateFacetOptions({freezeFacetOrder: true})
       );

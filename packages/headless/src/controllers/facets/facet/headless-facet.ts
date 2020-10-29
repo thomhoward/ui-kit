@@ -6,7 +6,7 @@ import {
   deselectAllFacetValues,
   updateFacetSortCriterion,
   updateFacetNumberOfValues,
-  updateFacetIsFieldExpanded,
+  updateFacetIsFieldExpanded, executeToggleFacetSelect,
 } from '../../../features/facets/facet-set/facet-set-actions';
 import {randomID} from '../../../utils/utils';
 import {
@@ -30,15 +30,12 @@ import {FacetValue} from '../../../features/facets/facet-set/interfaces/response
 import {FacetSortCriterion} from '../../../features/facets/facet-set/interfaces/request';
 import {updateFacetOptions} from '../../../features/facet-options/facet-options-actions';
 import {
-  toggleFacetSelect,
-  isFacetValueSelected,
-} from './headless-facet-actions';
-import {
   ConfigurationSection,
   FacetSearchSection,
   FacetSection,
   SearchSection,
 } from '../../../state/state-sections';
+import {isFacetValueSelected} from '../../../features/facets/facet-set/facet-set-utils';
 
 export type Facet = ReturnType<typeof buildFacet>;
 export type FacetState = Facet['state'];
@@ -127,7 +124,7 @@ export function buildFacet(
      * @param selection The facet value to select or deselect.
      */
     toggleSelect: (selection: FacetValue) =>
-      dispatch(toggleFacetSelect({facetId: options.facetId, selection})),
+      dispatch(executeToggleFacetSelect({facetId: options.facetId, selection})),
     /**
      * Returns `true` if the passed facet value is selected and `false` otherwise.
      * @param {FacetValue} The facet value to check.

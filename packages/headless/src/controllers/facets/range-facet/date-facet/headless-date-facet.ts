@@ -13,9 +13,8 @@ import {
   DateFacetResponse,
   DateFacetValue,
 } from '../../../../features/facets/range-facets/date-facet-set/interfaces/response';
-import {registerDateFacet} from '../../../../features/facets/range-facets/date-facet-set/date-facet-actions';
+import {registerDateFacet, toggleDateFacetSelect} from '../../../../features/facets/range-facets/date-facet-set/date-facet-actions';
 import {buildRangeFacet} from '../headless-range-facet';
-import {toggleDateFacetSelect} from './headless-date-facet-actions';
 import {
   ConfigurationSection,
   DateFacetSection,

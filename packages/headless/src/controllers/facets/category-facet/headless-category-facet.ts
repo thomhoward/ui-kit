@@ -4,16 +4,16 @@ import {randomID} from '../../../utils/utils';
 import {CategoryFacetRegistrationOptions} from '../../../features/facets/category-facet-set/interfaces/options';
 import {
   registerCategoryFacet,
-  deselectAllCategoryFacetValues,
   updateCategoryFacetNumberOfValues,
   updateCategoryFacetSortCriterion,
+  executeToggleCategoryFacetSelect,
+  executeDeselectAllCategoryFacetValues,
 } from '../../../features/facets/category-facet-set/category-facet-set-actions';
 import {categoryFacetResponseSelector} from '../../../features/facets/category-facet-set/category-facet-set-selectors';
 import {CategoryFacetValue} from '../../../features/facets/category-facet-set/interfaces/response';
 import {executeSearch} from '../../../features/search/search-actions';
 import {
   logFacetUpdateSort,
-  logFacetClearAll,
   logFacetShowMore,
   logFacetShowLess,
 } from '../../../features/facets/facet-set/facet-set-analytics-actions';
@@ -33,7 +33,6 @@ import {
   SearchSection,
 } from '../../../state/state-sections';
 import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utils';
-import {toggleCategoryFacetSelect} from './headless-category-facet-actions';
 
 export type CategoryFacetProps = {
   options: CategoryFacetOptions;
@@ -98,17 +97,16 @@ export function buildCategoryFacet(
      * @param selection The category facet value to select or deselect.
      */
     toggleSelect: (selection: CategoryFacetValue) =>
-      dispatch(toggleCategoryFacetSelect({facetId, selection})),
+      dispatch(executeToggleCategoryFacetSelect({facetId, selection})),
 
     /** Deselects all facet values.*/
-    deselectAll() {
-      const numberOfValues = options.numberOfValues!;
-
-      dispatch(deselectAllCategoryFacetValues(facetId));
-      dispatch(updateCategoryFacetNumberOfValues({facetId, numberOfValues}));
-      dispatch(updateFacetOptions({freezeFacetOrder: true}));
-      dispatch(executeSearch(logFacetClearAll(facetId)));
-    },
+    deselectAll: () =>
+      dispatch(
+        executeDeselectAllCategoryFacetValues({
+          facetId,
+          numberOfValues: options.numberOfValues!,
+        })
+      ),
 
     /** Sorts the category facet values according to the passed criterion.
      * @param {CategoryFacetSortCriterion} criterion The criterion to sort values by.

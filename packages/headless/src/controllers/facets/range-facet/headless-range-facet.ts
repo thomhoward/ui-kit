@@ -11,17 +11,14 @@ import {
 import {executeSearch} from '../../../features/search/search-actions';
 import {baseFacetResponseSelector} from '../../../features/facets/facet-set/facet-set-selectors';
 import {RangeFacetSortCriterion} from '../../../features/facets/range-facets/generic/interfaces/request';
-import {updateRangeFacetSortCriterion} from '../../../features/facets/range-facets/generic/range-facet-actions';
+import {updateRangeFacetSortCriterion, executeToggleRangeFacetSelect} from '../../../features/facets/range-facets/generic/range-facet-actions';
 import {deselectAllFacetValues} from '../../../features/facets/facet-set/facet-set-actions';
 import {updateFacetOptions} from '../../../features/facet-options/facet-options-actions';
 import {
   ConfigurationSection,
   SearchSection,
 } from '../../../state/state-sections';
-import {
-  isRangeFacetValueSelected,
-  toggleRangeFacetSelect,
-} from './headless-range-facet-actions';
+import {isRangeFacetValueSelected} from '../../../features/facets/range-facets/generic/range-facet-utils';
 
 export type RangeFacet = ReturnType<typeof buildRangeFacet>;
 
@@ -47,7 +44,7 @@ export function buildRangeFacet<
     ...controller,
     /** Logs a deselect (select) value event when the passed value is active (idle), and executes a search.*/
     toggleSelect: (selection: RangeFacetValue) =>
-      dispatch(toggleRangeFacetSelect({facetId, selection})),
+      dispatch(executeToggleRangeFacetSelect({facetId, selection})),
 
     /** Returns `true` if the passed value is selected, and `false` otherwise.
      * @param facetValue The facet value to check.

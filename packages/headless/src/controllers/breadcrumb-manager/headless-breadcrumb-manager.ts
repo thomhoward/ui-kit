@@ -9,9 +9,8 @@ import {facetResponseSelectedValuesSelector} from '../../features/facets/facet-s
 import {categoryFacetSelectedValuesSelector} from '../../features/facets/category-facet-set/category-facet-set-selectors';
 import {numericFacetSelectedValuesSelector} from '../../features/facets/range-facets/numeric-facet-set/numeric-facet-selectors';
 import {dateFacetSelectedValuesSelector} from '../../features/facets/range-facets/date-facet-set/date-facet-selectors';
-import {toggleFacetSelect} from '../facets/facet/headless-facet-actions';
-import {toggleNumericFacetSelect} from '../facets/range-facet/numeric-facet/headless-numeric-facet-actions';
-import {toggleDateFacetSelect} from '../facets/range-facet/date-facet/headless-date-facet-actions';
+import {executeToggleNumericFacetSelect} from '../../features/facets/range-facets/numeric-facet-set/numeric-facet-actions';
+import {toggleDateFacetSelect} from '../../features/facets/range-facets/date-facet-set/date-facet-actions';
 import {
   CategoryFacetSection,
   ConfigurationSection,
@@ -20,6 +19,8 @@ import {
   NumericFacetSection,
   SearchSection,
 } from '../../state/state-sections';
+import {executeToggleFacetSelect} from '../../features/facets/facet-set/facet-set-actions';
+import {executeDeselectAllCategoryFacetValues} from '../../features/facets/category-facet-set/category-facet-set-actions';
 
 export type BreadcrumbManager = ReturnType<typeof buildBreadcrumbManager>;
 export type BreadcrumbManagerState = BreadcrumbManager['state'];
@@ -48,7 +49,8 @@ export const buildBreadcrumbManager = (
       selectedValues.forEach((selection) => {
         breadcrumbs.push({
           value: selection,
-          deselect: () => dispatch(toggleFacetSelect({facetId, selection})),
+          deselect: () =>
+            dispatch(executeToggleFacetSelect({facetId, selection})),
         });
       });
     });
@@ -67,7 +69,14 @@ export const buildBreadcrumbManager = (
       breadcrumbs.push({
         value: selectedValues[selectedValues.length - 1],
         path: selectedValues,
-        deselect: () => {},
+        deselect: () => {
+          dispatch(
+            executeDeselectAllCategoryFacetValues({
+              facetId,
+              numberOfValues: 5,
+            })
+          );
+        },
       });
     });
     return breadcrumbs;
@@ -85,7 +94,7 @@ export const buildBreadcrumbManager = (
         breadcrumbs.push({
           value: selection,
           deselect: () =>
-            dispatch(toggleNumericFacetSelect({facetId, selection})),
+            dispatch(executeToggleNumericFacetSelect({facetId, selection})),
         });
       });
     });
