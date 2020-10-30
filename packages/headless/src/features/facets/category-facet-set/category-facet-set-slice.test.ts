@@ -159,7 +159,7 @@ describe('category facet slice', () => {
       categoryFacetSetReducer(
         state,
         updateCategoryFacetNumberOfValues({
-          facetId: '',
+          facetId: 'notRegistred',
           numberOfValues: 20,
         })
       )

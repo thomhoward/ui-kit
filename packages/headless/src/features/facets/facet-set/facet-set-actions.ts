@@ -1,8 +1,14 @@
 import {createAction} from '@reduxjs/toolkit';
 import {FacetRegistrationOptions} from './interfaces/options';
-import {FacetValue} from './interfaces/response';
 import {FacetSortCriterion} from './interfaces/request';
+import {
+  validatePayloadValue,
+  validatePayloadSchema,
+} from '../../../utils/validate-payload';
+import {StringValue, NumberValue, BooleanValue} from '@coveo/bueno';
+import {FacetValue} from './interfaces/response';
 
+const facetIdDefinition = new StringValue({required: true, emptyAllowed: true});
 /**
  * Registers a facet in the facet set.
  * @param (FacetRegistrationOptions) The options to register the facet with.
@@ -25,7 +31,10 @@ export const toggleSelectFacetValue = createAction<{
  * Deselects all values of a facet.
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  */
-export const deselectAllFacetValues = createAction<string>('facet/deselectAll');
+export const deselectAllFacetValues = createAction(
+  'facet/deselectAll',
+  (payload: string) => validatePayloadValue(payload, facetIdDefinition)
+);
 
 /**
  * Updates the sort criterion of a facet.
@@ -42,17 +51,25 @@ export const updateFacetSortCriterion = createAction<{
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  * @param numberOfValues (number) The new number of facet values (e.g., `10`).
  */
-export const updateFacetNumberOfValues = createAction<{
-  facetId: string;
-  numberOfValues: number;
-}>('facet/updateNumberOfValues');
+export const updateFacetNumberOfValues = createAction(
+  'facet/updateNumberOfValues',
+  (payload: {facetId: string; numberOfValues: number}) =>
+    validatePayloadSchema(payload, {
+      facetId: facetIdDefinition,
+      numberOfValues: new NumberValue({min: 0}),
+    })
+);
 
 /**
  * Whether to expand (show more values than initially configured) or shrink down the facet.
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  * @param isFieldExpanded (boolean) Whether to expand or shrink down the facet.
  */
-export const updateFacetIsFieldExpanded = createAction<{
-  facetId: string;
-  isFieldExpanded: boolean;
-}>('facet/updateIsFieldExpanded');
+export const updateFacetIsFieldExpanded = createAction(
+  'facet/updateIsFieldExpanded',
+  (payload: {facetId: string; isFieldExpanded: boolean}) =>
+    validatePayloadSchema(payload, {
+      facetId: facetIdDefinition,
+      isFieldExpanded: new BooleanValue({required: true}),
+    })
+);
