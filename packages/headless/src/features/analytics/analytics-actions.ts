@@ -55,7 +55,7 @@ export const logGenericSearchEvent = createAsyncThunk(
   'analytics/generic/search',
   async (p: GenericSearchEventPayload, {getState}) => {
     validatePayloadSchema(p, {
-      evt: new StringValue({required: true, emptyAllowed: false, url: false}),
+      evt: new StringValue({required: true, emptyAllowed: false}),
       meta: new RecordValue(),
     });
     const {evt, meta} = p;
