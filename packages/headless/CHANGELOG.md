@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.29](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.28...v0.1.0-alpha.29) (2020-10-30)
+
+
+### Bug Fixes
+
+* **headless:** Fix typo recommendationAppReducers ([4dab140](https://bitbucket.org/coveord/ui-kit/commits/4dab1401410799a4d13166b922d37abf17827992))
+
+
+
+
+
+# [0.1.0-alpha.28](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.27...v0.1.0-alpha.28) (2020-10-29)
+
+
+### Features
+
+* **headless:** add recommendation controller ([1e50a46](https://bitbucket.org/coveord/ui-kit/commits/1e50a461e38617a15cc64a3155f05bfb85100f70))
+
+
+
+
+
+# [0.1.0-alpha.27](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.26...v0.1.0-alpha.27) (2020-10-29)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
 # [0.1.0-alpha.26](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.25...v0.1.0-alpha.26) (2020-10-29)
 
 **Note:** Version bump only for package @coveo/headless
