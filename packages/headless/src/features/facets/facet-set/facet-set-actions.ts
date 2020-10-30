@@ -9,6 +9,7 @@ import {StringValue, NumberValue, BooleanValue} from '@coveo/bueno';
 import {FacetValue} from './interfaces/response';
 
 const facetIdDefinition = new StringValue({required: true, emptyAllowed: true});
+
 /**
  * Registers a facet in the facet set.
  * @param (FacetRegistrationOptions) The options to register the facet with.
