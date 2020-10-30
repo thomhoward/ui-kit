@@ -1,4 +1,4 @@
-import {NumericFacetResponse} from './interfaces/response';
+import {NumericFacetResponse, NumericFacetValue} from './interfaces/response';
 import {baseFacetResponseSelector} from '../../facet-set/facet-set-selectors';
 import {AnyFacetResponse} from '../../generic/interfaces/generic-facet-response';
 import {
@@ -28,7 +28,7 @@ export const numericFacetResponseSelector = (
 export const numericFacetSelectedValuesSelector = (
   state: SearchSection & NumericFacetSection,
   facetId: string
-) => {
+): NumericFacetValue[] => {
   const facetResponse = numericFacetResponseSelector(state, facetId);
   if (!facetResponse) {
     return [];

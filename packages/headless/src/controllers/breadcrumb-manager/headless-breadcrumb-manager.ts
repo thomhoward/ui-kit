@@ -41,7 +41,7 @@ export const buildBreadcrumbManager = (
   const controller = buildController(engine);
   const {dispatch} = engine;
 
-  function getBreadcrumbsFor<T extends BaseFacetValue>(
+  function getBreadcrumbs<T extends BaseFacetValue>(
     facetSet: Record<string, BaseFacetRequest>,
     executeToggleSelect: AsyncThunk<
       void,
@@ -69,7 +69,7 @@ export const buildBreadcrumbManager = (
   }
 
   function getFacetBreadcrumbs() {
-    return getBreadcrumbsFor<FacetValue>(
+    return getBreadcrumbs<FacetValue>(
       engine.state.facetSet,
       executeToggleFacetSelect,
       facetResponseSelectedValuesSelector
@@ -77,16 +77,16 @@ export const buildBreadcrumbManager = (
   }
 
   function getNumericFacetBreadcrumbs() {
-    return getBreadcrumbsFor<NumericFacetValue>(
-      engine.state.facetSet,
+    return getBreadcrumbs<NumericFacetValue>(
+      engine.state.numericFacetSet,
       executeToggleNumericFacetSelect,
       numericFacetSelectedValuesSelector
     );
   }
 
   function getDateFacetBreadcrumbs() {
-    return getBreadcrumbsFor<DateFacetValue>(
-      engine.state.facetSet,
+    return getBreadcrumbs<DateFacetValue>(
+      engine.state.dateFacetSet,
       executeToggleDateFacetSelect,
       dateFacetSelectedValuesSelector
     );

@@ -1,4 +1,4 @@
-import {DateFacetResponse} from './interfaces/response';
+import {DateFacetResponse, DateFacetValue} from './interfaces/response';
 import {baseFacetResponseSelector} from '../../facet-set/facet-set-selectors';
 import {AnyFacetResponse} from '../../generic/interfaces/generic-facet-response';
 import {
@@ -28,7 +28,7 @@ export const dataFacetResponseSelector = (
 export const dateFacetSelectedValuesSelector = (
   state: SearchSection & DateFacetSection,
   facetId: string
-) => {
+): DateFacetValue[] => {
   const facetResponse = dataFacetResponseSelector(state, facetId);
   if (!facetResponse) {
     return [];
