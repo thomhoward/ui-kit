@@ -1,9 +1,9 @@
-// @ts-check
 import {LightningElement, track, api} from 'lwc';
-import { initializeComponent } from 'c/initialization';
+import {initializeComponent} from 'c/initialization';
 
 export default class DateFacet extends LightningElement {
   /** @type {import("coveo").DateFacetState} */
+  // @ts-ignore TODO: Check CategoryFacetState typing and integration with LWC/Quantic
   @track state = {
     values: [],
   };
@@ -29,14 +29,17 @@ export default class DateFacet extends LightningElement {
     this.facet = CoveoHeadless.buildDateFacet(engine, {
       options: {
         field: this.field,
-        generateAutomaticRanges: true
+        generateAutomaticRanges: true,
       },
     });
     this.unsubscribe = this.facet.subscribe(() => this.updateState());
   }
 
   disconnectedCallback() {
-    this.unsubscribe && this.unsubscribe();
+
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   updateState() {

@@ -1,9 +1,9 @@
-// @ts-check
 import {LightningElement, track, api} from 'lwc';
-import { initializeComponent } from 'c/initialization';
+import {initializeComponent} from 'c/initialization';
 
 export default class Facet extends LightningElement {
   /** @type {import("coveo").FacetState} */
+  // @ts-ignore TODO: Check CategoryFacetState typing and integration with LWC/Quantic
   @track state = {
     sortCriterion: 'score',
     values: [],
@@ -36,7 +36,9 @@ export default class Facet extends LightningElement {
   }
 
   disconnectedCallback() {
-    this.unsubscribe && this.unsubscribe();
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
   }
 
   updateState() {

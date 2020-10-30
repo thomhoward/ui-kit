@@ -2,7 +2,9 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
+        "checkJs": true,
         "target": "es2016",
+        "module": "esnext",
         "paths": {
             "c/dateFacet": [
                 "dateFacet/dateFacet.js"
@@ -56,7 +58,10 @@
                 "numberButton/numberButton.js"
             ],
             "c/initialization": [
-                "c/initialization.js"
+                "initialization/initialization.js"
+            ],
+            "c/testUtils": [
+                "testUtils/testUtils.js"
             ]
         }
     },

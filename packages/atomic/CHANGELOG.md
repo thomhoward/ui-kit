@@ -3,6 +3,92 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.29](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.28...v0.1.0-alpha.29) (2020-10-30)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.28](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.27...v0.1.0-alpha.28) (2020-10-29)
+
+
+### Features
+
+* **headless:** add recommendation controller ([1e50a46](https://bitbucket.org/coveord/ui-kit/commits/1e50a461e38617a15cc64a3155f05bfb85100f70))
+
+
+
+
+
+# [0.1.0-alpha.27](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.26...v0.1.0-alpha.27) (2020-10-29)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.26](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.25...v0.1.0-alpha.26) (2020-10-29)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.24](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.23...v0.1.0-alpha.24) (2020-10-28)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.23](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.22...v0.1.0-alpha.23) (2020-10-27)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.22](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.21...v0.1.0-alpha.22) (2020-10-27)
+
+
+### Features
+
+* **atomic:** document slots & add examples ([b8627a5](https://bitbucket.org/coveord/ui-kit/commits/b8627a5ea8e7d508331969a2e41533b3fa7d07c8))
+
+
+
+
+
+# [0.1.0-alpha.21](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.20...v0.1.0-alpha.21) (2020-10-27)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.20](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.19...v0.1.0-alpha.20) (2020-10-26)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.19](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.18...v0.1.0-alpha.19) (2020-10-26)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
 # [0.1.0-alpha.18](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.17...v0.1.0-alpha.18) (2020-10-23)
 
 **Note:** Version bump only for package @coveo/atomic
