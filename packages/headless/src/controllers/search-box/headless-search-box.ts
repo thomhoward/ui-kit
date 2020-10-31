@@ -24,6 +24,7 @@ import {
   QuerySuggestionSection,
   SearchSection,
 } from '../../state/state-sections';
+import {logQuerySuggestionClick} from '../../features/query-suggest/query-suggest-analytics-actions';
 
 export interface SearchBoxProps {
   options: SearchBoxOptions;
@@ -127,6 +128,7 @@ export const buildSearchBox = (
      * @param value The string value of the suggestion to select
      */
     selectSuggestion(value: string) {
+      dispatch(logQuerySuggestionClick({id: options.id, suggestion: value}));
       dispatch(selectQuerySuggestion({id: options.id, expression: value}));
       this.submit();
     },

@@ -22,9 +22,12 @@ import {buildMockQuerySuggest} from '../../test/mock-query-suggest';
 import {buildMockSearchAppEngine, MockEngine} from '../../test/mock-engine';
 import {updatePage} from '../../features/pagination/pagination-actions';
 import {SearchAppState} from '../../state/search-app-state';
+import {logQuerySuggestionClick} from '../../features/query-suggest/query-suggest-analytics-actions';
+import {buildMockQuerySuggestCompletion} from '../../test/mock-query-suggest-completion';
 
 describe('headless searchBox', () => {
   const id = 'search-box-123';
+  const value = 'i like this expression';
   let state: SearchAppState;
 
   let engine: MockEngine<SearchAppState>;
@@ -46,7 +49,7 @@ describe('headless searchBox', () => {
   function initState() {
     state = createMockState();
     state.querySet[id] = 'query';
-    state.querySuggest[id] = buildMockQuerySuggest({id, q: 'some value'});
+    state.querySuggest[id] = buildMockQuerySuggest({id, q: 'some value', completions: [buildMockQuerySuggestCompletion({expression: value})]});
   }
 
   function initController() {
@@ -156,11 +159,22 @@ describe('headless searchBox', () => {
 
   it(`when calling selectSuggestion
     should dispatch a selectQuerySuggestion action`, () => {
-    const value = 'i like this expression';
     searchBox.selectSuggestion(value);
+    state.querySuggest[id] = buildMockQuerySuggest({
+      completions: [buildMockQuerySuggestCompletion({expression: value})],
+    });
 
     expect(engine.actions).toContainEqual(
       selectQuerySuggestion({id, expression: value})
+    );
+  });
+
+  it(`when calling selectSuggestion
+    should dispatch a logQuerySuggestionClick action`, () => {
+    searchBox.selectSuggestion(value);
+
+    expect(engine.actions).toContainEqual(
+      logQuerySuggestionClick({id, suggestion: value})
     );
   });
 
