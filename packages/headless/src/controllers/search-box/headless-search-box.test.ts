@@ -49,7 +49,11 @@ describe('headless searchBox', () => {
   function initState() {
     state = createMockState();
     state.querySet[id] = 'query';
-    state.querySuggest[id] = buildMockQuerySuggest({id, q: 'some value', completions: [buildMockQuerySuggestCompletion({expression: value})]});
+    state.querySuggest[id] = buildMockQuerySuggest({
+      id,
+      q: 'some value',
+      completions: [buildMockQuerySuggestCompletion({expression: value})],
+    });
   }
 
   function initController() {
@@ -160,9 +164,6 @@ describe('headless searchBox', () => {
   it(`when calling selectSuggestion
     should dispatch a selectQuerySuggestion action`, () => {
     searchBox.selectSuggestion(value);
-    state.querySuggest[id] = buildMockQuerySuggest({
-      completions: [buildMockQuerySuggestCompletion({expression: value})],
-    });
 
     expect(engine.actions).toContainEqual(
       selectQuerySuggestion({id, expression: value})
