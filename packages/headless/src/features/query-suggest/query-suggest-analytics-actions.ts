@@ -1,18 +1,17 @@
-// import {configureAnalytics} from '../../api/analytics/analytics';
+import {configureAnalytics} from '../../api/analytics/analytics';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {
   makeSearchActionType,
   searchPageState,
 } from '../analytics/analytics-actions';
-import {configureAnalytics} from '../../api/analytics/analytics';
 import {OmniboxSuggestionsMetadata} from 'coveo.analytics/src/searchPage/searchPageEvents';
 
 function filterRepeatedValues(toClean: string[]) {
   let prev = '';
   return toClean.filter((value) => {
-    const isSame = value !== prev;
+    const isDifferent = value !== prev;
     prev = value;
-    return isSame;
+    return isDifferent;
   });
 }
 
@@ -38,7 +37,7 @@ function cleanCustomData(toClean: string[]) {
     removedSemicolons[i] !== undefined &&
     nextLength(cleanedData, i, removedSemicolons) < analyticsLengthLimit
   ) {
-    cleanedData = `${removedSemicolons[i]};` + cleanedData;
+    cleanedData = removedSemicolons[i] + ';' + cleanedData;
     i++;
   }
 
