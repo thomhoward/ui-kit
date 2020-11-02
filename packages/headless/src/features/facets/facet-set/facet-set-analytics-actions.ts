@@ -11,8 +11,11 @@ import {
   validatePayloadValue,
   validatePayloadSchema,
 } from '../../../utils/validate-payload';
-import {facetIdDefinition} from './facet-set-actions';
-import {StringValue, Value} from '@coveo/bueno';
+import {Value} from '@coveo/bueno';
+import {
+  facetIdDefinition,
+  requiredNonEmptyString,
+} from '../generic/facet-actions-validation';
 
 export type FacetUpdateSortMetadata = {
   facetId: string;
@@ -121,7 +124,7 @@ export const logFacetSelect = createAsyncThunk(
   async (payload: FacetSelectionChangeMetadata, {getState}) => {
     validatePayloadSchema(payload, {
       facetId: facetIdDefinition,
-      facetValue: new StringValue({required: true, emptyAllowed: false}),
+      facetValue: requiredNonEmptyString,
     });
     const state = searchPageState(getState);
     const metadata = buildFacetSelectionChangeMetadata(payload, state);
@@ -140,7 +143,7 @@ export const logFacetDeselect = createAsyncThunk(
   async (payload: FacetSelectionChangeMetadata, {getState}) => {
     validatePayloadSchema(payload, {
       facetId: facetIdDefinition,
-      facetValue: new StringValue({required: true, emptyAllowed: false}),
+      facetValue: requiredNonEmptyString,
     });
     const state = searchPageState(getState);
     const metadata = buildFacetSelectionChangeMetadata(payload, state);

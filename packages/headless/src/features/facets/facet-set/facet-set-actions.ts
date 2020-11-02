@@ -13,15 +13,15 @@ import {
   Value,
 } from '@coveo/bueno';
 import {FacetValue} from './interfaces/response';
+import {
+  facetIdDefinition,
+  requiredNonEmptyString,
+} from '../generic/facet-actions-validation';
 
-export const facetIdDefinition = new StringValue({
-  required: true,
-  emptyAllowed: true,
-});
 const facetValueDefinition = {
-  value: new StringValue({required: true, emptyAllowed: false}),
+  value: requiredNonEmptyString,
   numberOfResults: new NumberValue({min: 0}),
-  state: new StringValue({required: true, emptyAllowed: false}),
+  state: requiredNonEmptyString,
 };
 const facetRegistrationOptionsDefinition = {
   facetId: facetIdDefinition,
