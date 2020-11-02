@@ -23,20 +23,20 @@ function removeSemicolons(toClean: string[]) {
 }
 
 function nextLength(cleanedData: string, i: number, data: string[]) {
-  return cleanedData.length + data[i].length;
+  const semicolonLength = 1;
+  return cleanedData.length + data[i].length + semicolonLength;
 }
 
 function cleanCustomData(toClean: string[]) {
   const analyticsLengthLimit = 256;
   const filteredOutRepeatedValues = filterRepeatedValues(toClean);
   const removedSemicolons = removeSemicolons(filteredOutRepeatedValues);
-  const data = removedSemicolons.reverse();
 
   let cleanedData = '';
   let i = 0;
   while (
-    data[i] !== undefined &&
-    nextLength(cleanedData, i, data) < analyticsLengthLimit
+    removedSemicolons[i] !== undefined &&
+    nextLength(cleanedData, i, removedSemicolons) < analyticsLengthLimit
   ) {
     cleanedData = `${removedSemicolons[i]};` + cleanedData;
     i++;
