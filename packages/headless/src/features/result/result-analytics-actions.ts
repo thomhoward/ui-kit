@@ -25,31 +25,30 @@ const rawPartialDefinition = {
   permanentid: requiredNonEmptyString,
 };
 const resultPartialDefinition = {
-  UniqueId: requiredNonEmptyString,
+  uniqueId: requiredNonEmptyString,
   raw: new RecordValue(rawPartialDefinition),
   title: requiredNonEmptyString,
   uri: new StringValue({required: true, emptyAllowed: false, url: true}),
   clickUri: new StringValue({required: true, emptyAllowed: false, url: true}),
   rankingModifier: new StringValue({required: false, emptyAllowed: true}),
 };
+type rawPartialType = keyof typeof rawPartialDefinition;
 
-function partialRawPayload(raw: Raw): Partial<Raw> {
+function partialRawPayload(raw: Raw): rawPartialType {
   const payload = {};
-  for (const [key, value] of Object.entries(raw)) {
-    if (key in resultPartialDefinition) {
-      Object.assign(payload, {[key]: value});
-    }
-  }
-  return payload;
+  Object.assign(
+    payload,
+    Object.keys(rawPartialDefinition).map((key) => ({[key]: raw[key]}))
+  );
+  return payload as rawPartialType;
 }
 
 function partialResultPayload(result: Result) {
   const resultPayload = {};
-  for (const [key, value] of Object.entries(result)) {
-    if (key in resultPartialDefinition) {
-      Object.assign(resultPayload, {[key]: value});
-    }
-  }
+  Object.assign(
+    resultPayload,
+    Object.keys(rawPartialDefinition).map((key) => ({[key]: result[key]}))
+  );
   return {...resultPayload, raw: partialRawPayload(result.raw)};
 }
 
