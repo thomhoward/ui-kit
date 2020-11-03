@@ -53,7 +53,7 @@ export const buildBreadcrumbManager = (
       | ((state: SearchSection & NumericFacetSection, facetId: string) => T[])
       | ((state: SearchSection & DateFacetSection, facetId: string) => T[])
   ) {
-    const breadcrumbs: GenericBreadcrumb<T>[] = [];
+    const breadcrumbs: Breadcrumb<T>[] = [];
 
     Object.keys(facetSet).forEach((facetId) => {
       const selectedValues = facetValuesSelector(engine.state, facetId);
@@ -68,7 +68,7 @@ export const buildBreadcrumbManager = (
     return breadcrumbs;
   }
 
-  function getFacetBreadcrumbs() {
+  function getFacetBreadcrumbs(): FacetBreadcrumb[] {
     return getBreadcrumbs<FacetValue>(
       engine.state.facetSet,
       executeToggleFacetSelect,
@@ -76,7 +76,7 @@ export const buildBreadcrumbManager = (
     );
   }
 
-  function getNumericFacetBreadcrumbs() {
+  function getNumericFacetBreadcrumbs(): NumericFacetBreadcrumb[] {
     return getBreadcrumbs<NumericFacetValue>(
       engine.state.numericFacetSet,
       executeToggleNumericFacetSelect,
@@ -84,7 +84,7 @@ export const buildBreadcrumbManager = (
     );
   }
 
-  function getDateFacetBreadcrumbs() {
+  function getDateFacetBreadcrumbs(): DateFacetBreadcrumb[] {
     return getBreadcrumbs<DateFacetValue>(
       engine.state.dateFacetSet,
       executeToggleDateFacetSelect,
@@ -92,7 +92,7 @@ export const buildBreadcrumbManager = (
     );
   }
 
-  function getCategoryFacetBreadcrumbs() {
+  function getCategoryFacetBreadcrumbs(): CategoryFacetBreadcrumb[] {
     const breadcrumbs: CategoryFacetBreadcrumb[] = [];
 
     Object.keys(engine.state.categoryFacetSet).forEach((facetId) => {
@@ -100,18 +100,19 @@ export const buildBreadcrumbManager = (
         engine.state,
         facetId
       );
-      breadcrumbs.push({
-        value: selectedValues[selectedValues.length - 1],
-        path: selectedValues,
-        deselect: () => {
-          dispatch(
-            executeDeselectAllCategoryFacetValues({
-              facetId,
-              numberOfValues: 5,
-            })
-          );
-        },
-      });
+      if (selectedValues.length > 0) {
+        breadcrumbs.push({
+          path: selectedValues,
+          deselect: () => {
+            dispatch(
+              executeDeselectAllCategoryFacetValues({
+                facetId,
+                numberOfValues: 5,
+              })
+            );
+          },
+        });
+      }
     });
     return breadcrumbs;
   }
@@ -130,12 +131,16 @@ export const buildBreadcrumbManager = (
   };
 };
 
-export type GenericBreadcrumb<T extends BaseFacetValue> = {
+export type Breadcrumb<T extends BaseFacetValue> = {
   value: T;
   deselect: () => void;
 };
 
-export interface CategoryFacetBreadcrumb
-  extends GenericBreadcrumb<CategoryFacetValue> {
+export type FacetBreadcrumb = Breadcrumb<FacetValue>;
+export type NumericFacetBreadcrumb = Breadcrumb<NumericFacetValue>;
+export type DateFacetBreadcrumb = Breadcrumb<DateFacetValue>;
+
+export interface CategoryFacetBreadcrumb {
   path: CategoryFacetValue[];
+  deselect: () => void;
 }

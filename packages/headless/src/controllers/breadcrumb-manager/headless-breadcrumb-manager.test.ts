@@ -1,4 +1,4 @@
-import {buildMockEngine, createMockState, MockEngine} from '../../test';
+import {buildMockSearchAppEngine, createMockState, MockEngine} from '../../test';
 import {buildMockFacetRequest} from '../../test/mock-facet-request';
 import {buildMockFacetValue} from '../../test/mock-facet-value';
 import {buildMockFacetResponse} from '../../test/mock-facet-response';
@@ -19,13 +19,13 @@ import {buildMockCategoryFacetResponse} from '../../test/mock-category-facet-res
 
 describe('headless breadcrumb manager', () => {
   const facetId = 'abc123';
-  let engine: MockEngine;
+  let engine: MockEngine<SearchAppState>;
   let state: SearchAppState;
   let breadcrumbManager: BreadcrumbManager;
 
   beforeEach(() => {
     state = createMockState();
-    engine = buildMockEngine({state});
+    engine = buildMockSearchAppEngine({state});
     breadcrumbManager = buildBreadcrumbManager(engine);
   });
 
@@ -66,6 +66,6 @@ describe('headless breadcrumb manager', () => {
       buildMockCategoryFacetResponse({facetId, values: [mockValue]}),
     ];
     const facetBreadcrumbs = breadcrumbManager.state.categoryFacetBreadcrumbs;
-    expect(facetBreadcrumbs?.[0]?.value).toBe(mockValue);
+    expect(facetBreadcrumbs?.[0]?.path).toEqual([mockValue]);
   });
 });

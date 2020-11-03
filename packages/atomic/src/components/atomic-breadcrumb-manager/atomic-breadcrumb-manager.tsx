@@ -6,11 +6,11 @@ import {
   Engine,
   Unsubscribe,
   buildBreadcrumbManager,
-  GenericBreadcrumb,
+  FacetBreadcrumb,
+  NumericFacetBreadcrumb,
+  DateFacetBreadcrumb,
   CategoryFacetBreadcrumb,
-  FacetValue,
-  NumericFacetValue,
-  DateFacetValue,
+  CategoryFacetValue,
 } from '@coveo/headless';
 
 @Component({
@@ -46,16 +46,14 @@ export class AtomicBreadcrumbManager {
   }
 
   private get facetBreadcrumbs() {
-    return this.state.facetBreadcrumbs.map(
-      (breadcrumb: GenericBreadcrumb<FacetValue>) => (
-        <button onClick={breadcrumb.deselect}>{breadcrumb.value.value}</button>
-      )
-    );
+    return this.state.facetBreadcrumbs.map((breadcrumb: FacetBreadcrumb) => (
+      <button onClick={breadcrumb.deselect}>{breadcrumb.value.value}</button>
+    ));
   }
 
   private get numericFacetBreadcrumbs() {
     return this.state.numericFacetBreadcrumbs.map(
-      (breadcrumb: GenericBreadcrumb<NumericFacetValue>) => (
+      (breadcrumb: NumericFacetBreadcrumb) => (
         <button onClick={breadcrumb.deselect}>
           {breadcrumb.value.start} - {breadcrumb.value.end}
         </button>
@@ -65,7 +63,7 @@ export class AtomicBreadcrumbManager {
 
   private get dateFacetBreadcrumbs() {
     return this.state.dateFacetBreadcrumbs.map(
-      (breadcrumb: GenericBreadcrumb<DateFacetValue>) => (
+      (breadcrumb: DateFacetBreadcrumb) => (
         <button onClick={breadcrumb.deselect}>
           {breadcrumb.value.start} - {breadcrumb.value.end}
         </button>
@@ -76,12 +74,10 @@ export class AtomicBreadcrumbManager {
   private get categoryFacetBreadcrumbs() {
     return this.state.categoryFacetBreadcrumbs.map(
       (breadcrumb: CategoryFacetBreadcrumb) => {
-        if (breadcrumb.path.length === 0) return null;
-        let path = '';
-        for (const segment of breadcrumb.path) {
-          path = path.concat(`${segment.value}/`);
-        }
-        return <button onClick={breadcrumb.deselect}>{path}</button>;
+        const pathString = breadcrumb.path
+          .map((value: CategoryFacetValue) => value.value)
+          .join('/');
+        return <button onClick={breadcrumb.deselect}>{pathString}</button>;
       }
     );
   }
