@@ -11,7 +11,7 @@ import {
 import {executeSearch} from '../../../features/search/search-actions';
 import {baseFacetResponseSelector} from '../../../features/facets/facet-set/facet-set-selectors';
 import {RangeFacetSortCriterion} from '../../../features/facets/range-facets/generic/interfaces/request';
-import {updateRangeFacetSortCriterion, executeToggleRangeFacetSelect} from '../../../features/facets/range-facets/generic/range-facet-actions';
+import {updateRangeFacetSortCriterion} from '../../../features/facets/range-facets/generic/range-facet-actions';
 import {deselectAllFacetValues} from '../../../features/facets/facet-set/facet-set-actions';
 import {updateFacetOptions} from '../../../features/facet-options/facet-options-actions';
 import {
@@ -19,6 +19,7 @@ import {
   SearchSection,
 } from '../../../state/state-sections';
 import {isRangeFacetValueSelected} from '../../../features/facets/range-facets/generic/range-facet-utils';
+import {executeToggleRangeFacetSelect} from '../../../features/facets/range-facets/generic/range-facet-controller-actions';
 
 export type RangeFacet = ReturnType<typeof buildRangeFacet>;
 

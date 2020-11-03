@@ -1,15 +1,7 @@
-import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAction} from '@reduxjs/toolkit';
 import {FacetRegistrationOptions} from './interfaces/options';
 import {FacetValue} from './interfaces/response';
 import {FacetSortCriterion} from './interfaces/request';
-import {AsyncThunkSearchOptions} from '../../../api/search/search-api-client';
-import {
-  ConfigurationSection,
-  FacetSection,
-} from '../../../state/state-sections';
-import {updateFacetOptions} from '../../facet-options/facet-options-actions';
-import {executeSearch} from '../../search/search-actions';
-import {getAnalyticsActionForToggleFacetSelect} from './facet-set-utils';
 
 /**
  * Registers a facet in the facet set.
@@ -65,25 +57,3 @@ export const updateFacetIsFieldExpanded = createAction<{
   isFieldExpanded: boolean;
 }>('facet/updateIsFieldExpanded');
 
-/**
- * Toggles the facet value and then executes a search with the appropriate analytics tag.
- * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
- * @param selection (FacetValue) The target facet value.
- */
-export const executeToggleFacetSelect = createAsyncThunk<
-  void,
-  {
-    facetId: string;
-    selection: FacetValue;
-  },
-  AsyncThunkSearchOptions<FacetSection & ConfigurationSection>
->('facet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
-  const analyticsAction = getAnalyticsActionForToggleFacetSelect(
-    facetId,
-    selection
-  );
-
-  dispatch(toggleSelectFacetValue({facetId, selection}));
-  dispatch(updateFacetOptions({freezeFacetOrder: true}));
-  dispatch(executeSearch(analyticsAction));
-});

@@ -9,8 +9,6 @@ import {facetResponseSelectedValuesSelector} from '../../features/facets/facet-s
 import {categoryFacetSelectedValuesSelector} from '../../features/facets/category-facet-set/category-facet-set-selectors';
 import {numericFacetSelectedValuesSelector} from '../../features/facets/range-facets/numeric-facet-set/numeric-facet-selectors';
 import {dateFacetSelectedValuesSelector} from '../../features/facets/range-facets/date-facet-set/date-facet-selectors';
-import {executeToggleNumericFacetSelect} from '../../features/facets/range-facets/numeric-facet-set/numeric-facet-actions';
-import {executeToggleDateFacetSelect} from '../../features/facets/range-facets/date-facet-set/date-facet-actions';
 import {
   CategoryFacetSection,
   ConfigurationSection,
@@ -19,11 +17,13 @@ import {
   NumericFacetSection,
   SearchSection,
 } from '../../state/state-sections';
-import {executeToggleFacetSelect} from '../../features/facets/facet-set/facet-set-actions';
-import {executeDeselectAllCategoryFacetValues} from '../../features/facets/category-facet-set/category-facet-set-actions';
 import {BaseFacetRequest} from '../../features/facets/facet-api/request';
 import {AsyncThunk} from '@reduxjs/toolkit';
 import {AsyncThunkSearchOptions} from '../../api/search/search-api-client';
+import {executeDeselectAllCategoryFacetValues} from '../../features/facets/category-facet-set/category-facet-set-controller-actions';
+import {executeToggleFacetSelect} from '../../features/facets/facet-set/facet-set-controller-actions';
+import {executeToggleNumericFacetSelect} from '../../features/facets/range-facets/numeric-facet-set/numeric-facet-controller-actions';
+import {executeToggleDateFacetSelect} from '../../features/facets/range-facets/date-facet-set/date-facet-controller-actions';
 
 export type BreadcrumbManager = ReturnType<typeof buildBreadcrumbManager>;
 export type BreadcrumbManagerState = BreadcrumbManager['state'];

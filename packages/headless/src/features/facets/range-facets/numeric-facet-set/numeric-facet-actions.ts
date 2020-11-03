@@ -1,16 +1,8 @@
-import {createAction, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAction} from '@reduxjs/toolkit';
 import {NumericFacetRegistrationOptions} from './interfaces/options';
 import {NumericFacetValue} from './interfaces/response';
-import {
-  executeToggleRangeFacetSelect,
-  updateRangeFacetSortCriterion,
-} from '../generic/range-facet-actions';
+import {updateRangeFacetSortCriterion} from '../generic/range-facet-actions';
 import {deselectAllFacetValues} from '../../facet-set/facet-set-actions';
-import {AsyncThunkSearchOptions} from '../../../../api/search/search-api-client';
-import {
-  ConfigurationSection,
-  NumericFacetSection,
-} from '../../../../state/state-sections';
 
 /**
  * Registers a numeric facet.
@@ -41,19 +33,3 @@ export const updateNumericFacetSortCriterion = updateRangeFacetSortCriterion;
  */
 export const deselectAllNumericFacetValues = deselectAllFacetValues;
 
-/**
- * Toggles the numeric facet value and then executes a search with the appropriate analytics tag.
- * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
- * @param selection (NumericFacetValue) The target numeric facet value.
- */
-export const executeToggleNumericFacetSelect = createAsyncThunk<
-  void,
-  {
-    facetId: string;
-    selection: NumericFacetValue;
-  },
-  AsyncThunkSearchOptions<ConfigurationSection & NumericFacetSection>
->('numericFacet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
-  dispatch(toggleSelectNumericFacetValue({facetId, selection}));
-  dispatch(executeToggleRangeFacetSelect({facetId, selection}));
-});

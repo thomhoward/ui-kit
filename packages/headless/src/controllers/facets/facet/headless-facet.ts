@@ -6,7 +6,7 @@ import {
   deselectAllFacetValues,
   updateFacetSortCriterion,
   updateFacetNumberOfValues,
-  updateFacetIsFieldExpanded, executeToggleFacetSelect,
+  updateFacetIsFieldExpanded,
 } from '../../../features/facets/facet-set/facet-set-actions';
 import {randomID} from '../../../utils/utils';
 import {
@@ -36,6 +36,7 @@ import {
   SearchSection,
 } from '../../../state/state-sections';
 import {isFacetValueSelected} from '../../../features/facets/facet-set/facet-set-utils';
+import {executeToggleFacetSelect} from '../../../features/facets/facet-set/facet-set-controller-actions';
 
 export type Facet = ReturnType<typeof buildFacet>;
 export type FacetState = Facet['state'];

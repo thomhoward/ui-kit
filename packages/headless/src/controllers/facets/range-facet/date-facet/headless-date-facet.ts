@@ -13,13 +13,14 @@ import {
   DateFacetResponse,
   DateFacetValue,
 } from '../../../../features/facets/range-facets/date-facet-set/interfaces/response';
-import {registerDateFacet, executeToggleDateFacetSelect} from '../../../../features/facets/range-facets/date-facet-set/date-facet-actions';
+import {registerDateFacet} from '../../../../features/facets/range-facets/date-facet-set/date-facet-actions';
 import {buildRangeFacet} from '../headless-range-facet';
 import {
   ConfigurationSection,
   DateFacetSection,
   SearchSection,
 } from '../../../../state/state-sections';
+import {executeToggleDateFacetSelect} from '../../../../features/facets/range-facets/date-facet-set/date-facet-controller-actions';
 
 type DateRangeOptions = Pick<DateRangeRequest, 'start' | 'end'> &
   Partial<DateRangeRequest>;

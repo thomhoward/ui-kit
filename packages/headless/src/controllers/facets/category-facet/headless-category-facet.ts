@@ -6,8 +6,8 @@ import {
   registerCategoryFacet,
   updateCategoryFacetNumberOfValues,
   updateCategoryFacetSortCriterion,
-  executeToggleCategoryFacetSelect,
-  executeDeselectAllCategoryFacetValues,
+
+
 } from '../../../features/facets/category-facet-set/category-facet-set-actions';
 import {categoryFacetResponseSelector} from '../../../features/facets/category-facet-set/category-facet-set-selectors';
 import {CategoryFacetValue} from '../../../features/facets/category-facet-set/interfaces/response';
@@ -33,6 +33,10 @@ import {
   SearchSection,
 } from '../../../state/state-sections';
 import {partitionIntoParentsAndValues} from '../../../features/facets/category-facet-set/category-facet-utils';
+import {
+  executeDeselectAllCategoryFacetValues,
+  executeToggleCategoryFacetSelect,
+} from '../../../features/facets/category-facet-set/category-facet-set-controller-actions';
 
 export type CategoryFacetProps = {
   options: CategoryFacetOptions;
