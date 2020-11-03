@@ -10,9 +10,11 @@ export {
 // Main App
 export * from './app/headless-engine';
 export * from './app/search-app-reducers';
+export * from './app/user-actions-app-reducers';
 
 // State
 export * from './state/search-app-state';
+export * from './state/user-actions-app-state';
 
 // Controllers
 export * from './controllers/controller/headless-controller';
@@ -32,6 +34,7 @@ export * from './controllers/search-box/headless-search-box';
 export * from './controllers/sort/headless-sort';
 export * from './controllers/tab/headless-tab';
 export * from './controllers/facet-manager/headless-facet-manager';
+export * from './controllers/user-actions/headless-user-actions';
 
 // Selectors
 export * from './features/facets/facet-set/facet-set-selectors';
@@ -59,6 +62,7 @@ export * as ResultAnalyticsActions from './features/result/result-analytics-acti
 export * as SearchActions from './features/search/search-actions';
 export * as SearchHubActions from './features/search-hub/search-hub-actions';
 export * as SortCriterionActions from './features/sort-criteria/sort-criteria-actions';
+export * as UserProfileActions from './features/user-profile/user-profile-actions';
 
 // Types & Helpers
 export * from './api/search/search/result';
@@ -75,3 +79,4 @@ export {FacetValue} from './features/facets/facet-set/interfaces/response';
 export {FacetSortCriterion} from './features/facets/facet-set/interfaces/request';
 export {NumericFacetValue} from './features/facets/range-facets/numeric-facet-set/interfaces/response';
 export {RangeFacetSortCriterion} from './features/facets/range-facets/generic/interfaces/request';
+export * from './features/user-profile/user-profile-state';

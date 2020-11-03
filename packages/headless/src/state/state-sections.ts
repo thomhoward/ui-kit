@@ -17,6 +17,7 @@ import {QueryState} from '../features/query/query-state';
 import {RedirectionState} from '../features/redirection/redirection-state';
 import {SearchState} from '../features/search/search-state';
 import {SortCriteriaState} from '../features/sort-criteria/sort-criteria-state';
+import {UserProfileState} from '../features/user-profile/user-profile-state';
 
 export interface QuerySection {
   /**
@@ -165,4 +166,11 @@ export interface FieldsSection {
    * The information related to fields used in the engine.
    */
   fields: FieldsState;
+}
+
+export interface UserProfileSection {
+  /**
+   * The information the machine learning user actions endpoint
+   */
+  userProfile: UserProfileState;
 }

@@ -1,0 +1,93 @@
+<template>
+  <div>
+    <template if:true={isLoading}>
+      <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+    </template>
+    <template if:false={isLoading}>
+      <div class="slds-border_bottom">
+        <div class="slds-text-heading_large">Session Summary</div>
+          <div class="slds-text-heading_medium">RECENT CLICKED DOCUMENTS</div>
+          <ul class="slds-m-around_medium">
+            <template for:each={someDocuments} for:item="document">
+              <li key={document.key}>
+                <lightning-icon icon-name="standard:document" alternative-text="Document" title="Document" size="x-small"></lightning-icon>
+                <a href={document.value.ClickUri}>{document.value.title}</a>
+              </li>
+            </template>
+          </ul>
+          <lightning-accordion allow-multiple-sections-open	>
+            <lightning-accordion-section name="moreDocuments" label="Show more" style="margin-left: -.75rem">
+              <ul class="slds-m-around_medium">
+                <template for:each={documents} for:item="document">
+                  <li key={document.key}>
+                    <lightning-icon icon-name="standard:document" alternative-text="Document" title="Document" size="x-small"></lightning-icon>
+                    <a href={document.value.ClickUri}>{document.value.title}</a>
+                  </li>
+                </template>
+              </ul>
+            </lightning-accordion-section>
+          </lightning-accordion>
+          <div class="slds-text-heading_medium">RECENT QUERIES</div>
+          <ul class="slds-m-around_medium">
+            <template for:each={someQueries} for:item="query">
+              <li key={query.key}>
+                <lightning-icon icon-name="standard:search" alternative-text="Search" title="Search" size="x-small"></lightning-icon>
+                <span>{query.value}</span>
+              </li>
+            </template>
+          </ul>
+          <lightning-accordion allow-multiple-sections-open>
+            <lightning-accordion-section name="Queries" label="Show more" style="margin-left: -.75rem">
+              <ul class="slds-m-around_medium">
+                <template for:each={moreQueries} for:item="query">
+                  <li key={query.key}>
+                    <lightning-icon icon-name="standard:search" alternative-text="Search" title="Search" size="x-small"></lightning-icon>
+                    <span>{query.value}</span>
+                  </li>
+                </template>
+              </ul>
+            </lightning-accordion-section>
+          </lightning-accordion>
+      </div>
+      <div class="slds-text-heading_large">User's Recent Activity</div>
+      <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-3">
+          <span>Start Date</span>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+          <span>Start Time</span>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+          <span>Duration</span>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+          <b><lightning-formatted-date-time value={startDate} month="short" day="2-digit"></lightning-formatted-date-time></b>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+          <b><lightning-formatted-date-time value={startDate} hour="2-digit" minute="2-digit" second="2-digit"></lightning-formatted-date-time></b>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+          <b><span>{duration}</span></b>
+        </div>
+      </div>
+      <ul class="slds-m-around_medium slds-scrollable_y" style="height:35rem">
+        <template for:each={userActions} for:item="userAction">
+          <li key={userAction.key}>
+            <lightning-card  key={userAction.key} title={userAction.name} icon-name="standard:search">
+              <lightning-formatted-date-time value={userAction.timestamp} month="short" day="2-digit" hour="2-digit" minute="2-digit" slot="actions"></lightning-formatted-date-time>
+              <div class="slds-p-horizontal_medium slds-p-bottom_small">
+                <template if:true={userAction.document}>
+                  <p class="slds-p-horizontal"><b>{userAction.document.title}</b></p>
+                </template>
+                <template if:true={userAction.query}>
+                  <p class="slds-p-horizontal"><b>{userAction.query}</b></p>
+                </template>
+                <p class="slds-p-horizontal">{userAction.raw.origin_level_1}</p>
+              </div>
+            </lightning-card>
+          </li>
+        </template>
+      </ul>
+    </template>
+  </div>
+</template>

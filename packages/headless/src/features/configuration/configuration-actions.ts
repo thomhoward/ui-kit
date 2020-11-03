@@ -67,6 +67,14 @@ export const updateAnalyticsConfiguration = createAction(
     })
 );
 
+export const updateUserProfileConfiguration = createAction(
+  'configuration/udpateUserProfileConfiguration',
+  (payload: {userId?: string}) =>
+    validatePayloadSchema(payload, {
+      userId: new StringValue({emptyAllowed: false, required: false}),
+    })
+);
+
 /**
  * Renews the accessToken specified in the global headless engine configuration.
  * @param renew (`() => Promise<string>`) A function that fetches a new access token. The function must return a Promise that resolves to a string (the new access token).

@@ -24,6 +24,14 @@ export interface ConfigurationState {
      */
     apiBaseUrl: string;
   };
+
+  userProfile: {
+    /**
+     * Specified ID to identify the user who's actions we want to retrieve,
+     */
+    userId: string;
+  };
+
   /**
    * The global headless engine Usage Analytics API configuration.
    */
@@ -66,6 +74,9 @@ export const getConfigurationInitialState: () => ConfigurationState = () => ({
   platformUrl: platformUrl(),
   search: {
     apiBaseUrl: `${platformUrl()}${searchAPIEndpoint}`,
+  },
+  userProfile: {
+    userId: '',
   },
   analytics: {
     enabled: true,

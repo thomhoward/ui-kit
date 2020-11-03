@@ -13,11 +13,14 @@ import {
   disableAnalytics,
   enableAnalytics,
   updateAnalyticsConfiguration,
+  updateUserProfileConfiguration,
 } from '../features/configuration/configuration-actions';
 import {configureStore, Store} from './store';
 import {SearchAPIClient} from '../api/search/search-api-client';
+import {MLAPIClient} from '../api/machine-learning/ml-api-client';
 import {debounce} from 'ts-debounce';
 import {SearchAppState} from '../state/search-app-state';
+import {UserActionsAppState} from '../state/user-actions-app-state';
 
 /**
  * The global headless engine options.
@@ -95,6 +98,16 @@ export interface HeadlessConfigurationOptions {
     searchHub?: string;
   };
 
+  /**
+   * The global headless engine configuration options specific to the Machine Learning user profile API.
+   */
+  userProfile?: {
+    /**
+     * Specifies the id of the user profile we want.
+     */
+    userId: string;
+  };
+
   analytics?: {
     /**
      * Specifies if usage analytics tracking should be enabled.
@@ -123,12 +136,14 @@ export interface HeadlessConfigurationOptions {
 
 type EngineDispatch<State> = ThunkDispatch<
   State,
-  {searchAPIClient: SearchAPIClient},
+  {searchAPIClient: SearchAPIClient; mlAPIClient: MLAPIClient},
   AnyAction
 > &
   Dispatch<AnyAction>;
 
-export interface Engine<State = SearchAppState> {
+export interface Engine<
+  State = SearchAppState | (SearchAppState & UserActionsAppState)
+> {
   /**
    * Dispatches an action directly. This is the only way to trigger a state change.
    * Each headless controller dispatches its own actions.
@@ -170,6 +185,7 @@ export class HeadlessEngine<Reducers extends ReducersMapObject>
       middlewares: options.middlewares,
       thunkExtraArguments: {
         searchAPIClient: new SearchAPIClient(() => this.renewAccessToken()),
+        mlAPIClient: new MLAPIClient(() => this.renewAccessToken()),
       },
     });
 
@@ -188,6 +204,11 @@ export class HeadlessEngine<Reducers extends ReducersMapObject>
     if (options.configuration.analytics) {
       this.reduxStore.dispatch(
         updateAnalyticsConfiguration(options.configuration.analytics)
+      );
+    }
+    if (options.configuration.userProfile) {
+      this.reduxStore.dispatch(
+        updateUserProfileConfiguration(options.configuration.userProfile)
       );
     }
   }

@@ -8,6 +8,7 @@ import {
   updateAnalyticsConfiguration,
   setOriginLevel2,
   setOriginLevel3,
+  updateUserProfileConfiguration,
 } from './configuration-actions';
 import {
   getConfigurationInitialState,
@@ -49,6 +50,11 @@ export const configurationReducer = createReducer(
         }
         if (action.payload.apiBaseUrl !== undefined) {
           state.analytics.apiBaseUrl = action.payload.apiBaseUrl;
+        }
+      })
+      .addCase(updateUserProfileConfiguration, (state, action) => {
+        if (action.payload.userId) {
+          state.userProfile.userId = action.payload.userId;
         }
       })
       .addCase(renewAccessToken.fulfilled, (state, action) => {

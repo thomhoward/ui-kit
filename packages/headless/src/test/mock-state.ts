@@ -21,6 +21,8 @@ import {getCategoryFacetSearchSetInitialState} from '../features/facets/facet-se
 import {getAdvancedSearchQueriesInitialState} from '../features/advanced-search-queries/advanced-search-queries-state';
 import {SearchAppState} from '../state/search-app-state';
 import {getFacetOptionsInitialState} from '../features/facet-options/facet-options-state';
+import {getUserProfileInitialState} from '../features/user-profile/user-profile-state';
+import {UserActionsAppState} from '../state/user-actions-app-state';
 
 export function createMockState(
   config: Partial<SearchAppState> = {}
@@ -48,6 +50,16 @@ export function createMockState(
     history: makeHistory(getHistoryEmptyState()),
     pipeline: getPipelineInitialState(),
     searchHub: getSearchHubInitialState(),
+    ...config,
+  };
+}
+
+export function createMockUserActionsState(
+  config: Partial<UserActionsAppState> = {}
+): UserActionsAppState {
+  return {
+    configuration: getConfigurationInitialState(),
+    userProfile: getUserProfileInitialState(),
     ...config,
   };
 }
