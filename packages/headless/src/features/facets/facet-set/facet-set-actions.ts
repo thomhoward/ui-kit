@@ -5,17 +5,41 @@ import {
   validatePayloadValue,
   validatePayloadSchema,
 } from '../../../utils/validate-payload';
-import {StringValue, NumberValue, BooleanValue} from '@coveo/bueno';
+import {
+  StringValue,
+  NumberValue,
+  BooleanValue,
+  RecordValue,
+  Value,
+} from '@coveo/bueno';
 import {FacetValue} from './interfaces/response';
+import {
+  facetIdDefinition,
+  requiredNonEmptyString,
+} from '../generic/facet-actions-validation';
 
-const facetIdDefinition = new StringValue({required: true, emptyAllowed: true});
-
+const facetValueDefinition = {
+  value: requiredNonEmptyString,
+  numberOfResults: new NumberValue({min: 0}),
+  state: requiredNonEmptyString,
+};
+const facetRegistrationOptionsDefinition = {
+  facetId: facetIdDefinition,
+  field: new StringValue({required: true, emptyAllowed: true}),
+  delimitingCharacter: new StringValue({required: false, emptyAllowed: true}),
+  filterFacetCount: new BooleanValue({required: false}),
+  injectionDepth: new NumberValue({required: false, min: 0}),
+  numberOfValues: new NumberValue({required: false, min: 1}),
+  sortCriteria: new Value<FacetSortCriterion>({required: false}),
+};
 /**
  * Registers a facet in the facet set.
  * @param (FacetRegistrationOptions) The options to register the facet with.
  */
-export const registerFacet = createAction<FacetRegistrationOptions>(
-  'facet/register'
+export const registerFacet = createAction(
+  'facet/register',
+  (payload: FacetRegistrationOptions) =>
+    validatePayloadSchema(payload, facetRegistrationOptionsDefinition)
 );
 
 /**
@@ -23,10 +47,14 @@ export const registerFacet = createAction<FacetRegistrationOptions>(
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  * @param selection (FacetValue) The target facet value.
  */
-export const toggleSelectFacetValue = createAction<{
-  facetId: string;
-  selection: FacetValue;
-}>('facet/toggleSelectValue');
+export const toggleSelectFacetValue = createAction(
+  'facet/toggleSelectValue',
+  (payload: {facetId: string; selection: FacetValue}) =>
+    validatePayloadSchema(payload, {
+      facetId: facetIdDefinition,
+      selection: new RecordValue(facetValueDefinition),
+    })
+);
 
 /**
  * Deselects all values of a facet.
@@ -42,10 +70,14 @@ export const deselectAllFacetValues = createAction(
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  * @param criterion (FacetSortCriterion) The criterion by which to sort the facet.
  */
-export const updateFacetSortCriterion = createAction<{
-  facetId: string;
-  criterion: FacetSortCriterion;
-}>('facet/updateSortCriterion');
+export const updateFacetSortCriterion = createAction(
+  'facet/updateSortCriterion',
+  (payload: {facetId: string; criterion: FacetSortCriterion}) =>
+    validatePayloadSchema(payload, {
+      facetId: facetIdDefinition,
+      criterion: new Value<FacetSortCriterion>({required: true}),
+    })
+);
 
 /**
  * Updates the number of values of a facet.
@@ -57,7 +89,7 @@ export const updateFacetNumberOfValues = createAction(
   (payload: {facetId: string; numberOfValues: number}) =>
     validatePayloadSchema(payload, {
       facetId: facetIdDefinition,
-      numberOfValues: new NumberValue({min: 0}),
+      numberOfValues: new NumberValue({required: true, min: 1}),
     })
 );
 
