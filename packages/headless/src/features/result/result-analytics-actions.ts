@@ -9,8 +9,7 @@ import {
 } from '../analytics/analytics-utils';
 import {configureAnalytics} from '../../api/analytics/analytics';
 import {Result} from '../../api/search/search/result';
-import {StringValue, RecordValue} from '@coveo/bueno';
-import {validatePayloadSchema} from '../../utils/validate-payload';
+import {StringValue, RecordValue, Schema} from '@coveo/bueno';
 import {Raw} from '../../api/search/search/raw';
 
 const requiredNonEmptyString = new StringValue({
@@ -32,24 +31,22 @@ const resultPartialDefinition = {
   clickUri: new StringValue({required: true, emptyAllowed: false, url: true}),
   rankingModifier: new StringValue({required: false, emptyAllowed: true}),
 };
-type rawPartialType = keyof typeof rawPartialDefinition;
 
-function partialRawPayload(raw: Raw): rawPartialType {
-  const payload = {};
-  Object.assign(
-    payload,
-    Object.keys(rawPartialDefinition).map((key) => ({[key]: raw[key]}))
+function partialRawPayload(raw: Raw): Partial<Raw> {
+  return Object.assign(
+    {},
+    ...Object.keys(rawPartialDefinition).map((key) => ({[key]: raw[key]}))
   );
-  return payload as rawPartialType;
 }
 
-function partialResultPayload(result: Result) {
-  const resultPayload = {};
-  Object.assign(
-    resultPayload,
-    Object.keys(rawPartialDefinition).map((key) => ({[key]: result[key]}))
+function partialResultPayload(result: Result): Partial<Result> {
+  return Object.assign(
+    {},
+    ...Object.keys(resultPartialDefinition).map((key) => ({
+      [key]: result[key as keyof typeof resultPartialDefinition],
+    })),
+    {raw: partialRawPayload(result.raw)}
   );
-  return {...resultPayload, raw: partialRawPayload(result.raw)};
 }
 
 /**
@@ -60,10 +57,7 @@ export const logDocumentOpen = createAsyncThunk(
   'analytics/result/open',
   async (result: Result, {getState}) => {
     const state = searchPageState(getState);
-    validatePayloadSchema(
-      partialResultPayload(result),
-      resultPartialDefinition
-    );
+    new Schema(resultPartialDefinition).validate(partialResultPayload(result));
     await configureAnalytics(state).logDocumentOpen(
       partialDocumentInformation(result, state),
       documentIdentifier(result)
