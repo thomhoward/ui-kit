@@ -74,4 +74,12 @@ export class ArrayValue implements SchemaValue<PrimitivesValues[]> {
   public get default() {
     return undefined;
   }
+
+  public get required() {
+    return this.value.required();
+  }
+}
+
+export function isArray(value: unknown): value is Array<PrimitivesValues> {
+  return Object.prototype.toString.call(value) === '[object Array]';
 }

@@ -3,17 +3,18 @@ import {StringValue, isString} from './string-value';
 import {BooleanValue, isBoolean} from './boolean-value';
 import {NumberValue, isNumber} from './number-value';
 import {isNullOrUndefined} from './value';
+import {ArrayValue, isArray} from './array-value';
 
 type PrimitivesValues = boolean | number | string | undefined | null;
 type RecordWithPrimitiveValues = Record<string, PrimitivesValues>;
 type ComplexRecord = Record<
   string,
-  PrimitivesValues | RecordWithPrimitiveValues
+  PrimitivesValues | RecordWithPrimitiveValues | ArrayValue
 >;
 
 type RecordValueConfig = Record<
   string,
-  BooleanValue | StringValue | NumberValue | RecordValue
+  BooleanValue | StringValue | NumberValue | RecordValue | ArrayValue
 >;
 
 export class RecordValue implements SchemaValue<ComplexRecord> {
@@ -50,6 +51,8 @@ export class RecordValue implements SchemaValue<ComplexRecord> {
         invalidValue = (this.values[k] as StringValue).validate(v);
       } else if (isNumber(v)) {
         invalidValue = (this.values[k] as NumberValue).validate(v);
+      } else if (isArray(v)) {
+        invalidValue = (this.values[k] as ArrayValue).validate(v);
       }
 
       if (invalidValue !== null) {

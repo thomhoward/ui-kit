@@ -2,6 +2,7 @@ import {RecordValue} from './record-value';
 import {BooleanValue} from './boolean-value';
 import {NumberValue} from './number-value';
 import {StringValue} from './string-value';
+import {ArrayValue} from './array-value';
 
 describe('record value', () => {
   describe('can validate', () => {
@@ -47,6 +48,16 @@ describe('record value', () => {
       expect(v.validate({foo: false})).not.toBeNull();
       expect(v.validate({foo: {bar: {bazz: 5}}})).toBeNull();
     });
+
+    it('array value', () => {
+      const v = new RecordValue({
+        foo: new ArrayValue({each: new NumberValue(), min: 1}),
+        bar: new StringValue({required: true, emptyAllowed: false}),
+      });
+
+      expect(v.validate({foo: [1, 2, 3], bar: 'test'})).toBeNull();
+    });
+
     it('empty record should be accepted if no property is required', () => {
       const v = new RecordValue({
         foo: new BooleanValue({required: false}),
