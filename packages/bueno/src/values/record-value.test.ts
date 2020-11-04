@@ -51,11 +51,12 @@ describe('record value', () => {
 
     it('array value', () => {
       const v = new RecordValue({
-        foo: new ArrayValue({each: new NumberValue(), min: 1}),
+        foo: new ArrayValue({each: new NumberValue({min: 1, max: 3}), min: 1}),
         bar: new StringValue({required: true, emptyAllowed: false}),
       });
 
       expect(v.validate({foo: [1, 2, 3], bar: 'test'})).toBeNull();
+      expect(v.validate({foo: [4, 5, 6], bar: 'test'})).not.toBeNull();
     });
 
     it('empty record should be accepted if no property is required', () => {
