@@ -15,12 +15,12 @@ export type ManualRangeFacetOptions<
   T extends RangeFacetRequest
 > = RangeFacetRequiredParameters &
   Pick<T, 'currentValues'> &
-  AutomaticRanges<false> &
+  AutomaticRanges &
   Partial<RangeFacetOptionalParameters>;
 
 export type AutomaticRangeFacetOptions<
   T extends RangeFacetRequest
 > = RangeFacetRequiredParameters &
   Partial<Pick<T, 'currentValues'>> &
-  AutomaticRanges<true> &
+  AutomaticRanges &
   Partial<RangeFacetOptionalParameters>;

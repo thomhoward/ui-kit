@@ -32,7 +32,7 @@ const dateFacetRegistrationOptionsDefinition = {
   facetId: facetIdDefinition,
   field: requiredNonEmptyString,
   //currentValues:new ArrayValue({required:true, each:dateRangeRequestDefinition}),
-  currentValues: new Value<DateRangeRequest[]>({required: true}),
+  currentValues: new Value<DateRangeRequest[]>({required: false}),
   generateAutomaticRanges: new BooleanValue({required: true, default: true}),
   filterFacetCount: new BooleanValue({required: false}),
   injectionDepth: new NumberValue({required: false, min: 0}),
