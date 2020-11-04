@@ -6,7 +6,7 @@ import {UserActionsAppState} from '../state/user-actions-app-state';
 /**
  * Map of reducers that make up the UserActionsAppState.
  */
-export const userActionsAppReducer: ReducersMapObject<UserActionsAppState> = {
+export const userActionsAppReducers: ReducersMapObject<UserActionsAppState> = {
   configuration: configurationReducer,
   userProfile: userProfileReducer,
 };

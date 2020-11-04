@@ -73,7 +73,7 @@
       <ul class="slds-m-around_medium slds-scrollable_y" style="height:35rem">
         <template for:each={userActions} for:item="userAction">
           <li key={userAction.key}>
-            <lightning-card  key={userAction.key} title={userAction.name} icon-name="standard:search">
+            <lightning-card  key={userAction.key} title={userAction.name} icon-name={userAction.icon}>
               <lightning-formatted-date-time value={userAction.timestamp} month="short" day="2-digit" hour="2-digit" minute="2-digit" slot="actions"></lightning-formatted-date-time>
               <div class="slds-p-horizontal_medium slds-p-bottom_small">
                 <template if:true={userAction.document}>

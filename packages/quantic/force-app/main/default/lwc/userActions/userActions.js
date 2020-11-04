@@ -75,7 +75,7 @@ export default class UserActions extends LightningElement {
   initEngine() {
     this.engine = new CoveoHeadless.HeadlessEngine({
       configuration: this.config,
-      reducers: CoveoHeadless.userActionsAppReducer,
+      reducers: CoveoHeadless.userActionsAppReducers,
     });
     return this.engine;
   }
@@ -109,6 +109,16 @@ export default class UserActions extends LightningElement {
     this.duration = this.formatTimeInterval(endDate.getTime() - this.startDate.getTime());
   }
 
+  getIcon(action) {
+    if (action.name === 'Clicked Document'){ 
+      return 'standard:document';
+    }
+    if (action.type === 'SEARCH') {
+      return 'standard:search';
+    }
+    return 'standard:today';
+  }
+
   get isLoading() {
     return this.state.isLoading;
   }
@@ -126,6 +136,7 @@ export default class UserActions extends LightningElement {
       action.key = index;
       action.type = String(action.type);
       action.name = this.getActionName(action);
+      action.icon = this.getIcon(action);
       return action;
     }) : [];
     return userActionsWithKey;
