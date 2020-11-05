@@ -43,7 +43,10 @@ describe('facet-set selectors', () => {
     });
 
     it('#facetResponseSelectedValuesSelector returns an empty array if the facet does not exist', () => {
-      const selectedValues = facetResponseSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseSelectedValuesSelector(
+        state,
+        facetId
+      );
       expect(selectedValues).toEqual([]);
     });
 
@@ -57,7 +60,10 @@ describe('facet-set selectors', () => {
           values: [mockValue],
         }),
       ];
-      const selectedValues = facetResponseSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseSelectedValuesSelector(
+        state,
+        facetId
+      );
       expect(selectedValues).toEqual([mockValue]);
     });
 
@@ -76,7 +82,10 @@ describe('facet-set selectors', () => {
           values: [mockValue, mockValue2],
         }),
       ];
-      const selectedValues = facetResponseSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseSelectedValuesSelector(
+        state,
+        facetId
+      );
       expect(selectedValues).toContain(mockValue);
       expect(selectedValues).toContain(mockValue2);
     });
@@ -96,7 +105,10 @@ describe('facet-set selectors', () => {
           values: [mockValue, mockValue2],
         }),
       ];
-      const selectedValues = facetResponseSelectedValuesSelector(state, facetId);
+      const selectedValues = facetResponseSelectedValuesSelector(
+        state,
+        facetId
+      );
       expect(selectedValues).toContain(mockValue);
       expect(selectedValues).not.toContain(mockValue2);
     });

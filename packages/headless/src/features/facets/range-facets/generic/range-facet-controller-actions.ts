@@ -11,15 +11,17 @@ import {executeSearch} from '../../../search/search-actions';
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  * @param selection (RangeFacetValue) The target range facet value.
  */
-export const executeToggleRangeFacetSelect = createAsyncThunk<void,
+export const executeToggleRangeFacetSelect = createAsyncThunk<
+  void,
   {
     facetId: string;
     selection: RangeFacetValue;
   },
-  AsyncThunkSearchOptions<ConfigurationSection>>('rangeFacet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
+  AsyncThunkSearchOptions<ConfigurationSection>
+>('rangeFacet/executeToggleSelect', ({facetId, selection}, {dispatch}) => {
   const analyticsAction = getAnalyticsActionForToggleRangeFacetSelect(
     facetId,
-    selection,
+    selection
   );
 
   dispatch(updateFacetOptions({freezeFacetOrder: true}));

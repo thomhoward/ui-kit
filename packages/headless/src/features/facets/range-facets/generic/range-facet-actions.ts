@@ -10,4 +10,3 @@ export const updateRangeFacetSortCriterion = createAction<{
   facetId: string;
   criterion: RangeFacetSortCriterion;
 }>('rangeFacet/updateSortCriterion');
-

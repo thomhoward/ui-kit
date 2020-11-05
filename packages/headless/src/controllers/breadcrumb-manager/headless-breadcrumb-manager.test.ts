@@ -1,4 +1,8 @@
-import {buildMockSearchAppEngine, createMockState, MockEngine} from '../../test';
+import {
+  buildMockSearchAppEngine,
+  createMockState,
+  MockEngine,
+} from '../../test';
 import {buildMockFacetRequest} from '../../test/mock-facet-request';
 import {buildMockFacetValue} from '../../test/mock-facet-value';
 import {buildMockFacetResponse} from '../../test/mock-facet-response';

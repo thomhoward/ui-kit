@@ -56,4 +56,3 @@ export const updateFacetIsFieldExpanded = createAction<{
   facetId: string;
   isFieldExpanded: boolean;
 }>('facet/updateIsFieldExpanded');
-

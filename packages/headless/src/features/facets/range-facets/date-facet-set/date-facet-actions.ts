@@ -32,4 +32,3 @@ export const updateDateFacetSortCriterion = updateRangeFacetSortCriterion;
  * @param facetId (string) The unique identifier of the facet (e.g., `"1"`).
  */
 export const deselectAllDateFacetValues = deselectAllFacetValues;
-

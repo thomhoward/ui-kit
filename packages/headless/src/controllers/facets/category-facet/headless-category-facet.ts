@@ -6,8 +6,6 @@ import {
   registerCategoryFacet,
   updateCategoryFacetNumberOfValues,
   updateCategoryFacetSortCriterion,
-
-
 } from '../../../features/facets/category-facet-set/category-facet-set-actions';
 import {categoryFacetResponseSelector} from '../../../features/facets/category-facet-set/category-facet-set-selectors';
 import {CategoryFacetValue} from '../../../features/facets/category-facet-set/interfaces/response';
