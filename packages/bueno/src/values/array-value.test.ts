@@ -1,5 +1,7 @@
 import {ArrayValue} from './array-value';
 import {NumberValue} from './number-value';
+import {RecordValue} from './record-value';
+import {StringValue} from './string-value';
 
 describe('array value', () => {
   describe('can validate', () => {
@@ -34,6 +36,54 @@ describe('array value', () => {
       expect(v.validate(null)).toBeNull();
       expect(v.validate(undefined)).toBeNull();
       expect(v.validate([0, 1, 2, 3, 4, 5])).toBeNull();
+    });
+
+    it('each RecordValue', () => {
+      const v = new ArrayValue({
+        min: 2,
+        max: 4,
+        each: new RecordValue({
+          foo: new NumberValue({required: true, min: 1, max: 2}),
+          bar: new ArrayValue({
+            required: true,
+            min: 2,
+            max: 3,
+            each: new StringValue({required: true, emptyAllowed: false}),
+          }),
+        }),
+      });
+
+      expect(
+        v.validate([
+          {foo: 1, bar: ['foo', 'bar']},
+          {foo: 2, bar: ['Coveo', 'JSUI']},
+        ])
+      ).toBeNull();
+      expect(v.validate([{foo: 1, bar: ['foo', 'bar']}])).not.toBeNull();
+      expect(
+        v.validate([
+          {foo: 1, bar: ['foo', 'bar']},
+          {foo: 5, bar: ['Coveo', 'JSUI']},
+        ])
+      ).not.toBeNull();
+      expect(
+        v.validate([
+          {foo: 1, bar: ['foo']},
+          {foo: 2, bar: ['Coveo', 'JSUI']},
+        ])
+      ).not.toBeNull();
+      expect(
+        v.validate([
+          {foo: 1, bar: ['foo', '']},
+          {foo: 2, bar: ['Coveo', 'JSUI']},
+        ])
+      ).not.toBeNull();
+      expect(
+        v.validate([
+          {foo: 1, bar: ['foo', 3]},
+          {foo: 2, bar: ['Coveo', 'JSUI']},
+        ])
+      ).not.toBeNull();
     });
 
     it('required', () => {

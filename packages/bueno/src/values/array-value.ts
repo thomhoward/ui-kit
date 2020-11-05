@@ -3,11 +3,12 @@ import {SchemaValue} from '../schema';
 import {BooleanValue, isBoolean} from './boolean-value';
 import {NumberValue, isNumber} from './number-value';
 import {StringValue, isString} from './string-value';
+import {RecordValue, isRecord} from './record-value';
 
 interface ArrayValueConfig extends ValueConfig<PrimitivesValues[]> {
   min?: number;
   max?: number;
-  each?: BooleanValue | NumberValue | StringValue;
+  each?: BooleanValue | NumberValue | StringValue | RecordValue;
 }
 
 export class ArrayValue implements SchemaValue<PrimitivesValues[]> {
@@ -58,7 +59,7 @@ export class ArrayValue implements SchemaValue<PrimitivesValues[]> {
 
   private validatePrimitiveValue(
     v: PrimitivesValues,
-    validator: BooleanValue | StringValue | NumberValue
+    validator: BooleanValue | StringValue | NumberValue | RecordValue
   ) {
     if (isBoolean(v)) {
       return (validator as BooleanValue).validate(v);
@@ -66,6 +67,8 @@ export class ArrayValue implements SchemaValue<PrimitivesValues[]> {
       return (validator as StringValue).validate(v);
     } else if (isNumber(v)) {
       return (validator as NumberValue).validate(v);
+    } else if (isRecord(v)) {
+      return (validator as RecordValue).validate(v);
     }
 
     return 'value is not a primitive value';
