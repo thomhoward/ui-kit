@@ -22,7 +22,6 @@ import {buildMockQuerySuggest} from '../../test/mock-query-suggest';
 import {buildMockSearchAppEngine, MockEngine} from '../../test/mock-engine';
 import {updatePage} from '../../features/pagination/pagination-actions';
 import {SearchAppState} from '../../state/search-app-state';
-import {logQuerySuggestionClick} from '../../features/query-suggest/query-suggest-analytics-actions';
 import {buildMockQuerySuggestCompletion} from '../../test/mock-query-suggest-completion';
 
 describe('headless searchBox', () => {
@@ -167,15 +166,6 @@ describe('headless searchBox', () => {
 
     expect(engine.actions).toContainEqual(
       selectQuerySuggestion({id, expression: value})
-    );
-  });
-
-  it(`when calling selectSuggestion
-    should dispatch a logQuerySuggestionClick action`, () => {
-    searchBox.selectSuggestion(value);
-
-    expect(engine.actions).toContainEqual(
-      logQuerySuggestionClick({id, suggestion: value})
     );
   });
 

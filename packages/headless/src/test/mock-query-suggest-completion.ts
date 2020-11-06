@@ -8,6 +8,6 @@ export function buildMockQuerySuggestCompletion(
     score: 0,
     highlighted: '',
     executableConfidence: 1,
-    ...config
+    ...config,
   };
 }
