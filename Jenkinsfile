@@ -13,6 +13,7 @@ node('linux && docker') {
 
       stage('Build') {
         sh 'npm run build'
+        sh 'npm run doc'
       }
 
       stage('Install Chrome') {
@@ -21,6 +22,11 @@ node('linux && docker') {
         sh "apt-get update"
         sh "apt-get install -y google-chrome-stable fonts-ipafont-gothic fonts-wqy-zenhei fonts-thai-tlwg fonts-kacst fonts-freefont-ttf libxss1 libxtst6 --no-install-recommends"
         sh "google-chrome --version"
+      }
+
+      stage('Linting') {
+        sh 'npm run lint:junit'
+        junit 'reports/eslint.xml'
       }
 
       stage('Unit Test') {
