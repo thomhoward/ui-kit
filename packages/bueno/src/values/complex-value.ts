@@ -1,5 +1,11 @@
 import {SchemaValue} from '../schema';
-import {PrimitivesValues, ValueConfig, isNullOrUndefined, Value} from './value';
+import {
+  PrimitivesValues,
+  ValueConfig,
+  isNullOrUndefined,
+  Value,
+  isUndefined,
+} from './value';
 import {StringValue, isString} from './string-value';
 import {BooleanValue, isBoolean} from './boolean-value';
 import {NumberValue, isNumber} from './number-value';
@@ -10,24 +16,35 @@ type ComplexRecord = Record<
   PrimitivesValues | RecordWithPrimitiveValues | ArrayValue
 >;
 
-type RecordValueConfig = Record<
-  string,
-  BooleanValue | StringValue | NumberValue | RecordValue | ArrayValue
->;
+type RecordValueConfig = {
+  config?: ValueConfig<ComplexRecord>;
+  values?: Record<
+    string,
+    BooleanValue | StringValue | NumberValue | RecordValue | ArrayValue
+  >;
+};
 
 export class RecordValue implements SchemaValue<ComplexRecord> {
-  constructor(private values: RecordValueConfig = {}) {}
+  constructor(private record: RecordValueConfig = {}) {}
 
   public validate(input: unknown): string | null {
+    if (isUndefined(input)) {
+      if (this.record.config?.required) {
+        return 'value is required and is currently undefined';
+      } else {
+        return null;
+      }
+    }
+
     if (!isRecord(input)) {
       return 'value is not an object';
     }
 
-    if (Object.keys(input).length > Object.keys(this.values).length) {
+    if (Object.keys(input).length > Object.keys(this.record.values!).length) {
       return 'value contains unknown keys';
     }
 
-    for (const [k, v] of Object.entries(this.values)) {
+    for (const [k, v] of Object.entries(this.record.values!)) {
       if (v.required && isNullOrUndefined(input[k])) {
         return `value does not contain ${k}`;
       }
@@ -44,13 +61,13 @@ export class RecordValue implements SchemaValue<ComplexRecord> {
       let invalidValue = null;
 
       if (isBoolean(v)) {
-        invalidValue = (this.values[k] as BooleanValue).validate(v);
+        invalidValue = (this.record.values![k] as BooleanValue).validate(v);
       } else if (isString(v)) {
-        invalidValue = (this.values[k] as StringValue).validate(v);
+        invalidValue = (this.record.values![k] as StringValue).validate(v);
       } else if (isNumber(v)) {
-        invalidValue = (this.values[k] as NumberValue).validate(v);
+        invalidValue = (this.record.values![k] as NumberValue).validate(v);
       } else if (isArray(v)) {
-        invalidValue = (this.values[k] as ArrayValue).validate(v);
+        invalidValue = (this.record.values![k] as ArrayValue).validate(v);
       }
 
       if (invalidValue !== null) {
