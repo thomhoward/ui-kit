@@ -8,9 +8,14 @@ import {
   facetIdDefinition,
   requiredNonEmptyString,
 } from '../../generic/facet-actions-validation';
-import {RecordValue, NumberValue, BooleanValue, Value} from '@coveo/bueno';
+import {
+  RecordValue,
+  NumberValue,
+  BooleanValue,
+  Value,
+  ArrayValue,
+} from '@coveo/bueno';
 import {RangeFacetSortCriterion} from '../generic/interfaces/request';
-import {NumericRangeRequest} from './interfaces/request';
 
 const numericFacetValueDefinition = {
   state: requiredNonEmptyString,
@@ -20,11 +25,21 @@ const numericFacetValueDefinition = {
   endInclusive: new BooleanValue({required: true}),
 };
 
+const currentValuesDefinition = {
+  state: requiredNonEmptyString,
+  start: new NumberValue({required: true}),
+  end: new NumberValue({required: true}),
+  endInclusive: new BooleanValue({required: true}),
+};
+
 const numericFacetRegistrationOptionsDefinition = {
   facetId: facetIdDefinition,
   field: requiredNonEmptyString,
-  currentValues: new Value<NumericRangeRequest[]>({required: true}),
-  generateAutomaticRanges: new BooleanValue<true>({required: true}),
+  currentValues: new ArrayValue({
+    required: false,
+    each: new RecordValue(currentValuesDefinition),
+  }),
+  generateAutomaticRanges: new BooleanValue({required: true}),
   filterFacetCount: new BooleanValue({required: false}),
   injectionDepth: new NumberValue({required: false, min: 0}),
   numberOfValues: new NumberValue({required: false, min: 1}),

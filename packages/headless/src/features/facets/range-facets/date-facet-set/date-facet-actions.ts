@@ -4,14 +4,18 @@ import {DateFacetValue} from './interfaces/response';
 import {updateRangeFacetSortCriterion} from '../generic/range-facet-actions';
 import {deselectAllFacetValues} from '../../facet-set/facet-set-actions';
 import {validatePayloadSchema} from '../../../../utils/validate-payload';
-import {NumberValue, BooleanValue, RecordValue, Value} from '@coveo/bueno';
+import {
+  NumberValue,
+  BooleanValue,
+  RecordValue,
+  Value,
+  ArrayValue,
+} from '@coveo/bueno';
 import {
   facetIdDefinition,
   requiredNonEmptyString,
 } from '../../generic/facet-actions-validation';
 import {RangeFacetSortCriterion} from '../generic/interfaces/request';
-import {DateRangeRequest} from './interfaces/request';
-// import { FacetValueState } from '../../facet-api/value';
 
 const dateFacetValueDefinition = {
   state: requiredNonEmptyString,
@@ -21,18 +25,21 @@ const dateFacetValueDefinition = {
   endInclusive: new BooleanValue({required: true}),
 };
 
-// const dateRangeRequestDefinition = {
-//   start: requiredNonEmptyString,
-//   end: requiredNonEmptyString,
-//   endInclusive: new BooleanValue({required:true}),
-//   state: new Value<FacetValueState>({required:true}),
-// }
+const dateRangeRequestDefinition = {
+  start: requiredNonEmptyString,
+  end: requiredNonEmptyString,
+  endInclusive: new BooleanValue({required: true}),
+  numberOfResults: new NumberValue({required: true, min: 0}),
+  state: requiredNonEmptyString,
+};
 
 const dateFacetRegistrationOptionsDefinition = {
   facetId: facetIdDefinition,
   field: requiredNonEmptyString,
-  //currentValues:new ArrayValue({required:true, each:dateRangeRequestDefinition}),
-  currentValues: new Value<DateRangeRequest[]>({required: false}),
+  currentValues: new ArrayValue({
+    required: false,
+    each: new RecordValue(dateRangeRequestDefinition),
+  }),
   generateAutomaticRanges: new BooleanValue({required: true, default: true}),
   filterFacetCount: new BooleanValue({required: false}),
   injectionDepth: new NumberValue({required: false, min: 0}),
