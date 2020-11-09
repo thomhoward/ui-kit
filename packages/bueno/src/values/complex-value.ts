@@ -24,8 +24,17 @@ type RecordValueConfig = {
   >;
 };
 
+const defaultConfig: RecordValueConfig = {
+  config: {required: false},
+};
+
 export class RecordValue implements SchemaValue<ComplexRecord> {
-  constructor(private record: RecordValueConfig = {}) {}
+  constructor(private record: RecordValueConfig = {}) {
+    this.record = {
+      ...defaultConfig,
+      ...record,
+    };
+  }
 
   public validate(input: unknown): string | null {
     if (isUndefined(input)) {
