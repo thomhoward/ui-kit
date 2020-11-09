@@ -1,7 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 import {SpecificFacetSearchResult} from '../../../../api/search/facet-search/specific-facet-search/specific-facet-search-response';
 import {FacetSearchOptions} from '../facet-search-request-options';
-import {RecordValue, NumberValue} from '@coveo/bueno';
+import {RecordValue, NumberValue, StringValue} from '@coveo/bueno';
 import {
   facetIdDefinition,
   requiredNonEmptyString,
@@ -11,8 +11,8 @@ import {validatePayloadSchema} from '../../../../utils/validate-payload';
 const facetSearchOptionsDefinition = {
   facetId: facetIdDefinition,
   captions: new RecordValue(),
-  numberOfValues: new NumberValue({required: true, min: 1}),
-  query: requiredNonEmptyString,
+  numberOfValues: new NumberValue({required: false, min: 1}),
+  query: new StringValue({required: false, emptyAllowed: true}),
 };
 
 const selectFacetSearchResultPayloadDefinition = {
@@ -36,7 +36,10 @@ type selectFacetSearchResultPayload = {
 export const registerFacetSearch = createAction(
   'facetSearch/register',
   (payload: FacetSearchOptions) =>
-    validatePayloadSchema(payload, facetSearchOptionsDefinition)
+    validatePayloadSchema(
+      {captions: {}, ...payload},
+      facetSearchOptionsDefinition
+    )
 );
 
 /**
@@ -46,7 +49,10 @@ export const registerFacetSearch = createAction(
 export const updateFacetSearch = createAction(
   'facetSearch/update',
   (payload: FacetSearchOptions) =>
-    validatePayloadSchema(payload, facetSearchOptionsDefinition)
+    validatePayloadSchema(
+      {captions: {}, ...payload},
+      facetSearchOptionsDefinition
+    )
 );
 
 /**
