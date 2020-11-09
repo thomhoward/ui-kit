@@ -24,7 +24,7 @@ const numericFacetRegistrationOptionsDefinition = {
   facetId: facetIdDefinition,
   field: requiredNonEmptyString,
   currentValues: new Value<NumericRangeRequest[]>({required: true}),
-  generateAutomaticRanges: new BooleanValue({required: true}),
+  generateAutomaticRanges: new BooleanValue<true>({required: true}),
   filterFacetCount: new BooleanValue({required: false}),
   injectionDepth: new NumberValue({required: false, min: 0}),
   numberOfValues: new NumberValue({required: false, min: 1}),

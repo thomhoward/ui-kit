@@ -1,15 +1,16 @@
 import {ValueConfig, Value, isUndefined} from './value';
 import {SchemaValue} from '../schema';
 
-type BooleanValueConfig = ValueConfig<boolean>;
+type BooleanValueConfig<trueOrFalse = boolean> = ValueConfig<trueOrFalse>;
 
-export class BooleanValue implements SchemaValue<boolean> {
-  private value: Value<boolean>;
-  constructor(config: BooleanValueConfig = {}) {
-    this.value = new Value(config);
+export class BooleanValue<trueOrFalse = boolean>
+  implements SchemaValue<trueOrFalse> {
+  private value: Value<trueOrFalse>;
+  constructor(config: BooleanValueConfig<trueOrFalse> = {}) {
+    this.value = new Value<trueOrFalse>(config);
   }
 
-  public validate(value: boolean) {
+  public validate(value: trueOrFalse) {
     const valueValidation = this.value.validate(value);
     if (valueValidation) {
       return valueValidation;
