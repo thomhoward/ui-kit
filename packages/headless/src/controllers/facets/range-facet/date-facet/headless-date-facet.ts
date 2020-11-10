@@ -39,7 +39,7 @@ export type DateFacetProps = {
   options: DateFacetOptions;
 };
 
-export type CurrentValueInputType =
+export type DateFacetCurrentValuesInputType =
   | RangeRequest<string>[]
   | RangeRequest<Date>[]
   | RangeRequest<number>[];
@@ -50,7 +50,7 @@ export interface ManualDateFacetOptions
     'facetId' | 'currentValues'
   > {
   facetId?: string;
-  currentValues: CurrentValueInputType;
+  currentValues: DateFacetCurrentValuesInputType;
 }
 
 export interface AutomaticDateFacetOptions
