@@ -10,7 +10,12 @@ export const logQuerySuggestionClick = createAsyncThunk(
   'analytics/querySuggest',
   async ({id, suggestion}: {id: string; suggestion: string}, {getState}) => {
     const state = searchPageState(getState);
-    const suggestions = state.querySuggest[id]!.completions.map(
+    const querySuggest = state.querySuggest[id];
+
+    if (!querySuggest) {
+      return null;
+    }
+    const suggestions = querySuggest.completions.map(
       (completion) => completion.expression
     );
 
