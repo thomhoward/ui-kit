@@ -220,6 +220,10 @@ export class HeadlessEngine<Reducers extends ReducersMapObject>
     this.dispatch(disableAnalytics());
   }
 
+  get store() {
+    return this.reduxStore;
+  }
+
   get dispatch(): EngineDispatch<StateFromReducersMapObject<Reducers>> {
     return this.reduxStore.dispatch;
   }
