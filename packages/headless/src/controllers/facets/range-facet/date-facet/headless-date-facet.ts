@@ -39,13 +39,6 @@ export type DateFacetProps = {
   options: DateFacetOptions;
 };
 
-export interface RangeValueInput<T extends string | number | Date> {
-  start: T;
-  end: T;
-  endInclusive: boolean;
-  state: 'selected' | 'idle';
-}
-
 export type CurrentValueInputType =
   | RangeRequest<string>[]
   | RangeRequest<Date>[]
