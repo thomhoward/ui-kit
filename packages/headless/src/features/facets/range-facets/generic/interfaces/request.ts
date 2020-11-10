@@ -10,7 +10,7 @@ export interface AutomaticRanges<T extends boolean> {
   generateAutomaticRanges: T;
 }
 
-export interface RangeRequest<T extends string | number>
+export interface RangeRequest<T extends string | number | Date>
   extends BaseFacetValueRequest {
   start: T;
   end: T;

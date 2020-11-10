@@ -4,6 +4,8 @@ import {
   AutomaticDateFacetOptions,
   DateFacetOptions,
 } from './headless-date-facet';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 
 function isAutomaticFacet(
   facetOptions: DateFacetOptions
@@ -11,32 +13,23 @@ function isAutomaticFacet(
   return facetOptions.generateAutomaticRanges;
 }
 
-function dateToTimestamp(date: Date): string {
-  const year = date.getFullYear().toString();
-  const month = (date.getMonth() + 1).toString().padStart(2, '0');
-  const day = date.getDate().toString().padStart(2, '0');
-  const hours = date.getHours().toString().padStart(2, '0');
-  const minutes = date.getMinutes().toString().padStart(2, '0');
-  const seconds = date.getMinutes().toString().padStart(2, '0');
-
-  return `${year}/${month}/${day}@${hours}:${minutes}:${seconds}`;
-}
-
 export function formatDateFacetOptions(
   facetId: string,
   facetOptions: DateFacetOptions
 ): DateFacetRegistrationOptions {
+  const DATE_FORMAT = 'YYYY/MM/DD@HH:mm:ss';
+  dayjs.extend(utc);
   if (isAutomaticFacet(facetOptions)) {
     return {facetId, ...facetOptions};
   }
   const currentValues: DateRangeRequest[] = [];
   for (const currentValue of facetOptions.currentValues) {
-    const start = new Date(currentValue.start);
-    const end = new Date(currentValue.end);
+    const start = dayjs(currentValue.start);
+    const end = dayjs(currentValue.end);
     currentValues.push({
       ...currentValue,
-      start: dateToTimestamp(start),
-      end: dateToTimestamp(end),
+      start: start.utc().format(DATE_FORMAT),
+      end: end.utc().format(DATE_FORMAT),
     });
   }
 

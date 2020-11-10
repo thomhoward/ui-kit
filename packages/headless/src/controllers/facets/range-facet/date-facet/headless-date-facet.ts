@@ -21,8 +21,8 @@ import {
   SearchSection,
 } from '../../../../state/state-sections';
 import {executeToggleDateFacetSelect} from '../../../../features/facets/range-facets/date-facet-set/date-facet-controller-actions';
-import {BaseFacetValue} from '../../../../features/facets/facet-api/response';
 import {formatDateFacetOptions} from './headless-date-facet-utils';
+import {RangeRequest} from '../../../../features/facets/range-facets/generic/interfaces/request';
 
 type DateRangeOptions = Pick<DateRangeRequest, 'start' | 'end'> &
   Partial<DateRangeRequest>;
@@ -39,17 +39,17 @@ export type DateFacetProps = {
   options: DateFacetOptions;
 };
 
-export interface RangeValueInput<T extends string | number | Date>
-  extends BaseFacetValue {
+export interface RangeValueInput<T extends string | number | Date> {
   start: T;
   end: T;
   endInclusive: boolean;
+  state: 'selected' | 'idle';
 }
 
 export type CurrentValueInputType =
-  | RangeValueInput<string>[]
-  | RangeValueInput<Date>[]
-  | RangeValueInput<number>[];
+  | RangeRequest<string>[]
+  | RangeRequest<Date>[]
+  | RangeRequest<number>[];
 
 export interface ManualDateFacetOptions
   extends Omit<
