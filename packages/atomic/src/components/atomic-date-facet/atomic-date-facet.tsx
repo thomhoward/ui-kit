@@ -32,16 +32,7 @@ export class AtomicDateFacet {
     const options: DateFacetOptions = {
       facetId: this.facetId,
       field: this.field,
-      generateAutomaticRanges: false,
-      currentValues: [
-        {
-          start: 721422625000,
-          end: 752958625000,
-          endInclusive: true,
-          state: 'idle',
-          numberOfResults: 5,
-        },
-      ],
+      generateAutomaticRanges: true,
     };
 
     this.facet = buildDateFacet(this.engine, {options});
