@@ -21,7 +21,6 @@ const dateRangeRequestDefinition = {
   start: requiredNonEmptyString,
   end: requiredNonEmptyString,
   endInclusive: new BooleanValue({required: true}),
-  numberOfResults: new NumberValue({required: true, min: 0}),
   state: requiredNonEmptyString,
 };
 
@@ -37,7 +36,7 @@ const dateFacetRegistrationOptionsDefinition = {
     required: false,
     each: new RecordValue(dateRangeRequestDefinition),
   }),
-  generateAutomaticRanges: new BooleanValue({required: true, default: true}),
+  generateAutomaticRanges: new BooleanValue({required: true}),
   filterFacetCount: new BooleanValue({required: false}),
   injectionDepth: new NumberValue({required: false, min: 0}),
   numberOfValues: new NumberValue({required: false, min: 1}),
