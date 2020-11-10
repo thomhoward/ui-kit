@@ -1,4 +1,4 @@
-import {Schema, SchemaValues, StringValue, NumberValue} from '@coveo/bueno';
+import {Schema, SchemaValues} from '@coveo/bueno';
 import {
   fetchQuerySuggestions,
   clearQuerySuggest,
@@ -7,7 +7,6 @@ import {
   selectQuerySuggestion,
 } from '../../features/query-suggest/query-suggest-actions';
 import {Engine} from '../../app/headless-engine';
-import {randomID} from '../../utils/utils';
 import {updateQuery} from '../../features/query/query-actions';
 import {
   registerQuerySetQuery,
@@ -24,31 +23,15 @@ import {
   QuerySuggestionSection,
   SearchSection,
 } from '../../state/state-sections';
+import {searchBoxOptionDefinitions} from './headless-search-box-options-schema';
+import {validateOptions} from '../../utils/validate-payload';
 import {logQuerySuggestionClick} from '../../features/query-suggest/query-suggest-analytics-actions';
 
 export interface SearchBoxProps {
   options: SearchBoxOptions;
 }
 
-const optionsSchema = new Schema({
-  /**
-   * A unique identifier for the controller.
-   * By default, a unique random identifier is generated.
-   */
-  id: new StringValue({
-    default: () => randomID('search_box'),
-    emptyAllowed: false,
-  }),
-  /**
-   * The number of query suggestions to request from Coveo ML (e.g., `3`).
-   *
-   * Using the value `0` disables the query suggest feature.
-   *
-   * @default 5
-   */
-  numberOfSuggestions: new NumberValue({default: 5, min: 0}),
-});
-
+const optionsSchema = new Schema(searchBoxOptionDefinitions);
 export type SearchBoxOptions = SchemaValues<typeof optionsSchema>;
 
 /**
@@ -60,7 +43,7 @@ export type SearchBoxState = SearchBox['state'];
  */
 export type SearchBox = ReturnType<typeof buildSearchBox>;
 
-export const buildSearchBox = (
+export function buildSearchBox(
   engine: Engine<
     QuerySection &
       QuerySuggestionSection &
@@ -69,13 +52,15 @@ export const buildSearchBox = (
       SearchSection
   >,
   props: Partial<SearchBoxProps> = {}
-) => {
+) {
   const controller = buildController(engine);
   const {dispatch} = engine;
 
-  const options = optionsSchema.validate(props.options) as Required<
-    SearchBoxOptions
-  >;
+  const options = validateOptions(
+    optionsSchema,
+    props.options,
+    buildSearchBox.name
+  ) as Required<SearchBoxOptions>;
 
   dispatch(registerQuerySetQuery({id: options.id, query: ''}));
   dispatch(
@@ -157,4 +142,4 @@ export const buildSearchBox = (
       };
     },
   };
-};
+}
