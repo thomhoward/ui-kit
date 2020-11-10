@@ -38,11 +38,9 @@ export class RecordValue implements SchemaValue<ComplexRecord> {
 
   public validate(input: unknown): string | null {
     if (isUndefined(input)) {
-      if (this.record.config?.required) {
-        return 'value is required and is currently undefined';
-      } else {
-        return null;
-      }
+      return this.record.config?.required
+        ? 'value is required and is currently undefined'
+        : null;
     }
 
     if (!isRecord(input)) {
