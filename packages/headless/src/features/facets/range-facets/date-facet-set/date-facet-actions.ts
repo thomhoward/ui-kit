@@ -34,7 +34,7 @@ const dateFacetRegistrationOptionsDefinition = {
   field: requiredNonEmptyString,
   currentValues: new ArrayValue({
     required: false,
-    each: new RecordValue(dateRangeRequestDefinition),
+    each: new RecordValue({values: dateRangeRequestDefinition}),
   }),
   generateAutomaticRanges: new BooleanValue({required: true}) as never,
   filterFacetCount: new BooleanValue({required: false}),
@@ -63,7 +63,7 @@ export const toggleSelectDateFacetValue = createAction(
   (payload: {facetId: string; selection: DateFacetValue}) =>
     validatePayloadSchema(payload, {
       facetId: facetIdDefinition,
-      selection: new RecordValue(dateFacetValueDefinition),
+      selection: new RecordValue({values: dateFacetValueDefinition}),
     })
 );
 

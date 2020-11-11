@@ -33,7 +33,7 @@ const numericFacetRegistrationOptionsDefinition = {
   field: requiredNonEmptyString,
   currentValues: new ArrayValue({
     required: false,
-    each: new RecordValue(numericFacetRequestDefinition),
+    each: new RecordValue({values: numericFacetRequestDefinition}),
   }),
   generateAutomaticRanges: new BooleanValue({required: true}) as never,
   filterFacetCount: new BooleanValue({required: false}),
@@ -62,7 +62,7 @@ export const toggleSelectNumericFacetValue = createAction(
   (payload: {facetId: string; selection: NumericFacetValue}) =>
     validatePayloadSchema(payload, {
       facetId: facetIdDefinition,
-      selection: new RecordValue(numericFacetValueDefinition),
+      selection: new RecordValue({values: numericFacetValueDefinition}),
     })
 );
 

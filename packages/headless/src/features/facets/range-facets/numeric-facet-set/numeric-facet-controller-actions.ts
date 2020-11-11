@@ -39,7 +39,7 @@ export const executeToggleNumericFacetSelect = createAsyncThunk<
     {facetId, selection},
     {
       facetId: facetIdDefinition,
-      selection: new RecordValue(numericFacetValueDefinition),
+      selection: new RecordValue({values: numericFacetValueDefinition}),
     }
   );
   dispatch(toggleSelectNumericFacetValue({facetId, selection}));
