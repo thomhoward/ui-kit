@@ -348,6 +348,17 @@ describe('category facet slice', () => {
         });
       });
     });
+
+    it('should throw when selection is invalid', () => {
+      const selection = buildMockCategoryFacetValue({
+        value: 'A',
+        numberOfResults: -1,
+      });
+
+      expect(() =>
+        toggleSelectCategoryFacetValue({facetId, selection})
+      ).toThrow();
+    });
   });
 
   describe('#selectCategoryFacetSearchResult', () => {

@@ -6,7 +6,10 @@ import {
   updateFacetNumberOfValues,
 } from '../facet-set/facet-set-actions';
 import {CategoryFacetSortCriterion} from './interfaces/request';
-import {validatePayloadSchema} from '../../../utils/validate-payload';
+import {
+  validatePayloadSchema,
+  validatePayloadValue,
+} from '../../../utils/validate-payload';
 import {
   facetIdDefinition,
   requiredNonEmptyString,
@@ -17,13 +20,14 @@ import {
   ArrayValue,
   StringValue,
   NumberValue,
-  RecordValue,
 } from '@coveo/bueno';
+import {FacetValueState} from '../facet-api/value';
 
 const categoryFacetValueDefinition = {
-  value: requiredNonEmptyString,
+  state: new Value<FacetValueState>({required: true}),
+  numberOfResults: new NumberValue({required: true, min: 0}),
+  value: new StringValue({required: true, emptyAllowed: true}),
   path: new ArrayValue({required: true, each: requiredNonEmptyString}),
-  children: new Value<CategoryFacetValue[]>({required: true}),
   moreValuesAvailable: new BooleanValue({required: false}),
 };
 
@@ -38,6 +42,22 @@ const categoryFacetRegistrationOptionsDefinition = {
   basePath: new ArrayValue({required: false, each: requiredNonEmptyString}),
   filterByBasePath: new BooleanValue({required: false}),
 };
+
+function validateCategoryFacetValue(payload: CategoryFacetValue) {
+  payload.children.forEach((child) => {
+    validateCategoryFacetValue(child);
+  });
+  validatePayloadSchema(
+    {
+      state: payload.state,
+      numberOfResults: payload.numberOfResults,
+      value: payload.value,
+      path: payload.path,
+      moreValuesAvailable: payload.moreValuesAvailable,
+    },
+    categoryFacetValueDefinition
+  );
+}
 
 /**
  * Registers a category facet in the category facet set.
@@ -56,11 +76,12 @@ export const registerCategoryFacet = createAction(
  */
 export const toggleSelectCategoryFacetValue = createAction(
   'categoryFacet/toggleSelectValue',
-  (payload: {facetId: string; selection: CategoryFacetValue}) =>
-    validatePayloadSchema(payload, {
-      facetId: facetIdDefinition,
-      selection: new RecordValue(categoryFacetValueDefinition),
-    })
+  (payload: {facetId: string; selection: CategoryFacetValue}) => {
+    validatePayloadValue(payload.facetId, requiredNonEmptyString);
+    validateCategoryFacetValue(payload.selection);
+
+    return {payload: payload};
+  }
 );
 
 /** Deselects all values of a category facet.
