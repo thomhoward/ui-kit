@@ -151,6 +151,10 @@ export interface Engine<State = SearchAppState> {
    * The complete headless state tree.
    */
   state: State;
+  /**
+   * The redux store.
+   */
+  store: Store;
   renewAccessToken: () => Promise<string>;
 }
 
