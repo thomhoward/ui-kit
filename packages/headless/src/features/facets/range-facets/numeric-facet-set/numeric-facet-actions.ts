@@ -35,7 +35,7 @@ const numericFacetRegistrationOptionsDefinition = {
     required: false,
     each: new RecordValue(numericFacetRequestDefinition),
   }),
-  generateAutomaticRanges: new BooleanValue({required: true}),
+  generateAutomaticRanges: new BooleanValue({required: true}) as never,
   filterFacetCount: new BooleanValue({required: false}),
   injectionDepth: new NumberValue({required: false, min: 0}),
   numberOfValues: new NumberValue({required: false, min: 1}),

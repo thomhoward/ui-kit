@@ -6,8 +6,8 @@ import {
 
 export type RangeFacetSortCriterion = 'ascending' | 'descending';
 
-export interface AutomaticRanges {
-  generateAutomaticRanges: boolean;
+export interface AutomaticRanges<T extends boolean> {
+  generateAutomaticRanges: T;
 }
 
 export interface RangeRequest<T extends string | number>
@@ -19,5 +19,5 @@ export interface RangeRequest<T extends string | number>
 
 export interface BaseRangeFacetRequest
   extends BaseFacetRequest,
-    AutomaticRanges,
+    AutomaticRanges<boolean>,
     SortCriteria<RangeFacetSortCriterion> {}
