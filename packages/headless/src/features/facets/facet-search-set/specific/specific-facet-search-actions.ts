@@ -10,7 +10,7 @@ import {validatePayloadSchema} from '../../../../utils/validate-payload';
 
 const facetSearchOptionsDefinition = {
   facetId: facetIdDefinition,
-  captions: new RecordValue(),
+  captions: new RecordValue({options: {required: false}}),
   numberOfValues: new NumberValue({required: false, min: 1}),
   query: new StringValue({required: false, emptyAllowed: true}),
 };
@@ -18,9 +18,11 @@ const facetSearchOptionsDefinition = {
 const selectFacetSearchResultPayloadDefinition = {
   facetId: facetIdDefinition,
   value: new RecordValue({
-    displayValue: requiredNonEmptyString,
-    rawValue: requiredNonEmptyString,
-    count: new NumberValue({required: true, min: 0}),
+    values: {
+      displayValue: requiredNonEmptyString,
+      rawValue: requiredNonEmptyString,
+      count: new NumberValue({required: true, min: 0}),
+    },
   }),
 };
 
@@ -36,10 +38,7 @@ type selectFacetSearchResultPayload = {
 export const registerFacetSearch = createAction(
   'facetSearch/register',
   (payload: FacetSearchOptions) =>
-    validatePayloadSchema(
-      {captions: {}, ...payload},
-      facetSearchOptionsDefinition
-    )
+    validatePayloadSchema(payload, facetSearchOptionsDefinition)
 );
 
 /**
@@ -49,10 +48,7 @@ export const registerFacetSearch = createAction(
 export const updateFacetSearch = createAction(
   'facetSearch/update',
   (payload: FacetSearchOptions) =>
-    validatePayloadSchema(
-      {captions: {}, ...payload},
-      facetSearchOptionsDefinition
-    )
+    validatePayloadSchema(payload, facetSearchOptionsDefinition)
 );
 
 /**

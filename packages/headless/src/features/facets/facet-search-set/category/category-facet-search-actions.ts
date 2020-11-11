@@ -10,7 +10,7 @@ import {NumberValue, RecordValue, ArrayValue, StringValue} from '@coveo/bueno';
 
 const facetSearchOptionsDefinition = {
   facetId: facetIdDefinition,
-  captions: new RecordValue(),
+  captions: new RecordValue({options: {required: false}}),
   numberOfValues: new NumberValue({required: false, min: 1}),
   query: new StringValue({required: false, emptyAllowed: true}),
 };
@@ -32,7 +32,7 @@ export const selectCategoryFacetSearchResult = createAction(
   (payload: {facetId: string; value: CategoryFacetSearchResult}) =>
     validatePayloadSchema(payload, {
       facetId: facetIdDefinition,
-      value: new RecordValue(categoryFacetSearchResultDefinition),
+      value: new RecordValue({values: categoryFacetSearchResultDefinition}),
     })
 );
 
@@ -43,8 +43,5 @@ export const selectCategoryFacetSearchResult = createAction(
 export const registerCategoryFacetSearch = createAction(
   'categoryFacetSearch/register',
   (payload: FacetSearchOptions) =>
-    validatePayloadSchema(
-      {captions: {}, ...payload},
-      facetSearchOptionsDefinition
-    )
+    validatePayloadSchema(payload, facetSearchOptionsDefinition)
 );
