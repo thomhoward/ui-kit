@@ -79,7 +79,7 @@ describe('complex value', () => {
 
       it('required', () => {
         const v = new RecordValue({
-          config: {required: true},
+          options: {required: true},
           values: {
             foo: new StringValue({required: false, emptyAllowed: false}),
             bar: new NumberValue({required: false}),
@@ -93,7 +93,7 @@ describe('complex value', () => {
 
       it('not required', () => {
         const v = new RecordValue({
-          config: {required: false},
+          options: {required: false},
           values: {
             foo: new StringValue({required: true, emptyAllowed: false}),
             bar: new NumberValue({required: false}),
