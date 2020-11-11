@@ -25,7 +25,7 @@ const rawPartialDefinition = {
 };
 const resultPartialDefinition = {
   uniqueId: requiredNonEmptyString,
-  raw: new RecordValue(rawPartialDefinition),
+  raw: new RecordValue({values: rawPartialDefinition}),
   title: requiredNonEmptyString,
   uri: new StringValue({required: true, emptyAllowed: false, url: true}),
   clickUri: new StringValue({required: true, emptyAllowed: false, url: true}),

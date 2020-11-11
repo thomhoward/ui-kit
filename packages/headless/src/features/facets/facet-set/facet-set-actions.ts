@@ -52,7 +52,7 @@ export const toggleSelectFacetValue = createAction(
   (payload: {facetId: string; selection: FacetValue}) =>
     validatePayloadSchema(payload, {
       facetId: facetIdDefinition,
-      selection: new RecordValue(facetValueDefinition),
+      selection: new RecordValue({values: facetValueDefinition}),
     })
 );
 
