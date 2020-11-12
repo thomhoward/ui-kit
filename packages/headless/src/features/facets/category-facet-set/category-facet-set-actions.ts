@@ -21,15 +21,7 @@ import {
   StringValue,
   NumberValue,
 } from '@coveo/bueno';
-import {FacetValueState} from '../facet-api/value';
-
-const categoryFacetValueDefinition = {
-  state: new Value<FacetValueState>({required: true}),
-  numberOfResults: new NumberValue({required: true, min: 0}),
-  value: new StringValue({required: true, emptyAllowed: true}),
-  path: new ArrayValue({required: true, each: requiredNonEmptyString}),
-  moreValuesAvailable: new BooleanValue({required: false}),
-};
+import {validateCategoryFacetValue} from './category-facet-validate-payload';
 
 const categoryFacetRegistrationOptionsDefinition = {
   facetId: facetIdDefinition,
@@ -42,22 +34,6 @@ const categoryFacetRegistrationOptionsDefinition = {
   basePath: new ArrayValue({required: false, each: requiredNonEmptyString}),
   filterByBasePath: new BooleanValue({required: false}),
 };
-
-function validateCategoryFacetValue(payload: CategoryFacetValue) {
-  payload.children.forEach((child) => {
-    validateCategoryFacetValue(child);
-  });
-  validatePayloadSchema(
-    {
-      state: payload.state,
-      numberOfResults: payload.numberOfResults,
-      value: payload.value,
-      path: payload.path,
-      moreValuesAvailable: payload.moreValuesAvailable,
-    },
-    categoryFacetValueDefinition
-  );
-}
 
 /**
  * Registers a category facet in the category facet set.
