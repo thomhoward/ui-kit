@@ -14,6 +14,9 @@ import {
   toggleSelectCategoryFacetValue,
   updateCategoryFacetNumberOfValues,
 } from './category-facet-set-actions';
+import {validatePayloadValue} from '../../../utils/validate-payload';
+import {requiredNonEmptyString} from '../generic/facet-actions-validation';
+import {validateCategoryFacetValue} from './category-facet-validate-payload';
 
 /**
  * Toggles the facet value and then executes a search with the appropriate analytics tag.
@@ -30,6 +33,9 @@ export const executeToggleCategoryFacetSelect = createAsyncThunk<
 >(
   'categoryFacetController/executeToggleSelect',
   ({facetId, selection}, {dispatch}) => {
+    validatePayloadValue(facetId, requiredNonEmptyString);
+    validateCategoryFacetValue(selection);
+
     const analyticsAction = getAnalyticsActionForCategoryFacetToggleSelect(
       facetId,
       selection
