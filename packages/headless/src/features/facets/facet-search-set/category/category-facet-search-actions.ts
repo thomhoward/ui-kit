@@ -7,13 +7,7 @@ import {
   requiredNonEmptyString,
 } from '../../generic/facet-actions-validation';
 import {NumberValue, RecordValue, ArrayValue, StringValue} from '@coveo/bueno';
-
-const facetSearchOptionsDefinition = {
-  facetId: facetIdDefinition,
-  captions: new RecordValue({options: {required: false}}),
-  numberOfValues: new NumberValue({required: false, min: 1}),
-  query: new StringValue({required: false, emptyAllowed: true}),
-};
+import {facetSearchOptionsDefinition} from '../generic/generic-facet-search-validate-payload';
 
 const categoryFacetSearchResultDefinition = {
   path: new ArrayValue({
