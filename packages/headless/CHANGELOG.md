@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.51](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.50...v0.1.0-alpha.51) (2020-11-13)
+
+
+### Features
+
+* **atomic:** add styling for results ([3c31eee](https://bitbucket.org/coveord/ui-kit/commits/3c31eeee6cc299ec20624b42733a0443bb7be43b))
+
+
+
+
+
+# [0.1.0-alpha.50](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.49...v0.1.0-alpha.50) (2020-11-13)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
+# [0.1.0-alpha.49](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.48...v0.1.0-alpha.49) (2020-11-12)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
+# [0.1.0-alpha.48](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.47...v0.1.0-alpha.48) (2020-11-12)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
+# [0.1.0-alpha.47](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.46...v0.1.0-alpha.47) (2020-11-11)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
+# [0.1.0-alpha.46](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.45...v0.1.0-alpha.46) (2020-11-11)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
+# [0.1.0-alpha.45](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.44...v0.1.0-alpha.45) (2020-11-11)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
+# [0.1.0-alpha.42](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.41...v0.1.0-alpha.42) (2020-11-11)
+
+
+### Features
+
+* **headless:** make store accessible from HeadlessEngine ([d29969c](https://bitbucket.org/coveord/ui-kit/commits/d29969c6ca6d2612850947d90efb78d75183cee1))
+
+
+
+
+
+# [0.1.0-alpha.41](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.40...v0.1.0-alpha.41) (2020-11-10)
+
+**Note:** Version bump only for package @coveo/headless
+
+
+
+
+
 # [0.1.0-alpha.40](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.39...v0.1.0-alpha.40) (2020-11-10)
 
 **Note:** Version bump only for package @coveo/headless

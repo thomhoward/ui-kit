@@ -3,6 +3,111 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.51](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.50...v0.1.0-alpha.51) (2020-11-13)
+
+
+### Features
+
+* **atomic:** add styling for results ([3c31eee](https://bitbucket.org/coveord/ui-kit/commits/3c31eeee6cc299ec20624b42733a0443bb7be43b))
+
+
+
+
+
+# [0.1.0-alpha.50](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.49...v0.1.0-alpha.50) (2020-11-13)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.49](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.48...v0.1.0-alpha.49) (2020-11-12)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.48](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.47...v0.1.0-alpha.48) (2020-11-12)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.47](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.46...v0.1.0-alpha.47) (2020-11-11)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.46](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.45...v0.1.0-alpha.46) (2020-11-11)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.45](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.44...v0.1.0-alpha.45) (2020-11-11)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.44](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.43...v0.1.0-alpha.44) (2020-11-11)
+
+
+### Features
+
+* **atomic:** add styling for Sort & fix combobox issues ([dcd2f81](https://bitbucket.org/coveord/ui-kit/commits/dcd2f81ac91448e9875f315acf9ed05b3a17c9f0))
+
+
+
+
+
+# [0.1.0-alpha.43](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.42...v0.1.0-alpha.43) (2020-11-11)
+
+
+### Features
+
+* **atomic:** add styling for query summary ([4256e5d](https://bitbucket.org/coveord/ui-kit/commits/4256e5d444ba9188fe01dacf1b82b5e1a5a2d6e6))
+
+
+
+
+
+# [0.1.0-alpha.42](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.41...v0.1.0-alpha.42) (2020-11-11)
+
+**Note:** Version bump only for package @coveo/atomic
+
+
+
+
+
+# [0.1.0-alpha.41](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.40...v0.1.0-alpha.41) (2020-11-10)
+
+
+### Bug Fixes
+
+* **atomic:** replace initialization-utils unit tests ([b2df117](https://bitbucket.org/coveord/ui-kit/commits/b2df1178dd3c42948231831f23a3c20ec2b63743))
+
+
+### Features
+
+* **atomic:** add styling for Pager and Results Per Page ([b1edf27](https://bitbucket.org/coveord/ui-kit/commits/b1edf27076c895b987a44c4f8972124c68d8c95a))
+
+
+
+
+
 # [0.1.0-alpha.40](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.39...v0.1.0-alpha.40) (2020-11-10)
 
 **Note:** Version bump only for package @coveo/atomic

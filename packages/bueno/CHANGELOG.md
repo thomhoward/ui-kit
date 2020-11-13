@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.50](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.49...v0.1.0-alpha.50) (2020-11-13)
+
+**Note:** Version bump only for package @coveo/bueno
+
+
+
+
+
+# [0.1.0-alpha.49](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.48...v0.1.0-alpha.49) (2020-11-12)
+
+**Note:** Version bump only for package @coveo/bueno
+
+
+
+
+
+# [0.1.0-alpha.47](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.46...v0.1.0-alpha.47) (2020-11-11)
+
+
+### Features
+
+* **bueno:** add constrainTo option to StringValue ([8f56ff1](https://bitbucket.org/coveord/ui-kit/commits/8f56ff1f3330ac258840bff5d9b3fc24710ebf1c))
+
+
+
+
+
+# [0.1.0-alpha.45](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.44...v0.1.0-alpha.45) (2020-11-11)
+
+
+### Features
+
+* **bueno:** added ValueConfig to RecordValue ([9829eca](https://bitbucket.org/coveord/ui-kit/commits/9829ecae1d2f7be5ff06d62273025744b6470687))
+
+
+
+
+
 # [0.1.0-alpha.39](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.38...v0.1.0-alpha.39) (2020-11-09)
 
 
