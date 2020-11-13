@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
 import {
   DateRangeRequest,
   DateFacetRequest,
@@ -21,17 +23,21 @@ import {
   SearchSection,
 } from '../../../../state/state-sections';
 import {executeToggleDateFacetSelect} from '../../../../features/facets/range-facets/date-facet-set/date-facet-controller-actions';
-import {formatDateFacetOptions} from './headless-date-facet-utils';
-import {RangeRequest} from '../../../../features/facets/range-facets/generic/interfaces/request';
 
-type DateRangeOptions = Pick<DateRangeRequest, 'start' | 'end'> &
-  Partial<DateRangeRequest>;
+type DateRangeOptions = Partial<Omit<DateRangeRequest, 'start' | 'end'>> & {
+  start: string | number | Date;
+  end: string | number | Date;
+};
 
 export function buildDateRange(config: DateRangeOptions): DateRangeRequest {
+  const DATE_FORMAT = 'YYYY/MM/DD@HH:mm:ss';
+  dayjs.extend(utc);
   return {
     endInclusive: false,
     state: 'idle',
     ...config,
+    start: dayjs(config.start).utc().format(DATE_FORMAT),
+    end: dayjs(config.end).utc().format(DATE_FORMAT),
   };
 }
 
@@ -39,31 +45,10 @@ export type DateFacetProps = {
   options: DateFacetOptions;
 };
 
-export type DateFacetCurrentValuesInputType =
-  | RangeRequest<string>[]
-  | RangeRequest<Date>[]
-  | RangeRequest<number>[];
-
-export interface ManualDateFacetOptions
-  extends Omit<
-    ManualRangeFacetOptions<DateFacetRequest>,
-    'facetId' | 'currentValues'
-  > {
-  facetId?: string;
-  currentValues: DateFacetCurrentValuesInputType;
-}
-
-export interface AutomaticDateFacetOptions
-  extends Omit<
-    AutomaticRangeFacetOptions<DateFacetRequest>,
-    'facetId' | 'currentValues'
-  > {
-  facetId?: string;
-}
-
-export type DateFacetOptions =
-  | AutomaticDateFacetOptions
-  | ManualDateFacetOptions;
+export type DateFacetOptions = {facetId?: string} & (
+  | Omit<AutomaticRangeFacetOptions<DateFacetRequest>, 'facetId'>
+  | Omit<ManualRangeFacetOptions<DateFacetRequest>, 'facetId'>
+);
 
 /** The `DateFacet` controller makes it possible to create a facet with date ranges.*/
 export type DateFacet = ReturnType<typeof buildDateFacet>;
@@ -76,10 +61,7 @@ export function buildDateFacet(
   const dispatch = engine.dispatch;
 
   const facetId = props.options.facetId || randomID('dateFacet');
-  const options: DateFacetRegistrationOptions = formatDateFacetOptions(
-    facetId,
-    props.options
-  );
+  const options: DateFacetRegistrationOptions = {facetId, ...props.options};
 
   dispatch(registerDateFacet(options));
 

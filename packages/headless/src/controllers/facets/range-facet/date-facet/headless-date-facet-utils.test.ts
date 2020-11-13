@@ -1,104 +1,52 @@
-import {formatDateFacetOptions} from './headless-date-facet-utils';
-import {DateFacetOptions} from './headless-date-facet';
-import {DateFacetRegistrationOptions} from '../../../../features/facets/range-facets/date-facet-set/interfaces/options';
+import {buildDateRange} from './headless-date-facet';
+import {DateRangeRequest} from '../../../../features/facets/range-facets/date-facet-set/interfaces/request';
 
 describe('headless date facet utils', () => {
-  const facetId = 'test';
-  const field = 'test';
+  it('#buildDateRange generates the correct value for a numeric input', () => {
+    const dateRange = buildDateRange({
+      start: 721386625000,
+      end: 752922625000,
+    });
 
-  it('#formatDateFacetOptions generates the correct currentValues for a numeric input', () => {
-    const facetOptions: DateFacetOptions = {
-      facetId,
-      field,
-      generateAutomaticRanges: false,
-      currentValues: [
-        {
-          start: 721386625000,
-          end: 752922625000,
-          endInclusive: true,
-          state: 'idle',
-        },
-      ],
+    const expectedValues: DateRangeRequest = {
+      start: '1992/11/10@09:10:25',
+      end: '1993/11/10@09:10:25',
+      endInclusive: false,
+      state: 'idle',
     };
-    const expectedValues: DateFacetRegistrationOptions = {
-      facetId,
-      field,
-      generateAutomaticRanges: false,
-      currentValues: [
-        {
-          start: '1992/11/10@09:10:25',
-          end: '1993/11/10@09:10:25',
-          endInclusive: true,
-          state: 'idle',
-        },
-      ],
-    };
-    expect(formatDateFacetOptions(facetId, facetOptions)).toMatchObject(
-      expectedValues
-    );
+
+    expect(dateRange).toMatchObject(expectedValues);
   });
 
-  it('#formatDateFacetOptions generates the correct currentValues for a js date input', () => {
-    const facetOptions: DateFacetOptions = {
-      facetId,
-      field,
-      generateAutomaticRanges: false,
-      currentValues: [
-        {
-          start: new Date(721386625000),
-          end: new Date(752922625000),
-          endInclusive: true,
-          state: 'idle',
-        },
-      ],
+  it('#buildDateRange generates the correct value for a js date input', () => {
+    const dateRange = buildDateRange({
+      start: new Date(721386625000),
+      end: new Date(752922625000),
+    });
+
+    const expectedValues: DateRangeRequest = {
+      start: '1992/11/10@09:10:25',
+      end: '1993/11/10@09:10:25',
+      endInclusive: false,
+      state: 'idle',
     };
-    const expectedValues: DateFacetRegistrationOptions = {
-      facetId,
-      field,
-      generateAutomaticRanges: false,
-      currentValues: [
-        {
-          start: '1992/11/10@09:10:25',
-          end: '1993/11/10@09:10:25',
-          endInclusive: true,
-          state: 'idle',
-        },
-      ],
-    };
-    expect(formatDateFacetOptions(facetId, facetOptions)).toMatchObject(
-      expectedValues
-    );
+
+    expect(dateRange).toMatchObject(expectedValues);
   });
 
-  it('#formatDateFacetOptions generates the correct currentValues for an iso 8601 string input', () => {
-    const facetOptions: DateFacetOptions = {
-      facetId,
-      field,
-      generateAutomaticRanges: false,
-      currentValues: [
-        {
-          start: new Date(721386625000).toISOString(),
-          end: new Date(752922625000).toISOString(),
-          endInclusive: true,
-          state: 'idle',
-        },
-      ],
+  it('#buildDateRange generates the correct value for an iso 8601 string input', () => {
+    const dateRange = buildDateRange({
+      start: new Date(721386625000).toISOString(),
+      end: new Date(752922625000).toISOString(),
+    });
+
+    const expectedValues: DateRangeRequest = {
+      start: '1992/11/10@09:10:25',
+      end: '1993/11/10@09:10:25',
+      endInclusive: false,
+      state: 'idle',
     };
-    const expectedValues: DateFacetRegistrationOptions = {
-      facetId,
-      field,
-      generateAutomaticRanges: false,
-      currentValues: [
-        {
-          start: '1992/11/10@09:10:25',
-          end: '1993/11/10@09:10:25',
-          endInclusive: true,
-          state: 'idle',
-        },
-      ],
-    };
-    expect(formatDateFacetOptions(facetId, facetOptions)).toMatchObject(
-      expectedValues
-    );
+
+    expect(dateRange).toMatchObject(expectedValues);
   });
 });
