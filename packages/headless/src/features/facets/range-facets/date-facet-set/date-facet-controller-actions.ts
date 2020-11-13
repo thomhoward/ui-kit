@@ -8,19 +8,9 @@ import {
 import {executeToggleRangeFacetSelect} from '../generic/range-facet-controller-actions';
 import {toggleSelectDateFacetValue} from './date-facet-actions';
 import {validatePayloadSchema} from '../../../../utils/validate-payload';
-import {
-  requiredNonEmptyString,
-  facetIdDefinition,
-} from '../../generic/facet-actions-validation';
-import {BooleanValue, NumberValue, RecordValue} from '@coveo/bueno';
-
-const dateFacetValueDefinition = {
-  start: requiredNonEmptyString,
-  end: requiredNonEmptyString,
-  endInclusive: new BooleanValue({required: true}),
-  state: requiredNonEmptyString,
-  numberOfResults: new NumberValue({required: true, min: 0}),
-};
+import {facetIdDefinition} from '../../generic/facet-actions-validation';
+import {RecordValue} from '@coveo/bueno';
+import {dateFacetValueDefinition} from '../generic/range-facet-validate-payload';
 
 /**
  * Toggles the date facet value and then executes a search with the appropriate analytics tag.

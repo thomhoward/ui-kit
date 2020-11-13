@@ -13,16 +13,9 @@ import {
   Value,
 } from '@coveo/bueno';
 import {FacetValue} from './interfaces/response';
-import {
-  facetIdDefinition,
-  requiredNonEmptyString,
-} from '../generic/facet-actions-validation';
+import {facetIdDefinition} from '../generic/facet-actions-validation';
+import {facetValueDefinition} from './facet-set-validate-payload';
 
-const facetValueDefinition = {
-  value: requiredNonEmptyString,
-  numberOfResults: new NumberValue({min: 0}),
-  state: requiredNonEmptyString,
-};
 const facetRegistrationOptionsDefinition = {
   facetId: facetIdDefinition,
   field: new StringValue({required: true, emptyAllowed: true}),
