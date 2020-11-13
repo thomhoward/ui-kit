@@ -71,7 +71,7 @@ export const executeDeselectAllCategoryFacetValues = createAsyncThunk<
       {facetId, numberOfValues},
       {
         facetId: facetIdDefinition,
-        numberOfValues: new NumberValue({required: false, min: 1}),
+        numberOfValues: new NumberValue({required: true}),
       }
     );
     dispatch(deselectAllCategoryFacetValues(facetId));
