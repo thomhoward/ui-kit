@@ -18,6 +18,7 @@ import {buildMockDateFacetValue} from '../../../../test/mock-date-facet-value';
 import {buildMockDateFacetResponse} from '../../../../test/mock-date-facet-response';
 import {buildMockDateFacetRequest} from '../../../../test/mock-date-facet-request';
 import {SearchAppState} from '../../../../state/search-app-state';
+import {DateRangeRequest} from '../../../../features/facets/range-facets/date-facet-set/interfaces/request';
 
 describe('date facet', () => {
   const facetId = '1';
@@ -78,14 +79,51 @@ describe('date facet', () => {
     expect(dateFacet.state.values).toEqual(values);
   });
 
-  it('#buildDateRange builds a range with the expected required and default values', () => {
-    const range = buildDateRange({start: '0', end: '100'});
+  it('#buildDateRange generates the correct value for a numeric input', () => {
+    const dateRange = buildDateRange({
+      start: 721386625000,
+      end: 752922625000,
+    });
 
-    expect(range).toEqual({
-      start: '0',
-      end: '100',
+    const expectedValues: DateRangeRequest = {
+      start: '1992/11/10@09:10:25',
+      end: '1993/11/10@09:10:25',
       endInclusive: false,
       state: 'idle',
+    };
+
+    expect(dateRange).toMatchObject(expectedValues);
+  });
+
+  it('#buildDateRange generates the correct value for a js date input', () => {
+    const dateRange = buildDateRange({
+      start: new Date(721386625000),
+      end: new Date(752922625000),
     });
+
+    const expectedValues: DateRangeRequest = {
+      start: '1992/11/10@09:10:25',
+      end: '1993/11/10@09:10:25',
+      endInclusive: false,
+      state: 'idle',
+    };
+
+    expect(dateRange).toMatchObject(expectedValues);
+  });
+
+  it('#buildDateRange generates the correct value for an iso 8601 string input', () => {
+    const dateRange = buildDateRange({
+      start: new Date(721386625000).toISOString(),
+      end: new Date(752922625000).toISOString(),
+    });
+
+    const expectedValues: DateRangeRequest = {
+      start: '1992/11/10@09:10:25',
+      end: '1993/11/10@09:10:25',
+      endInclusive: false,
+      state: 'idle',
+    };
+
+    expect(dateRange).toMatchObject(expectedValues);
   });
 });
