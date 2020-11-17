@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0-alpha.52](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.51...v0.1.0-alpha.52) (2020-11-16)
+
+
+### Features
+
+* **headless:** validate facet controller options ([b93463e](https://bitbucket.org/coveord/ui-kit/commits/b93463e4b70acde18922aa424ca19498b18e5805))
+
+
+
+
+
+# [0.1.0-alpha.51](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.50...v0.1.0-alpha.51) (2020-11-13)
+
+
+### Features
+
+* **atomic:** add styling for results ([3c31eee](https://bitbucket.org/coveord/ui-kit/commits/3c31eeee6cc299ec20624b42733a0443bb7be43b))
+
+
+
+
+
 # [0.1.0-alpha.50](https://bitbucket.org/coveord/ui-kit/compare/v0.1.0-alpha.49...v0.1.0-alpha.50) (2020-11-13)
 
 **Note:** Version bump only for package ui-kit
