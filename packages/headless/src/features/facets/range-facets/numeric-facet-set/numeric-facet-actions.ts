@@ -16,16 +16,12 @@ import {
   ArrayValue,
 } from '@coveo/bueno';
 import {RangeFacetSortCriterion} from '../generic/interfaces/request';
+import {numericFacetValueDefinition} from '../generic/range-facet-validate-payload';
 const numericFacetRequestDefinition = {
   state: requiredNonEmptyString,
   start: new NumberValue({required: true}),
   end: new NumberValue({required: true}),
   endInclusive: new BooleanValue({required: true}),
-};
-
-const numericFacetValueDefinition = {
-  ...numericFacetRequestDefinition,
-  numberOfResults: new NumberValue({required: true, min: 0}),
 };
 
 const numericFacetRegistrationOptionsDefinition = {

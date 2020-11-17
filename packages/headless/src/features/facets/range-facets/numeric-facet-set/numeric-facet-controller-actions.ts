@@ -8,19 +8,9 @@ import {
 import {executeToggleRangeFacetSelect} from '../generic/range-facet-controller-actions';
 import {toggleSelectNumericFacetValue} from './numeric-facet-actions';
 import {validatePayloadSchema} from '../../../../utils/validate-payload';
-import {
-  facetIdDefinition,
-  requiredNonEmptyString,
-} from '../../generic/facet-actions-validation';
-import {RecordValue, NumberValue, BooleanValue} from '@coveo/bueno';
-
-const numericFacetValueDefinition = {
-  state: requiredNonEmptyString,
-  start: new NumberValue({required: true}),
-  end: new NumberValue({required: true}),
-  endInclusive: new BooleanValue({required: true}),
-  numberOfResults: new NumberValue({required: true, min: 0}),
-};
+import {facetIdDefinition} from '../../generic/facet-actions-validation';
+import {RecordValue} from '@coveo/bueno';
+import {numericFacetValueDefinition} from '../generic/range-facet-validate-payload';
 
 /**
  * Toggles the numeric facet value and then executes a search with the appropriate analytics tag.

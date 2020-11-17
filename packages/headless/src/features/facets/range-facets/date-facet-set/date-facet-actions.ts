@@ -16,17 +16,13 @@ import {
   requiredNonEmptyString,
 } from '../../generic/facet-actions-validation';
 import {RangeFacetSortCriterion} from '../generic/interfaces/request';
+import {dateFacetValueDefinition} from '../generic/range-facet-validate-payload';
 
 const dateRangeRequestDefinition = {
   start: requiredNonEmptyString,
   end: requiredNonEmptyString,
   endInclusive: new BooleanValue({required: true}),
   state: requiredNonEmptyString,
-};
-
-const dateFacetValueDefinition = {
-  ...dateRangeRequestDefinition,
-  numberOfResults: new NumberValue({required: true, min: 0}),
 };
 
 const dateFacetRegistrationOptionsDefinition = {
