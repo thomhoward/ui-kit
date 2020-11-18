@@ -134,7 +134,9 @@ describe('date facet', () => {
         end: 'NOT A DATE',
       })
     ).toThrow(
-      'Could not parse the provided date, ensure it is in a format readable by day.js'
+      `Could not parse the provided date, please provide a dateFormat string in the configuration options.\n
+       See https://day.js.org/docs/en/parse/string-format for more information.
+       `
     );
   });
 
