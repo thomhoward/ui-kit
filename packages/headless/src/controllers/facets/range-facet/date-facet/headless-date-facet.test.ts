@@ -126,4 +126,15 @@ describe('date facet', () => {
 
     expect(dateRange).toMatchObject(expectedValues);
   });
+
+  it('#buildDateRange throws if the date can not be parsed', () => {
+    expect(() =>
+      buildDateRange({
+        start: 'NOT A DATE',
+        end: 'NOT A DATE',
+      })
+    ).toThrow(
+      'Could not parse the provided date, ensure it is in a format readable by day.js'
+    );
+  });
 });

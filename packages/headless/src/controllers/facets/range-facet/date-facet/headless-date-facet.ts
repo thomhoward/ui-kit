@@ -27,17 +27,30 @@ import {executeToggleDateFacetSelect} from '../../../../features/facets/range-fa
 type DateRangeOptions = Partial<Omit<DateRangeRequest, 'start' | 'end'>> & {
   start: string | number | Date;
   end: string | number | Date;
+  useLocalTime?: boolean;
 };
 
 export function buildDateRange(config: DateRangeOptions): DateRangeRequest {
   const DATE_FORMAT = 'YYYY/MM/DD@HH:mm:ss';
   dayjs.extend(utc);
+  const start = config.useLocalTime
+    ? dayjs(config.start).format(DATE_FORMAT)
+    : dayjs(config.start).utc().format(DATE_FORMAT);
+  const end = config.useLocalTime
+    ? dayjs(config.end).format(DATE_FORMAT)
+    : dayjs(config.end).utc().format(DATE_FORMAT);
+
+  if (start === 'Invalid Date' || end === 'Invalid Date') {
+    throw new Error(
+      'Could not parse the provided date, ensure it is in a format readable by day.js'
+    );
+  }
   return {
     endInclusive: false,
     state: 'idle',
     ...config,
-    start: dayjs(config.start).utc().format(DATE_FORMAT),
-    end: dayjs(config.end).utc().format(DATE_FORMAT),
+    start,
+    end,
   };
 }
 
