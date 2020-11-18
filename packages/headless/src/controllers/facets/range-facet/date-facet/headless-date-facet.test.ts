@@ -137,4 +137,22 @@ describe('date facet', () => {
       'Could not parse the provided date, ensure it is in a format readable by day.js'
     );
   });
+
+  it('#buildDateRange uses provided date format string', () => {
+    const dateFormat = 'MM-YYYY-DD@HH:mm:ss';
+    const dateRange = buildDateRange({
+      start: '11-1992-10@09:10:25',
+      end: '11-1993-10@09:10:25',
+      dateFormat,
+      useLocalTime: true,
+    });
+
+    const expectedValues: DateRangeRequest = {
+      start: '1992/11/10@09:10:25',
+      end: '1993/11/10@09:10:25',
+      endInclusive: false,
+      state: 'idle',
+    };
+    expect(dateRange).toMatchObject(expectedValues);
+  });
 });

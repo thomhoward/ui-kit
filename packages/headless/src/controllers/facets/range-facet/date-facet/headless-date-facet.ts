@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
 import {
   DateRangeRequest,
   DateFacetRequest,
@@ -24,21 +26,24 @@ import {
 } from '../../../../state/state-sections';
 import {executeToggleDateFacetSelect} from '../../../../features/facets/range-facets/date-facet-set/date-facet-controller-actions';
 
+dayjs.extend(utc);
+dayjs.extend(customParseFormat);
+
 type DateRangeOptions = Partial<Omit<DateRangeRequest, 'start' | 'end'>> & {
   start: string | number | Date;
   end: string | number | Date;
   useLocalTime?: boolean;
+  dateFormat?: string;
 };
 
 export function buildDateRange(config: DateRangeOptions): DateRangeRequest {
   const DATE_FORMAT = 'YYYY/MM/DD@HH:mm:ss';
-  dayjs.extend(utc);
   const start = config.useLocalTime
-    ? dayjs(config.start).format(DATE_FORMAT)
-    : dayjs(config.start).utc().format(DATE_FORMAT);
+    ? dayjs(config.start, config.dateFormat).format(DATE_FORMAT)
+    : dayjs(config.start, config.dateFormat).utc().format(DATE_FORMAT);
   const end = config.useLocalTime
-    ? dayjs(config.end).format(DATE_FORMAT)
-    : dayjs(config.end).utc().format(DATE_FORMAT);
+    ? dayjs(config.end, config.dateFormat).format(DATE_FORMAT)
+    : dayjs(config.end, config.dateFormat).utc().format(DATE_FORMAT);
 
   if (start === 'Invalid Date' || end === 'Invalid Date') {
     throw new Error(
