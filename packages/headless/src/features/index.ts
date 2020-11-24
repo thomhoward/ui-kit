@@ -22,8 +22,6 @@ export {
   updateCategoryFacetSortCriterion,
 } from './facets/category-facet-set/category-facet-set-actions';
 
-export * as CategoryFacetControllerActions from './facets/category-facet-set/category-facet-set-controller-actions'; // Should not have been exported
-
 export {
   updateBasicConfiguration,
   updateSearchConfiguration,
@@ -44,8 +42,6 @@ export {
   deselectAllDateFacetValues,
 } from './facets/range-facets/date-facet-set/date-facet-actions';
 
-export * as DateFacetControllerActions from './facets/range-facets/date-facet-set/date-facet-controller-actions'; // Should not have been exported
-
 export {
   enableDidYouMean,
   applyDidYouMeanCorrection,
@@ -60,8 +56,6 @@ export {
   updateFacetIsFieldExpanded,
   updateFacetSortCriterion,
 } from './facets/facet-set/facet-set-actions';
-
-export * as FacetControllerActions from './facets/facet-set/facet-set-controller-actions'; // Should not have been exported
 
 export {registerFieldsToInclude} from './fields/fields-actions';
 
@@ -80,8 +74,6 @@ export {
   toggleSelectNumericFacetValue,
   updateNumericFacetSortCriterion,
 } from './facets/range-facets/numeric-facet-set/numeric-facet-actions';
-
-export * as NumericFacetControllerActions from './facets/range-facets/numeric-facet-set/numeric-facet-controller-actions'; // Should not have been exported
 
 export {
   registerNumberOfResults,
