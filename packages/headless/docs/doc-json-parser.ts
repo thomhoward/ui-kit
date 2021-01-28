@@ -11,7 +11,7 @@ const OUTPUT_PATH = './packages/headless/dist/parsed_doc.json';
 function parse(docgen: DocGen, config: Config) {
   return {
     engine: parseEngine(),
-    controllers: parseControllers(docgen, config),
+    controllers: parseControllers(docgen, config.controllers),
     actions: parseActions(docgen, config),
   };
 }

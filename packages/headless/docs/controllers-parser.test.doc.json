@@ -1,0 +1,1131 @@
+{
+  "id": 0,
+  "name": "@coveo/headless",
+  "kind": 0,
+  "flags": {},
+  "originalName": "",
+  "children": [
+    {
+      "id": 3184,
+      "name": "\"src/controllers/search-box/headless-search-box\"",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {
+        "isExported": true
+      },
+      "originalName": "C:/Users/ssayegh/Documents/Github/ui-kit/packages/headless/src/controllers/search-box/headless-search-box.ts",
+      "children": [
+        {
+          "id": 3185,
+          "name": "SearchBoxProps",
+          "kind": 256,
+          "kindString": "Interface",
+          "flags": {
+            "isExported": true
+          },
+          "children": [
+            {
+              "id": 3186,
+              "name": "options",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isExported": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box.ts",
+                  "line": 42,
+                  "character": 9
+                }
+              ],
+              "type": {
+                "type": "reference",
+                "id": 2893,
+                "name": "SearchBoxOptions"
+              }
+            }
+          ],
+          "groups": [
+            {
+              "title": "Properties",
+              "kind": 1024,
+              "children": [3186]
+            }
+          ],
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box.ts",
+              "line": 41,
+              "character": 31
+            }
+          ]
+        },
+        {
+          "id": 3188,
+          "name": "SearchBox",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {
+            "isExported": true
+          },
+          "comment": {
+            "shortText": "The `SearchBox` headless controller offers a high-level interface for designing a common search box UI controller."
+          },
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box.ts",
+              "line": 52,
+              "character": 21
+            }
+          ],
+          "type": {
+            "type": "reference",
+            "typeArguments": [
+              {
+                "type": "query",
+                "queryType": {
+                  "type": "reference",
+                  "id": 3189,
+                  "name": "buildSearchBox"
+                }
+              }
+            ],
+            "name": "ReturnType"
+          }
+        },
+        {
+          "id": 3187,
+          "name": "SearchBoxState",
+          "kind": 4194304,
+          "kindString": "Type alias",
+          "flags": {
+            "isExported": true
+          },
+          "comment": {
+            "shortText": "A scoped and simplified part of the headless state that is relevant to the `SearchBox` controller."
+          },
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box.ts",
+              "line": 48,
+              "character": 26
+            }
+          ],
+          "type": {
+            "type": "indexedAccess",
+            "indexType": {
+              "type": "stringLiteral",
+              "value": "state"
+            },
+            "objectType": {
+              "type": "reference",
+              "name": "SearchBox"
+            }
+          }
+        },
+        {
+          "id": 3189,
+          "name": "buildSearchBox",
+          "kind": 64,
+          "kindString": "Function",
+          "flags": {
+            "isExported": true
+          },
+          "signatures": [
+            {
+              "id": 3190,
+              "name": "buildSearchBox",
+              "kind": 4096,
+              "kindString": "Call signature",
+              "flags": {
+                "isExported": true
+              },
+              "parameters": [
+                {
+                  "id": 3191,
+                  "name": "engine",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {
+                    "isExported": true
+                  },
+                  "type": {
+                    "type": "reference",
+                    "id": 1075,
+                    "typeArguments": [
+                      {
+                        "type": "intersection",
+                        "types": [
+                          {
+                            "type": "reference",
+                            "id": 735,
+                            "name": "QuerySection"
+                          },
+                          {
+                            "type": "reference",
+                            "id": 771,
+                            "name": "QuerySuggestionSection"
+                          },
+                          {
+                            "type": "reference",
+                            "id": 763,
+                            "name": "ConfigurationSection"
+                          },
+                          {
+                            "type": "reference",
+                            "id": 755,
+                            "name": "QuerySetSection"
+                          },
+                          {
+                            "type": "reference",
+                            "id": 773,
+                            "name": "SearchSection"
+                          }
+                        ]
+                      }
+                    ],
+                    "name": "Engine"
+                  }
+                },
+                {
+                  "id": 3192,
+                  "name": "props",
+                  "kind": 32768,
+                  "kindString": "Parameter",
+                  "flags": {
+                    "isExported": true
+                  },
+                  "type": {
+                    "type": "reference",
+                    "typeArguments": [
+                      {
+                        "type": "reference",
+                        "id": 3185,
+                        "name": "SearchBoxProps"
+                      }
+                    ],
+                    "name": "Partial"
+                  },
+                  "defaultValue": "{}"
+                }
+              ],
+              "type": {
+                "type": "reflection",
+                "declaration": {
+                  "id": 3193,
+                  "name": "__type",
+                  "kind": 65536,
+                  "kindString": "Type literal",
+                  "flags": {
+                    "isExported": true
+                  },
+                  "children": [
+                    {
+                      "id": 3197,
+                      "name": "clear",
+                      "kind": 64,
+                      "kindString": "Function",
+                      "flags": {
+                        "isExported": true
+                      },
+                      "signatures": [
+                        {
+                          "id": 3198,
+                          "name": "clear",
+                          "kind": 4096,
+                          "kindString": "Call signature",
+                          "flags": {
+                            "isExported": true
+                          },
+                          "comment": {
+                            "shortText": "Clears the search box text and the suggestions."
+                          },
+                          "type": {
+                            "type": "intrinsic",
+                            "name": "void"
+                          }
+                        }
+                      ],
+                      "sources": [
+                        {
+                          "fileName": "src/controllers/search-box/headless-search-box.ts",
+                          "line": 111,
+                          "character": 9
+                        }
+                      ]
+                    },
+                    {
+                      "id": 3199,
+                      "name": "hideSuggestions",
+                      "kind": 64,
+                      "kindString": "Function",
+                      "flags": {
+                        "isExported": true
+                      },
+                      "signatures": [
+                        {
+                          "id": 3200,
+                          "name": "hideSuggestions",
+                          "kind": 4096,
+                          "kindString": "Call signature",
+                          "flags": {
+                            "isExported": true
+                          },
+                          "comment": {
+                            "shortText": "Clears the suggestions."
+                          },
+                          "type": {
+                            "type": "intrinsic",
+                            "name": "void"
+                          }
+                        }
+                      ],
+                      "sources": [
+                        {
+                          "fileName": "src/controllers/search-box/headless-search-box.ts",
+                          "line": 119,
+                          "character": 19
+                        }
+                      ]
+                    },
+                    {
+                      "id": 3203,
+                      "name": "selectSuggestion",
+                      "kind": 64,
+                      "kindString": "Function",
+                      "flags": {
+                        "isExported": true
+                      },
+                      "signatures": [
+                        {
+                          "id": 3204,
+                          "name": "selectSuggestion",
+                          "kind": 4096,
+                          "kindString": "Call signature",
+                          "flags": {
+                            "isExported": true
+                          },
+                          "comment": {
+                            "shortText": "Selects a suggestion and calls `submit`."
+                          },
+                          "parameters": [
+                            {
+                              "id": 3205,
+                              "name": "value",
+                              "kind": 32768,
+                              "kindString": "Parameter",
+                              "flags": {
+                                "isExported": true
+                              },
+                              "comment": {
+                                "text": "The string value of the suggestion to select\n"
+                              },
+                              "type": {
+                                "type": "intrinsic",
+                                "name": "string"
+                              }
+                            }
+                          ],
+                          "type": {
+                            "type": "intrinsic",
+                            "name": "void"
+                          }
+                        }
+                      ],
+                      "sources": [
+                        {
+                          "fileName": "src/controllers/search-box/headless-search-box.ts",
+                          "line": 136,
+                          "character": 20
+                        }
+                      ]
+                    },
+                    {
+                      "id": 3201,
+                      "name": "showSuggestions",
+                      "kind": 64,
+                      "kindString": "Function",
+                      "flags": {
+                        "isExported": true
+                      },
+                      "signatures": [
+                        {
+                          "id": 3202,
+                          "name": "showSuggestions",
+                          "kind": 4096,
+                          "kindString": "Call signature",
+                          "flags": {
+                            "isExported": true
+                          },
+                          "comment": {
+                            "shortText": "Shows the suggestions for the current search box value."
+                          },
+                          "type": {
+                            "type": "intrinsic",
+                            "name": "void"
+                          }
+                        }
+                      ],
+                      "sources": [
+                        {
+                          "fileName": "src/controllers/search-box/headless-search-box.ts",
+                          "line": 126,
+                          "character": 19
+                        }
+                      ]
+                    },
+                    {
+                      "id": 3206,
+                      "name": "submit",
+                      "kind": 64,
+                      "kindString": "Function",
+                      "flags": {
+                        "isExported": true
+                      },
+                      "signatures": [
+                        {
+                          "id": 3207,
+                          "name": "submit",
+                          "kind": 4096,
+                          "kindString": "Call signature",
+                          "flags": {
+                            "isExported": true
+                          },
+                          "comment": {
+                            "shortText": "Triggers a search query."
+                          },
+                          "type": {
+                            "type": "intrinsic",
+                            "name": "void"
+                          }
+                        }
+                      ],
+                      "sources": [
+                        {
+                          "fileName": "src/controllers/search-box/headless-search-box.ts",
+                          "line": 144,
+                          "character": 10
+                        }
+                      ]
+                    },
+                    {
+                      "id": 3194,
+                      "name": "updateText",
+                      "kind": 64,
+                      "kindString": "Function",
+                      "flags": {
+                        "isExported": true
+                      },
+                      "signatures": [
+                        {
+                          "id": 3195,
+                          "name": "updateText",
+                          "kind": 4096,
+                          "kindString": "Call signature",
+                          "flags": {
+                            "isExported": true
+                          },
+                          "comment": {
+                            "shortText": "Updates the search box text value and shows the suggestions for that value."
+                          },
+                          "parameters": [
+                            {
+                              "id": 3196,
+                              "name": "value",
+                              "kind": 32768,
+                              "kindString": "Parameter",
+                              "flags": {
+                                "isExported": true
+                              },
+                              "comment": {
+                                "text": "The string value to update the search box with.\n"
+                              },
+                              "type": {
+                                "type": "intrinsic",
+                                "name": "string"
+                              }
+                            }
+                          ],
+                          "type": {
+                            "type": "intrinsic",
+                            "name": "void"
+                          }
+                        }
+                      ],
+                      "sources": [
+                        {
+                          "fileName": "src/controllers/search-box/headless-search-box.ts",
+                          "line": 103,
+                          "character": 14
+                        }
+                      ]
+                    },
+                    {
+                      "id": 3208,
+                      "name": "state",
+                      "kind": 262144,
+                      "kindString": "Accessor",
+                      "flags": {
+                        "isExported": true
+                      },
+                      "comment": {
+                        "returns": "The state of the `SearchBox` controller.\n"
+                      },
+                      "getSignature": [
+                        {
+                          "id": 3209,
+                          "name": "__get",
+                          "kind": 524288,
+                          "kindString": "Get signature",
+                          "flags": {
+                            "isExported": true
+                          },
+                          "comment": {
+                            "returns": "The state of the `SearchBox` controller.\n"
+                          },
+                          "type": {
+                            "type": "reflection",
+                            "declaration": {
+                              "id": 3210,
+                              "name": "__type",
+                              "kind": 65536,
+                              "kindString": "Type literal",
+                              "flags": {
+                                "isExported": true
+                              },
+                              "children": [
+                                {
+                                  "id": 3216,
+                                  "name": "isLoading",
+                                  "kind": 32,
+                                  "kindString": "Variable",
+                                  "flags": {
+                                    "isExported": true
+                                  },
+                                  "sources": [
+                                    {
+                                      "fileName": "src/controllers/search-box/headless-search-box.ts",
+                                      "line": 162,
+                                      "character": 17
+                                    }
+                                  ],
+                                  "type": {
+                                    "type": "intrinsic",
+                                    "name": "boolean"
+                                  },
+                                  "defaultValue": "state.search.isLoading"
+                                },
+                                {
+                                  "id": 3212,
+                                  "name": "suggestions",
+                                  "kind": 32,
+                                  "kindString": "Variable",
+                                  "flags": {
+                                    "isExported": true
+                                  },
+                                  "sources": [
+                                    {
+                                      "fileName": "src/controllers/search-box/headless-search-box.ts",
+                                      "line": 161,
+                                      "character": 19
+                                    }
+                                  ],
+                                  "type": {
+                                    "type": "array",
+                                    "elementType": {
+                                      "type": "reflection",
+                                      "declaration": {
+                                        "id": 3213,
+                                        "name": "__type",
+                                        "kind": 65536,
+                                        "kindString": "Type literal",
+                                        "flags": {
+                                          "isExported": true
+                                        },
+                                        "children": [
+                                          {
+                                            "id": 3214,
+                                            "name": "highlightedValue",
+                                            "kind": 32,
+                                            "kindString": "Variable",
+                                            "flags": {
+                                              "isExported": true
+                                            },
+                                            "sources": [
+                                              {
+                                                "fileName": "src/controllers/search-box/headless-search-box.ts",
+                                                "line": 177,
+                                                "character": 20
+                                              }
+                                            ],
+                                            "type": {
+                                              "type": "intrinsic",
+                                              "name": "string"
+                                            },
+                                            "defaultValue": "getHighlightedSuggestion(\r\n      completion.highlighted,\r\n      highlightOptions\r\n    )"
+                                          },
+                                          {
+                                            "id": 3215,
+                                            "name": "rawValue",
+                                            "kind": 32,
+                                            "kindString": "Variable",
+                                            "flags": {
+                                              "isExported": true
+                                            },
+                                            "sources": [
+                                              {
+                                                "fileName": "src/controllers/search-box/headless-search-box.ts",
+                                                "line": 181,
+                                                "character": 12
+                                              }
+                                            ],
+                                            "type": {
+                                              "type": "intrinsic",
+                                              "name": "string"
+                                            },
+                                            "defaultValue": "completion.expression"
+                                          }
+                                        ],
+                                        "groups": [
+                                          {
+                                            "title": "Variables",
+                                            "kind": 32,
+                                            "children": [3214, 3215]
+                                          }
+                                        ]
+                                      }
+                                    }
+                                  }
+                                },
+                                {
+                                  "id": 3211,
+                                  "name": "value",
+                                  "kind": 32,
+                                  "kindString": "Variable",
+                                  "flags": {
+                                    "isExported": true
+                                  },
+                                  "sources": [
+                                    {
+                                      "fileName": "src/controllers/search-box/headless-search-box.ts",
+                                      "line": 160,
+                                      "character": 13
+                                    }
+                                  ],
+                                  "type": {
+                                    "type": "intrinsic",
+                                    "name": "string"
+                                  },
+                                  "defaultValue": "getValue()"
+                                }
+                              ],
+                              "groups": [
+                                {
+                                  "title": "Variables",
+                                  "kind": 32,
+                                  "children": [3216, 3212, 3211]
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      ],
+                      "sources": [
+                        {
+                          "fileName": "src/controllers/search-box/headless-search-box.ts",
+                          "line": 151,
+                          "character": 13
+                        }
+                      ]
+                    }
+                  ],
+                  "groups": [
+                    {
+                      "title": "Functions",
+                      "kind": 64,
+                      "children": [3197, 3199, 3203, 3201, 3206, 3194]
+                    },
+                    {
+                      "title": "Accessors",
+                      "kind": 262144,
+                      "children": [3208]
+                    }
+                  ]
+                }
+              }
+            }
+          ],
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box.ts",
+              "line": 54,
+              "character": 30
+            }
+          ]
+        }
+      ],
+      "groups": [
+        {
+          "title": "Interfaces",
+          "kind": 256,
+          "children": [3185]
+        },
+        {
+          "title": "Type aliases",
+          "kind": 4194304,
+          "children": [3188, 3187]
+        },
+        {
+          "title": "Functions",
+          "kind": 64,
+          "children": [3189]
+        }
+      ],
+      "sources": [
+        {
+          "fileName": "src/controllers/search-box/headless-search-box.ts",
+          "line": 1,
+          "character": 0
+        }
+      ]
+    },
+    {
+      "id": 2892,
+      "name": "\"src/controllers/search-box/headless-search-box-options\"",
+      "kind": 1,
+      "kindString": "Module",
+      "flags": {
+        "isExported": true
+      },
+      "originalName": "C:/Users/ssayegh/Documents/Github/ui-kit/packages/headless/src/controllers/search-box/headless-search-box-options.ts",
+      "children": [
+        {
+          "id": 2893,
+          "name": "SearchBoxOptions",
+          "kind": 256,
+          "kindString": "Interface",
+          "flags": {
+            "isExported": true
+          },
+          "children": [
+            {
+              "id": 2897,
+              "name": "enableQuerySyntax",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isExported": true,
+                "isOptional": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 18,
+                  "character": 19
+                }
+              ],
+              "type": {
+                "type": "union",
+                "types": [
+                  {
+                    "type": "intrinsic",
+                    "name": "undefined"
+                  },
+                  {
+                    "type": "intrinsic",
+                    "name": "false"
+                  },
+                  {
+                    "type": "intrinsic",
+                    "name": "true"
+                  }
+                ]
+              },
+              "inheritedFrom": {
+                "type": "reference",
+                "id": 2897,
+                "name": "DefaultSearchBoxOptions.enableQuerySyntax"
+              }
+            },
+            {
+              "id": 2895,
+              "name": "highlightOptions",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isExported": true,
+                "isOptional": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 13,
+                  "character": 18
+                }
+              ],
+              "type": {
+                "type": "reference",
+                "id": 2878,
+                "name": "SuggestionHighlightingOptions"
+              }
+            },
+            {
+              "id": 2894,
+              "name": "id",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isExported": true,
+                "isOptional": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 12,
+                  "character": 4
+                }
+              ],
+              "type": {
+                "type": "union",
+                "types": [
+                  {
+                    "type": "intrinsic",
+                    "name": "undefined"
+                  },
+                  {
+                    "type": "intrinsic",
+                    "name": "string"
+                  }
+                ]
+              }
+            },
+            {
+              "id": 2896,
+              "name": "numberOfSuggestions",
+              "kind": 1024,
+              "kindString": "Property",
+              "flags": {
+                "isExported": true,
+                "isOptional": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 17,
+                  "character": 21
+                }
+              ],
+              "type": {
+                "type": "union",
+                "types": [
+                  {
+                    "type": "intrinsic",
+                    "name": "undefined"
+                  },
+                  {
+                    "type": "intrinsic",
+                    "name": "number"
+                  }
+                ]
+              },
+              "inheritedFrom": {
+                "type": "reference",
+                "id": 2896,
+                "name": "DefaultSearchBoxOptions.numberOfSuggestions"
+              }
+            }
+          ],
+          "groups": [
+            {
+              "title": "Properties",
+              "kind": 1024,
+              "children": [2897, 2895, 2894, 2896]
+            }
+          ],
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+              "line": 11,
+              "character": 33
+            }
+          ],
+          "extendedTypes": [
+            {
+              "type": "reference",
+              "name": "DefaultSearchBoxOptions"
+            }
+          ],
+          "extendedBy": [
+            {
+              "type": "reference",
+              "id": 3394,
+              "name": "StandaloneSearchBoxOptions"
+            }
+          ]
+        },
+        {
+          "id": 2906,
+          "name": "searchBoxOptionsSchema",
+          "kind": 32,
+          "kindString": "Variable",
+          "flags": {
+            "isExported": true,
+            "isConst": true
+          },
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+              "line": 69,
+              "character": 35
+            }
+          ],
+          "type": {
+            "type": "intrinsic",
+            "name": "any"
+          },
+          "defaultValue": "new Schema<Required<SearchBoxOptions>>(\n  searchBoxOptionDefinitions\n)"
+        },
+        {
+          "id": 2898,
+          "name": "defaultSearchBoxOptions",
+          "kind": 2097152,
+          "kindString": "Object literal",
+          "flags": {
+            "isExported": true,
+            "isConst": true
+          },
+          "children": [
+            {
+              "id": 2899,
+              "name": "enableQuerySyntax",
+              "kind": 32,
+              "kindString": "Variable",
+              "flags": {
+                "isExported": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 22,
+                  "character": 19
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "false"
+              },
+              "defaultValue": "false"
+            },
+            {
+              "id": 2900,
+              "name": "numberOfSuggestions",
+              "kind": 32,
+              "kindString": "Variable",
+              "flags": {
+                "isExported": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 23,
+                  "character": 21
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "number"
+              },
+              "defaultValue": "5"
+            }
+          ],
+          "groups": [
+            {
+              "title": "Variables",
+              "kind": 32,
+              "children": [2899, 2900]
+            }
+          ],
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+              "line": 21,
+              "character": 36
+            }
+          ],
+          "type": {
+            "type": "intrinsic",
+            "name": "object"
+          }
+        },
+        {
+          "id": 2901,
+          "name": "searchBoxOptionDefinitions",
+          "kind": 2097152,
+          "kindString": "Object literal",
+          "flags": {
+            "isExported": true,
+            "isConst": true
+          },
+          "children": [
+            {
+              "id": 2904,
+              "name": "enableQuerySyntax",
+              "kind": 32,
+              "kindString": "Variable",
+              "flags": {
+                "isExported": true
+              },
+              "comment": {
+                "shortText": "Whether to interpret advanced [Coveo Cloud query syntax](https://docs.coveo.com/en/1814/searching-with-coveo/search-prefixes-and-operators) in the query.",
+                "tags": [
+                  {
+                    "tag": "default",
+                    "text": "false\n"
+                  }
+                ]
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 50,
+                  "character": 19
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "any"
+              },
+              "defaultValue": "new BooleanValue()"
+            },
+            {
+              "id": 2905,
+              "name": "highlightOptions",
+              "kind": 32,
+              "kindString": "Variable",
+              "flags": {
+                "isExported": true
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 52,
+                  "character": 18
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "any"
+              },
+              "defaultValue": "new RecordValue({\n    values: {\n      notMatchDelimiters: new RecordValue({\n        values: openCloseDelimitersDefinition,\n      }),\n\n      exactMatchDelimiters: new RecordValue({\n        values: openCloseDelimitersDefinition,\n      }),\n\n      correctionDelimiters: new RecordValue({\n        values: openCloseDelimitersDefinition,\n      }),\n    },\n  })"
+            },
+            {
+              "id": 2902,
+              "name": "id",
+              "kind": 32,
+              "kindString": "Variable",
+              "flags": {
+                "isExported": true
+              },
+              "comment": {
+                "shortText": "A unique identifier for the controller.\nBy default, a unique random identifier is generated."
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 36,
+                  "character": 4
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "any"
+              },
+              "defaultValue": "requiredNonEmptyString"
+            },
+            {
+              "id": 2903,
+              "name": "numberOfSuggestions",
+              "kind": 32,
+              "kindString": "Variable",
+              "flags": {
+                "isExported": true
+              },
+              "comment": {
+                "shortText": "The number of query suggestions to request from Coveo ML (e.g., `3`).",
+                "text": "Using the value `0` disables the query suggest feature.\n",
+                "tags": [
+                  {
+                    "tag": "default",
+                    "text": "5\n"
+                  }
+                ]
+              },
+              "sources": [
+                {
+                  "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+                  "line": 44,
+                  "character": 21
+                }
+              ],
+              "type": {
+                "type": "intrinsic",
+                "name": "any"
+              },
+              "defaultValue": "new NumberValue({min: 0})"
+            }
+          ],
+          "groups": [
+            {
+              "title": "Variables",
+              "kind": 32,
+              "children": [2904, 2905, 2902, 2903]
+            }
+          ],
+          "sources": [
+            {
+              "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+              "line": 31,
+              "character": 39
+            }
+          ],
+          "type": {
+            "type": "intrinsic",
+            "name": "object"
+          }
+        }
+      ],
+      "groups": [
+        {
+          "title": "Interfaces",
+          "kind": 256,
+          "children": [2893]
+        },
+        {
+          "title": "Variables",
+          "kind": 32,
+          "children": [2906]
+        },
+        {
+          "title": "Object literals",
+          "kind": 2097152,
+          "children": [2898, 2901]
+        }
+      ],
+      "sources": [
+        {
+          "fileName": "src/controllers/search-box/headless-search-box-options.ts",
+          "line": 1,
+          "character": 0
+        }
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "title": "Modules",
+      "kind": 1,
+      "children": [2907]
+    }
+  ]
+}
