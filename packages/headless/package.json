@@ -24,7 +24,9 @@
     "test:unit": "jest --testPathIgnorePatterns=src/integration-tests",
     "test:integration": "jest --testPathPattern=src/integration-tests",
     "npm:publish": "npm publish --access public",
-    "doc": "typedoc --tsconfig tsconfig.typedoc.json"
+    "doc": "npm run generate:doc && npm run build:doc-parser",
+    "generate:doc": "typedoc --tsconfig tsconfig.typedoc.json",
+    "build:doc-parser": "tsc -p docs/"
   },
   "dependencies": {
     "@coveo/bueno": "^0.2.0",
