@@ -26,54 +26,6 @@
         "disabled": false,
         "auto_approve": "true"
       }
-    },
-    {
-      "id": "deploy-headless-to-s3-latest",
-      "s3": {
-        "bucket": "{terraform.infra.infra.bucket_binaries}",
-        "directory": "proda/StaticCDN/headless/latest",
-        "source": "packages/headless/dist/browser",
-        "parameters": {
-          "acl": "public-read"
-        }
-      }
-    },
-    {
-      "id": "deploy-headless-to-s3-version",
-      "s3": {
-        "bucket": "{terraform.infra.infra.bucket_binaries}",
-        "directory": "proda/StaticCDN/headless/v$[PRERELEASE]",
-        "source": "packages/headless/dist/browser",
-        "parameters": {
-          "acl": "public-read"
-        },
-        "prd": {
-          "directory": "proda/StaticCDN/headless/v$[VERSION]"
-        }
-      }
-    },
-    {
-      "id": "qa-release",
-      "team_jenkins": {
-        "disabled": true,
-        "job_name": "ui-kit-qa-release",
-        "qa": {
-          "disabled": false
-        }
-      }
-    },
-    {
-      "id": "production-release",
-      "team_jenkins": {
-        "disabled": true,
-        "job_name": "ui-kit-production-release",
-        "prd": {
-          "disabled": false
-        },
-        "extra_parameters": {
-          "COMMIT_HASH": "$[COMMIT_HASH]"
-        }
-      }
     }
   ],
   "snyk": {
