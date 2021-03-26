@@ -16,6 +16,18 @@
   },
   "ordered_phases": [
     {
+      "auto_approve": false,
+      "disabled": true,
+      "id": "deploy-atomic-to-s3",
+      "terraform": {
+        "terragrunt_path": "cloudfront"
+      },
+      "dev": {
+        "disabled": false,
+        "auto_approve": "true"
+      }
+    },
+    {
       "id": "deploy-headless-to-s3-latest",
       "s3": {
         "bucket": "{terraform.infra.infra.bucket_binaries}",

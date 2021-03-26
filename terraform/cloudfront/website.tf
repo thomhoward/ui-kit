@@ -1,6 +1,6 @@
 locals {
   remote_website_path = "website"
-  local_website_path  = "../../www"
+  local_website_path  = "../../atomic/www"
 }
 
 resource "aws_s3_bucket_object" "website" {
