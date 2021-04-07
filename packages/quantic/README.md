@@ -8,8 +8,8 @@ Under the hood, Quantic relies on the [Coveo Headless](https://docs.coveo.com/he
 ### When Should I Use Quantic?
 
 While Quantic is the modern library to use to build Coveo for Salesforce search UIs, there is currently a Salesforce AppExchange limitation preventing the release of Quantic there.
-As a consequence, the library is deployed as a managed package.
-Provided that you have developer skills, you can wrap the components of that managed package to create your own ones, which you can then assemble to create your search UI.
+As opposed to [standard Coveo Lightning Components that you can drag and drop out of the box](https://docs.coveo.com/en/1033/#adding-lightning-components), the Quantic library is deployed as a managed package and requires you to create your own components from it.
+In other words, provided that you have developer skills, you can wrap the components of the Quantic managed package to create your own components, which you can then assemble to create your search UI.
 If you have developer skills and want to create a new Coveo for Salesforce search UI, we recommend using Quantic.
 
 ### Install Quantic
@@ -31,7 +31,9 @@ Quantic components reside in the same default namespace as your custom component
 Wrap them in your custom components to use them, as you would other [custom Coveo for Salesforce lightning components](https://docs.coveo.com/en/1193), with two additional tweaks:
 
 1. For each Headless engine, there must be a `QuanticSearchInterface` component in the page. This component takes as properties the options to configure the headless engine and is responsible for setting the configuration for a given `engineId` and performing the initial search query when all components are initialized.
+
   This component is packaged with Quantic so users must just have it present in the page somewhere with their options passed down to it, ideally by a wrapper component.
+
 2. Each component belonging to the same engine must be given the same `engineId` value as parameter.
 
 For examples, see <PATH_TO_EXAMPLE_FOLDER>.
