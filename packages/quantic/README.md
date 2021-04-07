@@ -2,31 +2,43 @@
 
 ## Using Quantic
 
-Coveo Quantic is a [Lightning Web Component](https://developer.salesforce.com/docs/component-library/documentation/en/lwc) library for assembling responsive, accessible, and future-proof Coveo for Salesforce search UIs. Quantic components are self-encapsulated, composable, and lightweight. 
-Under the hood, Quantic relies on the link:{site-baseurl}/headless/latest/[Coveo Headless] library to interface with the Coveo Platform and handle the search application state.
+Coveo Quantic is a [Lightning Web Component](https://developer.salesforce.com/docs/component-library/documentation/en/lwc) library for assembling responsive, accessible, and future-proof Coveo for Salesforce search UIs. Quantic components are self-encapsulated, composable, and lightweight.
+Under the hood, Quantic relies on the [Coveo Headless](https://docs.coveo.com/headless) library to interface with the Coveo Platform and handle the search application state.
 
 ### When Should I Use Quantic?
 
-While Quantic is the modern library to use to build Coveo for Salesforce search UIs, there is currently a Lightning Locker constraint preventing Quantic deployment out of the box in Salesforce.
-As a consequence, you need developer skills to use Quantic.
-If you want to customize your Coveo for Salesforce components in any way, Quantic is therefore the right choice.
+While Quantic is the modern library to use to build Coveo for Salesforce search UIs, there is currently a Salesforce AppExchange limitation preventing the release of Quantic there.
+As a consequence, the library is deployed as a managed package.
+Provided that you have developer skills, you can wrap the components of that managed package to create your own ones, which you can then assemble to create your search UI.
+If you have developer skills and want to create a new Coveo for Salesforce search UI, we recommend using Quantic.
 
 ### Install Quantic
 
 0. Prerequisite: you must have installed [sfdx](https://developer.salesforce.com/tools/sfdxcli).
 
 1. Go to <BUTTON LOCATION> and click <BUTTON_NAME> to install the managed package in your Salesforce organization.
-2. In the target sfdx project, 
-3. Retrieve quantic source from your organization: `sfdx force:mdapi:retrieve -r <downloadlocation> -p Quantic -u <alias>`
-4. Unzip the resulting .zip compressed folder found in <downloadlocation>
-5. Convert package to usable source: `sfdx force:mdapi:convert -r <downloadLocation> -d <desiredLocation>`, where `<desiredLocation>` is the new package directory created at step 2.
-6. Use the Quantic components to build your own.
-7. Deploy the package source back to the org with new custom components: `sfdx force:source:deploy -d <projectDirectory> -u <alias>`
+2. In the target sfdx project, create a separate package directory structure for Quantic (see [Salesforce DX Project Structure and Source Format](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_source_file_format.htm)).
+3. Retrieve quantic source from your organization: `sfdx force:mdapi:retrieve -r <DOWNLOAD_LOCATION> -p Quantic -u <alias>`
+4. Unzip the resulting `.zip` compressed folder found in `<DOWNLOAD_LOCATION>`.
+5. Convert package to usable source: `sfdx force:mdapi:convert -r <DOWNLOAD_LOCATION> -d <TARGET_LOCATION>`, where `<TARGET_LOCATION>` is the new package directory created at step 2.
+6. [Use the Quantic components to build your own.](#use-quantic-components)
+7. Deploy the package source back to the org with new custom components: `sfdx force:source:deploy -d <PROJECT_DIRECTORY> -u <alias>`
+8. Your new component will be available for drag and drop editing in your Lightning pages.
 
+### Use Quantic Components to Build your Own
 
-### Use Quantic Components
+Quantic components reside in the same default namespace as your custom components.
+Wrap them in your custom components to use them, as you would other [custom Coveo for Salesforce lightning components](https://docs.coveo.com/en/1193), with two additional tweaks:
+
+1. For each Headless engine, there must be a `QuanticSearchInterface` component in the page. This component takes as properties the options to configure the headless engine and is responsible for setting the configuration for a given `engineId` and performing the initial search query when all components are initialized.
+  This component is packaged with Quantic so users must just have it present in the page somewhere with their options passed down to it, ideally by a wrapper component.
+2. Each component belonging to the same engine must be given the same `engineId` value as parameter.
+
+For examples, see <PATH_TO_EXAMPLE_FOLDER>.
 
 ## Contributing
+
+The following documentation is meant for developers who want to contribute to the Quantic project itself.
 
 ### Reference documentation
 
@@ -50,7 +62,7 @@ If you want to customize your Coveo for Salesforce components in any way, Quanti
 
 [vscode Salesforce Extension Pack](https://marketplace.visualstudio.com/items?itemName=salesforce.salesforcedx-vscode)
 
-**Note** Make sure you open the quantic project at the root (`/packages/quantic/`) in vscode in order for the entension to work properly.
+**Note** Make sure you open the quantic project at the root (`/packages/quantic/`) in vscode in order for the extension to work properly.
 
 ### Enable Dev Hub in your Salesforce organization
 
