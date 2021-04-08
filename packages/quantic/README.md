@@ -32,7 +32,7 @@ Wrap them in your custom components to use them, as you would other [custom Cove
 
 1. For each Headless engine, there must be a `QuanticSearchInterface` component in the page. This component takes as properties the options to configure the headless engine and is responsible for setting the configuration for a given `engineId` and performing the initial search query when all components are initialized.
 
-  This component is packaged with Quantic so users must just have it present in the page somewhere with their options passed down to it, ideally by a wrapper component.
+   This component is packaged with Quantic so users must just have it present in the page somewhere with their options passed down to it, ideally by a wrapper component.
 
 2. Each component belonging to the same engine must be given the same `engineId` value as parameter.
 
