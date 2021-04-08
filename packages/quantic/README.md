@@ -2,15 +2,17 @@
 
 ## Using Quantic
 
-Coveo Quantic is a [Lightning Web Component](https://developer.salesforce.com/docs/component-library/documentation/en/lwc) library for assembling responsive, accessible, and future-proof Coveo for Salesforce search UIs. Quantic components are self-encapsulated, composable, and lightweight.
+Coveo Quantic is a [Lightning Web Component](https://developer.salesforce.com/docs/component-library/documentation/en/lwc) library for assembling responsive, accessible, and future-proof Coveo for Salesforce search interfaces, Insight Panels and case deflection components. Quantic components are self-encapsulated, composable, and lightweight.
 Under the hood, Quantic relies on the [Coveo Headless](https://docs.coveo.com/headless) library to interface with the Coveo Platform and handle the search application state.
 
 ### When Should I Use Quantic?
 
-While Quantic is the modern library to use to build Coveo for Salesforce search UIs, there is currently a Salesforce AppExchange limitation preventing the release of Quantic there.
-As opposed to [standard Coveo Lightning Components that you can drag and drop out of the box](https://docs.coveo.com/en/1033/#adding-lightning-components), the Quantic library is deployed as a managed package and requires you to create your own components from it.
-In other words, provided that you have developer skills, you can wrap the components of the Quantic managed package to create your own components, which you can then assemble to create your search UI.
-If you have developer skills and want to create a new Coveo for Salesforce search UI, we recommend using Quantic.
+While Quantic is the latest and most modern library for bulding Coveo for Salesforce search interfaces, Insight Panels and case deflection components, there is currently a Salesforce AppExchange limitation preventing the release of Quantic there.
+As opposed to [standard Coveo Lightning Components that you can drag and drop out of the box](https://docs.coveo.com/en/1033/#adding-lightning-components), the Quantic library is deployed as a unlocked package and requires you to create your own components from it.
+In other words, provided that you have developer skills, you can wrap the components of the Quantic package to create your own components, which you can then assemble to create your search interface, Insight Panel and case deflection components.
+This also means that there is no advantage to customizing the standard Coveo Lightning Components over using the newer Quantic ones.
+
+In short, if you have developer skills and want to create new Coveo for Salesforce search interfaces, Insight Panels or case deflection components, we recommend using Quantic.
 
 ### Install Quantic
 
@@ -23,7 +25,7 @@ If you have developer skills and want to create a new Coveo for Salesforce searc
 5. Convert package to usable source: `sfdx force:mdapi:convert -r <DOWNLOAD_LOCATION> -d <TARGET_LOCATION>`, where `<TARGET_LOCATION>` is the new package directory created at step 2.
 6. [Use the Quantic components to build your own.](#use-quantic-components)
 7. Deploy the package source back to the org with new custom components: `sfdx force:source:deploy -d <PROJECT_DIRECTORY> -u <alias>`
-8. Your new component will be available for drag and drop editing in your Lightning pages.
+8. Your new components will be available for drag and drop editing in your Lightning pages.
 
 ### Use Quantic Components to Build your Own
 
