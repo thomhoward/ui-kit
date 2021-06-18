@@ -25,7 +25,7 @@
     "test:typings": "tsc"
   },
   "dependencies": {
-    "@coveo/headless": "^0.15.0"
+    "@coveo/headless": "^0.13.0"
   },
   "devDependencies": {
     "@salesforce/eslint-config-lwc": "^0.7.0",

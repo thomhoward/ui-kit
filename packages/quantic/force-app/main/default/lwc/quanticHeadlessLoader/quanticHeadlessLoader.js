@@ -125,7 +125,7 @@ async function initEngine(engineId) {
  */
 function setEngineConfiguration(config, engineId, element) {
   if (window.coveoHeadless && window.coveoHeadless[engineId] && window.coveoHeadless[engineId].config.isResolved) {
-    throw new Error(`Attempted to overwrite configuration for engine: ${engineId}`);
+    console.warn(`Attempted to overwrite configuration for engine: ${engineId}`);
   }
   if (!(window.coveoHeadless && window.coveoHeadless[engineId])) {
     instantiateWindowEngineObject(element, engineId)
