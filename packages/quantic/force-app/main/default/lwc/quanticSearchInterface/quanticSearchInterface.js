@@ -1,5 +1,15 @@
-import {LightningElement, api, wire} from 'lwc';
-import {setEngineConfiguration} from 'c/quanticHeadlessLoader';
+// @ts-nocheck
+import {
+  LightningElement,
+  api,
+  wire
+} from 'lwc';
+// @ts-ignore
+import {
+  setEngineConfiguration,
+  initializeWithHeadless,
+  registerComponentForInit
+} from 'c/quanticHeadlessLoader';
 // @ts-ignore
 import getHeadlessConfiguration from '@salesforce/apex/HeadlessController.getHeadlessConfiguration';
 
@@ -20,7 +30,10 @@ export default class QuanticSearchInterface extends LightningElement {
   fullConfig;
 
   @wire(getHeadlessConfiguration)
-  wiredConfig({ error, data }) {
+  wiredConfig({
+    error,
+    data
+  }) {
     if (data) {
       this.fullConfig = {
         ...JSON.parse(data),
@@ -33,5 +46,41 @@ export default class QuanticSearchInterface extends LightningElement {
     } else if (error) {
       console.error(error.message);
     }
+  }
+
+  connectedCallback() {
+    registerComponentForInit(this, this.engineId);
+  }
+
+  renderedCallback() {
+    initializeWithHeadless(this, this.engineId, this.initialize.bind(this));
+  }
+
+  initialize(engine) {
+    this.urlManager = CoveoHeadless.buildUrlManager(engine, {
+      initialState: {
+        fragment: this.fragment
+      },
+    });
+    this.unsubscribeUrlManager = this.urlManager.subscribe(() =>
+      this.updateHash()
+    );
+    window.addEventListener('hashchange', this.onHashChange);
+  }
+
+  updateHash() {
+    window.history.pushState(
+      null,
+      document.title,
+      `#${this.urlManager.state.fragment}`
+    );
+  }
+
+  onHashChange = () => {
+    this.urlManager.synchronize(this.fragment);
+  };
+
+  get fragment() {
+    return window.location.hash.slice(1);
   }
 }
