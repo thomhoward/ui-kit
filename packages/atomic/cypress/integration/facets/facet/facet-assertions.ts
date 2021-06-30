@@ -1,6 +1,6 @@
 import {doSortAlphanumeric} from '../../../utils/componentUtils';
 import {RouteAlias} from '../../../utils/setupComponent';
-import {BreadcrumbSelector} from '../../breadcrumb-manager-selectors';
+import {BreadcrumbSelector} from '../../breadcrumb-manager/breadcrumb-manager-selectors';
 import {ComponentErrorSelectors} from '../../component-error-selectors';
 import {
   selectShowMoreButton,
