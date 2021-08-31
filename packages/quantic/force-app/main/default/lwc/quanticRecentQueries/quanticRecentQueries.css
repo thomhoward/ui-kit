@@ -1,0 +1,24 @@
+.recent-queries__container {
+  width: 100%;
+  margin: 0 2em 0 0;
+}
+
+li span {
+  pointer-events: none;
+}
+
+li > .recent-query {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0070d2;
+}
+
+li:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.icon-color {
+  color: #0070d2;
+}

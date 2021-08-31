@@ -6,9 +6,6 @@ import {
 import {getItemfromLocalStorage, setIteminLocalStorage} from 'c/quanticUtils';
 
 export default class QuanticRecentResults extends LightningElement {
-  /** @type {import("coveo").RecentResultsState} */
-  @track state = {};
-
   /** @type {string} */
   @api engineId;
   /** @type {number} */
@@ -24,10 +21,12 @@ export default class QuanticRecentResults extends LightningElement {
   collapseIcon = 'utility:dash';
   /** @type {import("coveo").RecentResultsList} */
   recentResultsList;
+
   /** @type {import("coveo").RecentResultsState} */
-  initialState = {
+  @track state = {
     results: getItemfromLocalStorage(this.localStorageKey) ?? [],
-  }
+    maxLength: this.maxLength,
+  };
 
   /** @type {() => void} */
   unsubscribe;
@@ -46,9 +45,11 @@ export default class QuanticRecentResults extends LightningElement {
   @api
   initialize(engine) {
     this.recentResultsList = CoveoHeadless.buildRecentResultsList(engine, {
-      initialState: this.initialState,
+      initialState: {
+        results: this.state.results,
+      },
       options: {
-        maxLength: this.maxLength
+        maxLength: this.state.maxLength
       }
     });
     this.unsubscribe = this.recentResultsList.subscribe(() => this.updateState());
