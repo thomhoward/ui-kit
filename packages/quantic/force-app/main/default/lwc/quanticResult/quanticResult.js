@@ -35,6 +35,14 @@ export default class QuanticResult extends LightningElement {
         return 'standard:note';
       case 'city':
         return 'standard:household';
+      case 'page':
+        return 'doctype:unknown';
+      case 'how_to':
+        return 'standard:education';
+      case 'kb_knowledge':
+        return 'standard:knowledge';
+      case 'known issue':
+        return 'standard:maintenance_plan'
       default:
         return `standard:${objType.toLowerCase()}`;
     }

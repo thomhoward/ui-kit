@@ -46,7 +46,7 @@ export default class QuanticRecentQueries extends LightningElement {
         queries: this.state.queries
       },
       options: {
-        maxLength: this.state.maxLength,
+        maxLength: 10,
       },
     });
     this.unsubscribe = this.recentQueriesList.subscribe(() => this.updateState());

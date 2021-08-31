@@ -49,7 +49,7 @@ export default class QuanticRecentResults extends LightningElement {
         results: this.state.results,
       },
       options: {
-        maxLength: this.state.maxLength
+        maxLength: 10
       }
     });
     this.unsubscribe = this.recentResultsList.subscribe(() => this.updateState());
