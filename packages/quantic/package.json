@@ -32,11 +32,11 @@
     "@coveo/headless": "^1.23.0"
   },
   "devDependencies": {
-    "@salesforce/eslint-config-lwc": "0.11.1",
-    "@salesforce/sfdx-lwc-jest": "0.14.0",
-    "@types/jest": "26.0.24",
+    "@salesforce/eslint-config-lwc": "2.2.0",
+    "@salesforce/sfdx-lwc-jest": "1.0.1",
+    "@types/jest": "27.0.2",
     "@types/strip-color": "^0.1.0",
-    "cypress": "7.6.0",
+    "cypress": "8.5.0",
     "eslint": "7.32.0",
     "eslint-plugin-cypress": "2.11.3",
     "jest-junit": "12.2.0",
